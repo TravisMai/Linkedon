@@ -15,7 +15,9 @@ if ($conn->connect_error) {
 }
 
 // Create database
-$sql = "CREATE DATABASE IF NOT EXISTS co3049";
+$sql = "
+    CREATE DATABASE IF NOT EXISTS co3049;
+";
 if ($conn->query($sql) === TRUE) {
     //   echo "Database created successfully\n";
 } else {
@@ -33,7 +35,7 @@ $conn->select_db("co3049");
 // file hình thì đc trữ trong folder uploads r trích ra khi xài
 
 $sql = "
-    CREATE TABLE `users` (
+    CREATE TABLE IF NOT EXISTS `users` (
         `id` int(50) NOT NULL AUTO_INCREMENT PRIMARY KEY,
         `firstname` varchar(250) NOT NULL,
         `lastname` varchar(250) NOT NULL,
@@ -60,7 +62,7 @@ if ($conn->query($sql) === TRUE) {
 // rồi từ đó mới link qua 6 table còn lại
 
 $sql = "
-CREATE TABLE `resume` (
+CREATE TABLE IF NOT EXISTS `resume` (
     `id` int(50) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` int(50) NOT NULL,
     `objective` varchar(250) NOT NULL,
@@ -83,7 +85,7 @@ if ($conn->query($sql) === TRUE) {
 // có xài thì ghép 2 thg `degree` vs `major` lại thì ra kiểu: Bachelor of Computer Engineering
 
 $sql = "
-CREATE TABLE `education` (
+CREATE TABLE IF NOT EXISTS `education` (
     `id` int(50) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `resume_id` int(50) NOT NULL,
     `user_id` int(50) NOT NULL,
@@ -114,7 +116,7 @@ if ($conn->query($sql) === TRUE) {
 // LƯU Ý LÀ T LẤY VÍ DỤ THÔI NHÉ CHỨ KO PHẢI TRỮ MỖI MÌNH IELTS NHÉ :)
 
 $sql = "
-CREATE TABLE `certificate` (
+CREATE TABLE IF NOT EXISTS `certificate` (
     `id` int(50) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `resume_id` int(50) NOT NULL,
     `user_id` int(50) NOT NULL,
@@ -141,7 +143,7 @@ if ($conn->query($sql) === TRUE) {
 // skill PHP kinh nghiệm 100 năm 2 tháng
 
 $sql = "
-CREATE TABLE experience (
+CREATE TABLE IF NOT EXISTS experience (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `resume_id` int(50) NOT NULL,
     `user_id` int(50) NOT NULL,
@@ -166,7 +168,7 @@ if ($conn->query($sql) === TRUE) {
 // nên là khúc reference sẽ có link qua bảng này nữa nhé
 
 $sql = "
-CREATE TABLE `working_history` (
+CREATE TABLE IF NOT EXISTS `working_history` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `resume_id` int(50) NOT NULL,
     `user_id` int(50) NOT NULL,
@@ -190,7 +192,7 @@ if ($conn->query($sql) === TRUE) {
 // này t set hobbie habit j đó đều ko bắt buộc cả :v nên lúc user chèn vào có cũng đc ko có cũng chả sao :v
 
 $sql = "
-CREATE TABLE `additional_information` (
+CREATE TABLE IF NOT EXISTS `additional_information` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `resume_id` int(50) NOT NULL,
     `user_id` int(50) NOT NULL,
@@ -213,7 +215,7 @@ if ($conn->query($sql) === TRUE) {
 // nên là có truyền vào thì nhớ truyền cho đủ :v
 
 $sql = "
-CREATE TABLE `reference` (
+CREATE TABLE IF NOT EXISTS `reference` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `resume_id` int(50) NOT NULL,
     `user_id` int(50) NOT NULL,
