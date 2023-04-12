@@ -175,12 +175,12 @@
         <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?=.*[a-zA-Z]).{8,}" title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long.">
         
         <div class="type-form"> 
-            <label for="employee">Applicant</label>
+            <label for="employee">Job seeker</label>
             <input class="cate" type="radio" name="typeUser" value= 0 id="employee" checked>
         </div>
         
         <div class="type-form" style ='margin-left: 100px;' >
-            <label for="employer">Job seeker</label>
+            <label for="employer">Employer</label>
             <input class="cate" type="radio" name="typeUser" value= 1 id="employer">
         </div>
 
