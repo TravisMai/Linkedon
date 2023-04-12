@@ -53,7 +53,7 @@
         }
 
         form {
-            height: 520px;
+            height: 800px;
             width: 400px;
             background-color: rgba(255, 255, 255, 0.75);
             position: absolute;
@@ -145,18 +145,45 @@
         .social i {
             margin-right: 4px;
         }
+
+        .cate{
+            height: 1em;
+            width: 30px;
+        }
+
+        .type-form{
+            /* width: 40px; */
+            display: inline-block;
+        }
+        
     </style>
 </head>
 
 <body>
-    <form action="action/create_user.php" method="post">
+    <form action="./action/create_user.php" method="post">
         <h3>Register Here</h3>
+        <label for="username">Email:</label>
+        <input type="text" name="email" id="email" placeholder="Email" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" required>
+
         <label for="username">Username:</label>
-        <input type="text" name="username" id="username" placeholder="Email" required>
+        <input type="text" name="username" id="username" placeholder="Name" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>" required>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?=.*[a-zA-Z]).{8,}" title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long.">
         
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?=.*[a-zA-Z]).{8,}" title="Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long.">
+        
+        <div class="type-form"> 
+            <label for="employee">Applicant</label>
+            <input class="cate" type="radio" name="typeUser" value= 0 id="employee" checked>
+        </div>
+        
+        <div class="type-form" style ='margin-left: 100px;' >
+            <label for="employer">Job seeker</label>
+            <input class="cate" type="radio" name="typeUser" value= 1 id="employer">
+        </div>
+
         <label><a href="./login.php" style="color:#000000">Already have one?</a></label>
 
         <button type="submit" value="Create User">Register</button>
