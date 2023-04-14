@@ -3,58 +3,64 @@
 
 <?php require_once('inc/header.php') ?>
 <?php
-    ob_start();
+ob_start();
 ?>
 
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
-        integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />
+        integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" />  
     <style>
         th {
             font-size: 20px;
         }
+
         /* user-dashboard-info-box */
         .user-dashboard-info-box .candidates-list .thumb {
             margin-right: 20px;
         }
+
         .user-dashboard-info-box .candidates-list .thumb img {
             width: 80px;
             height: 80px;
-            -o-object-fit: cover;
             object-fit: cover;
             overflow: hidden;
             border-radius: 50%;
         }
+
         .user-dashboard-info-box .title {
-            display: -webkit-box;
-            display: -ms-flexbox;
             display: flex;
-            -webkit-box-align: center;
-            -ms-flex-align: center;
             align-items: center;
             padding: 30px 0;
         }
+
         .user-dashboard-info-box .candidates-list td {
             vertical-align: middle;
         }
+
         .user-dashboard-info-box td li {
             margin: 0 4px;
         }
+
         .user-dashboard-info-box .table thead th {
             border-bottom: none;
         }
+
         .table.manage-candidates-top th {
             border: 0;
         }
-        .user-dashboard-info-box .candidate-list-email {
+
+        .user-dashboard-info-box .candidate-list-objective {
             margin-bottom: 10px;
         }
+
         .table.manage-candidates-top {
             min-width: 100px;
         }
+
         .user-dashboard-info-box .candidate-list-details ul {
             color: #969696;
         }
+
         /* Candidate List */
         .candidate-list {
             background: #f1f1f1;
@@ -63,32 +69,39 @@
             align-items: center;
             padding: 20px;
         }
-        .candidate-list:hover a.candidate-list-email {
+
+        .candidate-list:hover a.candidate-list-objective {
             color: #e74c3c;
             box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
         }
+
         .candidate-list .candidate-list-image {
             margin-right: 25px;
             flex: 0 0 80px;
             border: none;
         }
+
         .candidate-list .candidate-list-image img {
             width: 80px;
             height: 80px;
             object-fit: cover;
         }
+
         .candidate-list-title {
             margin-bottom: 5px;
         }
+
         .candidate-list-details ul {
             display: flex;
             flex-wrap: wrap;
             margin-bottom: 0px;
         }
+
         .candidate-list-details ul li {
             margin: 5px 10px 5px 0px;
             font-size: 13px;
         }
+
         .candidate-list {
             margin-left: auto;
             text-align: center;
@@ -97,11 +110,13 @@
             -ms-flex: 0 0 90px;
             flex: 0 0 90px;
         }
+
         .candidate-list .span {
             display: block;
             margin: 0 auto;
         }
-        .candidate-list .candidate-list-email {
+
+        .candidate-list .candidate-list-objective {
             display: inline-block;
             position: relative;
             height: 40px;
@@ -116,21 +131,25 @@
             font-size: 16px;
             color: #646f79;
         }
+
         .candidate-list:hover {
             position: inherit;
             -webkit-box-shadow: inherit;
             box-shadow: inherit;
             z-index: inherit;
         }
+
         .user-dashboard-info-box .candidates-list .thumb {
             margin-right: 20px;
         }
+
         .bi-three-dots:hover {
             display: block;
             background-color: #666666;
             border-radius: 50%;
         }
-        #candidate-search-result{
+
+        #candidate-search-result {
             display: none;
         }
 
@@ -139,17 +158,21 @@
                 width: 40px;
                 height: 40px;
             }
+
             .candidate-list-title h5 {
                 font-size: 10px;
                 padding-left: 10px;
             }
+
             .candidate-list-option ul li {
                 font-size: 8px;
                 padding-left: 10px;
             }
-            .candidate-list-email {
+
+            .candidate-list-objective {
                 font-size: 8px;
             }
+
             th {
                 font-size: 10px;
             }
@@ -159,6 +182,7 @@
 
 <body id="top">
     <?php require_once('inc/topBarNav.php') ?>
+
     <div class="page-content bg-light">
         <div id="content">
             <div class="container">
@@ -168,23 +192,45 @@
                     <input type="text" class="form-control rounded" placeholder="Search">
 
                 </div>
-
+                <!-- Filter buttons -->
+                <div class="container d-flex justify-content-around">
+                    <div class = "d-flex">
+                        <select class="form-select" aria-label="Sort by Objective">
+                            <option selected>Objective</option>
+                            <option value="1">Tutor</option>
+                            <option value="2">Computer Scientist</option>
+                            <option value="3">Manager</option>
+                        </select>             
+                    </div>    
+                    <div class = "d-flex">
+                        <select class="form-select" aria-label="Sort by Major">
+                            <option selected>Major</option>
+                            <option value="1">Tutor</option>
+                            <option value="2">Computer Scientist</option>
+                            <option value="3">Manager</option>
+                        </select>             
+                    </div>    
+                    <div class = "d-flex">
+                        <select class="form-select" aria-label="Sort by Skill">
+                            <option selected>Skill</option>
+                            <option value="1">Tutor</option>
+                            <option value="2">Computer Scientist</option>
+                            <option value="3">Manager</option>
+                        </select>             
+                    </div>    
+                </div>
                 <!-- Show a list of all candidates -->
-                <div class="container mt-3 mb-4" id = "candidate-all">
+                <div class="container mt-3 mb-4" id="candidate-all">
                     <div class="col-lg-12 mt-4 mt-lg-0">
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- This div show the value when search for candidate -->
-                                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm" id = "candidate-search-result">
-
-                                </div>
-                                <!-- Table display when user click on Candidates on NavBar-->
-                                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm" id = "candidate-all">
+                                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm" id="candidate-search-result">
                                     <table class="table manage-candidates-top mb-0">
                                         <thead>
                                             <tr>
                                                 <th>Candidate Name</th>
-                                                <th>E-mail</th>
+                                                <th>Objective</th>
                                                 <th class="action text-right"></th>
                                             </tr>
                                         </thead>
@@ -208,15 +254,55 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="candidate-list-email">
+                                                <td class="candidate-list-objective">
 
-                                                    <span class=>hungdeptrai@gmail.com</span>
+                                                    <span class=>Tutor</span>
                                                 </td>
                                                 <td>
                                                     <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li><a href="#" class="text-primary" data-toggle="tooltip"
-                                                                title="" data-original-title="view"><i
-                                                                    class="bi fa-lg bi-three-dots"></i></a></li>
+                                                        <li class="text-primary"><i class="bi fa-lg bi-three-dots"></i></li>
+                                                    </ul>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- Table display when user click on Candidates on NavBar-->
+                                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm" id="candidate-all">
+                                    <table class="table manage-candidates-top mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th>Candidate Name</th>
+                                                <th>Objective</th>
+                                                <th class="action text-right"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="candidates-list">
+                                                <td class="title">
+                                                    <div class="thumb">
+                                                        <img class="img-fluid border border-primary"
+                                                            src="https://i.ibb.co/P5hLdTg/profile-picture.png" alt="">
+                                                    </div>
+                                                    <div class="candidate-list-details">
+                                                        <div class="candidate-list-info">
+                                                            <div class="candidate-list-title">
+                                                                <h5 class="mb-0"><a href="#">Hung Dep Trai</a></h5>
+                                                            </div>
+                                                            <div class="candidate-list-option">
+                                                                <ul class="list-unstyled">
+                                                                    <li>Information Technology</li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="candidate-list-objective">
+                                                    <span class=>Tutor</span>
+                                                </td>
+                                                <td>
+                                                    <ul class="list-unstyled mb-0 d-flex justify-content-end">
+                                                        <li class="text-primary"><i class="bi fa-lg bi-three-dots"></i></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -239,16 +325,13 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="candidate-list-email">
+                                                <td class="candidate-list-objective">
 
-                                                    <span class=>hungdeptrai@gmail.com</span>
+                                                    <span class=>Human Resources</span>
                                                 </td>
                                                 <td>
                                                     <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li><a href="#" class="text-primary" data-toggle="tooltip"
-                                                                title="" data-original-title="view"><i
-                                                                    class="bi fa-lg bi-three-dots"></i></a></li>
-
+                                                        <li class="text-primary"><i class="bi fa-lg bi-three-dots"></i></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -271,16 +354,13 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="candidate-list-email">
+                                                <td class="candidate-list-objective">
 
-                                                    <span class=>hungdeptrai@gmail.com</span>
+                                                    <span class=>Project Manager</span>
                                                 </td>
                                                 <td>
                                                     <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li><a href="#" class="text-primary" data-toggle="tooltip"
-                                                                title="" data-original-title="view"><i
-                                                                    class="bi fa-lg bi-three-dots"></i></a></li>
-
+                                                        <li class="text-primary"><i class="bi fa-lg bi-three-dots"></i></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -303,16 +383,13 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="candidate-list-email">
+                                                <td class="candidate-list-objective">
 
-                                                    <span class=>hungdeptrai@gmail.com</span>
+                                                    <span class=>Computer Scientist</span>
                                                 </td>
                                                 <td>
                                                     <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li><a href="#" class="text-primary" data-toggle="tooltip"
-                                                                title="" data-original-title="view"><i
-                                                                    class="bi fa-lg bi-three-dots"></i></a></li>
-
+                                                        <li class="text-primary"><i class="bi fa-lg bi-three-dots"></i></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -329,22 +406,19 @@
                                                             </div>
                                                             <div class="candidate-list-option">
                                                                 <ul class="list-unstyled">
-                                                                    <li>Web Developer</li>
+                                                                    <li>Web Programming</li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td class="candidate-list-email">
+                                                <td class="candidate-list-objective">
 
-                                                    <span class=>hungdeptrai@gmail.com</span>
+                                                    <span class=>Web Developer</span>
                                                 </td>
                                                 <td>
                                                     <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li><a href="#" class="text-primary" data-toggle="tooltip"
-                                                                title="" data-original-title="view"><i
-                                                                    class="bi fa-lg bi-three-dots"></i></a></li>
-
+                                                        <li class="text-primary"><i class="bi fa-lg bi-three-dots"></i></li>
                                                     </ul>
                                                 </td>
                                             </tr>
@@ -369,8 +443,8 @@
                 </div>
             </div>
         </div>
+        <?php require_once('inc/footer.php') ?>
     </div>
-    <?php require_once('inc/footer.php') ?>
 
     <div id="scrolltop">
         <a class="btn btn-secondary" href="#top">
@@ -379,7 +453,6 @@
             </span>
         </a>
     </div>
-
     <script src="./scripts/imagesloaded.pkgd.min.js?ver=1.2.0"></script>
     <script src="./scripts/masonry.pkgd.min.js?ver=1.2.0"></script>
     <script src="./scripts/BigPicture.min.js?ver=1.2.0"></script>
