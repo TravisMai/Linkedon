@@ -235,14 +235,20 @@ if ($conn->query($sql) === TRUE) {
     //   echo "Error creating table: " . $conn->error;
 }
 
+// Cái chỗ insert data dưới này để nó chạy lần dầu tiên xong nhớ disable nó bằng comment
+// Không hiểu sao mỗi lần chạy lại phần code reset_table thì cái trang Candates nó không hiện gì hết
+// nên là insert lần đầu cho có data để test thôi rồi hủy cái đống này trước khi reload lại
+// sau này xong phần insert manual thì bỏ luôn mấy cái code insert này ra luôn
+
+/*
 // Delete existing data, reset id to begin with 1, then insert data again when reload page
 include "database/reset_table.php";
 
-// Open file.sql
+// Open insertdata.sql
 $sql_file = fopen('database/insertdata.sql', 'r');
-// Read content of file.sql
+// Read content of insertdata.sql
 $sql = fread($sql_file, filesize('database/insertdata.sql'));
-// Close file.sql
+// Close insertdata.sql
 fclose($sql_file);
 
 if ($conn->multi_query($sql) === TRUE) {
@@ -250,6 +256,6 @@ if ($conn->multi_query($sql) === TRUE) {
 } else {
     //echo "Error executing SQL commands: " . $conn->error;
 }
-
+*/
 $conn->close();
 ?>

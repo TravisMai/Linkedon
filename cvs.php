@@ -58,7 +58,7 @@ ob_start();
             align-items: center;
             padding: 20px;
         }
-        .candidate-list:hover a.candidate-list-objective {
+        .candidate-list:hover a .candidate-list-objective {
             color: #e74c3c;
             box-shadow: -1px 4px 10px 1px rgba(24, 111, 201, 0.1);
         }
@@ -88,8 +88,6 @@ ob_start();
             margin-left: auto;
             text-align: center;
             font-size: 13px;
-            -webkit-box-flex: 0;
-            -ms-flex: 0 0 90px;
             flex: 0 0 90px;
         }
         .candidate-list .span {
@@ -105,17 +103,9 @@ ob_start();
             border: 1px solid #eeeeee;
             border-radius: 100%;
             text-align: center;
-            -webkit-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
             margin-bottom: 20px;
             font-size: 16px;
             color: #646f79;
-        }
-        .candidate-list:hover {
-            position: inherit;
-            -webkit-box-shadow: inherit;
-            box-shadow: inherit;
-            z-index: inherit;
         }
         .user-dashboard-info-box .candidates-list .thumb {
             margin-right: 20px;
@@ -227,7 +217,7 @@ ob_start();
                                                 </td>
                                                 <td class="candidate-list-objective">
 
-                                                    <span class=>Tutor</span>
+                                                    <span>Tutor</span>
                                                 </td>
                                                 <td>
                                                     <ul class="list-unstyled mb-0 d-flex justify-content-end">
@@ -249,150 +239,56 @@ ob_start();
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr class="candidates-list">
-                                                <td class="title">
-                                                    <div class="thumb">
-                                                        <img class="img-fluid border border-primary"
-                                                            src="https://i.ibb.co/x3wfK5z/female-avatar.jpg" alt="">
-                                                    </div>
-                                                    <div class="candidate-list-details">
-                                                        <div class="candidate-list-info">
-                                                            <div class="candidate-list-title">
-                                                                <h5 class="mb-0"><a href="#">Hung Dep Trai</a></h5>
-                                                            </div>
-                                                            <div class="candidate-list-option">
-                                                                <ul class="list-unstyled">
-                                                                    <li>Information Technology</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="candidate-list-objective">
-                                                    <span class=>Tutor</span>
-                                                </td>
-                                                <td>
-                                                    <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="candidates-list">
-                                                <td class="title">
-                                                    <div class="thumb">
-                                                        <img class="img-fluid border border-primary"
-                                                            src="https://i.ibb.co/P5hLdTg/profile-picture.png" alt="">
-                                                    </div>
-                                                    <div class="candidate-list-details">
-                                                        <div class="candidate-list-info">
-                                                            <div class="candidate-list-title">
-                                                                <h5 class="mb-0"><a href="#">Hung Dep Trai</a></h5>
-                                                            </div>
-                                                            <div class="candidate-list-option">
-                                                                <ul class="list-unstyled">
-                                                                    <li>Human Resources</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="candidate-list-objective">
+                                            <?php
+                                                include "database/dbconnect.php";
+                                                // select data to show to the list of candidates/
+                                                $sql = "SELECT 
+                                                users.firstname, 
+                                                users.lastname, 
+                                                users.avatar, 
+                                                resume.objective, 
+                                                education.major 
+                                                FROM users
+                                                INNER JOIN resume ON users.id = resume.user_id
+                                                INNER JOIN education ON resume.id = education.resume_id
+                                                ORDER BY resume.date_added DESC;";
 
-                                                    <span class=>Human Resources</span>
-                                                </td>
-                                                <td>
-                                                    <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="candidates-list">
-                                                <td class="title">
-                                                    <div class="thumb">
-                                                        <img class="img-fluid border border-primary"
-                                                            src="https://i.ibb.co/P5hLdTg/profile-picture.png" alt="">
-                                                    </div>
-                                                    <div class="candidate-list-details">
-                                                        <div class="candidate-list-info">
-                                                            <div class="candidate-list-title">
-                                                                <h5 class="mb-0"><a href="#">Hung Dep Trai</a></h5>
-                                                            </div>
-                                                            <div class="candidate-list-option">
-                                                                <ul class="list-unstyled">
-                                                                    <li>Computer Science</li>
-                                                                </ul>
+                                                $result = $conn->query($sql);
+                                                
+                                                while($row = $result->fetch_assoc()) {
+                                                    echo
+                                                    '<tr class="candidates-list">
+                                                    <td class="title">
+                                                        <div class="thumb">
+                                                            <img class="img-fluid border border-primary"
+                                                                src="' . $row['avatar'] . '" alt="">
+                                                        </div>
+                                                        <div class="candidate-list-details">
+                                                            <div class="candidate-list-info">
+                                                                <div class="candidate-list-title">
+                                                                    <h5 class="mb-0"><a href="#">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
+                                                                </div>
+                                                                <div class="candidate-list-option">
+                                                                    <ul class="list-unstyled">
+                                                                        <li>' . $row['major'] . '</li>
+                                                                    </ul>
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                </td>
-                                                <td class="candidate-list-objective">
-
-                                                    <span class=>Project Manager</span>
-                                                </td>
-                                                <td>
-                                                    <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="candidates-list">
-                                                <td class="title">
-                                                    <div class="thumb">
-                                                        <img class="img-fluid border border-primary"
-                                                            src="https://i.ibb.co/P5hLdTg/profile-picture.png" alt="">
-                                                    </div>
-                                                    <div class="candidate-list-details">
-                                                        <div class="candidate-list-info">
-                                                            <div class="candidate-list-title">
-                                                                <h5 class="mb-0"><a href="#">Hung Dep Trai</a></h5>
-                                                            </div>
-                                                            <div class="candidate-list-option">
-                                                                <ul class="list-unstyled">
-                                                                    <li>Computer Science</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="candidate-list-objective">
-
-                                                    <span class=>Computer Scientist</span>
-                                                </td>
-                                                <td>
-                                                    <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                            <tr class="candidates-list">
-                                                <td class="title">
-                                                    <div class="thumb">
-                                                        <img class="img-fluid border border-primary"
-                                                            src="https://i.ibb.co/P5hLdTg/profile-picture.png" alt="">
-                                                    </div>
-                                                    <div class="candidate-list-details">
-                                                        <div class="candidate-list-info">
-                                                            <div class="candidate-list-title">
-                                                                <h5 class="mb-0"><a href="#">Hung Dep Trai</a></h5>
-                                                            </div>
-                                                            <div class="candidate-list-option">
-                                                                <ul class="list-unstyled">
-                                                                    <li>Web Programming</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="candidate-list-objective">
-
-                                                    <span class=>Web Developer</span>
-                                                </td>
-                                                <td>
-                                                    <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
+                                                    </td>
+                                                    <td class="candidate-list-objective mb-0">
+                                                        <span>'. $row['objective'] .'</span>
+                                                    </td>
+                                                    <td>
+                                                        <ul class="list-unstyled mb-0 d-flex justify-content-end">
+                                                            <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
+                                                        </ul>
+                                                    </td>
+                                                    </tr>                                                     
+                                                    ';
+                                                }
+                                                $conn->close();
+                                            ?>
                                         </tbody>
                                     </table>
                                     <div class="text-center mt-3 mt-sm-3">

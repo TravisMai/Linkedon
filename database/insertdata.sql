@@ -5,7 +5,7 @@ VALUES
 -- user 1
 ('Kara-lynn', 'Bownas', 'kbownas0', 'd787HoJ', 'kbownas0@gmail.com', '0402849675', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
 -- user 2
-('Karoly', 'Bretelle', 'kbretelle1', 'u4QeRRmDZm', 'kbretelle1@gmail.com', '0477247106', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Karoly', 'Bretelle', 'kbretelle1', 'u4QeRRmDZm', 'kbretelle1@gmail.com', '0477247106', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
 -- user 3
 ('Ingra', 'Brugger', 'ibrugger2', '6f3iWv', 'ibrugger2@gmail.com', '0559349117', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
 -- user 4
@@ -13,11 +13,11 @@ VALUES
 -- user 5
 ('Cart', 'Stringman', 'cstringman4', 'bXrwL5u0Rx', 'cstringman4@gmail.com', '0631353477', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
 -- user 6
-('Sabine', 'Baguley', 'sbaguley5', 'MueVGBK3P1', 'sbaguley5@gmail.com', '0872532363', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Sabine', 'Baguley', 'sbaguley5', 'MueVGBK3P1', 'sbaguley5@gmail.com', '0872532363', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
 -- user 7
 ('Coralie', 'Carslaw', 'ccarslaw6', 'KhxDlTK', 'ccarslaw6@gmail.com', '0401625846', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
 -- user 8
-('Garvin', 'Galbreth', 'ggalbreth7', 'TQPVl9gHqwlC', 'ggalbreth7@gmail.com', '0867198979', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Garvin', 'Galbreth', 'ggalbreth7', 'TQPVl9gHqwlC', 'ggalbreth7@gmail.com', '0867198979', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
 -- user 9
 ('Cirilo', 'Nosworthy', 'cnosworthy8', 'YkQc06M', 'cnosworthy8@gmail.com', '0861791717', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
 -- user 10
@@ -191,3 +191,6 @@ VALUES
 (6, 6, 'Andrew', 'Kwon', 'andrewkwon@email.com', '1234567890', 'Former Manager'),
 
 (8, 8, 'Jessica', 'Park', 'jessicapark@email.com', '1234567890', 'Former Colleague');
+
+
+
