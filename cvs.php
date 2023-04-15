@@ -2,6 +2,7 @@
 <html lang="en">
 
 <?php require_once('inc/header.php') ?>
+<?php require_once('initialize.php') ?>
 <?php
 ob_start();
 ?>
@@ -9,7 +10,6 @@ ob_start();
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
         integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" /> 
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
     <style>
         th {
             font-size: 20px;
@@ -143,6 +143,67 @@ ob_start();
             }
         }
     </style>
+    <script>
+        function showCandidate(userid) {
+            //clear input field
+            const inputField = document.getElementById('searchInput');
+            inputField.value = '';
+            // remove show class from dropdown menu
+            const searchMenu = document.querySelector('#searchMenu');
+            searchMenu.classList.remove('show');
+
+            var candidate_search = document.getElementById("candidate-search-result");
+            var candidate_all = document.getElementById("candidate-all");
+            var showBtn = document.getElementById("showBtn");
+            if (userid.length == 0) {
+                candidate_search.innerHTML="";
+                return;
+            }
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState==4 && this.status==200) {
+                    showBtn.disabled = false;
+                    candidate_all.style.display = 'none';
+                    candidate_search.style.display = 'block';
+                    candidate_search.innerHTML=this.responseText;
+                }
+            }
+            xmlhttp.open("GET","action/search_candidate.php?query="+userid,true);
+            xmlhttp.send();
+        }
+
+        function toggleShowBtn(){
+            var candidate_search = document.getElementById("candidate-search-result");
+            var candidate_all = document.getElementById("candidate-all");
+            var showBtn = document.getElementById("showBtn");
+            if(candidate_search.style.display === 'none') {
+                candidate_search.style.display = 'block';
+                candidate_all.style.display = 'none';
+            }
+            else {
+                showBtn.disabled = true;
+                candidate_search.style.display = 'none';
+                candidate_all.style.display = 'block';
+            }
+        }
+
+        function searchCandidate(str) {
+            if (str.length == 0) {
+                document.getElementById("search-dropdown").innerHTML="";
+                return;
+            }
+            var xmlhttp=new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState==4 && this.status==200) {
+                    document.getElementById("search-dropdown").innerHTML=this.responseText;
+                }
+            }
+            xmlhttp.open("GET","action/search_dropdown.php?query="+str,true);
+            xmlhttp.send();
+        }
+        
+
+    </script>
 </head>
 
 <body id="top">
@@ -157,8 +218,8 @@ ob_start();
                 <h1><u class="text-warning">CVs</u></h1>
                 <!-- Search bar -->
                 <div class="container mt-3 mb-2">
-                    <input type="text" class="form-control rounded" placeholder="Search for candidate">
-
+                    <input type="text" onkeyup="searchCandidate(this.value)" class="form-control rounded" id = "searchInput" placeholder="Search for candidate">
+                    <div class = "container" id="search-dropdown"></div>
                 </div>
                 <!-- Filter buttons -->
                 <div class="container d-flex flex-wrap justify-content-around">
@@ -178,56 +239,17 @@ ob_start();
                             <option value="3">Manager</option>
                         </select>             
                     </div>        
+                    <div class = "d-flex pt-1">
+                        <button class = "btn btn-primary btn-block" onclick= "toggleShowBtn()" id = "showBtn" disabled>Show All</button>
+                    </div>
                 </div>
-
                 <!-- Show a list of candidates with name, major and their objective -->
-                <div class="container mt-3 mb-4" id="candidate-all">
+                <div class="container mt-3 mb-4">
                     <div class="col-lg-12 mt-4 mt-lg-0">
                         <div class="row">
                             <div class="col-md-12">
                                 <!-- This div show the value when search for candidate -->
-                                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm" id="candidate-search-result">
-                                    <table class="table manage-candidates-top mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th>Candidate Name</th>
-                                                <th>Objective</th>
-                                                <th class="action text-right"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="candidates-list">
-                                                <td class="title">
-                                                    <div class="thumb">
-                                                        <img class="img-fluid border border-primary"
-                                                            src="https://i.ibb.co/P5hLdTg/profile-picture.png" alt="">
-                                                    </div>
-                                                    <div class="candidate-list-details">
-                                                        <div class="candidate-list-info">
-                                                            <div class="candidate-list-title">
-                                                                <h5 class="mb-0"><a href="#">Hung Dep Trai</a></h5>
-                                                            </div>
-                                                            <div class="candidate-list-option">
-                                                                <ul class="list-unstyled">
-                                                                    <li>Information Technology</li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td class="candidate-list-objective">
-
-                                                    <span>Tutor</span>
-                                                </td>
-                                                <td>
-                                                    <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                        <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                                <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm" id="candidate-search-result"></div>
                                 <!-- Table display when user click on Candidates on NavBar-->
                                 <div class="user-dashboard-info-box table-responsive mb-0 bg-white p-4 shadow-sm" id="candidate-all">
                                     <table class="table manage-candidates-top mb-0">
@@ -242,7 +264,8 @@ ob_start();
                                             <?php
                                                 include "database/dbconnect.php";
                                                 // select data to show to the list of candidates/
-                                                $sql = "SELECT 
+                                                $sql = "SELECT
+                                                users.id, 
                                                 users.firstname, 
                                                 users.lastname, 
                                                 users.avatar, 
