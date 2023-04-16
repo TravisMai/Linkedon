@@ -77,7 +77,7 @@
                 </ul>
                 <!-- FORM START -->
 
-                <form id="cv-form">
+                <form id="cv-form" method="POST" action="./action/add_cv_processing.php">
                     <div class="card border-success rounded">
                         <div class="card-body tab-content">
                             <!-- Personal Information Section -->
@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="graduation-year">Graduation Year</label>
-                                    <select class="form-control" id="graduation-year" name="graduation-year" required>
+                                    <select class="form-control" id="graduation-year" name="graduation-year">
                                         <option value="">-- Select Year --</option>
                                         <option value="1234">High School</option>
                                         <!-- Generate options for years from 1990 to 2023 -->
