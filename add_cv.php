@@ -491,7 +491,17 @@
         addReferenceForm();
     </script>
 
-
+<script>
+    const tabIndex = {
+        "personal": 0,
+    "objective": 1,
+    "education": 2,
+    "skills": 3,
+    "history": 4,
+    "certification": 5,
+    "reference": 6,
+  };
+</script>
 
     <script>
         function changeTab(tab) {
