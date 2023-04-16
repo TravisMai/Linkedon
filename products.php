@@ -17,19 +17,20 @@
                             see more of it, please feel free to go to my <a
                                 href="https://github.com/TravisMai">TravisMai</a> Github page to see more.</a></p>
                     </div>
-                    <?php if (!isset($_SESSION['user_id'])): ?>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">Add
+                                Product</button>
+<!--                     <?php if (!isset($_SESSION['user_id'])): ?>
                         <div class="text-center">
                             <h2 class="marker marker-center" style="color: red"><b>YOU NEED TO LOGIN FIRST</b></h2><BR />
                             <h2 class="marker marker-center" style="color: red"><b>IF YOU DONT HAVE AN ACCOUNT FEEL FREE TO CREATE ONE</b></h2>
                             <br />
                         </div>
                     <?php endif; ?>
-                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0): ?>
+                    <?php if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0): ?> -->
                         <div class="text-end">
                             <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#getProductsModal">Get
                                 Products</button>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">Add
-                                Product</button>
+                            
                             <div class="mt-3">
                                 <input type="text" id="searchInput" class="form-control" name="searchInput"
                                     placeholder="Search products...">
@@ -73,7 +74,7 @@
 
                         </div>
 
-                    <?php endif; ?>
+<!--                     <?php endif; ?> -->
                 </div>
             </div>
         </div>

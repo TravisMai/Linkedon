@@ -55,8 +55,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
+
                         <button class="nav-link" id="objective-tab" onclick="changeTab('objective')">
                             Objective</button>
+
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" id="education-tab" onclick="changeTab('education')">Education</button>
@@ -68,11 +70,14 @@
                         <button class="nav-link" id="history-tab" onclick="changeTab('history')">Work History</button>
                     </li>
                     <li class="nav-item">
+
                         <button class="nav-link" id="certification-tab"
                             onclick="changeTab('certification')">Certification</button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" id="reference-tab" onclick="changeTab('reference')">References</button>
+
+
                     </li>
                 </ul>
                 <!-- FORM START -->
@@ -86,6 +91,7 @@
                                 <p class="card-text h4">Start: Personal Information</p>
                                 <p class="text" style="color: blue">First, we need to confirm your personal information
                                 </p>
+
                                 <label for="first-name" class="mt-2">First Name</label>
                                 <input type="text" class="form-control" name="first-name" id="first-name" disabled
                                     value="lấy bên login">
@@ -105,6 +111,8 @@
                                 <label for="additional-info" class="mt-2">Additional Information:</label>
                                 <textarea id="additional-info" name="additional-info" class="form-control"
                                     placeholder="Tell us something about your habit and hobby"></textarea>
+
+
                                 <div class="d-flex justify-content-between mt-4">
                                     <div class="mr-auto"> </div>
                                     <button type="button" class="btn btn-primary ml-auto" id="next-to-objective"
@@ -117,6 +125,7 @@
                             <div class="tab-pane" id="objective-section">
                                 <input type="hidden" id="activeTabIndex" value="1">
                                 <h4>Step 1/6: Job Objective</h4>
+
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="job-title">Job Title</label>
@@ -169,6 +178,7 @@
                             <div class="tab-pane" id="education-section">
                                 <input type="hidden" id="activeTabIndex" value="2">
                                 <h4>Step 2/6: Education</h4>
+
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="school-name">School/University name</label>
@@ -231,6 +241,7 @@
 
                             <!-- Professional Skills -->
                             <div class="tab-pane" id="experience-section" style="display: none;">
+
                                 <input type="hidden" id="activeTabIndex" value="3">
                                 <h4>Step 3/6: Professional Experience</h4>
                                 <h5>First Experience</h5>
@@ -275,8 +286,10 @@
                                     impressive experience </p>
                                 <form>
                                     <div class="form-group mt-1">
+
                                         <label for="job-name">Job Title</label>
                                         <input type="text" class="form-control" id="job-name" name="job-name" required>
+
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="company-name">Company Name</label>
@@ -284,9 +297,11 @@
                                             id="company-name" name="company-name" required>
                                     </div>
                                     <div class="form-group mt-1">
+
                                         <label for="employment-degree">Type of Employment</label>
                                         <select class="form-control" id="employment-degree" required
                                             name="employment-degree">
+
                                             <option value="">-- Select --</option>
                                             <option value="full-time">Full-time</option>
                                             <option value="part-time">Part-time</option>
@@ -306,9 +321,11 @@
                                     </div>
                                     <div class="form-group mt-1 ">
                                         <label for="job-description">Job Description</label>
+
                                         <textarea class="form-control" id="job-description[0]"
                                             placeholder="Tell us something about that working experience"
                                             name="job-description[0]" rows="5" required></textarea>
+
                                     </div>
                                 </form>
                                 <div class="d-flex justify-content-between mt-4">
@@ -318,6 +335,7 @@
                                         onclick="changeTab('certification')">Next</button>
                                 </div>
                             </div>
+
 
 
                             <!-- Certiftication -->
@@ -344,6 +362,7 @@
                                 </div>
                                 <!-- </form> -->
 
+
                                 <button type="button" class="btn btn-primary mt-3" id="add-certification">Add
                                     More</button>
 
@@ -354,6 +373,7 @@
                                         onclick="changeTab('reference')">Next</button>
                                 </div>
                             </div>
+
 
 
                             <!-- Refernce -->
@@ -385,6 +405,7 @@
                                 </div>
                                 <!-- </form> -->
 
+
                                 <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
 
                                 <div class="d-flex justify-content-between mt-4">
@@ -414,6 +435,7 @@
     <script src="./scripts/bootstrap.bundle.min.js?ver=1.2.0"></script>
     <script src="./scripts/aos.min.js?ver=1.2.0"></script>
     <script src="./scripts/main.js?ver=1.2.0"></script>
+
 
     <!-- required word handle -->
     <script>
@@ -474,10 +496,12 @@
     <!-- GPA handle -->
     <script>
         const gpaInput = document.getElementById('gpa');
+
         let gpaScaleSelect = document.querySelector('#gpa-scale');
 
         gpaScaleSelect.addEventListener('change', function () {
             let gpaScale = this.value;
+
             gpaInput.setAttribute('max', gpaScale);
         });
 
@@ -520,6 +544,7 @@
     </script>
 
     <!-- add many experience -->
+
     <script>
         function addExperienceForm() {
             let experienceCount = 1;
@@ -530,6 +555,7 @@
                 newForm.innerHTML = `
             <h5 class="mt-3">Next Experience </h5>
             <div class="form-group">
+
                     <label for="job-description[${experienceCount}]">Job Description</label>
                     <textarea class="form-control" id="job-description[${experienceCount}]" name="job-description[${experienceCount}]" 
                     placeholder="Tell us something about that job" rows="2"
@@ -543,6 +569,7 @@
                     <label for="job-skills[${experienceCount}]">Skills Utilized</label>
                     <input type="text" class="form-control" placeholder="What you obtain after working at this position" 
                     name="job-skills[${experienceCount}]" required>
+
                 </div>
             <button type="button" class="btn btn-danger my-3 remove-experience-form">Remove Experience</button>
         `;
@@ -566,7 +593,9 @@
         addExperienceForm();
     </script>
 
+
     <!-- Add many certification -->
+
     <script>
         function addCertificationForm() {
             let certificationCount = 1;
@@ -577,6 +606,7 @@
                 newForm.innerHTML = `
             <h5 class="mt-3">Next Certification</h5>
             <div class="form-group">
+
                 <label for="certification-name[${certificationCount}]">Certification Name</label>
                 <input type="text" class="form-control" id="certification-name[${certificationCount}]" name="certification-name[${certificationCount}]" required>
             </div>
@@ -587,6 +617,7 @@
             <div class="form-group">
                 <label for="certification-description[${certificationCount}]">Description</label>
                 <textarea class="form-control" id="certification-description[${certificationCount}]"  name="certification-description[${certificationCount}]"  rows="2" required></textarea>
+
             </div>
             <button type="button" class="btn btn-danger my-3 remove-certification-form">Remove Certification</button>
         `;
@@ -657,6 +688,7 @@
 
 
     <!-- Change tab handle -->
+
     <script>
         function changeTab(tab) {
             document.getElementById(tab + "-tab").disabled = false;
@@ -680,13 +712,60 @@
 
             // Add the 'active' class to the selected tab link
 
+
             document.getElementById(tab + "-tab").classList.add('active');
+
             document.querySelector('.active').style.backgroundColor = "lightblue"
             const scrolling = document.getElementById('card-cv');
 
             scrolling.scrollIntoView();
 
         }
+    </script>
+    <script>
+        function addReferenceForm() {
+            let referenceCount = 1;
+            document.querySelector('#add-reference').addEventListener('click', function () {
+                // Create new form elements
+                let newForm = document.createElement('div');
+                newForm.classList.add('reference-forms');
+                newForm.innerHTML = `
+            <h5 class="mt-3">Next Reference</h5>
+            <div class="form-group">
+                <label for="reference-name">Reference Name</label>
+                <input type="text" class="form-control" name="reference-name[]" required>
+            </div>
+            <div class="form-group">
+                <label for="reference-email">Email</label>
+                <input type="email" class="form-control" name="reference-email[]" required>
+            </div>
+            <div class="form-group">
+                <label for="reference-phone">Phone</label>
+                <input type="tel" class="form-control" name="reference-phone[]" required>
+            </div>
+            <div class="form-group">
+                <label for="reference-relationship">Relationship</label>
+                <input type="text" class="form-control" name="reference-relationship[]" required>
+            </div>
+            <button type="button" class="btn btn-danger my-3 remove-reference-form">Remove Reference</button>
+        `;
+
+                this.parentNode.insertBefore(newForm, this);
+
+                referenceCount++;
+
+                newForm.querySelector('.remove-reference-form').addEventListener('click', function () {
+                    if (confirm('Are you sure you want to delete this reference?')) {
+                        // Remove the corresponding reference form
+                        this.parentNode.remove();
+                        // Decrement the reference count
+                        referenceCount--;
+                    }
+                });
+            });
+        }
+
+        addReferenceForm();
     </script>
 
     <!-- validation handle -->
