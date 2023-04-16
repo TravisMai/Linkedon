@@ -14,6 +14,12 @@ ob_start();
         th {
             font-size: 20px;
         }
+        select {
+            max-width: 200px;
+        }
+        .select-label {
+            background: #F6E05E;
+        }
         .user-dashboard-info-box .candidates-list .thumb {
             margin-right: 20px;
         }
@@ -144,17 +150,26 @@ ob_start();
         }
     </style>
     <script>
+
+        // Show candidate after click on search dropdown
+        // disable the filter parts
+        // enable Show All button to go back and show the whole list
         function showCandidate(userid) {
-            //clear input field
-            const inputField = document.getElementById('searchInput');
+
+            document.getElementById('filterObjective').disabled = true;
+            document.getElementById('filterMajor').disabled = true;
+            // clear input field
+            var inputField = document.getElementById('searchInput');
             inputField.value = '';
             // remove show class from dropdown menu
-            const searchMenu = document.querySelector('#searchMenu');
+            var searchMenu = document.querySelector('#searchMenu');
             searchMenu.classList.remove('show');
 
             var candidate_search = document.getElementById("candidate-search-result");
             var candidate_all = document.getElementById("candidate-all");
             var showBtn = document.getElementById("showBtn");
+            var filterBtn = document.getElementById("filterBtn");
+
             if (userid.length == 0) {
                 candidate_search.innerHTML="";
                 return;
@@ -163,6 +178,7 @@ ob_start();
             xmlhttp.onreadystatechange=function() {
                 if (this.readyState==4 && this.status==200) {
                     showBtn.disabled = false;
+                    filterBtn.disabled = true;
                     candidate_all.style.display = 'none';
                     candidate_search.style.display = 'block';
                     candidate_search.innerHTML=this.responseText;
@@ -172,21 +188,7 @@ ob_start();
             xmlhttp.send();
         }
 
-        function toggleShowBtn(){
-            var candidate_search = document.getElementById("candidate-search-result");
-            var candidate_all = document.getElementById("candidate-all");
-            var showBtn = document.getElementById("showBtn");
-            if(candidate_search.style.display === 'none') {
-                candidate_search.style.display = 'block';
-                candidate_all.style.display = 'none';
-            }
-            else {
-                showBtn.disabled = true;
-                candidate_search.style.display = 'none';
-                candidate_all.style.display = 'block';
-            }
-        }
-
+        // Create a dropdown list of search results that has the beginning match with user's input
         function searchCandidate(str) {
             if (str.length == 0) {
                 document.getElementById("search-dropdown").innerHTML="";
@@ -202,6 +204,63 @@ ob_start();
             xmlhttp.send();
         }
         
+        // Show candidate based on the condition set inside the filters after click the Filter button
+        function filterCandidates() {
+            var objective = document.getElementById("filterObjective").value;
+            var major = document.getElementById("filterMajor").value;
+            var candidate_search = document.getElementById("candidate-search-result");
+            var candidate_all = document.getElementById("candidate-all");
+            var showBtn = document.getElementById("showBtn");
+
+            if(objective == '0' && major == '0') {
+                showBtn.disabled = true;
+                candidate_all.style.display = 'block';
+                candidate_search.style.display = 'none';
+                return;
+            }
+            else {
+                var xmlhttp = new XMLHttpRequest();
+
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        showBtn.disabled = false;
+                        candidate_all.style.display = 'none';
+                        candidate_search.style.display = 'block';
+
+                        candidate_search.innerHTML=this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "action/filter_candidate.php?objective=" + objective + "&major=" + major, true);
+                xmlhttp.send();
+            }            
+        }
+
+        // Show All button will show all candidate and will be enable after a search
+        function toggleShowBtn(){
+            var candidate_search = document.getElementById("candidate-search-result");
+            var candidate_all = document.getElementById("candidate-all");
+            var showBtn = document.getElementById("showBtn");
+            var filterBtn = document.getElementById("filterBtn");
+            var objectiveSlct = document.getElementById("filterObjective");
+            var majorSlct = document.getElementById("filterMajor");
+
+            if(candidate_search.style.display === 'none') {         
+                candidate_search.style.display = 'block';
+                candidate_all.style.display = 'none';
+            }
+            else {
+                document.getElementById('filterObjective').disabled = false;
+                document.getElementById('filterMajor').disabled = false;
+                filterBtn.disabled = false;
+                showBtn.disabled = true;
+
+                objectiveSlct.selectedIndex = 0;
+                majorSlct.selectedIndex = 0;
+
+                candidate_search.style.display = 'none';
+                candidate_all.style.display = 'block';
+            }
+        }
 
     </script>
 </head>
@@ -224,23 +283,44 @@ ob_start();
                 <!-- Filter buttons -->
                 <div class="container d-flex flex-wrap justify-content-around">
                     <div class = "d-flex pt-1">
-                        <select class="form-select" aria-label="Sort by Objective">
-                            <option value="0" selected>Objective</option>
-                            <option value="1">Tutor</option>
-                            <option value="2">Computer Scientist</option>
-                            <option value="3">Manager</option>
+                        <select class="form-select w-100" aria-label="Sort by Objective" id = "filterObjective">
+                            <option class="select-label" value="0" selected>Objective</option>
+                            <?php
+                                include "database/dbconnect.php";
+
+                                $sql = "SELECT DISTINCT `objective` FROM `resume`";
+
+                                $result = $conn->query($sql);
+
+                                if(mysqli_num_rows($result) > 0){
+                                    while($row = $result->fetch_assoc()) {
+                                        echo '<option value="'. $row['objective'] .'">'. $row['objective'] .'</option>';
+                                    }
+                                }
+                            ?>
                         </select>             
                     </div>    
                     <div class = "d-flex pt-1">
-                        <select class="form-select" aria-label="Sort by Major">
-                            <option value="0" selected>Major</option>
-                            <option value="1">Tutor</option>
-                            <option value="2">Computer Scientist</option>
-                            <option value="3">Manager</option>
+                        <select class="form-select w-100" aria-label="Sort by Major" id = "filterMajor">
+                            <option class="select-label" value="0" selected>Major</option>
+                            <?php
+                                include "database/dbconnect.php";
+
+                                $sql = "SELECT DISTINCT `major` FROM `education`";
+
+                                $result = $conn->query($sql);
+
+                                if(mysqli_num_rows($result) > 0){
+                                    while($row = $result->fetch_assoc()) {
+                                        echo '<option value="'. $row['major'] .'">'. $row['major'] .'</option>';
+                                    }
+                                }
+                            ?>
                         </select>             
                     </div>        
                     <div class = "d-flex pt-1">
-                        <button class = "btn btn-primary btn-block" onclick= "toggleShowBtn()" id = "showBtn" disabled>Show All</button>
+                        <button class = "btn btn-secondary me-1" onclick= "filterCandidates()" id = "filterBtn">Filter</button>
+                        <button class = "btn btn-primary" onclick= "toggleShowBtn()" id = "showBtn" disabled>Show All</button>
                     </div>
                 </div>
                 <!-- Show a list of candidates with name, major and their objective -->
@@ -277,38 +357,39 @@ ob_start();
                                                 ORDER BY resume.date_added DESC;";
 
                                                 $result = $conn->query($sql);
-                                                
-                                                while($row = $result->fetch_assoc()) {
-                                                    echo
-                                                    '<tr class="candidates-list">
-                                                    <td class="title">
-                                                        <div class="thumb">
-                                                            <img class="img-fluid border border-primary"
-                                                                src="' . $row['avatar'] . '" alt="">
-                                                        </div>
-                                                        <div class="candidate-list-details">
-                                                            <div class="candidate-list-info">
-                                                                <div class="candidate-list-title">
-                                                                    <h5 class="mb-0"><a href="#">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
-                                                                </div>
-                                                                <div class="candidate-list-option">
-                                                                    <ul class="list-unstyled">
-                                                                        <li>' . $row['major'] . '</li>
-                                                                    </ul>
+                                                if(mysqli_num_rows($result) > 0){
+                                                    while($row = $result->fetch_assoc()) {
+                                                        echo
+                                                        '<tr class="candidates-list">
+                                                        <td class="title">
+                                                            <div class="thumb">
+                                                                <img class="img-fluid border border-primary"
+                                                                    src="' . $row['avatar'] . '" alt="">
+                                                            </div>
+                                                            <div class="candidate-list-details">
+                                                                <div class="candidate-list-info">
+                                                                    <div class="candidate-list-title">
+                                                                        <h5 class="mb-0"><a href="#">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
+                                                                    </div>
+                                                                    <div class="candidate-list-option">
+                                                                        <ul class="list-unstyled">
+                                                                            <li>' . $row['major'] . '</li>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </td>
-                                                    <td class="candidate-list-objective mb-0">
-                                                        <span>'. $row['objective'] .'</span>
-                                                    </td>
-                                                    <td>
-                                                        <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                            <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
-                                                        </ul>
-                                                    </td>
-                                                    </tr>                                                     
-                                                    ';
+                                                        </td>
+                                                        <td class="candidate-list-objective mb-0">
+                                                            <span>'. $row['objective'] .'</span>
+                                                        </td>
+                                                        <td>
+                                                            <ul class="list-unstyled mb-0 d-flex justify-content-end">
+                                                                <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
+                                                            </ul>
+                                                        </td>
+                                                        </tr>                                                     
+                                                        ';
+                                                    }
                                                 }
                                                 $conn->close();
                                             ?>
