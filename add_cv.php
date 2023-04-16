@@ -55,14 +55,14 @@
                     </li>
                 </ul>
                 <!-- FORM START -->
-                
+
                 <form id="cv-form">
                     <div class="card border-success rounded">
                         <div class="card-body tab-content">
                             <!-- Personal Information Section -->
-                           
+
                             <div class="tab-pane active" id="personal-section">
-                            <input type="hidden" id="activeTabIndex" value="0">
+                                <input type="hidden" id="activeTabIndex" value="0">
                                 <p class="card-text h4">Start: Personal Information</p>
                                 <p class="text" style="color: blue">First, we need to confirm your personal information
                                 </p>
@@ -87,7 +87,7 @@
 
                             <!-- Job Objective Section -->
                             <div class="tab-pane" id="objective-section">
-                                <input type="hidden" id="activeTabIndex" value="1"> 
+                                <input type="hidden" id="activeTabIndex" value="1">
                                 <h4>Step 1/6: Job Objective</h4>
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
@@ -126,7 +126,7 @@
 
                             <!-- Education Section -->
                             <div class="tab-pane" id="education-section">
-                            <input type="hidden" id="activeTabIndex" value="2"> 
+                                <input type="hidden" id="activeTabIndex" value="2">
                                 <h4>Step 2/6: Education</h4>
                                 <form>
                                     <div class="form-group mt-1">
@@ -174,7 +174,7 @@
 
                             <!-- Professional Skills -->
                             <div class="tab-pane" id="experience-section" style="display: none;">
-                            <input type="hidden" id="activeTabIndex" value="3"> 
+                                <input type="hidden" id="activeTabIndex" value="3">
                                 <h4>Step 3/6: Professional Experience</h4>
                                 <h5>First Experience</h5>
                                 <form>
@@ -206,7 +206,7 @@
 
                             <!-- Work history Section -->
                             <div class="tab-pane" id="history-section">
-                            <input type="hidden" id="activeTabIndex" value="4"> 
+                                <input type="hidden" id="activeTabIndex" value="4">
                                 <h4>Step 4/6: Work History</h4>
                                 <p class="text" style="color: blue">Plese show us your latest job, or your most
                                     impressive experience </p>
@@ -252,7 +252,7 @@
 
                             <!-- Certiftication -->
                             <div class="tab-pane" id="certification-section" style="display: none;">
-                            <input type="hidden" id="activeTabIndex" value="5"> 
+                                <input type="hidden" id="activeTabIndex" value="5">
                                 <h4>Step 5/6: Certifications</h4>
 
                                 <h5>First Certification</h5>
@@ -283,7 +283,7 @@
 
                             <!-- Refernce -->
                             <div class="tab-pane" id="reference-section" style="display: none;">
-                            <input type="hidden" id="activeTabIndex" value="6"> 
+                                <input type="hidden" id="activeTabIndex" value="6">
                                 <h4>Step 6/6: References</h4>
                                 <h5>First Reference</h5>
                                 <form>
@@ -334,17 +334,6 @@
     <script src="./scripts/main.js?ver=1.2.0"></script>
 
 
-    <script>
-        const tabValues = {
-            "personal": 0,
-            "objective": 1,
-            "education": 2,
-            "skills": 3,
-            "history": 4,
-            "certification": 5,
-            "reference": 6,
-        };
-    </script>
 
     <!-- GPA handle -->
     <script>
@@ -491,21 +480,29 @@
         addReferenceForm();
     </script>
 
-<script>
-    const tabIndex = {
-        "personal": 0,
-    "objective": 1,
-    "education": 2,
-    "skills": 3,
-    "history": 4,
-    "certification": 5,
-    "reference": 6,
-  };
-</script>
+    <script>
+        const tabIndex = {
+            "personal": 0,
+            "objective": 1,
+            "education": 2,
+            "experience": 3,
+            "history": 4,
+            "certification": 5,
+            "reference": 6,
+            "end": 7
+        };
+        let activeTabIndex = tabIndex[tab];
+    </script>
 
     <script>
         function changeTab(tab) {
-            // Get all tab content elements
+
+            
+
+            // Get all tab content elements 
+            let activeTabIndex = tabIndex[tab];
+
+            confirm(Object.entries(tabIndex)[activeTabIndex + 1][0]);
             var tabs = document.getElementsByClassName("tab-pane");
 
             // Loop through each tab content element and hide them
@@ -530,10 +527,36 @@
             const scrolling = document.getElementById('card-cv');
 
             scrolling.scrollIntoView();
+
         }
     </script>
 
 
+    <script>
+
+
+        // Enable the next button only when all required fields have been filled
+        requiredInputs.forEach(function(input) {
+            input.addEventListener("input", function() {
+                if (checkRequiredInputs()) {
+                    nextButton.disabled = false;
+                } else {
+                    nextButton.disabled = true;
+                }
+            });
+        });
+
+        // Check if all required inputs in the active tab are filled
+        function checkRequiredInputs() {
+            let allFilled = true;
+            requiredInputs.forEach(function(input) {
+                if (input.value === "") {
+                    allFilled = false;
+                }
+            });
+            return allFilled;
+        }
+    </script>
 </body>
 
 </html>
