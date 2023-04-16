@@ -3,6 +3,8 @@
 
 <?php require_once('inc/header.php') ?>
 
+
+
 <body id="top">
     <?php require_once('inc/topBarNav.php') ?>
     <div class="page-content bg-light">
@@ -52,13 +54,15 @@
                         <a class="nav-link" id="reference-tab" onclick="changeTab('reference')">References</a>
                     </li>
                 </ul>
-
-
+                <!-- FORM START -->
+                
                 <form id="cv-form">
                     <div class="card border-success rounded">
                         <div class="card-body tab-content">
                             <!-- Personal Information Section -->
+                           
                             <div class="tab-pane active" id="personal-section">
+                            <input type="hidden" id="activeTabIndex" value="0">
                                 <p class="card-text h4">Start: Personal Information</p>
                                 <p class="text" style="color: blue">First, we need to confirm your personal information
                                 </p>
@@ -67,57 +71,62 @@
                                 <label for="last-name" class="mt-2 h5">Last Name:</label>
                                 <input type="text" class="form-control" name="last-name" placeholder="Tell us the field you want to apply" id="last-name" required disabled value="lấy bên login">
                                 <label for="email" class="mt-2 h5">Email:</label>
-                                <input type="text" class="form-control" disabled value="lấy bên Phú@">
+                                <input type="text" id="email" name="email" class="form-control" disabled value="lấy bên Phú@gmail.com">
                                 <label for="phone-number" class="mt-2 h5">Phone Number:</label>
-                                <input type="text" class="form-control" disabled value="+84xxxxxx">
-                                <label for="phone-number" class="mt-2 h5">Address:</label>
-                                <input type="text" class="form-control" disabled value="xx/yy abc, P.z, Q.t">
-                                <label for="phone-number" class="mt-2 h5">Additional Information:</label>
-                                <input type="textarea" class="form-control" placeholder="Tell us something about your habit and hobby">
+                                <input type="text" id="phone-number" name="phone-number" class="form-control" disabled value="093423233232">
+                                <label for="address" class="mt-2 h5">Address:</label>
+                                <input type="text" id="address" name="address" class="form-control" disabled value="xx/yy abc, P.z, Q.t">
+                                <label for="additional-info" class="mt-2 h5">Additional Information:</label>
+                                <textarea id="additional-info" name="additional-info" class="form-control" placeholder="Tell us something about your habit and hobby"></textarea>
                                 <div class="d-flex justify-content-between mt-4">
                                     <div class="mr-auto"> </div>
                                     <button type="button" class="btn btn-primary ml-auto" id="next-to-objective" onclick="changeTab('objective')">Confirm</button>
                                 </div>
                             </div>
+
+
                             <!-- Job Objective Section -->
                             <div class="tab-pane" id="objective-section">
+                                <input type="hidden" id="activeTabIndex" value="1"> 
                                 <h4>Step 1/6: Job Objective</h4>
-                                <form>
-                                    <div class="form-group mt-1">
-                                        <label for="job-title">Job Title </label>
-                                        <input placeholder="Job Title" type="text" class="form-control" id="job-title" name="job-title" required />
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="position">Postion</label>
-                                        <input placeholder="Tell us the position you want to apply: fresher, junior, etc.." type="text" class="form-control" id="industry" name="industry">
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="employment-type">Type of Employment</label>
-                                        <select class="form-control" id="employment-type" name="employment-type">
-                                            <option value="">-- Select --</option>
-                                            <option value="full-time">Full-time</option>
-                                            <option value="part-time">Part-time</option>
-                                            <option value="contract">Contract</option>
-                                            <option value="freelance">Freelance</option>
-                                            <option value="internship">Internship</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="salary-range">Desired Salary Range</label>
-                                        <input placeholder="Ex: 20.000.000VNĐ" type="text" class="form-control" id="salary-range" name="salary-range">
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="qualifications">Qualifications and Career Goals</label>
-                                        <textarea placeholder="Tell us about your aim and goal, and expectation about job" class="form-control" id="qualifications" name="qualifications" rows="2"></textarea>
-                                    </div>
-                                    <div class="d-flex justify-content-between mt-4">
-                                        <button type="button" class="btn btn-secondary mr-auto" id="back-to-personal" onclick="changeTab('personal')">Back</button>
-                                        <button type="button" class="btn btn-primary ml-auto" id="next-to-education" onclick="changeTab('education')">Next</button>
-                                    </div>
-                                </form>
+                                <!-- <form> -->
+                                <div class="form-group mt-1">
+                                    <label for="job-title">Job Title </label>
+                                    <input placeholder="Job Title" type="text" class="form-control" id="job-title" name="job-title" required />
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="position">Postion</label>
+                                    <input placeholder="Tell us the position you want to apply: fresher, junior, etc.." type="text" class="form-control" id="industry" name="industry">
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="employment-type">Type of Employment</label>
+                                    <select class="form-control" id="employment-type" name="employment-type">
+                                        <option value="">-- Select --</option>
+                                        <option value="full-time">Full-time</option>
+                                        <option value="part-time">Part-time</option>
+                                        <option value="contract">Contract</option>
+                                        <option value="freelance">Freelance</option>
+                                        <option value="internship">Internship</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="salary-range">Desired Salary Range</label>
+                                    <input placeholder="Ex: 20.000.000VNĐ" type="number" class="form-control" required id="salary-range" name="salary-range">
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="qualifications">Qualifications and Career Goals</label>
+                                    <textarea placeholder="Tell us about your aim and goal, and expectation about job" required class="form-control" id="qualifications" name="qualifications" rows="2"></textarea>
+                                </div>
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-personal" onclick="changeTab('personal')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-education" onclick="changeTab('education')">Next</button>
+                                </div>
+                                <!-- </form> -->
                             </div>
+
                             <!-- Education Section -->
                             <div class="tab-pane" id="education-section">
+                            <input type="hidden" id="activeTabIndex" value="2"> 
                                 <h4>Step 2/6: Education</h4>
                                 <form>
                                     <div class="form-group mt-1">
@@ -161,8 +170,11 @@
                                     <button type="button" class="btn btn-primary ml-auto" id="next-to-experience" onclick="changeTab('experience')">Next</button>
                                 </div>
                             </div>
+
+
                             <!-- Professional Skills -->
                             <div class="tab-pane" id="experience-section" style="display: none;">
+                            <input type="hidden" id="activeTabIndex" value="3"> 
                                 <h4>Step 3/6: Professional Experience</h4>
                                 <h5>First Experience</h5>
                                 <form>
@@ -190,8 +202,11 @@
                                     </div>
                                 </form>
                             </div>
+
+
                             <!-- Work history Section -->
                             <div class="tab-pane" id="history-section">
+                            <input type="hidden" id="activeTabIndex" value="4"> 
                                 <h4>Step 4/6: Work History</h4>
                                 <p class="text" style="color: blue">Plese show us your latest job, or your most
                                     impressive experience </p>
@@ -233,25 +248,28 @@
                                     <button type="button" class="btn btn-primary ml-auto" id="next-to-certification" onclick="changeTab('certification')">Next</button>
                                 </div>
                             </div>
+
+
                             <!-- Certiftication -->
                             <div class="tab-pane" id="certification-section" style="display: none;">
+                            <input type="hidden" id="activeTabIndex" value="5"> 
                                 <h4>Step 5/6: Certifications</h4>
 
                                 <h5>First Certification</h5>
-                                <form>
-                                    <div class="form-group mt-1">
-                                        <label for="certification-name">Certification Name</label>
-                                        <input type="text" class="form-control" placeholder="Certification title" name="certification-name[]" required>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="certification-date">Date</label>
-                                        <input type="month" class="form-control" name="certification-date[]" required>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="certification-description">Description</label>
-                                        <textarea class="form-control" name="certification-description[]" rows="5" required></textarea>
-                                    </div>
-                                </form>
+                                <!-- <form> -->
+                                <div class="form-group mt-1">
+                                    <label for="certification-name">Certification Name</label>
+                                    <input type="text" class="form-control" placeholder="Certification title" name="certification-name[]" required>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="certification-date">Date</label>
+                                    <input type="month" class="form-control" name="certification-date[]" required>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="certification-description">Description</label>
+                                    <textarea class="form-control" name="certification-description[]" rows="5" required></textarea>
+                                </div>
+                                <!-- </form> -->
 
                                 <button type="button" class="btn btn-primary mt-3" id="add-certification">Add
                                     More</button>
@@ -261,8 +279,11 @@
                                     <button type="button" class="btn btn-primary ml-auto" id="next-to-reference" onclick="changeTab('reference')">Next</button>
                                 </div>
                             </div>
+
+
                             <!-- Refernce -->
                             <div class="tab-pane" id="reference-section" style="display: none;">
+                            <input type="hidden" id="activeTabIndex" value="6"> 
                                 <h4>Step 6/6: References</h4>
                                 <h5>First Reference</h5>
                                 <form>
@@ -300,13 +321,6 @@
             <div class="col bg-light"> </div>
         </div>
 
-        <!-- <div class="input-container">
-            <label for="major" class="mt-2 h5">Major:</label>
-            <select class="form-select" name="" id="">
-                <option value="">Computer Science</option>
-                <option value="">Electrical Engineer</option>
-            </select>
-        </div> -->
     </div>
     </div>
     <?php require_once('inc/footer.php') ?>
@@ -318,6 +332,19 @@
     <script src="./scripts/bootstrap.bundle.min.js?ver=1.2.0"></script>
     <script src="./scripts/aos.min.js?ver=1.2.0"></script>
     <script src="./scripts/main.js?ver=1.2.0"></script>
+
+
+    <script>
+        const tabValues = {
+            "personal": 0,
+            "objective": 1,
+            "education": 2,
+            "skills": 3,
+            "history": 4,
+            "certification": 5,
+            "reference": 6,
+        };
+    </script>
 
     <!-- GPA handle -->
     <script>
@@ -465,6 +492,7 @@
     </script>
 
 
+
     <script>
         function changeTab(tab) {
             // Get all tab content elements
@@ -494,6 +522,8 @@
             scrolling.scrollIntoView();
         }
     </script>
+
+
 </body>
 
 </html>
