@@ -33,25 +33,29 @@
         <div class="row">
             <div class="col bg-light"> </div>
             <div class="col-7 col-sm-10 col-md-5">
-                <ul class="nav nav-tabs flex-column flex-md-row small" id="cv-Tab" role="tablist">
+                <ul class="nav nav-tabs flex-column flex-md-row small" id="cv-Tab">
                     <li class="nav-item">
-                        <a class="nav-link" id="objective-tab" onclick="changeTab('objective')">
-                            Objective</a>
+                        <a class="nav-link" id="personal-tab" disabled onclick="changeTab('personal')" style="display: none">
+                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="education-tab" onclick="changeTab('education')">Education</a>
+                        <button class="nav-link" id="objective-tab" onclick="changeTab('objective')">
+                            Objective</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="experience-tab" onclick="changeTab('experience')">Skills</a>
+                        <button class="nav-link" id="education-tab" onclick="changeTab('education')">Education</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="history-tab" onclick="changeTab('history')">Work History</a>
+                        <button class="nav-link" id="experience-tab" onclick="changeTab('experience')">Skills</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="certification-tab" onclick="changeTab('certification')">Certification</a>
+                        <button class="nav-link" id="history-tab" onclick="changeTab('history')">Work History</button>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" id="reference-tab" onclick="changeTab('reference')">References</a>
+                        <button class="nav-link" id="certification-tab" onclick="changeTab('certification')">Certification</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" id="reference-tab" onclick="changeTab('reference')">References</button>
                     </li>
                 </ul>
                 <!-- FORM START -->
@@ -67,7 +71,7 @@
                                 <p class="text" style="color: blue">First, we need to confirm your personal information
                                 </p>
                                 <label for="first-name" class="mt-2 h5">First Name:</label>
-                                <input type="text" class="form-control" name="first-name" id="first-name" required disabled value="lấy bên login">
+                                <input type="text" class="form-control" name="first-name" id="first-name" disabled value="lấy bên login">
                                 <label for="last-name" class="mt-2 h5">Last Name:</label>
                                 <input type="text" class="form-control" name="last-name" placeholder="Tell us the field you want to apply" id="last-name" required disabled value="lấy bên login">
                                 <label for="email" class="mt-2 h5">Email:</label>
@@ -96,7 +100,7 @@
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="position">Postion</label>
-                                    <input placeholder="Tell us the position you want to apply: fresher, junior, etc.." type="text" class="form-control" id="industry" name="industry">
+                                    <input placeholder="Tell us the position you want to apply: fresher, junior, etc.." type="text" class="form-control" id="position" name="position">
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="employment-type">Type of Employment</label>
@@ -111,7 +115,7 @@
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="salary-range">Desired Salary Range</label>
-                                    <input placeholder="Ex: 20.000.000VNĐ" type="number" class="form-control" required id="salary-range" name="salary-range">
+                                    <input placeholder="Ex: 20.000.000VNĐ" type="number" min="1000000" step="1000000" class="form-control" required id="salary-range" name="salary-range">
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="qualifications">Qualifications and Career Goals</label>
@@ -128,43 +132,43 @@
                             <div class="tab-pane" id="education-section">
                                 <input type="hidden" id="activeTabIndex" value="2">
                                 <h4>Step 2/6: Education</h4>
-                                <form>
-                                    <div class="form-group mt-1">
-                                        <label for="school-name">School/University name</label>
-                                        <input type="text" placeholder="Your University/ School" class="form-control" id="school-name" name="school-name" required>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="degree-name">Degree/Course name</label>
-                                        <input type="text" placeholder="Your majority/ course name" class="form-control" id="degree-name" name="degree-name" required>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="education-level">Education level</label>
-                                        <select class="form-control" id="education-level" name="education-level" required>
-                                            <option value="high-school">High School</option>
-                                            <option value="bachelor">Bachelor's Degree</option>
-                                            <option value="mba">MBA</option>
-                                            <option value="graduate">Graduate Degree</option>
-                                            <option value="post-graduate">Post-Graduate Degree</option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="graduation-year">Graduation Year</label>
-                                        <input type="number" min="1990" max="2035" class="form-control" id="graduation-year" placeholder="2024" name="graduation-year">
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="gpa">GPA</label>
-                                        <div class="d-flex align-items-center">
-                                            <input type="number" step="0.01" min="1" max="10" class="form-control mr-2" id="gpa-value" placeholder="7.0" name="gpa-value">
+                                <!-- <form> -->
+                                <div class="form-group mt-1">
+                                    <label for="school-name">School/University name</label>
+                                    <input type="text" placeholder="Your University/ School" class="form-control" id="school-name" name="school-name" required>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="degree-name">Degree/Course name</label>
+                                    <input type="text" placeholder="Your majority/ course name" class="form-control" id="degree-name" name="degree-name" required>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="education-level">Education level</label>
+                                    <select class="form-control" id="education-level" name="education-level" required>
+                                        <option value="high-school">High School</option>
+                                        <option value="bachelor">Bachelor's Degree</option>
+                                        <option value="mba">MBA</option>
+                                        <option value="graduate">Graduate Degree</option>
+                                        <option value="post-graduate">Post-Graduate Degree</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="graduation-year">Graduation Year</label>
+                                    <input type="number" min="1990" max="2035" class="form-control" id="graduation-year" placeholder="2024" name="graduation-year">
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="gpa">GPA</label>
+                                    <div class="d-flex align-items-center">
+                                        <input type="number" step="0.01" min="1" max="10" class="form-control mr-2" id="gpa" placeholder="7.0" name="gpa">
 
-                                            <select class="form-control ml-2" id="gpa-scale" name="gpa-scale">
-                                                <option value="10">/10</option>
-                                                <option value="4">/4</option>
-                                            </select>
-                                            <div>
-                                            </div>
+                                        <select class="form-control ml-2" aria-labelledby="state" id="gpa-scale" name="gpa-scale">
+                                            <option value="10">/10</option>
+                                            <option value="4">/4</option>
+                                        </select>
+                                        <div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
+                                <!-- </form> -->
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-objective" onclick="changeTab('objective')">Back</button>
                                     <button type="button" class="btn btn-primary ml-auto" id="next-to-experience" onclick="changeTab('experience')">Next</button>
@@ -177,30 +181,30 @@
                                 <input type="hidden" id="activeTabIndex" value="3">
                                 <h4>Step 3/6: Professional Experience</h4>
                                 <h5>First Experience</h5>
-                                <form>
+                                <!-- <form> -->
 
-                                    <div class="form-group mt-1">
-                                        <label for="job-description">Job Description</label>
-                                        <textarea class="form-control" name="job-description[]" placeholder="Tell us something about that job" rows="2" required></textarea>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="job-duration">Duration</label>
-                                        <input type="month" class="form-control" name="job-duration[]" required>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="job-skills">Skills Utilized</label>
-                                        <input type="text" class="form-control" placeholder="What you obtain after working at this position" name="job-skills[]" required>
-                                    </div>
+                                <div class="form-group mt-1">
+                                    <label for="job-description">Job Description</label>
+                                    <textarea class="form-control" name="job-description[]" placeholder="Tell us something about that job" rows="2" required></textarea>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="job-duration">Duration</label>
+                                    <input type="month" class="form-control" id="job-duration" name="job-duration[]" required>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="job-skills">Skills Utilized</label>
+                                    <input type="text" class="form-control" id="job-skills" placeholder="What you obtain after working at this position" name="job-skills[]" required>
+                                </div>
 
-                                    <button type="button" class="btn btn-success my-3" id="add-experience">Add
-                                        Another
-                                        Experience</button>
-                                    <!-- Add a Next button to go to the next section -->
-                                    <div class="d-flex justify-content-between mt-4">
-                                        <button type="button" class="btn btn-secondary mr-auto" id="back-to-education" onclick="changeTab('education')">Back</button>
-                                        <button type="button" class="btn btn-primary ml-auto" id="next-to-history" onclick="changeTab('history')">Next</button>
-                                    </div>
-                                </form>
+                                <button type="button" class="btn btn-success my-3" id="add-experience">Add
+                                    Another
+                                    Experience</button>
+                                <!-- Add a Next button to go to the next section -->
+                                <div class="d-flex justify-content-between mt-4">
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-education" onclick="changeTab('education')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-history" onclick="changeTab('history')">Next</button>
+                                </div>
+                                <!-- </form> -->
                             </div>
 
 
@@ -212,16 +216,16 @@
                                     impressive experience </p>
                                 <form>
                                     <div class="form-group mt-1">
-                                        <label for="job-title">Job Title</label>
-                                        <input type="text" class="form-control" id="job-title" name="job-title" required>
+                                        <label for="job-name">Job Title</label>
+                                        <input type="text" class="form-control" id="job-name" name="job-name" required>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="company-name">Company Name</label>
                                         <input type="text" class="form-control" placeholder="Name of the Company" id="company-name" name="company-name" required>
                                     </div>
                                     <div class="form-group mt-1">
-                                        <label for="employment-type">Type of Employment</label>
-                                        <select class="form-control" id="employment-type" name="employment-type">
+                                        <label for="employment-degree">Type of Employment</label>
+                                        <select class="form-control" id="employment-degree" required name="employment-degree">
                                             <option value="">-- Select --</option>
                                             <option value="full-time">Full-time</option>
                                             <option value="part-time">Part-time</option>
@@ -263,11 +267,11 @@
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="certification-date">Date</label>
-                                    <input type="month" class="form-control" name="certification-date[]" required>
+                                    <input type="month" class="form-control" id="certification-date" name="certification-date[]" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="certification-description">Description</label>
-                                    <textarea class="form-control" name="certification-description[]" rows="5" required></textarea>
+                                    <textarea class="form-control" id="certification-description" name="certification-description[]" rows="5" required></textarea>
                                 </div>
                                 <!-- </form> -->
 
@@ -286,31 +290,31 @@
                                 <input type="hidden" id="activeTabIndex" value="6">
                                 <h4>Step 6/6: References</h4>
                                 <h5>First Reference</h5>
-                                <form>
-                                    <div class="form-group">
-                                        <label for="reference-name">Reference Name</label>
-                                        <input type="text" class="form-control" name="reference-name[]" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="reference-phone">Major</label>
-                                        <input type="text" class="form-control" name="reference-phone[]" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="reference-email">Email</label>
-                                        <input type="email" class="form-control" name="reference-email[]" required>
-                                    </div>
+                                <!-- <form> -->
+                                <div class="form-group">
+                                    <label for="reference-name">Reference Name</label>
+                                    <input type="text" class="form-control" id="reference-name" name="reference-name[]" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reference-phone">Major</label>
+                                    <input type="text" class="form-control" id="reference-phone" name="reference-phone[]" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="reference-email">Email</label>
+                                    <input type="email" class="form-control" id="reference-email" name="reference-email[]" required>
+                                </div>
 
-                                    <div class="form-group">
-                                        <label for="reference-relationship">Relationship</label>
-                                        <input type="text" class="form-control" name="reference-relationship[]" required>
-                                    </div>
-                                </form>
+                                <div class="form-group">
+                                    <label for="reference-relationship">Relationship</label>
+                                    <input type="text" class="form-control" id="reference-relationship" name="reference-relationship[]" required>
+                                </div>
+                                <!-- </form> -->
 
                                 <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
 
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-certification" onclick="changeTab('certification')">Back</button>
-                                    <button type="submit" class="btn btn-primary ml-auto">Submit</button>
+                                    <button type="submit" id="next-to-end" class="btn btn-primary ml-auto">Submit</button>
                                 </div>
                             </div>
 
@@ -337,7 +341,7 @@
 
     <!-- GPA handle -->
     <script>
-        let gpaValueInput = document.querySelector('#gpa-value');
+        let gpaValueInput = document.querySelector('#gpa');
         let gpaScaleSelect = document.querySelector('#gpa-scale');
 
         gpaScaleSelect.addEventListener('change', function() {
@@ -481,30 +485,24 @@
     </script>
 
     <script>
-        const tabIndex = {
-            "personal": 0,
-            "objective": 1,
-            "education": 2,
-            "experience": 3,
-            "history": 4,
-            "certification": 5,
-            "reference": 6,
-            "end": 7
+        var tabIndex = {
+            "personal": [0, 1],
+            "objective": [1, 0],
+            "education": [2, 0],
+            "experience": [3, 0],
+            "history": [4, 0],
+            "certification": [5, 0],
+            "reference": [6, 0],
+            "end": [7, 0]
         };
-        let activeTabIndex = tabIndex[tab];
     </script>
 
     <script>
         function changeTab(tab) {
-
-            
-
-            // Get all tab content elements 
-            let activeTabIndex = tabIndex[tab];
-
-            confirm(Object.entries(tabIndex)[activeTabIndex + 1][0]);
+            document.getElementById(tab + "-tab").disabled = false;
+            validationTab(tab);
             var tabs = document.getElementsByClassName("tab-pane");
-
+            let tabButton = document.getElementById(`${tab}-tab`);
             // Loop through each tab content element and hide them
             for (var i = 0; i < tabs.length; i++) {
                 tabs[i].style.display = "none";
@@ -522,7 +520,7 @@
 
             // Add the 'active' class to the selected tab link
 
-            document.getElementById(tab + "-tab").classList.add("active");
+            document.getElementById(tab + "-tab").classList.add('active');
             document.querySelector('.active').style.backgroundColor = "lightblue"
             const scrolling = document.getElementById('card-cv');
 
@@ -533,28 +531,56 @@
 
 
     <script>
-
-
         // Enable the next button only when all required fields have been filled
-        requiredInputs.forEach(function(input) {
-            input.addEventListener("input", function() {
-                if (checkRequiredInputs()) {
-                    nextButton.disabled = false;
-                } else {
-                    nextButton.disabled = true;
-                }
-            });
-        });
 
-        // Check if all required inputs in the active tab are filled
-        function checkRequiredInputs() {
-            let allFilled = true;
+        function validationTab(tab) {
+            let activeTabIndex = tabIndex[tab];
+            // Get the index of the active tab
+
+            // Get the next button
+            
+            let nextButton = document.getElementById(`next-to-${Object.entries(tabIndex)[activeTabIndex[0] + 1][0]}`);
+
+            // Get all required inputs in the active tab
+            let requiredInputs = document.querySelectorAll(`#${Object.entries(tabIndex)[activeTabIndex[0]][0]}-section [required]`);
+
+            // Disable the next button initially
+            if (!tabIndex[tab][1]) {
+                nextButton.disabled = true;
+            } else {
+                nextButton.disabled = false;
+
+            }
             requiredInputs.forEach(function(input) {
-                if (input.value === "") {
-                    allFilled = false;
-                }
+                input.addEventListener("input", function() {
+                    if (checkRequiredInputs()) {
+                        nextButton.disabled = false;
+                        document.getElementById(tab + "-tab").disabled = false;
+                        tabIndex[tab][1] = 1;
+                    } else {
+                        nextButton.disabled = true;
+                    }
+                });
             });
-            return allFilled;
+
+            // Check if all required inputs in the active tab are filled
+            function checkRequiredInputs() {
+                let allFilled = true;
+                requiredInputs.forEach(function(input) {
+                    if (input.value === "") {
+                        allFilled = false;
+                    }
+                });
+                return allFilled;
+            }
+            // Get all tab content elements 
+        }
+    </script>
+
+    <script>
+        for (var idx = 0; idx < Object.keys(tabIndex).length - 1; idx++) {
+            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled =  !Object.entries(tabIndex)[idx][1][1];
+            console.log(!Object.entries(tabIndex)[idx][1][1]);
         }
     </script>
 </body>
