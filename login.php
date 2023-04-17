@@ -153,7 +153,7 @@
     <form method="POST" action="action/login_processing.php">
         <h3>Login Here</h3>
         <label for="username">Username:</label>
-        <input type="username" id="username" name="username" placeholder="Username" required>
+        <input type="username" id="username" name="username" placeholder="Username" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>" required>
 
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" placeholder="Password" required>
