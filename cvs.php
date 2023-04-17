@@ -17,6 +17,9 @@ ob_start();
         select {
             max-width: 200px;
         }
+        .card {
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+        }
         .select-label {
             background: #F6E05E;
         }
