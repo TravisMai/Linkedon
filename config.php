@@ -219,14 +219,14 @@ CREATE TABLE IF NOT EXISTS `reference` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `resume_id` int(50) NOT NULL,
     `user_id` int(50) NOT NULL,
-    `working_id` int(50) NOT NULL,
+    `firstname` varchar(250) NOT NULL,
+    `lastname` varchar(250) NOT NULL,
     `email` text NOT NULL,
     `phone` int(10) NOT NULL,
     `relationship` text NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (`resume_id`) REFERENCES `resume`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
-    FOREIGN KEY (`working_id`) REFERENCES `working_history`(`id`) ON DELETE CASCADE
+    FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
   );
 ";
 if ($conn->query($sql) === TRUE) {
@@ -235,6 +235,27 @@ if ($conn->query($sql) === TRUE) {
     //   echo "Error creating table: " . $conn->error;
 }
 
+// Cái chỗ insert data dưới này để nó chạy lần dầu tiên xong nhớ disable nó bằng comment
+// Không hiểu sao mỗi lần chạy lại phần code reset_table thì cái trang Candates nó không hiện gì hết
+// nên là insert lần đầu cho có data để test thôi rồi hủy cái đống này trước khi reload lại
+// sau này xong phần insert manual thì bỏ luôn mấy cái code insert này ra luôn
 
+/*
+// Delete existing data, reset id to begin with 1, then insert data again when reload page
+include "database/reset_table.php";
+
+// Open insertdata.sql
+$sql_file = fopen('database/insertdata.sql', 'r');
+// Read content of insertdata.sql
+$sql = fread($sql_file, filesize('database/insertdata.sql'));
+// Close insertdata.sql
+fclose($sql_file);
+
+if ($conn->multi_query($sql) === TRUE) {
+    //echo "SQL commands were executed successfully!";
+} else {
+    //echo "Error executing SQL commands: " . $conn->error;
+}
+*/
 $conn->close();
 ?>
