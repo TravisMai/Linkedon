@@ -20,6 +20,7 @@
     }   
 
 </style>
+
 <?php require_once('inc/header.php') ?>
 
 <body id="top">
@@ -30,30 +31,36 @@
                 <div class="container-narrow">
                     <div class="row">
                         <h1 class="text-center">My Profile</h1>
-                        <p class= 'text-danger'>Add your information to complete the registration!</p>
+                        <?php       
+                            if(!isset($_SESSION['updated'])){
+                                echo '<div class= "text-danger registration-message" >Add your information to complete the registration!</div>';
+                            }
+                        ?>
                         <div class="col-md-6">
-                            <form action="/attraction" method="post">
-                                <div class="form-floating mb-3">
-                                <input type="text" class="form-control" name="first-name" id="floatingInput" placeholder="Ex: Smai" required pattern="^[a-zA-Z]+$" title="Please enter a valid first name (only letters)">
-                                <label for="floatingInput" >First Name<span class='text-danger'>(*)</span></label>
+                            <form action="./action/profile_processing.php" method="post">
+                                <div class="form-floating mb-3 mt-2">
+                                <input type="text" class="form-control" name="first-name" id="first-name" placeholder="Ex: Smai" value="<?php echo isset($_SESSION['first-name']) ? $_SESSION['first-name'] : ''; ?>" required pattern="[\p{L}\p{N}]+" title="Please enter a valid first name (only letters)">
+                                <label for="first-name" >First Name<span class='text-danger'>(*)</span></label>
                                 </div>
                                 
-                                <div class="mb-3">
-                                <label for="last-name" class="form-label">Last Name<span class='text-danger'>(*)</span>:</label>
-                                <input type="text" class="form-control is-invalid" name="last-name" id="last-name" placeholder="Ex: Nghia" required>
+                                <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="last-name" id="last-name" placeholder="Ex: Nghia" value="<?php echo isset($_SESSION['last-name']) ? $_SESSION['last-name'] : ''; ?>" required pattern="[\p{L}\p{N}]+" title="Please enter a valid last name (only letters)">
+                                <label for="last-name" >Last Name<span class='text-danger'>(*)</span></label>
                                 </div>
 
-                                <div class="mb-3">
-                                <label for="location" class="form-label">Email<span class='text-danger'>(*)</span>:</label>
-                                <input type="email" class="form-control is-invalid" name="area[location]" id="location" placeholder="Ex: nghia@gmail.com" required>
+                                <div class="form-floating mb-3">
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Ex: nghia@gmail.com" value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" required>
+                                <label for="email" class="form-label">Email<span class='text-danger'>(*)</span>:</label>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="image" class="form-label">Phone Number<span class='text-danger'>(*)</span>:</label>
-                                    <input type="text" class="form-control is-invalid" name="area[image]" id="image" required>
+
+                                <div class="form-floating mb-3">
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="Ex: 0546565846" value="<?php echo isset($_SESSION['phone']) ? $_SESSION['phone'] : ''; ?>" required pattern="[0-9]*" title="Please enter only numbers!">
+                                <label for="phone" class="form-label">Phone Number<span class='text-danger'>(*)</span>:</label>    
                                 </div>
-                                <div class="mb-3">
-                                    <label for="image" class="form-label">Address:</label>
-                                    <input type="text" class="form-control" name="area[image]" id="image" required>
+
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" name="address" placeholder="Ex: HCM city" id="address" value="<?php echo isset($_SESSION['address']) ? $_SESSION['address'] : ''; ?>">
+                                    <label for="address" class="form-label">Address:</label>  
                                 </div>
                                 
                                 <div class="mb-3">
@@ -86,38 +93,31 @@
         <script src="./scripts/main.js?ver=1.2.0"></script>
 
     <script>
-        const inputCont = document.querySelector('.inp-control');
-        function checkFname(){
-            const firstName = document.getElementById("first-name");
-            //firstName.addEventListener("change", function() {
-                if(firstName.value.length == 0){
-                    firstName.classList.add('border-warning');
-                }
-                else if(!validateName(firstName)){
-                    firstName.classList.add('border-danger');
-                }
-            
-        }
+        const formCont = document.querySelector('.form-control');
 
+        const firstName = document.getElementById("first-name");
         const lastName = document.getElementById("last-name");
-        lastName.addEventListener("change", function() {
-            validateName(lastName);
+        const email = document.getElementById("email");
+        const phoneNum = document.getElementById("phone");
+        const regisMess = document.querySelector(".registration-message");
+        // formCont.addEventListener("change", function(){
+        //     if(firstName.value.length > 0 && lastName.value.length > 0 && email.value.length > 0 && phoneNum.value.length > 0){
+        //     regisMess.style.display = "none";
+        //     }
+        // });
+        const formInputs = [firstName, lastName, email, phoneNum];
+
+        formInputs.forEach(input => {
+        input.addEventListener("input", function() {
+            if (firstName.value.length > 0 && lastName.value.length > 0 && email.value.length > 0 && phoneNum.value.length > 0) {
+            regisMess.style.display = "none";
+            }
         });
-
-        function validateName(field) {
-        var regex = /^[a-zA-Z]+$/;
-        if (regex.test(field.value)) {
-            return true;
-        } else {
-
-            return false;
-        }
-    }
-        
-
-
+        });
+   
 
     </script>
+
 </body>
 
 </html>
