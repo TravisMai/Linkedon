@@ -19,7 +19,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
 ?>
 <header class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header-nav" role="navigation">
-        <div class="container"><a class="link-dark navbar-brand site-title mb-0" href="#">LMEO SEEKERS</a>
+        <div class="container"><a class="link-dark navbar-brand site-title mb-0" href="#">Worst CV</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
@@ -29,8 +29,17 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
                     <li class="nav-item"><a class="nav-link" href="index.php?page=cvs">Candidates</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php?page=home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php?page=about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="index.php?page=products">"Products"</a></li>
-                    <li class="nav-item"><a class="nav-link" href="<?php echo $login_link; ?>"><?php echo $login_text; ?></a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.php?page=products">Products</a></li>
+                </ul>    
+                <ul class="navbar-nav ms-auto me-2">    
+                    <?php
+                        // check if user is logged in
+                        if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
+                            // user is logged in, show profile option
+                            echo '<li class="nav-item"><a class="nav-link" href="action/setup_profile.php"><i class="bi bi-person-circle"></i></a></li>';
+                        } 
+                    ?>    
+                    <li class="nav-item"><a class="nav-link" href="<?php echo $login_link; ?>"><?php echo $login_text; ?></a></li>               
                 </ul>
             </div>
         </div>
