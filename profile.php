@@ -21,7 +21,13 @@
 
 </style>
 
-<?php require_once('inc/header.php') ?>
+<?php 
+require_once('inc/header.php');
+    if(!isset($_SESSION['setup'])){
+     require_once('action/setup_profile.php');
+    }
+ ?>
+
 
 <body id="top">
     <?php require_once('inc/topBarNav.php') ?>

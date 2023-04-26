@@ -59,7 +59,7 @@ if (isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['p
   }
   $user_id = $_SESSION['user_id'];
 
-  $sql_update_userInfo = "UPDATE users SET firstName='$firstName', lastName='$lastName', email='$email', phone='$phoneNumber' WHERE id=$user_id";
+  $sql_update_userInfo = "UPDATE users SET firstName='$firstName', lastName='$lastName', email='$email', phone='$phoneNumber', address='$address' WHERE id=$user_id";
     //Execute SQL statement
     if ($conn->query($sql_update_userInfo) === TRUE) {
         echo '<script language="javascript"> console.log("Data inserted into users table successfully!");</script>';
