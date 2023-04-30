@@ -3,7 +3,7 @@ session_start();
 include '../config.php'; // contains the database connection settings
 
 $host = 'localhost';
-$dbname = 'OnlineStore';
+$dbname = 'co3049';
 $username = 'root';
 $password = '';
 
@@ -54,7 +54,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
 
         // Redirect to dashboard
-        header("Location: ../index.php?page=home");
+        header("Location: ../index.php");
         exit();
     }
 } else {
