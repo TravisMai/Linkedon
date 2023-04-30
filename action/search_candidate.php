@@ -44,7 +44,7 @@ if(isset($_GET['query'])){
                 <div class="candidate-list-details">
                     <div class="candidate-list-info">
                         <div class="candidate-list-title">
-                            <h5 class="mb-0"><a href="#">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
+                            <h5 class="mb-0"><a href="index.php?page=candidates&id='. $row['id'] .'">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
                         </div>
                         <div class="candidate-list-option">
                             <ul class="list-unstyled">

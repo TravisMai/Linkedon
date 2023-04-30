@@ -127,6 +127,10 @@ ob_start();
         #candidate-search-result {
             display: none;
         }
+        #detail-of-candidate {
+            display: none;
+        }
+
         @media screen and (max-width: 800px) {
             .user-dashboard-info-box .candidates-list .thumb img {
                 width: 40px;
@@ -264,7 +268,6 @@ ob_start();
                 candidate_all.style.display = 'block';
             }
         }
-
     </script>
 </head>
 
@@ -273,95 +276,9 @@ ob_start();
 
     <div class="page-content bg-light">
         <div id="content">
-            <!-- The detail of candidate will be show when user click on a candidate's name or click view detail -->
-            <div class="container" id = "detail-of-candidate">
-
-                <button type="button" class="btn btn-dark my-2"><i class="bi fa-lg bi-chevron-left"></i></button>
-
-                <h1><u class="text-warning">Candidate Information</u></h1>        
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-4 mt-3">
-                            <div class="card border">
-                                <img class="card-img-top border border-primary" src="https://i.ibb.co/x3wfK5z/female-avatar.jpg" alt="">
-                                <div class="card-body">              
-                                    <p class="card-text">Name: <strong>Test Name</strong></p>
-                                    <p class="card-text">Email: <strong>testname@example.com</strong></p>
-                                    <p class="card-text">Phone: <strong>0123456789</strong></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8 mb-2 mt-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Objective</h5>
-                                    <p class="card-text">To obtain a challenging position at a reputable company where my skills, 
-                                                        experience, and education can be utilized for the mutual benefit of both 
-                                                        the company and myself.</p>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Education</h5>
-                                    <ul>
-                                        <li>Bachelor of Science in Computer Science, XYZ University, 2020</li>
-                                        <li>Master of Business Administration, ABC University, 2022</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Certificates</h5>
-                                    <ul>
-                                        <li>Microsoft Certified Solutions Expert (MCSE)</li>
-                                        <li>Amazon Web Services (AWS) Certified Solutions Architect - Associate</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Experience</h5>
-                                    <ul>
-                                        <li>Software Engineer, Acme Corporation, 2020 - Present</li>
-                                        <li>IT Consultant, XYZ Consulting, 2018 - 2020</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Working History</h5>
-                                    <ul>
-                                        <li>Software Developer, Acme Corporation, 2016 - 2018</li>
-                                        <li>Intern, ABC Company, 2015 - 2016</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Additional Information</h5>
-                                    <ul>
-                                        <li>Hobbies: Reading, music, and sports</li>
-                                        <li>Habits: Punctual, detail-oriented, and hardworking</li>
-                                        <li>Personal Info: Single, no dependents</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">References</h5>
-                                    <ul>
-                                        <li>John Smith, Manager at Acme Corporation, jsmith@example.com, 555-4321, Professional Reference</li>
-                                        <li>Jane Doe, Professor at XYZ University, janedoe@example.com, 555-9876, Academic Reference</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>     
-            </div>
             <!-- This appear first when user click on "Candidates" -->
             <div class="container" id = "search-for-candidate">
-                <h1><u class="text-warning">CVs</u></h1>
+                <h1><u class="text-warning">Candidates</u></h1>
                 <!-- Search bar -->
                 <div class="container mt-3 mb-2">
                     <input type="text" onkeyup="searchCandidate(this.value)" class="form-control rounded" id = "searchInput" placeholder="Search for candidate">
@@ -456,7 +373,7 @@ ob_start();
                                                             <div class="candidate-list-details">
                                                                 <div class="candidate-list-info">
                                                                     <div class="candidate-list-title">
-                                                                        <h5 class="mb-0"><a href="#">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
+                                                                        <h5 class="mb-0"><a href="index.php?page=candidates&id='. $row['id'] . '">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
                                                                     </div>
                                                                     <div class="candidate-list-option">
                                                                         <ul class="list-unstyled">
