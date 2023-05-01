@@ -94,9 +94,7 @@ if(isset($_GET['objective']) && isset($_GET['major'])){
                 <span>'. $row['objective'] .'</span>
             </td>
             <td>
-                <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                    <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
-                </ul>
+                <a href="index.php?page=candidates&id='. $row['id'] . '"><button class = "btn btn-outline-secondary btn-sm">View CV</button></a>
             </td>
             </tr>                                                     
             ';

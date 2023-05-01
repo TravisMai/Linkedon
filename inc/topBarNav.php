@@ -6,6 +6,7 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 if(isset($_GET['id'])){
     $page = 'show_resume';
 }
+
 $page_path = dirname(__DIR__) . '/' . $page . '.php';
 
 // check if user is logged in

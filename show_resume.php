@@ -36,7 +36,7 @@ ob_start();
 
                 $output = '
                 <a id = "backbtn" href="index.php?page=candidates"><button type="button" class="btn btn-dark my-2"><i class="bi fa-lg bi-chevron-left"></i></button></a>
-                <h1><u class="text-warning">Candidate Information</u></h1>        
+                <h1><u class="text-warning">Curriculum Vitae</u></h1>        
                         <div class="container">
                             <div class="row justify-content-center">';
                 if(mysqli_num_rows($result) > 0){
