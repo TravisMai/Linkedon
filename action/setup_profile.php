@@ -15,7 +15,7 @@ require_once('./config.php');
   $user_id = $_SESSION['user_id'];
 
 // Prepare SQL statement
-$sql = "SELECT firstname, lastname, email, phone, address FROM users WHERE id = $user_id";
+$sql = "SELECT firstname, lastname, email, phone, address, avatar FROM users WHERE id = $user_id";
 
 // Execute SQL statement
 $result = $conn->query($sql);
@@ -29,6 +29,7 @@ if ($result->num_rows > 0) {
         $email = $row["email"];
         $phoneNumber = $row["phone"];
         $address = $row["address"];
+        $image = $row["avatar"];
         // Do something with the retrieved values
           
     //Set success message and redirect to login page
@@ -37,6 +38,7 @@ if ($result->num_rows > 0) {
     $_SESSION['last-name'] = $lastName;
     $_SESSION['phone'] = $phoneNumber;
     $_SESSION['address'] = $address;
+    $_SESSION['image'] = $image;
     $_SESSION['updated'] = 1;
     $_SESSION['setup'] = 1;
     header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');

@@ -11,7 +11,7 @@
             $user_name = $_SESSION['user_name'];
             
             // Specify the directory where the uploaded file will be stored
-            $uploadDir = '../uploads/';
+            $uploadDir = 'C:/xampp/htdocs/CO3049_WebProgramming_HK222/uploads/';
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
@@ -23,7 +23,7 @@
 
             // Set the path where the file will be saved
             $targetFilePath = $uploadDir . $fileName;
-
+            $savedFilePath = 'uploads/'. $fileName;
             // Check if the file already exists in the directory
             if(file_exists($targetFilePath)) {
                 echo "File already exists.";
@@ -44,11 +44,12 @@
                     if (!$conn) {
                         die("Connection failed: " . mysqli_connect_error());
                     }
-                    $path = mysqli_real_escape_string($conn, $targetFilePath);
+                    $path = mysqli_real_escape_string($conn, $savedFilePath);
                     $sql = "UPDATE users SET avatar = '$path' WHERE id = $user_id";
                     if (mysqli_query($conn, $sql)) {
                         echo "Path saved to MySQL successfully.";
                         mysqli_close($conn);
+                        $_SESSION['setup'] = 0;
                         header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
                         exit();
                     } else {

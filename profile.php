@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+    .avatar{
+        object-fit: cover;
+    }
+</style>
 
 <?php 
 require_once('inc/header.php');
-    if(!isset($_SESSION['setup'])){
+    if(!isset($_SESSION['setup']) || $_SESSION['setup'] == 0){
      require_once('action/setup_profile.php');
     }
  ?>
@@ -61,7 +66,8 @@ require_once('inc/header.php');
 
                         <div class="col-md-5" data-aos="fade-left" data-aos-delay="100">
                             <div class="form-floating mb-5 ">
-                                <img class="avatar img-fluid mt-2" src="images/avatar.jpg" width="200" height="200" alt="Walter Patterson" />
+                                <img class="avatar mt-2" src="<?php echo isset($_SESSION['image']) ? $_SESSION['image'] : 'images/avatar.jpg'; ?>" width="200" height="200" alt="Walter Patterson" />
+                                
                             </div>
                             <form method="post" enctype="multipart/form-data" action="./action/upload.php">
                                 <div><h6>Select your avatar:</h6></div>
