@@ -1,11 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.19.3/js/vendor/jquery.ui.widget.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.19.3/js/jquery.iframe-transport.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.19.3/js/jquery.fileupload.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/cloudinary-core/2.11.0/cloudinary-core-shrinkwrap.min.js"></script>
-
 
 <?php 
 require_once('inc/header.php');
@@ -69,11 +63,11 @@ require_once('inc/header.php');
                             <div class="form-floating mb-5 ">
                                 <img class="avatar img-fluid mt-2" src="images/avatar.jpg" width="200" height="200" alt="Walter Patterson" />
                             </div>
-                            <form method="post" enctype="multipart/form-data">
+                            <form method="post" enctype="multipart/form-data" action="./action/upload.php">
                                 <div><h6>Select your avatar:</h6></div>
                                 <div class="input-group mb-3">
                                     <input class="form-control" type="file" id="avatar" name="avatar" accept="image/*"><br>                                     
-                                    <button class="input-group-text" type="submit">Upload</button>
+                                    <button class="input-group-text" >Upload</button>
                                 </div>
                             </form>
  
@@ -122,51 +116,6 @@ require_once('inc/header.php');
 
 
     </script>
-   <?php
-    // Check if form is submitted
-    if(isset($_POST['submit'])) {
-
-        // Check if file was uploaded without errors
-        if(isset($_FILES["avatar"]) && $_FILES["avatar"]["error"] == 0) {
-            $uploadDir = 'uploads/'; // Specify the directory where the uploaded file will be stored
-            $fileName = basename($_FILES["avatar"]["name"]); // Get the name of the uploaded file
-            $targetFilePath = $uploadDir . $fileName; // Set the path where the file will be saved
-
-            // Check if the file already exists in the directory
-            if(file_exists($targetFilePath)) {
-                echo "File already exists.";
-            } else{
-                // Move the uploaded file to the specified directory
-                if(move_uploaded_file($_FILES["avatar"]["tmp_name"], $targetFilePath)) {
-                    echo "The file ".$fileName. " has been uploaded.";
-                    
-                    // Save the path of the uploaded file to MySQL
-                    $dbHost = 'localhost';
-                    $dbUsername = 'root';
-                    $dbPassword = '';
-                    $dbName = 'co3049';
-                    $conn = mysqli_connect($dbHost, $dbUsername, $dbPassword, $dbName);
-                    if (!$conn) {
-                        die("Connection failed: " . mysqli_connect_error());
-                    }
-                    $path = mysqli_real_escape_string($conn, $targetFilePath);
-                    $sql = "INSERT INTO users (avatar) VALUES ('$path')";
-                    if (mysqli_query($conn, $sql)) {
-                        echo "Path saved to MySQL successfully.";
-                    } else {
-                        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-                    }
-                    mysqli_close($conn);
-                    
-                } else {
-                    echo "Sorry, there was an error uploading your file.";
-                }
-            }
-        } else {
-            echo "Error: " . $_FILES["avatar"]["error"];
-        }
-    }
-?>
 
 
 
