@@ -64,7 +64,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
   if ($row['count'] != 0){
     echo '<script language="javascript">console.log("Username already exists");</script>';
     $_SESSION['label'] = "Invalid signup";
-    $_SESSION['message'] = "Username already exists";
+    $_SESSION['message'] = "Username or email already exists";
     header('Location: http://localhost/CO3049_WebProgramming_HK222/register.php');
     exit();
   }
