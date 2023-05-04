@@ -482,7 +482,7 @@ ob_start();
                                             ?>
                                         </tbody>
                                     </table>
-                                    <div class="text-center mt-3 mt-sm-3">
+                                    <div class="text-center mt-3 mt-sm-3" style>
                                         <ul class="pagination justify-content-center mb-0">
                                             <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
                                             <li class="page-item active" aria-current="page"><span class="page-link">1

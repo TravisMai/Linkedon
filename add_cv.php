@@ -17,7 +17,6 @@
     var experienceCount = 0;
     var certificationCount = 0;
     var referenceCount = 0;
-
 </script>
 
 <body id="top">
@@ -47,18 +46,15 @@
         </div>
         <div class="row">
             <div class="col bg-light"> </div>
-            <div class="col-7 col-sm-10 col-md-5">
-                <ul class="nav nav-tabs flex-column flex-md-row small" id="cv-Tab">
+            <div class="col-7 col-sm-10 col-md-6">
+                <ul class="nav nav-tabs flex-column flex-md-row" id="cv-Tab">
                     <li class="nav-item">
-                        <a class="nav-link" id="personal-tab" disabled onclick="changeTab('personal')"
-                            style="display: none">
+                        <a class="nav-link" id="personal-tab" disabled onclick="changeTab('personal')" style="display: none">
                         </a>
                     </li>
                     <li class="nav-item">
-
                         <button class="nav-link" id="objective-tab" onclick="changeTab('objective')">
                             Objective</button>
-
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" id="education-tab" onclick="changeTab('education')">Education</button>
@@ -70,19 +66,18 @@
                         <button class="nav-link" id="history-tab" onclick="changeTab('history')">Work History</button>
                     </li>
                     <li class="nav-item">
-
-                        <button class="nav-link" id="certification-tab"
-                            onclick="changeTab('certification')">Certification</button>
+                        <button class="nav-link" id="certification-tab" onclick="changeTab('certification')">Certification</button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" id="reference-tab" onclick="changeTab('reference')">References</button>
-
-
                     </li>
                 </ul>
                 <!-- FORM START -->
 
-                <form id="cv-form" method="POST" action="./action/add_cv_processing.php">
+                <form id="cv-form" method="POST" action="index.php?page=action\add_cv_processing">
+
+                    <input type="hidden" name="page" value="action\add_cv_processing">
+
                     <div class="card border-success rounded">
                         <div class="card-body tab-content">
                             <!-- Personal Information Section -->
@@ -91,32 +86,33 @@
                                 <p class="card-text h4">Start: Personal Information</p>
                                 <p class="text" style="color: blue">First, we need to confirm your personal information
                                 </p>
-
                                 <label for="first-name" class="mt-2">First Name</label>
-                                <input type="text" class="form-control" name="first-name" id="first-name" disabled
-                                    value="lấy bên login">
+                                <input type="text" class="form-control" name="first-name" id="first-name" disabled value="lấy bên login">
                                 <label for="last-name" class="mt-2">Last Name</label>
-                                <input type="text" class="form-control" name="last-name"
-                                    placeholder="Tell us the field you want to apply" id="last-name" disabled
-                                    value="lấy bên login">
+                                <input type="text" class="form-control" name="last-name" placeholder="Tell us the field you want to apply" id="last-name" disabled value="lấy bên login">
                                 <label for="email" class="mt-2">Email</label>
-                                <input type="text" id="email" name="email" class="form-control" disabled
-                                    value="lấy bên Phú@gmail.com">
+                                <input type="text" id="email" name="email" class="form-control" disabled value="lấy bên Phú@gmail.com">
                                 <label for="phone-number" class="mt-2">Phone Number:</label>
-                                <input type="text" id="phone-number" name="phone-number" class="form-control" disabled
-                                    value="093423233232">
+                                <input type="text" id="phone-number" name="phone-number" class="form-control" disabled value="093423233232">
                                 <label for="address" class="mt-2">Address</label>
-                                <input type="text" id="address" name="address" class="form-control" disabled
-                                    value="xx/yy abc, P.z, Q.t">
+                                <input type="text" id="address" name="address" class="form-control" disabled value="xx/yy abc, P.z, Q.t">
                                 <label for="additional-info" class="mt-2">Additional Information:</label>
-                                <textarea id="additional-info" name="additional-info" class="form-control"
-                                    placeholder="Tell us something about your habit and hobby"></textarea>
-
-
+                                <div class="form-group mt-2">
+                                    <label for="habit">Habit</label>
+                                    <input type="text" class="form-control" placeholder="Something about your habit"id="habit" name="habit">
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="hobbies">Hobbies</label>
+                                    <input type="text" class="form-control" placeholder="Something about your hobbies"id="hobbies" name="hobbies" >
+                                </div>
+                                <div class="form-group mt-2">
+                                    <label for="personal-information">Personal Information</label>
+                                    <textarea class="form-control" id="personal-information" name="personal-information" rows="3" placeholder="Share us something about yourself: 
+Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
+                                </div>
                                 <div class="d-flex justify-content-between mt-4">
                                     <div class="mr-auto"> </div>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-objective"
-                                        onclick="changeTab('objective')">Confirm</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-objective" onclick="changeTab('objective')">Confirm</button>
                                 </div>
                             </div>
 
@@ -125,17 +121,14 @@
                             <div class="tab-pane" id="objective-section">
                                 <input type="hidden" id="activeTabIndex" value="1">
                                 <h4>Step 1/6: Job Objective</h4>
-
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="job-title">Job Title</label>
-                                    <input placeholder="Job Title" type="text" class="form-control" id="job-title"
-                                        name="job-title" required>
+                                    <input placeholder="Job Title" type="text" class="form-control" id="job-title" name="job-title" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="position">Postion</label>
-                                    <input placeholder="Tell us the position you want to apply: fresher, junior, etc.."
-                                        type="text" class="form-control" id="position" name="position" required>
+                                    <input placeholder="Tell us the position you want to apply: fresher, junior, etc.." type="text" class="form-control" id="position" name="position" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="employment-type">Type of Employment</label>
@@ -152,24 +145,17 @@
                                     <label for="">Desired Salary Range</label>
                                     <div class="input-group">
                                         <label class="input-group-text" for="salary-range">Apprx</label>
-                                        <input placeholder="Ex: 20." type="number" min="1" step="1" class="form-control"
-                                            required id="salary-range" name="salary-range">
-
+                                        <input placeholder="Ex: 20." type="number" min="1" step="1" class="form-control" required id="salary-range" name="salary-range">
                                         <span class="input-group-text">.000.000 VND</span>
-
                                     </div>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="qualifications">Qualifications and Career Goals</label>
-                                    <textarea placeholder="Tell us about your aim and goal, and expectation about job"
-                                        required class="form-control" id="qualifications" name="qualifications"
-                                        rows="2"></textarea>
+                                    <textarea placeholder="Tell us about your aim and goal, and expectation about job" required class="form-control" id="qualifications" name="qualifications" rows="2"></textarea>
                                 </div>
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-personal"
-                                        onclick="changeTab('personal')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-education"
-                                        onclick="changeTab('education')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-personal" onclick="changeTab('personal')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-education" onclick="changeTab('education')">Next</button>
                                 </div>
                                 <!-- </form> -->
                             </div>
@@ -182,13 +168,11 @@
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="school-name">School/University name</label>
-                                    <input type="text" placeholder="Your University/ School" class="form-control"
-                                        id="school-name" name="school-name" required>
+                                    <input type="text" placeholder="Your University/ School" class="form-control" id="school-name" name="school-name" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="degree-name">Degree/Course name</label>
-                                    <input type="text" placeholder="Your majority/ course name" class="form-control"
-                                        id="degree-name" name="degree-name" required>
+                                    <input type="text" placeholder="Your majority/ course name" class="form-control" id="degree-name" name="degree-name" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="education-level">Education level</label>
@@ -218,8 +202,7 @@
                                     <label for="">GPA</label>
                                     <div class="input-group">
                                         <label class="input-group-text" for="gpa"> </label>
-                                        <input type="number" step="0.01" max="10" required class="form-control" id="gpa"
-                                            placeholder="7.0" name="gpa">
+                                        <input type="number" step="0.01" max="10" required class="form-control" id="gpa" placeholder="7.0" name="gpa">
 
                                         <select class="form-control" id="gpa-scale" name="gpa-scale">
                                             <option value="10">/10</option>
@@ -231,10 +214,8 @@
                                 </div>
                                 <!-- </form> -->
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-objective"
-                                        onclick="changeTab('objective')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-experience"
-                                        onclick="changeTab('experience')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-objective" onclick="changeTab('objective')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-experience" onclick="changeTab('experience')">Next</button>
                                 </div>
                             </div>
 
@@ -249,19 +230,15 @@
 
                                 <div class="form-group mt-1">
                                     <label for="job-description">Job Description</label>
-                                    <textarea class="form-control" name="job-description[]"
-                                        placeholder="Tell us something about that job" rows="2" required></textarea>
+                                    <textarea class="form-control" id="job-description" name="job-description[]" placeholder="Tell us something about that job" rows="2" required></textarea>
                                 </div>
                                 <div class="form-group mt-1">
-                                    <label for="job-duration[0]">Duration</label>
-                                    <input type="month" class="form-control" id="job-duration[0]" name="job-duration[0]"
-                                        required>
+                                    <label for="job-duration">Duration</label>
+                                    <input type="month" class="form-control" id="job-duration" name="job-duration[]" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="job-skills">Skills Utilized</label>
-                                    <input type="text" class="form-control" id="job-skills"
-                                        placeholder="What you obtain after working at this position" name="job-skills[]"
-                                        required>
+                                    <input type="text" class="form-control" id="job-skills" placeholder="What you obtain after working at this position" name="job-skills[]" required>
                                 </div>
 
                                 <button type="button" class="btn btn-success my-3" id="add-experience">Add
@@ -269,10 +246,8 @@
                                     Experience</button>
                                 <!-- Add a Next button to go to the next section -->
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-education"
-                                        onclick="changeTab('education')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-history"
-                                        onclick="changeTab('history')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-education" onclick="changeTab('education')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-history" onclick="changeTab('history')">Next</button>
                                 </div>
                                 <!-- </form> -->
                             </div>
@@ -293,15 +268,12 @@
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="company-name">Company Name</label>
-                                        <input type="text" class="form-control" placeholder="Name of the Company"
-                                            id="company-name" name="company-name" required>
+                                        <input type="text" class="form-control" placeholder="Name of the Company" id="company-name" name="company-name" required>
                                     </div>
                                     <div class="form-group mt-1">
 
                                         <label for="employment-degree">Type of Employment</label>
-                                        <select class="form-control" id="employment-degree" required
-                                            name="employment-degree">
-
+                                        <select class="form-control" id="employment-degree" required name="employment-degree">
                                             <option value="">-- Select --</option>
                                             <option value="full-time">Full-time</option>
                                             <option value="part-time">Part-time</option>
@@ -312,27 +284,22 @@
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="start-date">Start Date</label>
-                                        <input type="date" class="form-control" id="start-date" name="start-date"
-                                            required>
+                                        <input type="date" class="form-control" id="start-date" name="start-date" required>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="end-date">End Date</label>
                                         <input type="date" class="form-control" id="end-date" name="end-date">
                                     </div>
                                     <div class="form-group mt-1 ">
-                                        <label for="job-description">Job Description</label>
+                                        <label for="working-description">Job Description</label>
 
-                                        <textarea class="form-control" id="job-description[0]"
-                                            placeholder="Tell us something about that working experience"
-                                            name="job-description[0]" rows="5" required></textarea>
+                                        <textarea class="form-control" id="working-description" placeholder="Tell us something about that working experience" name="working-description" rows="5" required></textarea>
 
                                     </div>
                                 </form>
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-experience"
-                                        onclick="changeTab('experience')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-certification"
-                                        onclick="changeTab('certification')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-experience" onclick="changeTab('experience')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-certification" onclick="changeTab('certification')">Next</button>
                                 </div>
                             </div>
 
@@ -347,18 +314,15 @@
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="certification-name">Certification Name</label>
-                                    <input type="text" class="form-control" id="certification-name[0]"
-                                        placeholder="Certification title" name="certification-name[0]" required>
+                                    <input type="text" class="form-control" id="certification-name" placeholder="Certification title" name="certification-name[]" required>
                                 </div>
                                 <div class="form-group mt-1">
-                                    <label for="certification-date[0]">Date</label>
-                                    <input type="month" class="form-control" id="certification-date[0]"
-                                        name="certification-date[0]" required>
+                                    <label for="certification-date">Date</label>
+                                    <input type="month" class="form-control" id="certification-date" name="certification-date[]" required>
                                 </div>
                                 <div class="form-group mt-1">
-                                    <label for="certification-description[0]">Description</label>
-                                    <textarea class="form-control" id="certification-description[0]"
-                                        name="certification-description[0]" rows="5" required></textarea>
+                                    <label for="certification-description">Description</label>
+                                    <textarea class="form-control" id="certification-description" name="certification-description[]" rows="5" required></textarea>
                                 </div>
                                 <!-- </form> -->
 
@@ -367,10 +331,8 @@
                                     More</button>
 
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-history"
-                                        onclick="changeTab('history')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-reference"
-                                        onclick="changeTab('reference')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-history" onclick="changeTab('history')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-reference" onclick="changeTab('reference')">Next</button>
                                 </div>
                             </div>
 
@@ -384,24 +346,20 @@
                                 <!-- <form> -->
                                 <div class="form-group">
                                     <label for="reference-name">Reference Name</label>
-                                    <input type="text" class="form-control" id="reference-name" name="reference-name[]"
-                                        required>
+                                    <input type="text" class="form-control" id="reference-name" name="reference-name[]" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="reference-phone">Major</label>
-                                    <input type="text" class="form-control" id="reference-phone"
-                                        name="reference-phone[]" required>
+                                    <input type="text" class="form-control" id="reference-phone" name="reference-phone[]" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="reference-email">Email</label>
-                                    <input type="email" class="form-control" id="reference-email"
-                                        name="reference-email[]" required>
+                                    <input type="email" class="form-control" id="reference-email" name="reference-email[]" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="reference-relationship">Relationship</label>
-                                    <input type="text" class="form-control" id="reference-relationship"
-                                        name="reference-relationship[]" required>
+                                    <input type="text" class="form-control" id="reference-relationship" name="reference-relationship[]" required>
                                 </div>
                                 <!-- </form> -->
 
@@ -409,13 +367,10 @@
                                 <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
 
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-certification"
-                                        onclick="changeTab('certification')">Back</button>
-                                    <button type="submit" id="next-to-end"
-                                        class="btn btn-primary ml-auto">Submit</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-certification" onclick="changeTab('certification')">Back</button>
+                                    <button type="submit" id="next-to-end" class="btn btn-primary ml-auto" onclick="submitForms()">Submit</button>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </form>
@@ -426,8 +381,7 @@
     </div>
     </div>
     <?php require_once('inc/footer.php') ?>
-    <div id="scrolltop"><a class="btn btn-secondary" href="#top"><span class="icon"><i
-                    class="fas fa-angle-up fa-x"></i></span></a></div>
+    <div id="scrolltop"><a class="btn btn-secondary" href="#top"><span class="icon"><i class="fas fa-angle-up fa-x"></i></span></a></div>
     <script src="./scripts/imagesloaded.pkgd.min.js?ver=1.2.0"></script>
     <script src="./scripts/masonry.pkgd.min.js?ver=1.2.0"></script>
     <script src="./scripts/BigPicture.min.js?ver=1.2.0"></script>
@@ -476,7 +430,7 @@
         const graduationYearSelect = document.getElementById('graduation-year');
 
         // Disable the Graduation Year select when the Education Level is High School
-        educationLevel.addEventListener('change', function () {
+        educationLevel.addEventListener('change', function() {
             if (educationLevel.value === 'high-school') {
                 graduationYearSelect.value = '1234';
                 graduationYearSelect.disabled = true;
@@ -486,11 +440,10 @@
         });
         const salaryRangeInput = document.getElementById('salary-range');
 
-        salaryRangeInput.addEventListener('input', function () {
+        salaryRangeInput.addEventListener('input', function() {
             const cleanedValue = salaryRangeInput.value.replace(/[^0-9]/g, '');
             salaryRangeInput.value = cleanedValue;
         });
-
     </script>
 
     <!-- GPA handle -->
@@ -499,7 +452,7 @@
 
         let gpaScaleSelect = document.querySelector('#gpa-scale');
 
-        gpaScaleSelect.addEventListener('change', function () {
+        gpaScaleSelect.addEventListener('change', function() {
             let gpaScale = this.value;
 
             gpaInput.setAttribute('max', gpaScale);
@@ -513,13 +466,13 @@
         gpaInput.setAttribute('max', maxGpa);
 
         // Update max value when the selected scale changes
-        gpaScaleSelect.addEventListener('change', function () {
+        gpaScaleSelect.addEventListener('change', function() {
             const newMaxGpa = gpaScaleSelect.value;
             gpaInput.setAttribute('max', newMaxGpa);
         });
 
         // Listen for input events on the GPA input element
-        gpaInput.addEventListener('input', function () {
+        gpaInput.addEventListener('input', function() {
             const enteredGpa = parseFloat(gpaInput.value);
             const maxGpa = parseFloat(gpaInput.getAttribute('max'));
 
@@ -528,7 +481,7 @@
                 gpaInput.value = maxGpa;
             }
         });
-        gpaInput.addEventListener('input', function () {
+        gpaInput.addEventListener('input', function() {
             // Remove all non-numeric and non-decimal characters
             let cleanedValue = gpaInput.value;
 
@@ -539,7 +492,7 @@
                 gpaInput.value = cleanedValue;
             }
 
-            
+
         });
     </script>
 
@@ -548,7 +501,7 @@
     <script>
         function addExperienceForm() {
             let experienceCount = 1;
-            document.querySelector('#add-experience').addEventListener('click', function () {
+            document.querySelector('#add-experience').addEventListener('click', function() {
                 // Create new form elements
                 let newForm = document.createElement('div');
                 newForm.classList.add('experience-forms');
@@ -556,19 +509,19 @@
             <h5 class="mt-3">Next Experience </h5>
             <div class="form-group">
 
-                    <label for="job-description[${experienceCount}]">Job Description</label>
-                    <textarea class="form-control" id="job-description[${experienceCount}]" name="job-description[${experienceCount}]" 
+                    <label for="job-description">Job Description</label>
+                    <textarea class="form-control" id="job-description" name="job-description[]" 
                     placeholder="Tell us something about that job" rows="2"
                         required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="job-duration[${experienceCount}]">Duration</label>
-                    <input type="month" class="form-control" id="job-duration[${experienceCount}]" name="job-duration[${experienceCount}]" required>
+                    <label for="job-duration">Duration</label>
+                    <input type="month" class="form-control" id="job-duration" name="job-duration[]" required>
                 </div>
                 <div class="form-group">
-                    <label for="job-skills[${experienceCount}]">Skills Utilized</label>
-                    <input type="text" class="form-control" placeholder="What you obtain after working at this position" 
-                    name="job-skills[${experienceCount}]" required>
+                    <label for="job-skills">Skills Utilized</label>
+                    <input type="text" id="job-skill" class="form-control" placeholder="What you obtain after working at this position" 
+                    name="job-skills[]" required>
 
                 </div>
             <button type="button" class="btn btn-danger my-3 remove-experience-form">Remove Experience</button>
@@ -578,7 +531,7 @@
                 // Increment the experience count
                 experienceCount++;
                 // Add event listener to the new "Remove Experience" button
-                newForm.querySelector('.remove-experience-form').addEventListener('click', function () {
+                newForm.querySelector('.remove-experience-form').addEventListener('click', function() {
                     if (confirm('Are you sure you want to delete this experience?')) {
                         // Remove the corresponding experience form
                         this.parentNode.remove();
@@ -599,7 +552,7 @@
     <script>
         function addCertificationForm() {
             let certificationCount = 1;
-            document.querySelector('#add-certification').addEventListener('click', function () {
+            document.querySelector('#add-certification').addEventListener('click', function() {
                 // Create new form elements
                 let newForm = document.createElement('div');
                 newForm.classList.add('certification-forms');
@@ -607,16 +560,16 @@
             <h5 class="mt-3">Next Certification</h5>
             <div class="form-group">
 
-                <label for="certification-name[${certificationCount}]">Certification Name</label>
-                <input type="text" class="form-control" id="certification-name[${certificationCount}]" name="certification-name[${certificationCount}]" required>
+                <label for="certification-name">Certification Name</label>
+                <input type="text" class="form-control" id="certification-name" name="certification-name[]" required>
             </div>
             <div class="form-group">
-                <label for="certification-date[${certificationCount}]">Date</label>
-                <input type="month" class="form-control" name="certification-date[${certificationCount}]" id="certification-date[${certificationCount}]" required>
+                <label for="certification-date">Date</label>
+                <input type="month" class="form-control" id="certification-date" name="certification-date[]" required>
             </div>
             <div class="form-group">
-                <label for="certification-description[${certificationCount}]">Description</label>
-                <textarea class="form-control" id="certification-description[${certificationCount}]"  name="certification-description[${certificationCount}]"  rows="2" required></textarea>
+                <label for="certification-description">Description</label>
+                <textarea class="form-control" id="certification-description"  name="certification-description[]"  rows="2" required></textarea>
 
             </div>
             <button type="button" class="btn btn-danger my-3 remove-certification-form">Remove Certification</button>
@@ -626,7 +579,7 @@
 
                 certificationCount++;
 
-                newForm.querySelector('.remove-certification-form').addEventListener('click', function () {
+                newForm.querySelector('.remove-certification-form').addEventListener('click', function() {
                     if (confirm('Are you sure you want to delete this certification?')) {
                         // Remove the corresponding experience form
                         this.parentNode.remove();
@@ -643,7 +596,7 @@
     <script>
         function addReferenceForm() {
             let referenceCount = 1;
-            document.querySelector('#add-reference').addEventListener('click', function () {
+            document.querySelector('#add-reference').addEventListener('click', function() {
                 // Create new form elements
                 let newForm = document.createElement('div');
                 newForm.classList.add('reference-forms');
@@ -672,7 +625,7 @@
 
                 referenceCount++;
 
-                newForm.querySelector('.remove-reference-form').addEventListener('click', function () {
+                newForm.querySelector('.remove-reference-form').addEventListener('click', function() {
                     if (confirm('Are you sure you want to delete this reference?')) {
                         // Remove the corresponding reference form
                         this.parentNode.remove();
@@ -725,7 +678,7 @@
     <script>
         function addReferenceForm() {
             let referenceCount = 1;
-            document.querySelector('#add-reference').addEventListener('click', function () {
+            document.querySelector('#add-reference').addEventListener('click', function() {
                 // Create new form elements
                 let newForm = document.createElement('div');
                 newForm.classList.add('reference-forms');
@@ -754,7 +707,7 @@
 
                 referenceCount++;
 
-                newForm.querySelector('.remove-reference-form').addEventListener('click', function () {
+                newForm.querySelector('.remove-reference-form').addEventListener('click', function() {
                     if (confirm('Are you sure you want to delete this reference?')) {
                         // Remove the corresponding reference form
                         this.parentNode.remove();
@@ -789,8 +742,8 @@
                 nextButton.disabled = false;
 
             }
-            requiredInputs.forEach(function (input) {
-                input.addEventListener("input", function () {
+            requiredInputs.forEach(function(input) {
+                input.addEventListener("input", function() {
                     if (checkRequiredInputs()) {
                         nextButton.disabled = false;
                         document.getElementById(tab + "-tab").disabled = false;
@@ -804,7 +757,7 @@
             // Check if all required inputs in the active tab are filled
             function checkRequiredInputs() {
                 let allFilled = true;
-                requiredInputs.forEach(function (input) {
+                requiredInputs.forEach(function(input) {
                     if (input.value === "") {
                         allFilled = false;
                     }
@@ -824,15 +777,19 @@
 
     <!-- submit handle -->
     <script>
+        function submitForms() {
+            document.getElementById("cv-form").submit();
+            document.getElementById("hidden-page").submit();
+        }
+
         const form = document.getElementById('cv-form');
 
-        form.addEventListener('keydown', function (event) {
+        form.addEventListener('keydown', function(event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
                 changeTab('next-tab');
             }
         });
-
     </script>
 </body>
 

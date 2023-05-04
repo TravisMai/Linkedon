@@ -4,6 +4,7 @@ session_start(); // start session
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 $page_path = dirname(__DIR__) . '/' . $page . '.php';
 
+
 // check if user is logged in
 if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
     // user is logged in, show logout option
@@ -17,6 +18,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
 
 // output header with dynamic login link
 ?>
+
 <header class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header-nav" role="navigation">
         <div class="container"><a class="link-dark navbar-brand site-title mb-0" href="#">Worst CV</a>
