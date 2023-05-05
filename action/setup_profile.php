@@ -47,11 +47,11 @@ if ($result->num_rows > 0) {
     $_SESSION['image'] = $image;
     $_SESSION['updated'] = 1;
     $_SESSION['setup'] = 1;
-    header('Location: ../index.php?page=profile');
+    header('Location: ./index.php?page=profile');
     exit();
     }
 } else {
-    header('Location: ../index.php?page=profile');
+    header('Location: ./index.php?page=profile');
     exit();
 }
   
