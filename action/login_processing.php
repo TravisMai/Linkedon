@@ -45,6 +45,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         // Set session variables
         $_SESSION['user_id'] = $user['id'];
         $_SESSION['user_name'] = $user['username'];
+        $_SESSION['type'] = $user['type'];
         $_SESSION['label'] = "Successful";
         $_SESSION['message'] = "Login successful";
 

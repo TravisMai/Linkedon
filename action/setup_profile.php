@@ -45,6 +45,7 @@ if ($result->num_rows > 0) {
     $_SESSION['phone'] = $phoneNumber;
     $_SESSION['address'] = $address;
     $_SESSION['image'] = $image;
+
     $_SESSION['updated'] = 1;
     $_SESSION['setup'] = 1;
     header('Location: ./index.php?page=profile');

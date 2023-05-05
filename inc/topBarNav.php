@@ -25,7 +25,14 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto me-2">
-                    <li class="nav-item"><a class="nav-link" href="index.php?page=add_cv">Job Seeker</a></li>
+                <?php
+                        // check if user is logged in
+                        if (isset($_SESSION['user_id']) && $_SESSION['type'] == 0) {
+                            // user is logged in, show profile option
+                            echo '<li class="nav-item"><a class="nav-link" href="index.php?page=add_cv">Job Seeker</a></li>';
+                        } 
+                    ?> 
+
                     <li class="nav-item"><a class="nav-link" href="index.php?page=home">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php?page=about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.php?page=products">Products</a></li>
@@ -33,7 +40,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
                 <ul class="navbar-nav ms-auto me-2">    
                     <?php
                         // check if user is logged in
-                        if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
+                        if (isset($_SESSION['user_id'])) {
                             // user is logged in, show profile option
                             echo '<li class="nav-item"><a class="nav-link" href="index.php?page=profile"><i class="bi bi-person-circle"></i></a></li>';
                         } 

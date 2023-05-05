@@ -88,9 +88,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     $user_id = $row['id'];
+    $type = $row['type'];
 
     $_SESSION['user_id'] = $user_id;
     $_SESSION['user_name'] = $username;
+    $_SESSION['type'] = $type;
     $_SESSION['label'] = "Successful";
     $_SESSION['message'] = "Signup Successful";
 
