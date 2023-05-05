@@ -137,7 +137,7 @@ VALUES
   -- User 5
   (5, 5, 'Associate Electrical Engineer', 'Electricity Innovations', '2020-02-15', '2022-11-30', 'Constructed, implemented and analyzed electrical testing to provide safety and optimization in electrical products. Collaborated in a team environment to ensure goal completion.'),
   -- User 6
-  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.', '2021-04-01', '2021-02-29', 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
+  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.', '2021-04-01', '2021-02-28', 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
   -- User 7
   (7, 7, 'Customer Service Representative', 'Helpful Corp.', '2019-03-01', '2021-02-28', 'Provided top-notch customer service using voice and digital channels. Provided solutions to consumer problems by escalating larger issues to management staff when necessary.'),
   -- User 8
