@@ -8,6 +8,7 @@
 
 <?php 
 require_once('inc/header.php');
+require_once('./config.php');
     if(!isset($_SESSION['setup']) || $_SESSION['setup'] == 0){
      require_once('action/setup_profile.php');
     }
@@ -72,8 +73,8 @@ require_once('inc/header.php');
                             <form method="post" enctype="multipart/form-data" action="./action/upload.php">
                                 <div><h6>Select your avatar:</h6></div>
                                 <div class="input-group mb-3">
-                                    <input class="form-control" type="file" id="avatar" name="avatar" accept="image/*"><br>                                     
-                                    <button class="input-group-text" >Upload</button>
+                                    <input class="form-control file" type="file" id="avatar" name="avatar" accept="image/*"><br>                                     
+                                    <button class="input-group-text upload" disabled>Upload</button>
                                 </div>
                             </form>
  
@@ -119,6 +120,18 @@ require_once('inc/header.php');
             }
         });
         });
+        const uploadButton = document.querySelector('.upload');
+        const inputFile = document.querySelector('.file');
+
+        inputFile.addEventListener("input", function(){
+        console.log(inputFile.value);
+        if(inputFile.value){
+            uploadButton.disabled = false;
+        }
+        else{
+            uploadButton.disabled = true;
+        }
+        })
 
 
     </script>
