@@ -1,7 +1,6 @@
 <?php
-session_start();
 ob_start();
-require_once('../config.php');
+require_once('./config.php');
   
   // Connect to the database
   $servername = "localhost";
@@ -16,7 +15,7 @@ require_once('../config.php');
   $user_id = $_SESSION['user_id'];
 
 // Prepare SQL statement
-$sql = "SELECT firstname, lastname, email, phone FROM users WHERE id = $user_id";
+$sql = "SELECT firstname, lastname, email, phone, address, avatar FROM users WHERE id = $user_id";
 
 // Execute SQL statement
 $result = $conn->query($sql);
@@ -29,20 +28,26 @@ if ($result->num_rows > 0) {
         $lastName = $row["lastname"];
         $email = $row["email"];
         $phoneNumber = $row["phone"];
+        $address = $row["address"];
+        $image = $row["avatar"];
         // Do something with the retrieved values
-    }
-} else {
-    header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
-    exit();
-}
-    
+          
     //Set success message and redirect to login page
     $_SESSION['email'] = $email;
     $_SESSION['first-name'] = $firstName;
     $_SESSION['last-name'] = $lastName;
     $_SESSION['phone'] = $phoneNumber;
+    $_SESSION['address'] = $address;
+    $_SESSION['image'] = $image;
     $_SESSION['updated'] = 1;
+    $_SESSION['setup'] = 1;
     header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
     exit();
+    }
+} else {
+    header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
+    exit();
+}
+  
 
 ?>

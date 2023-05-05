@@ -1,27 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
-    .inp-control {
-        display: block;
-        width: 100%;
-        padding: 0.375rem 0.75rem;
-        font-size: 1rem;
-        font-weight: 400;
-        line-height: 1.6;
-        color: #212529;
-        background-color: #fff;
-        background-clip: padding-box;
-        border: 2px solid #e9ecef;
-        appearance: none;
-        border-radius: 10px;
+    .avatar{
+        object-fit: cover;
     }
-    .inp-control:focus {
-        border-color: #007bff; /* new border color on focus */
-    }   
-
 </style>
 
-<?php require_once('inc/header.php') ?>
+<?php 
+require_once('inc/header.php');
+    if(!isset($_SESSION['setup']) || $_SESSION['setup'] == 0){
+     require_once('action/setup_profile.php');
+    }
+ ?>
+
 
 <body id="top">
     <?php require_once('inc/topBarNav.php') ?>
@@ -36,7 +27,8 @@
                                 echo '<div class= "text-danger registration-message" >Add your information to complete the registration!</div>';
                             }
                         ?>
-                        <div class="col-md-6">
+
+                        <div class="col-md-5">
                             <form action="./action/profile_processing.php" method="post">
                                 <div class="form-floating mb-3 mt-2">
                                 <input type="text" class="form-control" name="first-name" id="first-name" placeholder="Ex: Smai" value="<?php echo isset($_SESSION['first-name']) ? $_SESSION['first-name'] : ''; ?>" required pattern="[\p{L}\p{N}]+" title="Please enter a valid first name (only letters)">
@@ -69,12 +61,25 @@
                             </form>                            
                          
                         </div>
-                        <div class="col-md-5 offset-md-1" data-aos="fade-left" data-aos-delay="100">
-                            <img class="avatar img-fluid mt-2" src="images/avatar.jpg" width="200" height="200" alt="Walter Patterson" />
 
+                        <div class="col-2"></div>
 
-                        
+                        <div class="col-md-5" data-aos="fade-left" data-aos-delay="100">
+                            <div class="form-floating mb-5 ">
+                                <img class="avatar mt-2" src="<?php echo isset($_SESSION['image']) ? $_SESSION['image'] : 'images/avatar.jpg'; ?>" width="200" height="200" alt="Walter Patterson" />
+                                
+                            </div>
+                            <form method="post" enctype="multipart/form-data" action="./action/upload.php">
+                                <div><h6>Select your avatar:</h6></div>
+                                <div class="input-group mb-3">
+                                    <input class="form-control" type="file" id="avatar" name="avatar" accept="image/*"><br>                                     
+                                    <button class="input-group-text" >Upload</button>
+                                </div>
+                            </form>
+ 
                         </div>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -114,9 +119,12 @@
             }
         });
         });
-   
+
 
     </script>
+
+
+
 
 </body>
 
