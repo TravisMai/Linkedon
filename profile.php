@@ -8,6 +8,7 @@
 
 <?php 
 require_once('inc/header.php');
+require_once('./config.php');
     if(!isset($_SESSION['setup']) || $_SESSION['setup'] == 0){
      require_once('action/setup_profile.php');
     }

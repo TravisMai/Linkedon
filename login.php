@@ -150,7 +150,7 @@
 </head>
 
 <body>
-    <form method="POST" action="action/login_processing.php">
+    <form method="POST" action="./action/login_processing.php">
         <h3>Login Here</h3>
         <label for="username">Username:</label>
         <input type="username" id="username" name="username" placeholder="Username" value="<?php echo isset($_SESSION['username']) ? $_SESSION['username'] : ''; ?>" required>
