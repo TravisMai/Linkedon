@@ -18,7 +18,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.$@$!%*?&])[A-Za-z\d.$@$!%*?&]{8,}$/', $password)) {
         $_SESSION['label'] = "Invalid signup";
         $_SESSION['message'] = 'Password must have 8 letters and contain at least one lowercase letter, one uppercase letter, one number, and one special character.';
-        header('Location: http://localhost/CO3049_WebProgramming_HK222/register.php');
+        header('Location: ../register.php');
         exit();
       }
       
@@ -27,7 +27,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $_SESSION['label'] = "Invalid signup";
         $_SESSION['message'] = 'Username cannot contain special characters!';
         echo "<script>console.log('Username cannot contain special characters!');</script>";
-        header('Location: http://localhost/CO3049_WebProgramming_HK222/register.php');
+        header('Location: ../register.php');
         exit();
       }
       
@@ -36,7 +36,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $_SESSION['label'] = "Invalid signup";
         $_SESSION['message'] = 'Confirm password must be the same as password!';
         echo "<script>console.log('Confirm password must be the same as password!');</script>";
-        header('Location: http://localhost/CO3049_WebProgramming_HK222/register.php');
+        header('Location: ../register.php');
         exit();
       }
     
@@ -64,8 +64,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
   if ($row['count'] != 0){
     echo '<script language="javascript">console.log("Username already exists");</script>';
     $_SESSION['label'] = "Invalid signup";
-    $_SESSION['message'] = "Username already exists";
-    header('Location: http://localhost/CO3049_WebProgramming_HK222/register.php');
+    $_SESSION['message'] = "Username or email already exists";
+    header('Location: ../register.php');
     exit();
   }
   else{
@@ -104,7 +104,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 } else {
     $_SESSION['label'] = "Invalid register";
     $_SESSION['message'] = "Signup again";
-    header("Location: http://localhost/CO3049_WebProgramming_HK222/register.php");
+    header("Location: ../register.php");
     exit();
 }
 
