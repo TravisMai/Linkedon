@@ -8,7 +8,7 @@ if (isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['p
     if(!isset($_SESSION['user_id'])){
         $_SESSION['label'] = "Invalid update";
         $_SESSION['message'] = 'Please login first!';
-        header('Location: http://localhost/CO3049_WebProgramming_HK222/login.php');
+        header('Location: ../login.php');
         exit();
     }
     // Get the username and password from the form
@@ -28,14 +28,14 @@ if (isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['p
       if (preg_match('/[^a-zA-Z\x{00C0}-\x{1EF9}\x{1EBF}\x{1EED}\x{1EF7}\x{1EEB}\x{1EED}\x{1EF9}]/u', $firstName)) {
         $_SESSION['label'] = "Invalid first name";
         $_SESSION['message'] = 'Please enter a valid first name (only letters)';
-        header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
+        header('Location: ../index.php?page=profile');
         exit();
       }
 
       if (preg_match('/[^a-zA-Z\x{00C0}-\x{1EF9}\x{1EBF}\x{1EED}\x{1EF7}\x{1EEB}\x{1EED}\x{1EF9}]/u', $lastName)) {
         $_SESSION['label'] = "Invalid last name";
         $_SESSION['message'] = 'Please enter a valid last name (only letters)';
-        header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
+        header('Location: ../index.php?page=profile');
         exit();
       }
       
@@ -43,7 +43,7 @@ if (isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['p
       if (preg_match('/[^0-9]/', $phoneNumber)) {
         $_SESSION['label'] = "Invalid phone number";
         $_SESSION['message'] = 'Please enter only numbers!';
-        header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
+        header('Location: ../index.php?page=profile');
         exit();
       }
     
@@ -71,13 +71,13 @@ if (isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['p
     $_SESSION['label'] = "Successful";
     $_SESSION['message'] = "Update information successfully";
     $_SESSION['updated'] = 1;
-    header("Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile");
+    header("Location: ../index.php?page=profile");
     exit();
   
 } else {
     $_SESSION['label'] = "Invalid information";
     $_SESSION['message'] = "Add your information again!";
-    header("Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile");
+    header("Location: ../index.php?page=profile");
     exit();
 }
 

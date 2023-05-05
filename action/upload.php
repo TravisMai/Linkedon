@@ -11,7 +11,7 @@
             $user_name = $_SESSION['user_name'];
             
             // Specify the directory where the uploaded file will be stored
-            $uploadDir = 'C:/xampp/htdocs/CO3049_WebProgramming_HK222/uploads/';
+            $uploadDir = '../uploads/';
             if (!file_exists($uploadDir)) {
                 mkdir($uploadDir, 0777, true);
             }
@@ -24,12 +24,13 @@
             // Set the path where the file will be saved
             $targetFilePath = $uploadDir . $fileName;
             $savedFilePath = 'uploads/'. $fileName;
-            // Check if the file already exists in the directory
-            if(file_exists($targetFilePath)) {
-                echo "File already exists.";
-                header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
-                exit();   
-            } else{
+            // // Check if the file already exists in the directory
+            // if(file_exists($targetFilePath)) {
+            //     echo "File already exists. ";
+            //     echo $targetFilePath;
+            //     //header('Location: ../index.php?page=profile');
+            //     exit();   
+            // } else{
                 // Move the uploaded file to the specified directory
                 if(move_uploaded_file($_FILES["avatar"]["tmp_name"], $targetFilePath)) {
                     echo "The file ".$fileName. " has been uploaded.";
@@ -50,7 +51,7 @@
                         echo "Path saved to MySQL successfully.";
                         mysqli_close($conn);
                         $_SESSION['setup'] = 0;
-                        header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
+                        header('Location: ../index.php?page=profile');
                         exit();
                     } else {
                         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -61,10 +62,10 @@
                     echo "Sorry, there was an error uploading your file.";
                     
                 }
-            }
+            //}
         } else {
             echo "Error: " . $_FILES["avatar"]["error"];
-            // header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
+            // header('Location: ../profile.php');
             // exit();
         }
 

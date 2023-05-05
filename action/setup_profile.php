@@ -1,5 +1,6 @@
 <?php
 ob_start();
+//session_start();
 require_once('./config.php');
   
   // Connect to the database
@@ -41,11 +42,11 @@ if ($result->num_rows > 0) {
     $_SESSION['image'] = $image;
     $_SESSION['updated'] = 1;
     $_SESSION['setup'] = 1;
-    header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
+    header('Location: index.php?page=profile');
     exit();
     }
 } else {
-    header('Location: http://localhost/CO3049_WebProgramming_HK222/index.php?page=profile');
+    header('Location: index.php?page=profile');
     exit();
 }
   
