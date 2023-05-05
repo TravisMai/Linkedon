@@ -9,11 +9,11 @@ $page_path = dirname(__DIR__) . '/' . $page . '.php';
 if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
     // user is logged in, show logout option
     $login_link = 'logout.php';
-    $login_text = 'Logout';
+    $login_text = 'logout';
 } else {
     // user is not logged in, show login/register option
     $login_link = 'login.php';
-    $login_text = 'Login/Register';
+    $login_text = 'login/Register';
 }
 
 // output header with dynamic login link
@@ -38,7 +38,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
                         // check if user is logged in
                         if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
                             // user is logged in, show profile option
-                            echo '<li class="nav-item"><a class="nav-link" href="action/setup_profile.php"><i class="bi bi-person-circle"></i></a></li>';
+                            echo '<li class="nav-item"><a class="nav-link" href="./action/setup_profile.php"><i class="bi bi-person-circle"></i></a></li>';
                         } 
                     ?>    
                     <li class="nav-item"><a class="nav-link" href="<?php echo $login_link; ?>"><?php echo $login_text; ?></a></li>               

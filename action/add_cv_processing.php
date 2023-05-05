@@ -1,10 +1,11 @@
 <?php
 require_once('initialize.php');
 require_once('database/dbconnect.php');
-echo "<h1>342342343243242 </h1>";
 
 
-if (isset($_POST['submit'])) {
+
+// if (isset($_POST['submit'])) {
+    echo "<h1>342342343243242 </h1>";
     $habit = $_POST['additional-info'];
     // Job-Objective
     $job_title = $_POST['job-title'];
@@ -134,5 +135,6 @@ if (isset($_POST['submit'])) {
         $sql .= "('$reference[reference_name]', '$reference[reference_phone]', '$reference[reference_email]', '$reference[reference_relationship]'),";
     }
     $sql = rtrim($sql, ",");
+    header('Location: http://localhost/CO3049_WebProgramming_HK222/register.php');
     mysqli_query($conn, $sql);
-}
+// }
