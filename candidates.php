@@ -140,7 +140,6 @@ else {
             position: absolute;
             z-index: 10;
         }
-
         @media screen and (max-width: 800px) {
             #candidate-all {
                 margin: 0;
@@ -149,33 +148,21 @@ else {
                 display:none;
             }
             .user-dashboard-info-box .candidates-list .thumb img {
-                width: 20px;
-                height: 20px;
+                width: 40px;
+                height: 40px;
             }
 
-            .candidate-list-title h5 {
-                font-size: 10px;
-                padding-left: 10px;
-            }
-
-            .candidate-list-option ul li {
-                font-size: 8px;
-                padding-left: 10px;
-            }
-
-            .candidate-list-objective {
-                font-size: 8px;
-            }
-
-            th {
-                font-size: 10px;
-            }
             #numbertoshow {
                 position: static;
                 justify-content: center;
                 margin-bottom: 5px;
             }
             #numbertoshow p {
+                display: none;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .candidate-list-objective {
                 display: none;
             }
         }
@@ -263,7 +250,7 @@ else {
                 };
                 xmlhttp.open("GET", "action/filter_candidate.php?objective=" + objective + "&major=" + major, true);
                 xmlhttp.send();
-            }            
+            }
         }
 
         // Show All button will show all candidate and will be enable after a search
@@ -298,12 +285,13 @@ else {
                 window.location.href = "index.php?page=candidates&pagenum=1&show=" + num;
             }
         }
+
+
     </script>
 </head>
 
 <body id="top">
     <?php require_once('inc/topBarNav.php') ?>
-
     <div class="page-content bg-light">
         <div id="content">
             <!-- This appear first when user click on "Candidates" -->
@@ -353,7 +341,7 @@ else {
                         </select>             
                     </div>        
                     <div class = "d-flex pt-1">
-                        <button class = "btn btn-secondary me-1" onclick= "filterCandidates()" id = "filterBtn">Filter</button>
+                        <button class = "btn btn-secondary me-1" onclick= "filterCandidates();" id = "filterBtn">Filter</button>
                         <button class = "btn btn-primary" onclick= "toggleShowBtn()" id = "showBtn" disabled>Show All</button>
                     </div>
                 </div>
@@ -370,7 +358,7 @@ else {
                                         <thead>
                                             <tr>
                                                 <th>Candidate Name</th>
-                                                <th>Objective</th>
+                                                <th class="candidate-list-objective">Objective</th>
                                                 <th class="action text-right"></th>
                                             </tr>
                                         </thead>

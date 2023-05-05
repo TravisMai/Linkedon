@@ -16,6 +16,11 @@ ob_start();
         #backbtn {
             color: white;
         }
+        @media print {
+            header, footer, .hide-on-print {
+                display: none;
+            }    
+        }
     </style>
 </head>
 
@@ -35,8 +40,8 @@ ob_start();
                 $result = $conn->query($sql);
 
                 $output = '
-                <a id = "backbtn" href="index.php?page=candidates"><button type="button" class="btn btn-dark my-2"><i class="bi fa-lg bi-chevron-left"></i></button></a>
-                <h1><u class="text-warning">Curriculum Vitae</u></h1>        
+                <a id = "backbtn" href="index.php?page=candidates"><button type="button" class="btn btn-dark my-2 hide-on-print"><i class="bi fa-lg bi-chevron-left"></i></button></a>
+                <h1><u class="text-warning hide-on-print">Curriculum Vitae</u></h1>        
                         <div class="container">
                             <div class="row justify-content-center">';
                 if(mysqli_num_rows($result) > 0){
@@ -203,6 +208,8 @@ ob_start();
             ?>
 
             </div>
+        </div>
+    </div>
 
 </body>
 
