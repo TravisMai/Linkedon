@@ -99,31 +99,31 @@ VALUES
   
 
 -- Insert experience for each user
-INSERT INTO `experience` (`resume_id`, `user_id`, `experience`, `duration_years`, `duration_months`, `description`)
+INSERT INTO `skill` (`resume_id`, `user_id`, `skill`)
 VALUES
   -- User 1
-  (1, 1, 'Freelance Web Developer', 2, 0, 'Designed and developed modern, responsive websites and web applications using HTML, CSS, JavaScript and Bootstrap.'),
+  (1, 1, 'Freelance Web Developer'),
   -- User 2
-  (2, 2, 'Business Analyst', 3, 6, 'Conducted market research and prepared detailed reports on findings. Collaborated with cross-functional teams to define project requirements, goals, and timelines.'),
+  (2, 2, 'Business Analyst'),
   -- User 3
-  (3, 3, 'Senior Accountant', 5, 0, 'Performed monthly, quarterly and annual close procedures, analyzed financial statements and provided recommendations for improvement of financial performance. Mentored and trained junior accountants.'),
+  (3, 3, 'Senior Accountant'),
   -- User 4
-  (4, 4, 'Software Developer', 4, 3, 'Developed and maintained software applications in Java and Python. Participated in code reviews and provided technical guidance and support to team members.'),
+  (4, 4, 'Software Developer'),
   -- User 5
-  (5, 5, 'Associate Electrical Engineer', 2, 9, 'Designed, tested, and maintained electrical equipment, systems and components. Troubleshot technical issues and provided guidance to technicians and engineers.'),
+  (5, 5, 'Associate Electrical Engineer'),
   -- User 6
-  (6, 6, 'Administrative Assistant', 1, 6, 'Provided administrative support to department managers and executives. Scheduled meetings, managed calendars, and maintained confidential records.'),
+  (6, 6, 'Administrative Assistant'),
   -- User 7
-  (7, 7, 'Customer Service Representative', 2, 0, 'Handled inbound and outbound calls from customers, resolved issues and provided excellent customer service. Maintained accurate records of communications.'),
+  (7, 7, 'Customer Service Representative'),
   -- User 8
-  (8, 8, 'Marketing Coordinator', 2, 0, 'Developed and executed marketing campaigns across digital and traditional channels. Analyzed campaign data and provided insights to optimize performance.'),
+  (8, 8, 'Marketing Coordinator'),
   -- User 9
-  (9, 9, 'Mechanical Engineer', 3, 0, 'Designed and developed mechanical components and systems for various projects. Conducted design reviews and managed project timelines.'),
+  (9, 9, 'Mechanical Engineer'),
   -- User 10
-  (10, 10, 'Content Writer', 1, 0, 'Researched and produced engaging, well-researched and informative content for clients across various industries. Conducted keyword research and optimized content for search engines.');
+  (10, 10, 'Content Writer');
 
 -- Insert working history for each user
-INSERT INTO `working_history` (`resume_id`, `user_id`, `position`, `company_name`, `start_date`, `end_date`, `tasks`)
+INSERT INTO `working_history` (`resume_id`, `user_id`, `position`, `company_name`, `duration`, `tasks`)
 VALUES
   -- User 1
   (1, 1, 'Web Developer', 'ABC Company', '2018-06-01', '2020-12-31', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP. Collaborated with clients and designers to ensure project accuracy and completed projects on time.'),
