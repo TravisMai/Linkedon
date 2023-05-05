@@ -7,6 +7,14 @@
 ob_start();
 ?>
 
+<?php
+if(isset($_GET['pagenum'])) {
+    $page = intval($_GET['pagenum']);
+}
+else {
+    $page = 1;
+}
+?>
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
         integrity="sha256-2XFplPlrFClt0bIdPgpz8H7ojnk10H69xRqd9+uTShA=" crossorigin="anonymous" /> 
@@ -127,10 +135,22 @@ ob_start();
         #candidate-search-result {
             display: none;
         }
+
+        #numbertoshow {
+            position: absolute;
+            z-index: 10;
+        }
+
         @media screen and (max-width: 800px) {
+            #candidate-all {
+                margin: 0;
+            }
+            #viewCVBtn {
+                display:none;
+            }
             .user-dashboard-info-box .candidates-list .thumb img {
-                width: 40px;
-                height: 40px;
+                width: 20px;
+                height: 20px;
             }
 
             .candidate-list-title h5 {
@@ -149,6 +169,14 @@ ob_start();
 
             th {
                 font-size: 10px;
+            }
+            #numbertoshow {
+                position: static;
+                justify-content: center;
+                margin-bottom: 5px;
+            }
+            #numbertoshow p {
+                display: none;
             }
         }
     </style>
@@ -265,6 +293,11 @@ ob_start();
             }
         }
 
+        function changeShowNumber(num) {
+            if (num !== "") {
+                window.location.href = "index.php?page=candidates&pagenum=1&show=" + num;
+            }
+        }
     </script>
 </head>
 
@@ -273,95 +306,9 @@ ob_start();
 
     <div class="page-content bg-light">
         <div id="content">
-            <!-- The detail of candidate will be show when user click on a candidate's name or click view detail -->
-            <div class="container" id = "detail-of-candidate">
-
-                <button type="button" class="btn btn-dark my-2"><i class="bi fa-lg bi-chevron-left"></i></button>
-
-                <h1><u class="text-warning">Candidate Information</u></h1>        
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-md-4 mt-3">
-                            <div class="card border">
-                                <img class="card-img-top border border-primary" src="https://i.ibb.co/x3wfK5z/female-avatar.jpg" alt="">
-                                <div class="card-body">              
-                                    <p class="card-text">Name: <strong>Test Name</strong></p>
-                                    <p class="card-text">Email: <strong>testname@example.com</strong></p>
-                                    <p class="card-text">Phone: <strong>0123456789</strong></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-8 mb-2 mt-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">Objective</h5>
-                                    <p class="card-text">To obtain a challenging position at a reputable company where my skills, 
-                                                        experience, and education can be utilized for the mutual benefit of both 
-                                                        the company and myself.</p>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Education</h5>
-                                    <ul>
-                                        <li>Bachelor of Science in Computer Science, XYZ University, 2020</li>
-                                        <li>Master of Business Administration, ABC University, 2022</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Certificates</h5>
-                                    <ul>
-                                        <li>Microsoft Certified Solutions Expert (MCSE)</li>
-                                        <li>Amazon Web Services (AWS) Certified Solutions Architect - Associate</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Experience</h5>
-                                    <ul>
-                                        <li>Software Engineer, Acme Corporation, 2020 - Present</li>
-                                        <li>IT Consultant, XYZ Consulting, 2018 - 2020</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Working History</h5>
-                                    <ul>
-                                        <li>Software Developer, Acme Corporation, 2016 - 2018</li>
-                                        <li>Intern, ABC Company, 2015 - 2016</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">Additional Information</h5>
-                                    <ul>
-                                        <li>Hobbies: Reading, music, and sports</li>
-                                        <li>Habits: Punctual, detail-oriented, and hardworking</li>
-                                        <li>Personal Info: Single, no dependents</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="card mt-2">
-                                <div class="card-body">
-                                    <h5 class="card-title">References</h5>
-                                    <ul>
-                                        <li>John Smith, Manager at Acme Corporation, jsmith@example.com, 555-4321, Professional Reference</li>
-                                        <li>Jane Doe, Professor at XYZ University, janedoe@example.com, 555-9876, Academic Reference</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>     
-            </div>
             <!-- This appear first when user click on "Candidates" -->
             <div class="container" id = "search-for-candidate">
-                <h1><u class="text-warning">CVs</u></h1>
+                <h1><u class="text-warning">Candidates</u></h1>
                 <!-- Search bar -->
                 <div class="container mt-3 mb-2">
                     <input type="text" onkeyup="searchCandidate(this.value)" class="form-control rounded" id = "searchInput" placeholder="Search for candidate">
@@ -370,7 +317,7 @@ ob_start();
                 <!-- Filter buttons -->
                 <div class="container d-flex flex-wrap justify-content-around">
                     <div class = "d-flex pt-1">
-                        <select class="form-select w-100" aria-label="Sort by Objective" id = "filterObjective">
+                        <select class="form-select w-100" aria-label="Sort by Objective" id = "filterObjective" data-live-search="true">
                             <option class="select-label" value="0" selected>Objective</option>
                             <?php
                                 include "database/dbconnect.php";
@@ -388,7 +335,7 @@ ob_start();
                         </select>             
                     </div>    
                     <div class = "d-flex pt-1">
-                        <select class="form-select w-100" aria-label="Sort by Major" id = "filterMajor">
+                        <select class="form-select w-100" aria-label="Sort by Major" id = "filterMajor" data-live-search="true">
                             <option class="select-label" value="0" selected>Major</option>
                             <?php
                                 include "database/dbconnect.php";
@@ -431,6 +378,15 @@ ob_start();
                                             <?php
                                                 include "database/dbconnect.php";
                                                 // select data to show to the list of candidates/
+                                                if(isset($_GET['show'])){
+                                                    $num_per_page = intval($_GET['show']);
+                                                }
+                                                else {
+                                                    $num_per_page = 5;
+                                                }
+
+                                                $offset = ($page - 1) * $num_per_page;
+
                                                 $sql = "SELECT
                                                 users.id, 
                                                 users.firstname, 
@@ -441,7 +397,8 @@ ob_start();
                                                 FROM users
                                                 INNER JOIN resume ON users.id = resume.user_id
                                                 INNER JOIN education ON resume.id = education.resume_id
-                                                ORDER BY resume.date_added DESC;";
+                                                ORDER BY resume.date_added DESC
+                                                LIMIT $offset, $num_per_page";
 
                                                 $result = $conn->query($sql);
                                                 if(mysqli_num_rows($result) > 0){
@@ -456,7 +413,7 @@ ob_start();
                                                             <div class="candidate-list-details">
                                                                 <div class="candidate-list-info">
                                                                     <div class="candidate-list-title">
-                                                                        <h5 class="mb-0"><a href="#">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
+                                                                        <h5 class="mb-0"><a href="index.php?page=candidates&id='. $row['id'] . '">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
                                                                     </div>
                                                                     <div class="candidate-list-option">
                                                                         <ul class="list-unstyled">
@@ -469,29 +426,90 @@ ob_start();
                                                         <td class="candidate-list-objective mb-0">
                                                             <span>'. $row['objective'] .'</span>
                                                         </td>
-                                                        <td>
-                                                            <ul class="list-unstyled mb-0 d-flex justify-content-end">
-                                                                <li class="text-secondary"><i class="bi fa-lg bi-three-dots-vertical"></i></li>
-                                                            </ul>
+                                                        <td id = "viewCVBtn">
+                                                            <a href="index.php?page=candidates&id='. $row['id'] . '"><button class = "btn btn-outline-secondary btn-sm">View CV</button></a>
                                                         </td>
                                                         </tr>                                                     
                                                         ';
                                                     }
                                                 }
-                                                $conn->close();
+                                                
                                             ?>
                                         </tbody>
                                     </table>
-                                    <div class="text-center mt-3 mt-sm-3">
+                                    
+                                    <div class = "mt-3 mt-sm-3">
+                                        <div id="numbertoshow" class = "d-flex align-items-center">
+                                            <p class = "m-0">Show:</p>
+                                            <select class="form-select form-select-sm ms-1" aria-label="choose number of candidates to show" onchange = "changeShowNumber(this.value)">
+                                                <option value="5" <?php if($num_per_page === 5) echo "selected" ?> >5</option>
+                                                <option value="1" <?php if($num_per_page === 1) echo "selected" ?>>1</option>
+                                                <option value="2" <?php if($num_per_page === 2) echo "selected" ?>>2</option>
+                                                <option value="3" <?php if($num_per_page === 3) echo "selected" ?>>3</option>
+                                                <option value="10" <?php if($num_per_page === 10) echo "selected" ?>>10</option>
+                                            </select>
+                                        </div>
+                                        <?php
+                                        $sql = "SELECT * FROM `resume`";
+                                        $result = mysqli_query($conn, $sql);
+                                        $records = mysqli_num_rows($result);
+                    
+                                        $totalpage = ceil($records / $num_per_page);
+
+                                        ?>
                                         <ul class="pagination justify-content-center mb-0">
-                                            <li class="page-item disabled"> <span class="page-link">Prev</span> </li>
-                                            <li class="page-item active" aria-current="page"><span class="page-link">1
-                                                </span> <span class="sr-only">(current)</span></li>
-                                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                            <li class="page-item"><a class="page-link" href="#">25</a></li>
-                                            <li class="page-item"> <a class="page-link" href="#">Next</a> </li>
+                                            
+                                            <?php
+                                            $prevbtn = '<li class="page-item disabled"><a href = "index.php?page=candidates&pagenum='. ($page - 1) .'&show='. $num_per_page .'" class = "page-link">Prev</a></li>';
+                                            if ($page > 1) {
+                                                $prevbtn = '<li class="page-item"><a href = "index.php?page=candidates&pagenum='. ($page - 1) .'&show='. $num_per_page .'" class = "page-link">Prev</a></li>';
+                                            }
+                        
+                                            echo $prevbtn;
+                                            if($totalpage > 5) {
+                                                if($totalpage - $page > 4){
+                                                    for($i = $page; $i < $page + 3; $i++) {
+                                                        if ($page == $i) {
+                                                            echo '<li class="page-item active"><a href = "index.php?page=candidates&pagenum='.$i.'&show='. $num_per_page .'" class = "page-link">' . $i . '</a></li>';
+                                                        }
+                                                        else {
+                                                            echo '<li class="page-item"><a href = "index.php?page=candidates&pagenum='.$i.'&show='. $num_per_page .'" class = "page-link">' . $i . '</a></li>';
+                                                        }
+                                                    }
+                                                    echo '<li class="page-item" disabled><a class="page-link">...</a></li>';
+                                                    echo '<li class="page-item"><a href = "index.php?page=candidates&pagenum='.$totalpage.'&show='. $num_per_page .'" class = "page-link">' . $totalpage . '</a></li>';
+                                                }
+                                                else {
+                                                    for($i = $totalpage - 4; $i <= $totalpage; $i++) {
+                                                        if ($page == $i) {
+                                                            echo '<li class="page-item active"><a href = "index.php?page=candidates&pagenum='.$i.'&show='. $num_per_page .'" class = "page-link">' . $i . '</a></li>';
+                                                        }
+                                                        else {
+                                                            echo '<li class="page-item"><a href = "index.php?page=candidates&pagenum='.$i.'&show='. $num_per_page .'" class = "page-link">' . $i . '</a></li>';
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            else {
+                                                for($i = 1; $i <= $totalpage; $i++) {
+                                                        if ($page == $i) {
+                                                            echo '<li class="page-item active"><a href = "index.php?page=candidates&pagenum='.$i.'&show='. $num_per_page .'" class = "page-link">' . $i . '</a></li>';
+                                                        }
+                                                        else {
+                                                            echo '<li class="page-item"><a href = "index.php?page=candidates&pagenum='.$i.'&show='. $num_per_page .'" class = "page-link">' . $i . '</a></li>';
+                                                        }
+                                                    }
+                                            }
+                        
+                        
+                                            $nextbtn = '<li class="page-item disabled"><a href = "index.php?page=candidates&pagenum='. ($page + 1) .'&show='. $num_per_page .'" class = "page-link">Next</a></li>';
+                                            if ($page < $totalpage) {
+                                                $nextbtn = '<li class="page-item"><a href = "index.php?page=candidates&pagenum='. ($page + 1) .'&show='. $num_per_page .'" class = "page-link">Next</a></li>';
+                                            }
+                        
+                                            echo $nextbtn;
+                                            ?>
                                         </ul>
                                     </div>
                                 </div>
@@ -501,6 +519,7 @@ ob_start();
                 </div>
             </div>
         </div>
+        <?php $conn->close(); ?>
         <?php require_once('inc/footer.php') ?>
     </div>
 
