@@ -148,8 +148,8 @@ else {
                 display:none;
             }
             .user-dashboard-info-box .candidates-list .thumb img {
-                width: 40px;
-                height: 40px;
+                width: 45px;
+                height: 45px;
             }
 
             #numbertoshow {
