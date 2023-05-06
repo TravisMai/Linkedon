@@ -1,57 +1,131 @@
 <?php
 
-if(isset($_GET['objective']) && isset($_GET['major'])){
+if(isset($_GET['objective']) && isset($_GET['major']) && isset($_GET['skill'])){
     $objective = $_GET['objective'];
     $major = $_GET['major'];
+    $skill = $_GET['skill'];
+    $skill = rawurldecode($skill);
 
     require_once('../initialize.php');
     require_once('../database/dbconnect.php');
 
     $sql = '';
-    if($objective == '0') {
-        $sql = "
+    if ($skill == '0') {
+        if($objective == '0') {
+            $sql = "
+                SELECT
+                users.id, 
+                users.firstname, 
+                users.lastname, 
+                users.avatar, 
+                resume.position, 
+                education.major 
+                FROM users
+                INNER JOIN resume ON users.id = resume.user_id
+                INNER JOIN education ON resume.id = education.resume_id
+                WHERE education.major = '$major'";
+        }
+
+        elseif($major == '0') {
+            $sql = "
             SELECT
             users.id, 
             users.firstname, 
             users.lastname, 
             users.avatar, 
-            resume.objective, 
+            resume.position, 
             education.major 
             FROM users
             INNER JOIN resume ON users.id = resume.user_id
             INNER JOIN education ON resume.id = education.resume_id
-            WHERE education.major = '$major'";
-    }
+            WHERE resume.position = '$objective'";
+        }
 
-    elseif($major == '0') {
-        $sql = "
-        SELECT
-        users.id, 
-        users.firstname, 
-        users.lastname, 
-        users.avatar, 
-        resume.objective, 
-        education.major 
-        FROM users
-        INNER JOIN resume ON users.id = resume.user_id
-        INNER JOIN education ON resume.id = education.resume_id
-        WHERE resume.objective = '$objective'";
+        else {
+            $sql = "
+            SELECT
+            users.id, 
+            users.firstname, 
+            users.lastname, 
+            users.avatar, 
+            resume.position, 
+            education.major 
+            FROM users
+            INNER JOIN resume ON users.id = resume.user_id
+            INNER JOIN education ON resume.id = education.resume_id
+            WHERE resume.position = '$objective'
+            AND education.major = '$major'";
+        }
     }
 
     else {
-        $sql = "
-        SELECT
-        users.id, 
-        users.firstname, 
-        users.lastname, 
-        users.avatar, 
-        resume.objective, 
-        education.major 
-        FROM users
-        INNER JOIN resume ON users.id = resume.user_id
-        INNER JOIN education ON resume.id = education.resume_id
-        WHERE resume.objective = '$objective'
-        AND education.major = '$major'";
+        if ($objective == '0' && $major == '0') {
+            $sql = "
+            SELECT
+            users.id, 
+            users.firstname, 
+            users.lastname, 
+            users.avatar, 
+            resume.position, 
+            education.major 
+            FROM users
+            INNER JOIN resume ON users.id = resume.user_id
+            INNER JOIN education ON resume.id = education.resume_id
+            INNER JOIN skill ON resume.id = skill.resume_id
+            WHERE skill.skill = '$skill'";
+        }
+
+        elseif ($objective == '0') {
+            $sql = "
+                SELECT
+                users.id, 
+                users.firstname, 
+                users.lastname, 
+                users.avatar, 
+                resume.position, 
+                education.major 
+                FROM users
+                INNER JOIN resume ON users.id = resume.user_id
+                INNER JOIN education ON resume.id = education.resume_id
+                INNER JOIN skill ON resume.id = skill.resume_id
+                WHERE education.major = '$major'
+                AND skill.skill = '$skill'";
+        }
+
+        elseif ($major == '0') {
+            $sql = "
+            SELECT
+            users.id, 
+            users.firstname, 
+            users.lastname, 
+            users.avatar, 
+            resume.position, 
+            education.major 
+            FROM users
+            INNER JOIN resume ON users.id = resume.user_id
+            INNER JOIN education ON resume.id = education.resume_id
+            INNER JOIN skill ON resume.id = skill.resume_id
+            WHERE resume.position = '$objective'
+            AND skill.skill = '$skill'";
+        }
+
+        else {
+            $sql = "
+            SELECT
+            users.id, 
+            users.firstname, 
+            users.lastname, 
+            users.avatar, 
+            resume.position, 
+            education.major 
+            FROM users
+            INNER JOIN resume ON users.id = resume.user_id
+            INNER JOIN education ON resume.id = education.resume_id
+            INNER JOIN skill ON resume.id = skill.resume_id
+            WHERE resume.position = '$objective'
+            AND education.major = '$major'
+            AND skill.skill = '$skill'";
+        }
     }
 
     $result = $conn->query($sql);
@@ -91,7 +165,7 @@ if(isset($_GET['objective']) && isset($_GET['major'])){
                 </div>
             </td>
             <td class="candidate-list-objective mb-0">
-                <span>'. $row['objective'] .'</span>
+                <span>'. $row['position'] .'</span>
             </td>
             <td>
                 <a href="index.php?page=candidates&id='. $row['id'] . '"><button class = "btn btn-outline-secondary btn-sm">View CV</button></a>

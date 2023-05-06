@@ -26,9 +26,9 @@ if ($conn->query($sql_delete_certificate) === TRUE) {
 } else {
     die("Error deleting data: " . $conn->error);
 }
-$sql_delete_experience = "DELETE FROM `experience`";
-if ($conn->query($sql_delete_experience) === TRUE) {
-    //echo "experience table emptied successfully";
+$sql_delete_skill = "DELETE FROM `skill`";
+if ($conn->query($sql_delete_skill) === TRUE) {
+    //echo "skill table emptied successfully";
 } else {
     die("Error deleting data: " . $conn->error);
 }
@@ -77,7 +77,7 @@ if ($conn->query($sql_alter_auto_increment) === TRUE) {
 } else {
     die("Error deleting data: " . $conn->error);
 }
-$sql_alter_auto_increment = "ALTER TABLE `experience` AUTO_INCREMENT = 1";
+$sql_alter_auto_increment = "ALTER TABLE `skill` AUTO_INCREMENT = 1";
 if ($conn->query($sql_alter_auto_increment) === TRUE) {
     //echo "alter table successfully";
 } else {

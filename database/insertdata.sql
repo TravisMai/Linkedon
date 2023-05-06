@@ -1,51 +1,57 @@
 
 -- Insert 10 users into database
-INSERT INTO `users` (`firstname`, `lastname`, `username`, `password`, `email`, `phone`, `avatar`, `type`) 
+INSERT INTO `users` (`firstname`, `lastname`, `username`, `password`, `email`, `phone`, `address`, `avatar`, `type`) 
 VALUES 
 -- user 1
-('Kara-lynn', 'Bownas', 'kbownas0', 'd787HoJ', 'kbownas0@gmail.com', '0402849675', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Kara-lynn', 'Bownas', 'kbownas0', 'd787HoJ$', 'kbownas0@gmail.com', '0402849675', 'Sydney, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 2
-('Karoly', 'Bretelle', 'kbretelle1', 'u4QeRRmDZm', 'kbretelle1@gmail.com', '0477247106', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Karoly', 'Bretelle', 'kbretelle1', 'u4QeRRmDZm#', 'kbretelle1@gmail.com', '0477247106', 'Melbourne, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 3
-('Ingra', 'Brugger', 'ibrugger2', '6f3iWv', 'ibrugger2@gmail.com', '0559349117', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Ingra', 'Brugger', 'ibrugger2', '6f3iWv@k', 'ibrugger2@gmail.com', '0559349117', 'Brisbane, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 4
-('Michell', 'Medford', 'mmedford3', '923HIpspSW', 'mmedford3@gmail.com', '0325057104', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Michell', 'Medford', 'mmedford3', '923HIpspSW^', 'mmedford3@gmail.com', '0325057104', 'Adelaide, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 5
-('Cart', 'Stringman', 'cstringman4', 'bXrwL5u0Rx', 'cstringman4@gmail.com', '0631353477', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Cart', 'Stringman', 'cstringman4', 'bXrwL5u0Rx*', 'cstringman4@gmail.com', '0631353477', 'Perth, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 6
-('Sabine', 'Baguley', 'sbaguley5', 'MueVGBK3P1', 'sbaguley5@gmail.com', '0872532363', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Sabine', 'Baguley', 'sbaguley5', 'MueVGBK3P1%', 'sbaguley5@gmail.com', '0872532363', 'Hobart, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 7
-('Coralie', 'Carslaw', 'ccarslaw6', 'KhxDlTK', 'ccarslaw6@gmail.com', '0401625846', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Coralie', 'Carslaw', 'ccarslaw6', 'KhxDlTK#1t', 'ccarslaw6@gmail.com', '0401625846', 'Darwin, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 8
-('Garvin', 'Galbreth', 'ggalbreth7', 'TQPVl9gHqwlC', 'ggalbreth7@gmail.com', '0867198979', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Garvin', 'Galbreth', 'ggalbreth7', 'TQPVl9gHqwlC+', 'ggalbreth7@gmail.com', '0867198979', 'Canberra, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 9
-('Cirilo', 'Nosworthy', 'cnosworthy8', 'YkQc06M', 'cnosworthy8@gmail.com', '0861791717', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Cirilo', 'Nosworthy', 'cnosworthy8', 'YkQc06M@p', 'cnosworthy8@gmail.com', '0861791717', 'Gold Coast, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 10
-('Gertrudis', 'Espinas', 'gespinas9', 'TYgZMwz', 'gespinas9@gmail.com', '0291168164', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1);
+('Gertrudis', 'Espinas', 'gespinas9', 'TYgZMwz$1', 'gespinas9@gmail.com', '0291168164', 'Newcastle, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0);
+
 
 -- Insert resumes for each user
-INSERT INTO `resume` (`user_id`, `objective`)
+-- `position` varchar(255) NOT NULL,
+--    `employment_type` varchar(255) NOT NULL,
+ --   `desire_salary` int(10) NOT NULL,
+  --  `goals` text NOT NULL,
+INSERT INTO `resume` (`user_id`, `position`, `employment_type`, `desire_salary`, `goals`)
 VALUES
   -- User 1
-  (1, 'Web developer'),
+  (1, 'Web developer', 'Full-time', 100000, 'To become an expert in web development'),
   -- User 2
-  (2, 'Business Analyst'),
+  (2, 'Business Analyst', 'Full-time', 90000, 'To help companies make data-driven decisions'),
   -- User 3
-  (3, 'Accountant'),
+  (3, 'Accountant', 'Part-time', 50000, 'To gain more experience in accounting'),
   -- User 4
-  (4, 'Software Engineer'),
+  (4, 'Software Engineer', 'Full-time', 120000, 'To work on challenging projects and innovate'),
   -- User 5
-  (5, 'Associate Electrical Engineer'),
+  (5, 'Associate Electrical Engineer', 'Full-time', 80000, 'To design and implement electrical systems'),
   -- User 6
-  (6, 'Administrative Assistant'),
+  (6, 'Administrative Assistant', 'Contract', 60000, 'To provide efficient administrative support'),
   -- User 7
-  (7, 'Customer Service Representative'),
+  (7, 'Customer Service Representative', 'Full-time', 50000, 'To provide excellent service to customers'),
   -- User 8
-  (8, 'Marketing Coordinator'),
+  (8, 'Marketing Coordinator', 'Full-time', 70000, 'To develop and implement effective marketing plans'),
   -- User 9
-  (9, 'Mentor'),
+  (9, 'Mentor', 'Part-time', 30000, 'To help guide and inspire others'),
   -- User 10
-  (10, 'Content Creator');
+  (10, 'Content Creator', 'Full-time', 80000, 'To create engaging and informative content for audiences');
+
 
 -- Insert education for each user
 INSERT INTO `education` (`resume_id`, `user_id`, `school`, `degree`, `major`)
@@ -102,50 +108,58 @@ VALUES
 INSERT INTO `skill` (`resume_id`, `user_id`, `skill`)
 VALUES
   -- User 1
-  (1, 1, 'Freelance Web Developer'),
+  (1, 1, 'PHP'),
+  (1, 1, 'JavaScript'),
+  (1, 1, 'HTML'),
+  (1, 1, 'CSS'),
   -- User 2
-  (2, 2, 'Business Analyst'),
+  (2, 2, 'JavaScript'),
+  (2, 2, 'Python'),
+  (2, 2, 'C#'),
   -- User 3
-  (3, 3, 'Senior Accountant'),
+  (3, 3, 'Java'),
+  (3, 3, 'C#'),
   -- User 4
-  (4, 4, 'Software Developer'),
+  (4, 4, 'Python'),
+  (4, 4, 'ReactJS'),
+  (4, 4, 'VueJS'),
   -- User 5
-  (5, 5, 'Associate Electrical Engineer'),
+  (5, 5, 'Leadership'),
   -- User 6
-  (6, 6, 'Administrative Assistant'),
+  (6, 6, 'PHP'),
   -- User 7
-  (7, 7, 'Customer Service Representative'),
+  (7, 7, 'HTML'),
   -- User 8
-  (8, 8, 'Marketing Coordinator'),
+  (8, 8, 'C++'),
   -- User 9
-  (9, 9, 'Mechanical Engineer'),
+  (9, 9, 'Team Working'),
   -- User 10
-  (10, 10, 'Content Writer');
+  (10, 10, 'Research Skills');
 
 -- Insert working history for each user
 INSERT INTO `working_history` (`resume_id`, `user_id`, `position`, `company_name`, `duration`, `tasks`)
 VALUES
   -- User 1
-  (1, 1, 'Web Developer', 'ABC Company', '2018-06-01', '2020-12-31', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP. Collaborated with clients and designers to ensure project accuracy and completed projects on time.'),
-  (1, 1, 'Web Developer', 'ABC Company', '2021-05-01', '2023-3-31', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP.'),
+  (1, 1, 'Web Developer', 'ABC Company', '1 year', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP. Collaborated with clients and designers to ensure project accuracy and completed projects on time.'),
+  (1, 1, 'Web Developer', 'ABllC Company', 'less than 6 months', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP.'),
   -- User 2
-  (2, 2, 'Business Analyst', 'XYZ Corporation', '2019-01-01', '2022-03-31', 'Worked closely with key stakeholders to model business processes, gather and define business requirements. Conducted system analysis, developed use cases and prepared functional specifications.'),
+  (2, 2, 'Business Analyst', 'XYZ Corporation', '5 years', 'Worked closely with key stakeholders to model business processes, gather and define business requirements. Conducted system analysis, developed use cases and prepared functional specifications.'),
   -- User 3
-  (3, 3, 'Senior Accountant', 'Super Accounting Firm', '2017-05-01', '2022-07-31', 'Conducted multiple audits of firms and provided internal control analysis while communicating documents and performing fieldwork.'),
+  (3, 3, 'Senior Accountant', 'Super Accounting Firm', '50 years', 'Conducted multiple audits of firms and provided internal control analysis while communicating documents and performing fieldwork.'),
   -- User 4
-  (4, 4, 'Software Developer', 'Global Software Solutions', '2018-12-01', '2023-01-31', 'Coded, tested and deployed software applications, APIs and software libraries. Worked in a team environment with frequent code reviews.'),
+  (4, 4, 'Software Developer', 'Global Software Solutions', '5 months', 'Coded, tested and deployed software applications, APIs and software libraries. Worked in a team environment with frequent code reviews.'),
   -- User 5
-  (5, 5, 'Associate Electrical Engineer', 'Electricity Innovations', '2020-02-15', '2022-11-30', 'Constructed, implemented and analyzed electrical testing to provide safety and optimization in electrical products. Collaborated in a team environment to ensure goal completion.'),
+  (5, 5, 'Associate Electrical Engineer', 'Electricity Innovations', '9 months', 'Constructed, implemented and analyzed electrical testing to provide safety and optimization in electrical products. Collaborated in a team environment to ensure goal completion.'),
   -- User 6
-  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.', '2021-04-01', '2021-02-28', 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
+  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.', '15 months', 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
   -- User 7
-  (7, 7, 'Customer Service Representative', 'Helpful Corp.', '2019-03-01', '2021-02-28', 'Provided top-notch customer service using voice and digital channels. Provided solutions to consumer problems by escalating larger issues to management staff when necessary.'),
+  (7, 7, 'Customer Service Representative', 'Helpful Corp.', '7 years', 'Provided top-notch customer service using voice and digital channels. Provided solutions to consumer problems by escalating larger issues to management staff when necessary.'),
   -- User 8
-  (8, 8, 'Marketing Coordinator', 'Marketing Firm', '2021-06-01', '2023-01-31', 'Designed and implemented digital marketing campaigns using a variety of mediums on channels like LinkedIn, Instagram, and Twitter. Analyzed campaign success and made recommendations for updates to the company strategy.'),
+  (8, 8, 'Marketing Coordinator', 'Marketing Firm', '3 years', 'Designed and implemented digital marketing campaigns using a variety of mediums on channels like LinkedIn, Instagram, and Twitter. Analyzed campaign success and made recommendations for updates to the company strategy.'),
   -- User 9
-  (9, 9, 'Mechanical Engineer', 'Mechanical Industries, LLC', '2018-07-01', '2021-07-31', 'Researched, designed and created mechanical systems in machines and structures. Collaborated with a team to ensure the completion of important projects.'),
+  (9, 9, 'Mechanical Engineer', 'Mechanical Industries, LLC', '8 months', 'Researched, designed and created mechanical systems in machines and structures. Collaborated with a team to ensure the completion of important projects.'),
   -- User 10
-  (10, 10, 'Content Writer', 'Content Creation, Inc.', '2022-02-01', '2023-01-31', 'Wrote engaging content across a variety of web products, ranging from press releases to landing pages to full-fledged articles. Worked with clients to develop content strategies that were appropriate to their specific needs.');
+  (10, 10, 'Content Writer', 'Content Creation, Inc.', '7 years', 'Wrote engaging content across a variety of web products, ranging from press releases to landing pages to full-fledged articles. Worked with clients to develop content strategies that were appropriate to their specific needs.');
 
 -- Insert additional information for each user
 INSERT INTO `additional_information` (`resume_id`, `user_id`, `hobbies`, `habits`, `personal_info`)
@@ -172,25 +186,22 @@ VALUES
 
 INSERT INTO `reference` (`resume_id`, `user_id`, `firstname`, `lastname`, `email`, `phone`, `relationship`)
 VALUES
-(1, 1, 'Sarah', 'Lee', 'sarahlee@email.com', '1234567890', 'Former Manager'),
+(1, 1, 'Sarah', 'Lee', 'sarahlee@email.com', '0421412421', 'Former Manager'),
 
-(1, 1, 'David', 'Kim', 'davidkim@email.com', '1234567890', 'Former Colleague'),
+(1, 1, 'David', 'Kim', 'davidkim@email.com', '0123456779', 'Former Colleague'),
 
-(2, 2, 'Mark', 'Chen', 'markchen@email.com', '1234567890', 'Former Manager'),
+(2, 2, 'Mark', 'Chen', 'markchen@email.com', '0123457789', 'Former Manager'),
 
-(2, 2, 'Emily', 'Wang', 'emilywang@email.com', '1234567890', 'Former Tutor'),
+(2, 2, 'Emily', 'Wang', 'emilywang@email.com', '0127456789', 'Former Tutor'),
 
-(3, 3, 'Amy', 'Zhang', 'amyzhang@email.com', '1234567890', 'Former Manager'),
+(3, 3, 'Amy', 'Zhang', 'amyzhang@email.com', '0123456689', 'Former Manager'),
 
-(3, 3, 'Michael', 'Li', 'michaelli@email.com', '1234567890', 'Former Colleague'),
+(3, 3, 'Michael', 'Li', 'michaelli@email.com', '0123456769', 'Former Colleague'),
 
-(4, 4, 'Jennifer', 'Kim', 'jenniferkim@email.com', '1234567890', 'Former Supervisor'),
+(4, 4, 'Jennifer', 'Kim', 'jenniferkim@email.com', '0823456789', 'Former Supervisor'),
 
-(5, 5, 'Daniel', 'Cho', 'danielcho@email.com', '1234567890', 'Former Colleague'),
+(5, 5, 'Daniel', 'Cho', 'danielcho@email.com', '0825456789', 'Former Colleague'),
 
-(6, 6, 'Andrew', 'Kwon', 'andrewkwon@email.com', '1234567890', 'Former Manager'),
+(6, 6, 'Andrew', 'Kwon', 'andrewkwon@email.com', '0923456789', 'Former Manager'),
 
-(8, 8, 'Jessica', 'Park', 'jessicapark@email.com', '1234567890', 'Former Colleague');
-
-
-
+(8, 8, 'Jessica', 'Park', 'jessicapark@email.com', '023456789', 'Former Colleague');

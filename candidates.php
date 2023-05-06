@@ -24,6 +24,7 @@ else {
         }
         select {
             max-width: 200px;
+            min-width: 200px;
         }
         .card {
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -140,7 +141,6 @@ else {
             position: absolute;
             z-index: 10;
         }
-
         @media screen and (max-width: 800px) {
             #candidate-all {
                 margin: 0;
@@ -149,33 +149,21 @@ else {
                 display:none;
             }
             .user-dashboard-info-box .candidates-list .thumb img {
-                width: 20px;
-                height: 20px;
+                width: 45px;
+                height: 45px;
             }
 
-            .candidate-list-title h5 {
-                font-size: 10px;
-                padding-left: 10px;
-            }
-
-            .candidate-list-option ul li {
-                font-size: 8px;
-                padding-left: 10px;
-            }
-
-            .candidate-list-objective {
-                font-size: 8px;
-            }
-
-            th {
-                font-size: 10px;
-            }
             #numbertoshow {
                 position: static;
                 justify-content: center;
                 margin-bottom: 5px;
             }
             #numbertoshow p {
+                display: none;
+            }
+        }
+        @media screen and (max-width: 768px) {
+            .candidate-list-objective {
                 display: none;
             }
         }
@@ -189,6 +177,7 @@ else {
 
             document.getElementById('filterObjective').disabled = true;
             document.getElementById('filterMajor').disabled = true;
+            document.getElementById('filterSkill').disabled = true;
             // clear input field
             var inputField = document.getElementById('searchInput');
             inputField.value = '';
@@ -239,11 +228,13 @@ else {
         function filterCandidates() {
             var objective = document.getElementById("filterObjective").value;
             var major = document.getElementById("filterMajor").value;
+            var skill = document.getElementById("filterSkill").value;
+
             var candidate_search = document.getElementById("candidate-search-result");
             var candidate_all = document.getElementById("candidate-all");
             var showBtn = document.getElementById("showBtn");
 
-            if(objective == '0' && major == '0') {
+            if(objective == '0' && major == '0' && skill == '0') {
                 showBtn.disabled = true;
                 candidate_all.style.display = 'block';
                 candidate_search.style.display = 'none';
@@ -261,9 +252,10 @@ else {
                         candidate_search.innerHTML=this.responseText;
                     }
                 };
-                xmlhttp.open("GET", "action/filter_candidate.php?objective=" + objective + "&major=" + major, true);
+                skill = encodeURIComponent(skill);
+                xmlhttp.open("GET", "action/filter_candidate.php?objective=" + objective + "&major=" + major + "&skill=" + skill, true);
                 xmlhttp.send();
-            }            
+            }
         }
 
         // Show All button will show all candidate and will be enable after a search
@@ -271,9 +263,12 @@ else {
             var candidate_search = document.getElementById("candidate-search-result");
             var candidate_all = document.getElementById("candidate-all");
             var showBtn = document.getElementById("showBtn");
+
             var filterBtn = document.getElementById("filterBtn");
+
             var objectiveSlct = document.getElementById("filterObjective");
             var majorSlct = document.getElementById("filterMajor");
+            var skillSlct = document.getElementById("filterSkill");
 
             if(candidate_search.style.display === 'none') {         
                 candidate_search.style.display = 'block';
@@ -282,11 +277,13 @@ else {
             else {
                 document.getElementById('filterObjective').disabled = false;
                 document.getElementById('filterMajor').disabled = false;
+                document.getElementById('filterSkill').disabled = false;
                 filterBtn.disabled = false;
                 showBtn.disabled = true;
 
                 objectiveSlct.selectedIndex = 0;
                 majorSlct.selectedIndex = 0;
+                skillSlct.selectedIndex = 0;
 
                 candidate_search.style.display = 'none';
                 candidate_all.style.display = 'block';
@@ -298,12 +295,13 @@ else {
                 window.location.href = "index.php?page=candidates&pagenum=1&show=" + num;
             }
         }
+
+
     </script>
 </head>
 
 <body id="top">
     <?php require_once('inc/topBarNav.php') ?>
-
     <div class="page-content bg-light">
         <div id="content">
             <!-- This appear first when user click on "Candidates" -->
@@ -322,13 +320,13 @@ else {
                             <?php
                                 include "database/dbconnect.php";
 
-                                $sql = "SELECT DISTINCT `objective` FROM `resume`";
+                                $sql = "SELECT DISTINCT `position` FROM `resume`";
 
                                 $result = $conn->query($sql);
 
                                 if(mysqli_num_rows($result) > 0){
                                     while($row = $result->fetch_assoc()) {
-                                        echo '<option value="'. $row['objective'] .'">'. $row['objective'] .'</option>';
+                                        echo '<option value="'. $row['position'] .'">'. $row['position'] .'</option>';
                                     }
                                 }
                             ?>
@@ -353,7 +351,25 @@ else {
                         </select>             
                     </div>        
                     <div class = "d-flex pt-1">
-                        <button class = "btn btn-secondary me-1" onclick= "filterCandidates()" id = "filterBtn">Filter</button>
+                        <select class="form-select w-100" aria-label="Sort by Skill" id = "filterSkill" data-live-search="true">
+                            <option class="select-label" value="0" selected>Skill</option>
+                            <?php
+                                include "database/dbconnect.php";
+
+                                $sql = "SELECT DISTINCT `skill` FROM `skill`";
+
+                                $result = $conn->query($sql);
+
+                                if(mysqli_num_rows($result) > 0){
+                                    while($row = $result->fetch_assoc()) {
+                                        echo '<option value="'. $row['skill'] .'">'. $row['skill'] .'</option>';
+                                    }
+                                }
+                            ?>
+                        </select>             
+                    </div>        
+                    <div class = "d-flex pt-1">
+                        <button class = "btn btn-secondary me-1" onclick= "filterCandidates();" id = "filterBtn">Filter</button>
                         <button class = "btn btn-primary" onclick= "toggleShowBtn()" id = "showBtn" disabled>Show All</button>
                     </div>
                 </div>
@@ -370,7 +386,7 @@ else {
                                         <thead>
                                             <tr>
                                                 <th>Candidate Name</th>
-                                                <th>Objective</th>
+                                                <th class="candidate-list-objective">Objective</th>
                                                 <th class="action text-right"></th>
                                             </tr>
                                         </thead>
@@ -392,7 +408,7 @@ else {
                                                 users.firstname, 
                                                 users.lastname, 
                                                 users.avatar, 
-                                                resume.objective, 
+                                                resume.position, 
                                                 education.major 
                                                 FROM users
                                                 INNER JOIN resume ON users.id = resume.user_id
@@ -424,7 +440,7 @@ else {
                                                             </div>
                                                         </td>
                                                         <td class="candidate-list-objective mb-0">
-                                                            <span>'. $row['objective'] .'</span>
+                                                            <span>'. $row['position'] .'</span>
                                                         </td>
                                                         <td id = "viewCVBtn">
                                                             <a href="index.php?page=candidates&id='. $row['id'] . '"><button class = "btn btn-outline-secondary btn-sm">View CV</button></a>
