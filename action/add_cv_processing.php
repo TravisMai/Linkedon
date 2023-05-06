@@ -4,7 +4,7 @@ require_once('database/dbconnect.php');
 
 
 
-if (isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION["user_id"];
     // Job-Objective
     $job_title = $_POST['job-title'];
@@ -25,17 +25,13 @@ if (isset($_POST['submit'])) {
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
 
-
-
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Education-Section
     $school_name = $_POST['school-name'];
     $degree_name = $_POST['degree-name'];
     $education_level = $_POST['education-level'];
     $graduation_year = $_POST['graduation-year'];
-    $gpa = $_POST['gpa'] . $_POST['gpa-scale'];
+    $gpa = $_POST['gpa'] . "/" . $_POST['gpa-scale'];
 
     // Store the values in an array
     $educations = array();
@@ -49,9 +45,9 @@ if (isset($_POST['submit'])) {
 
     // Insert the educations into the database
 // $sql = "INSERT INTO education (school, degree, major, graduation_year, gpa) VALUES ";
-    $sql = "INSERT INTO education (resume_id, user_id , school, degree, major) VALUES ";
+    $sql = "INSERT INTO education (resume_id, user_id , school,  degree, `year`, gpa, major) VALUES ";
     foreach ($educations as $education) {
-        $sql .= "('$insert_id','$user_id','$education[school_name]', '$education[education_level]', '$education[degree_name]'),";
+        $sql .= "('$insert_id','$user_id','$education[school_name]', '$education[education_level]','$education[graduation_year]' , '$education[gpa]',  '$education[degree_name]'),";
     }
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
@@ -76,25 +72,28 @@ if (isset($_POST['submit'])) {
     mysqli_query($conn, $sql);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Working-Section
-    $job_name = $_POST['employment-degree'] . " " . $_POST['job-name'];
+    $job_name = $_POST['job-name'];
     $company_name = $_POST['company-name'];
-
+    $work_type = $_POST['employment-degree'];
     $job_duration = $_POST['job-duration'];
     $working_description = $_POST['working-description'];
 
     // Store the values in an array
     $work_histories = array();
-    $work_histories[] = array(
-        'job_name' => $job_name,
-        'company_name' => $company_name,
-        'job_duration' => $job_duration,
-        'working_description' => $working_description
-    );
+    for ($i = 0; $i < count($job_name); $i++) {
+        $work_histories[$i] = array(
+            'job_name' => $job_name[$i],
+            'company_name' => $company_name[$i],
+            'work_type' => $work_type[$i],
+            'job_duration' => $job_duration[$i],
+            'working_description' => $working_description[$i]
+        );
+    }
 
     // Insert the work histories into the database
-    $sql = "INSERT INTO working_history (resume_id, user_id,  position, company_name,  duration , tasks) VALUES ";
+    $sql = "INSERT INTO working_history (resume_id, user_id,  position, company_name, work_type,  duration , tasks) VALUES ";
     foreach ($work_histories as $work_history) {
-        $sql .= "('$insert_id','$user_id','$work_history[job_name]', '$work_history[company_name]', '$work_history[job_duration]', '$work_history[working_description]'),";
+        $sql .= "('$insert_id','$user_id','$work_history[job_name]', '$work_history[company_name]', '$work_history[work_type]','$work_history[job_duration]', '$work_history[working_description]'),";
     }
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
@@ -142,15 +141,17 @@ if (isset($_POST['submit'])) {
     }
 
     // Insert the references into the database
-    $sql = "INSERT INTO reference (resume_id, user_id, firstname, lastname, email, phone, relationship) VALUES ";
+    $sql = "INSERT INTO reference (resume_id, user_id, name, email, phone, relationship) VALUES ";
     foreach ($references as $reference) {
-        $sql .= "('$reference[reference_name]', '$reference[reference_phone]', '$reference[reference_email]', '$reference[reference_relationship]'),";
+        $sql .= "('$insert_id','$user_id', '$reference[reference_name]',  '$reference[reference_email]','$reference[reference_phone]', '$reference[reference_relationship]'),";
     }
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
 
     $_SESSION['label'] = "Successful";
     $_SESSION['message'] = "Your CV created successfully";
-    header('Location: ./index.php?page=candidates&id=' . $_SESSION["user_id"] .'');
-    
+    header('Location: ./index.php?page=candidates&id=' . $_SESSION["user_id"] . '');
+}
+else{
+    echo "dm";
 }
