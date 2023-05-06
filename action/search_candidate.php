@@ -11,7 +11,7 @@ if(isset($_GET['query'])){
     users.firstname, 
     users.lastname, 
     users.avatar, 
-    resume.objective, 
+    resume.position, 
     education.major 
     FROM users
     INNER JOIN resume ON users.id = resume.user_id
@@ -55,7 +55,7 @@ if(isset($_GET['query'])){
                 </div>
             </td>
             <td class="candidate-list-objective mb-0">
-                <span>'. $row['objective'] .'</span>
+                <span>'. $row['position'] .'</span>
             </td>
             <td>
                 <a href="index.php?page=candidates&id='. $row['id'] . '"><button class = "btn btn-outline-secondary btn-sm">View CV</button></a>

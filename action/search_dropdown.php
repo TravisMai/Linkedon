@@ -5,7 +5,7 @@ if(isset($_GET['query'])){
     require_once('../initialize.php');
     require_once('../database/dbconnect.php');
 
-    $sql = "SELECT * FROM `users` WHERE (firstname LIKE '" . $query . "%' OR lastname LIKE '". $query ."%')";
+    $sql = "SELECT * FROM `users` WHERE `type` = 0 AND (firstname LIKE '" . $query . "%' OR lastname LIKE '". $query ."%')";
     $result = $conn->query($sql);
 
     $output = '';
