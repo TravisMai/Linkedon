@@ -96,6 +96,26 @@ ob_start();
                     </div>';
                 }
 
+                $sql = "SELECT `position`, `company_name`, `duration`, `tasks` FROM `working_history` WHERE user_id = $id";
+                $result = $conn->query($sql);
+
+                if(mysqli_num_rows($result) > 0){
+                    $output .= '
+                    <div class="card mt-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Working History</h5>
+                                <ul>';
+                    while ($row = $result->fetch_assoc()) {
+                        $output .= '
+                            <li>'. $row['position'] .', '. $row['company_name'] . ', ' . $row['duration'] . '<br>' . '<strong>Tasks: </strong>'. $row['tasks'] .'</li>      
+                        ';
+                    }
+                    $output .= '
+                            </ul>
+                        </div>
+                    </div>';
+                }
+
                 $sql = "SELECT `title`, `organization`, `value`, YEAR(obtained_date) as `year` FROM `certificate` WHERE user_id = $id";
                 $result = $conn->query($sql);
 
@@ -116,44 +136,22 @@ ob_start();
                     </div>';
                 }
 
-                $sql = "SELECT `experience`, `duration_years`, `duration_months`, `description` FROM `experience` WHERE user_id = $id";
+                $sql = "SELECT `skill` FROM `skill` WHERE user_id = $id";
                 $result = $conn->query($sql);
 
-                if(mysqli_num_rows($result) > 0){
-                    $output .= '
-                    <div class="card mt-2">
-                        <div class="card-body">
-                            <h5 class="card-title">Experience</h5>
-                                <ul>';
+                if (mysqli_num_rows($result) > 0) {
+                    $skills = '';
                     while ($row = $result->fetch_assoc()) {
-                        $output .= '
-                            <li>'. $row['experience'] .' for '. $row['duration_years'] . ' year(s) and ' . $row['duration_months'] . ' month(s)' . '<br>' . '<strong>Description: </strong>'. $row['description'] .'</li>      
-                        ';
+                        $delimiter = empty($skills) ? '' : ' <i class="bi bi-dot"></i> ';
+                        $skills .= $delimiter . $row['skill'];
                     }
                     $output .= '
-                            </ul>
-                        </div>
-                    </div>';
-                }
-
-                $sql = "SELECT `position`, `company_name`, YEAR(`start_date`) as `start`, YEAR(`end_date`) as `end`, `tasks` FROM `working_history` WHERE user_id = $id";
-                $result = $conn->query($sql);
-
-                if(mysqli_num_rows($result) > 0){
-                    $output .= '
-                    <div class="card mt-2">
-                        <div class="card-body">
-                            <h5 class="card-title">Working History</h5>
-                                <ul>';
-                    while ($row = $result->fetch_assoc()) {
-                        $output .= '
-                            <li>'. $row['position'] .', '. $row['company_name'] . ', ' . $row['start'] . ' - ' . $row['end'] . '<br>' . '<strong>Tasks: </strong>'. $row['tasks'] .'</li>      
-                        ';
-                    }
-                    $output .= '
-                            </ul>
-                        </div>
-                    </div>';
+                        <div class="card mt-2">
+                            <div class="card-body">
+                                <h5 class="card-title">Skills</h5>
+                                <p>' . $skills . '</p>
+                            </div>
+                        </div>';
                 }
 
                 $sql = "SELECT `hobbies`, `habits`, `personal_info` FROM `additional_information` WHERE user_id = $id";

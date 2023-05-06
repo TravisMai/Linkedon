@@ -102,50 +102,58 @@ VALUES
 INSERT INTO `skill` (`resume_id`, `user_id`, `skill`)
 VALUES
   -- User 1
-  (1, 1, 'Freelance Web Developer'),
+  (1, 1, 'PHP'),
+  (1, 1, 'JavaScript'),
+  (1, 1, 'HTML'),
+  (1, 1, 'CSS'),
   -- User 2
-  (2, 2, 'Business Analyst'),
+  (2, 2, 'JavaScript'),
+  (2, 2, 'Python'),
+  (2, 2, 'C#'),
   -- User 3
-  (3, 3, 'Senior Accountant'),
+  (3, 3, 'Java'),
+  (3, 3, 'C#'),
   -- User 4
-  (4, 4, 'Software Developer'),
+  (4, 4, 'Python'),
+  (4, 4, 'ReactJS'),
+  (4, 4, 'VueJS'),
   -- User 5
-  (5, 5, 'Associate Electrical Engineer'),
+  (5, 5, 'Leadership'),
   -- User 6
-  (6, 6, 'Administrative Assistant'),
+  (6, 6, 'PHP'),
   -- User 7
-  (7, 7, 'Customer Service Representative'),
+  (7, 7, 'HTML'),
   -- User 8
-  (8, 8, 'Marketing Coordinator'),
+  (8, 8, 'C++'),
   -- User 9
-  (9, 9, 'Mechanical Engineer'),
+  (9, 9, 'Team Working'),
   -- User 10
-  (10, 10, 'Content Writer');
+  (10, 10, 'Research Skills');
 
 -- Insert working history for each user
 INSERT INTO `working_history` (`resume_id`, `user_id`, `position`, `company_name`, `duration`, `tasks`)
 VALUES
   -- User 1
-  (1, 1, 'Web Developer', 'ABC Company', '2018-06-01', '2020-12-31', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP. Collaborated with clients and designers to ensure project accuracy and completed projects on time.'),
-  (1, 1, 'Web Developer', 'ABC Company', '2021-05-01', '2023-3-31', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP.'),
+  (1, 1, 'Web Developer', 'ABC Company', '1 year', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP. Collaborated with clients and designers to ensure project accuracy and completed projects on time.'),
+  (1, 1, 'Web Developer', 'ABllC Company', 'less than 6 months', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP.'),
   -- User 2
-  (2, 2, 'Business Analyst', 'XYZ Corporation', '2019-01-01', '2022-03-31', 'Worked closely with key stakeholders to model business processes, gather and define business requirements. Conducted system analysis, developed use cases and prepared functional specifications.'),
+  (2, 2, 'Business Analyst', 'XYZ Corporation', '5 years', 'Worked closely with key stakeholders to model business processes, gather and define business requirements. Conducted system analysis, developed use cases and prepared functional specifications.'),
   -- User 3
-  (3, 3, 'Senior Accountant', 'Super Accounting Firm', '2017-05-01', '2022-07-31', 'Conducted multiple audits of firms and provided internal control analysis while communicating documents and performing fieldwork.'),
+  (3, 3, 'Senior Accountant', 'Super Accounting Firm', '50 years', 'Conducted multiple audits of firms and provided internal control analysis while communicating documents and performing fieldwork.'),
   -- User 4
-  (4, 4, 'Software Developer', 'Global Software Solutions', '2018-12-01', '2023-01-31', 'Coded, tested and deployed software applications, APIs and software libraries. Worked in a team environment with frequent code reviews.'),
+  (4, 4, 'Software Developer', 'Global Software Solutions', '5 months', 'Coded, tested and deployed software applications, APIs and software libraries. Worked in a team environment with frequent code reviews.'),
   -- User 5
-  (5, 5, 'Associate Electrical Engineer', 'Electricity Innovations', '2020-02-15', '2022-11-30', 'Constructed, implemented and analyzed electrical testing to provide safety and optimization in electrical products. Collaborated in a team environment to ensure goal completion.'),
+  (5, 5, 'Associate Electrical Engineer', 'Electricity Innovations', '9 months', 'Constructed, implemented and analyzed electrical testing to provide safety and optimization in electrical products. Collaborated in a team environment to ensure goal completion.'),
   -- User 6
-  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.', '2021-04-01', '2021-02-28', 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
+  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.', '15 months', 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
   -- User 7
-  (7, 7, 'Customer Service Representative', 'Helpful Corp.', '2019-03-01', '2021-02-28', 'Provided top-notch customer service using voice and digital channels. Provided solutions to consumer problems by escalating larger issues to management staff when necessary.'),
+  (7, 7, 'Customer Service Representative', 'Helpful Corp.', '7 years', 'Provided top-notch customer service using voice and digital channels. Provided solutions to consumer problems by escalating larger issues to management staff when necessary.'),
   -- User 8
-  (8, 8, 'Marketing Coordinator', 'Marketing Firm', '2021-06-01', '2023-01-31', 'Designed and implemented digital marketing campaigns using a variety of mediums on channels like LinkedIn, Instagram, and Twitter. Analyzed campaign success and made recommendations for updates to the company strategy.'),
+  (8, 8, 'Marketing Coordinator', 'Marketing Firm', '3 years', 'Designed and implemented digital marketing campaigns using a variety of mediums on channels like LinkedIn, Instagram, and Twitter. Analyzed campaign success and made recommendations for updates to the company strategy.'),
   -- User 9
-  (9, 9, 'Mechanical Engineer', 'Mechanical Industries, LLC', '2018-07-01', '2021-07-31', 'Researched, designed and created mechanical systems in machines and structures. Collaborated with a team to ensure the completion of important projects.'),
+  (9, 9, 'Mechanical Engineer', 'Mechanical Industries, LLC', '8 months', 'Researched, designed and created mechanical systems in machines and structures. Collaborated with a team to ensure the completion of important projects.'),
   -- User 10
-  (10, 10, 'Content Writer', 'Content Creation, Inc.', '2022-02-01', '2023-01-31', 'Wrote engaging content across a variety of web products, ranging from press releases to landing pages to full-fledged articles. Worked with clients to develop content strategies that were appropriate to their specific needs.');
+  (10, 10, 'Content Writer', 'Content Creation, Inc.', '7 years', 'Wrote engaging content across a variety of web products, ranging from press releases to landing pages to full-fledged articles. Worked with clients to develop content strategies that were appropriate to their specific needs.');
 
 -- Insert additional information for each user
 INSERT INTO `additional_information` (`resume_id`, `user_id`, `hobbies`, `habits`, `personal_info`)
@@ -191,6 +199,3 @@ VALUES
 (6, 6, 'Andrew', 'Kwon', 'andrewkwon@email.com', '1234567890', 'Former Manager'),
 
 (8, 8, 'Jessica', 'Park', 'jessicapark@email.com', '1234567890', 'Former Colleague');
-
-
-

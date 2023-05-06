@@ -252,7 +252,7 @@ if ($conn->multi_query($sql) === TRUE) {
     //echo "SQL commands were executed successfully!";
 } else {
     //echo "Error executing SQL commands: " . $conn->error;
-}
-*/
+}*/
+
 $conn->close();
 ?>
