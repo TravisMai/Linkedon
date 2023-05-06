@@ -11,13 +11,15 @@
                 <div class="cover bg-light">
                     <div class="container px-3">
                         <div class="row">
-                            <div class="col-lg-6 p-2"><img class="img-fluid" src="images/ava.png" alt="hello" />
+                            <div class="col-lg-6 p-2"><img class="avatar img-fluid mt-2" src="images/avatar.jpg"
+                                    width="400" height="400" />
                             </div>
+
                             <div class="col-lg-6">
                                 <div class="mt-5">
                                     <p class="lead text-uppercase mb-1">Hello!</p>
-                                    <h1 class="intro-title marker" data-aos="fade-left" data-aos-delay="50">I’m Mai Huu
-                                        Nghia</h1>
+                                    <h1 class="intro-title marker" data-aos="fade-left" data-aos-delay="50">Welcome to
+                                        LinkedOn!!</h1>
                                     <p class="lead fw-normal mt-3" data-aos="fade-up" data-aos-delay="100"></p>
                                     <div class="social-nav" data-aos="fade-up" data-aos-delay="200">
                                         <nav role="navigation">
@@ -31,11 +33,7 @@
                                                             class="fa fa-envelope"></i><span
                                                             class="menu-title sr-only">Gmail</span></a></li>
                                                 <li class="nav-item"><a class="nav-link"
-                                                        href="https://www.linkedin.com/in/ngh%C4%A9a-mai-10654824b/"
-                                                        title="LinkedIn"><i class="fab fa-linkedin"></i><span
-                                                            class="menu-title sr-only">LinkedIn</span></a></li>
-                                                <li class="nav-item"><a class="nav-link"
-                                                        href="https://github.com/TravisMai" title="Github"><i
+                                                        href="https://github.com/TravisMai/CO3049_WebProgramming_HK222" title="Github"><i
                                                             class="fab fa-github"></i><span
                                                             class="menu-title sr-only">Github</span></a></li>
                                             </ul>

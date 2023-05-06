@@ -56,6 +56,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
                             if ($user_type == 0) {
                                 echo '<li class="nav-item"><a class="nav-link" href="index.php?page=candidates">Candidates</a></li>';
                                 echo '<li class="nav-item"><a class="nav-link" href="index.php?page=add_cv">Modify Resume</a></li>';
+                                echo '<li class="nav-item"><a class="nav-link" href="index.php?page=candidates&id='. $_SESSION["user_id"] . '">Your Resume</a></li>';
                             } else {
                                 echo '<li class="nav-item"><a class="nav-link" href="index.php?page=candidates">Candidates</a></li>';
                             }
