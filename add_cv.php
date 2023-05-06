@@ -171,14 +171,13 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="employment-type">Type of Employment</label>
-                                    <select class="form-control" required id="employment-type" name="employment-type"
-                                        value="<?php echo "full-time"; ?>">
+                                    <select class="form-control" required id="employment-type" name="employment-type">
                                         <option value="">-- Select --</option>
-                                        <option value="full-time">Full-time</option>
-                                        <option value="part-time">Part-time</option>
-                                        <option value="contract">Contract</option>
-                                        <option value="freelance">Freelance</option>
-                                        <option value="internship">Internship</option>
+                                        <option value="full-time" <?php if ($row_obj['employment_type'] == 'full-time') echo 'selected'; ?>>Full-time</option>
+                                        <option value="part-time" <?php if ($row_obj['employment_type'] == 'part-time') echo 'selected'; ?>>Part-time</option>
+                                        <option value="contract" <?php if ($row_obj['employment_type'] == 'contract') echo 'selected'; ?>>Contract</option>
+                                        <option value="freelance" <?php if ($row_obj['employment_type'] == 'freelance') echo 'selected'; ?>>Freelance</option>
+                                        <option value="internship" <?php if ($row_obj['employment_type'] == 'internship') echo 'selected'; ?>>Internship</option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-1">
@@ -205,7 +204,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
 
 
                             <?php
-                            $edu_info = $conn->prepare("SELECT education.school, education.major, education.degree FROM education WHERE education.user_id = $user_id AND education.resume_id = $resume_id");
+                            $edu_info = $conn->prepare("SELECT education.school, education.major, education.degree, education.year, education.gpa FROM education WHERE education.user_id = $user_id AND education.resume_id = $resume_id");
                             $edu_info->execute();
                             $result_edu = $edu_info->get_result();
                             $row_edu = $result_edu->fetch_assoc();
@@ -228,12 +227,12 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <label for="education-level">Education level</label>
                                     <select class="form-control" id="education-level" name="education-level" required>
                                         <option value="">-- Select --</option>
-                                        <option value="High School">High School</option>
-                                        <option value="Bachelor">Bachelor's Degree</option>
-                                        <option value="MBA">MBA</option>
-                                        <option value="Graduate">Graduate Degree</option>
-                                        <option value="Post Graduate">Post-Graduate Degree</option>
-                                        <option value="Ph.D">Doctor of Philosophy</option>
+                                        <option value="High School" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'High School') {echo 'selected';} ?>>High School</option>
+                                        <option value="Bachelor" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Bachelor's Degree") {echo 'selected';} ?>>Bachelor's Degree</option>
+                                        <option value="MBA" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'MBA') {echo 'selected';} ?>>MBA</option>
+                                        <option value="Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Graduate Degree') {echo 'selected';} ?>>Graduate Degree</option>
+                                        <option value="Post Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Post-Graduate Degree') {echo 'selected';} ?>>Post-Graduate Degree</option>
+                                        <option value="Ph.D" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Doctor of Philosophy') {echo 'selected';} ?>>Doctor of Philosophy</option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-1">
@@ -244,7 +243,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <!-- Generate options for years from 1990 to 2023 -->
                                         <?php
                                         for ($i = 2030; $i >= 1990; $i--) {
-                                            echo "<option value='$i'>$i</option>";
+                                            if (isset($row_edu['year']) && $row_edu['year'] == $i){
+                                                echo "<option value='$i' selected>$i</option>";
+                                            } else {
+                                                echo "<option value='$i'>$i</option>";
+                                            }
                                         }
                                         ?>
                                     </select>
@@ -301,7 +304,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                             </div>
 
                             <?php
-                            $work_info = $conn->prepare("SELECT working_history.position, working_history.company_name, working_history.duration, working_history.tasks FROM working_history WHERE working_history.resume_id = $resume_id AND working_history.user_id = $user_id");
+                            $work_info = $conn->prepare("SELECT working_history.position, working_history.company_name, working_history.duration, working_history.work_type, working_history.tasks FROM working_history WHERE working_history.resume_id = $resume_id AND working_history.user_id = $user_id");
                             $work_info->execute();
                             $result_work = $work_info->get_result();
                             $row_work = $result_work->fetch_assoc();
@@ -324,16 +327,15 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                             id="company-name" name="company-name" value="<?php if (isset($row_work['company_name'])) {echo $row_work['company_name'];} else {echo "";} ?>" required>
                                     </div>
                                     <div class="form-group mt-1">
-
                                         <label for="employment-degree">Type of Employment</label>
                                         <select class="form-control" id="employment-degree" required
                                             name="employment-degree">
                                             <option value="">-- Select --</option>
-                                            <option value="full-time">Full-time</option>
-                                            <option value="part-time">Part-time</option>
-                                            <option value="contract">Contract</option>
-                                            <option value="freelance">Freelance</option>
-                                            <option value="internship">Internship</option>
+                                            <option value="full-time" <?php if ($row_work['work_type'] == 'full-time') echo 'selected'; ?>>Full-time</option>
+                                            <option value="part-time" <?php if ($row_work['work_type'] == 'part-time') echo 'selected'; ?>>Part-time</option>
+                                            <option value="contract" <?php if ($row_work['work_type'] == 'contract') echo 'selected'; ?>>Contract</option>
+                                            <option value="freelance" <?php if ($row_work['work_type'] == 'freelance') echo 'selected'; ?>>Freelance</option>
+                                            <option value="internship" <?php if ($row_work['work_type'] == 'internship') echo 'selected'; ?>>Internship</option>
                                         </select>
                                     </div>
 
@@ -341,14 +343,14 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <label for="job-duration">Duration</label>
                                         <select class="form-control" id="job-duration" name="job-duration[]" required>
                                             <option value="">-- Select --</option>
-                                            <option value="0">Less Than 6 Months</option>
-                                            <option value="1">6 Months to < 1 Years</option>
-                                            <option value="2">1 Years to < 2 Years</option>
-                                            <option value="3">2 Years to < 3 Years</option>
-                                            <option value="4">3 Years to < 4 Years</option>
-                                            <option value="5">4 Years to < 5 Years</option>
-                                            <option value="6">Over 5 Years</option>
-                                            <option value="-1">Still in Job</option>
+                                            <option value="0" <?php if ($row_work['duration'] == '0') echo 'selected'; ?>>Less Than 6 Months</option>
+                                            <option value="1" <?php if ($row_work['duration'] == '1') echo 'selected'; ?>>6 Months to < 1 Years</option>
+                                            <option value="2" <?php if ($row_work['duration'] == '2') echo 'selected'; ?>>1 Years to < 2 Years</option>
+                                            <option value="3" <?php if ($row_work['duration'] == '3') echo 'selected'; ?>>2 Years to < 3 Years</option>
+                                            <option value="4" <?php if ($row_work['duration'] == '4') echo 'selected'; ?>>3 Years to < 4 Years</option>
+                                            <option value="5" <?php if ($row_work['duration'] == '5') echo 'selected'; ?>>4 Years to < 5 Years</option>
+                                            <option value="6" <?php if ($row_work['duration'] == '6') echo 'selected'; ?>>Over 5 Years</option>
+                                            <option value="-1" <?php if ($row_work['duration'] == '-1') echo 'selected'; ?>>Still in Job</option>
                                         </select>
                                     </div>
                                     <div class="form-group mt-1 ">
