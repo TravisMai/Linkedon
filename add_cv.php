@@ -290,7 +290,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <option value="">-- Select --</option>
                                         <option value="High School" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'High School') {
                                             echo 'selected';
-                                        } ?>>High School </option>
+                                        } ?>>High School</option>
                                         <option value="Bachelor" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Bachelor") {
                                             echo 'selected';
                                         } ?>>Bachelor's Degree</option>
