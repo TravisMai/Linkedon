@@ -26,11 +26,7 @@
             <header>
                 <div class="cover bg-light">
                     <div class="row bg-success">
-                        <div class="container container-fluid text-center py-5">
-                            <h1 data-v-c0c0f1ee="" class="title">
-                                Step 1: Upload CV
-                            </h1>
-                        </div>
+                            <img src="images/neon_cat.webp" style="max-height: 200px; width: 100%;">
                     </div>
             </header>
             <div class="container bg-light px-3">
