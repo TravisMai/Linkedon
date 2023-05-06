@@ -36,14 +36,14 @@ ob_start();
                 $id = intval($_GET['id']);
                 require_once('database/dbconnect.php');
 
-                $sql = "SELECT `avatar`, `firstname`, `lastname`, `email`, `phone` FROM `users` WHERE id = $id";
+                $sql = "SELECT `avatar`, `firstname`, `lastname`, `email`, `phone`, `address` FROM `users` WHERE id = $id";
                 $result = $conn->query($sql);
 
                 $output = '
-                <a id = "backbtn" href="index.php?page=candidates"><button type="button" class="btn btn-dark my-2 hide-on-print"><i class="bi fa-lg bi-chevron-left"></i></button></a>
+                <button type="button" class="btn btn-dark my-2 hide-on-print" onclick = "history.back();"><i class="bi fa-lg bi-chevron-left"></i></button>
                 <h1><u class="text-warning hide-on-print">Curriculum Vitae</u></h1>        
-                        <div class="container">
-                            <div class="row justify-content-center">';
+                    <div class="container">
+                        <div class="row justify-content-center">';
                 if(mysqli_num_rows($result) > 0){
                     while ($row = $result->fetch_assoc()) {
                         $output .= '
@@ -53,28 +53,33 @@ ob_start();
                                 <div class="card-body">              
                                     <p class="card-text">Name: <strong>'.$row['firstname'].' '. $row['lastname'] .'</strong></p>
                                     <p class="card-text">Email: <strong>'. $row['email'] .'</strong><i class="bi bi-envelope m-1"></i></p>
-                                    <p class="card-text">Phone: <strong>'.'0'. $row['phone'] .'</strong><i class="bi bi-telephone m-1"></i></p>
+                                    <p class="card-text">Phone: <strong>'. $row['phone'] .'</strong><i class="bi bi-telephone m-1"></i></p>
+                                    <p class="card-text">Address: <strong>'. $row['address'] .'</strong><i class="bi bi-geo-alt m-1"></i></p>
                                 </div>
                             </div>
                         </div>';
                     }
                 }
 
+
                 $sql = "SELECT * FROM `resume` WHERE user_id = $id";
                 $result = $conn->query($sql);
-
-                if(mysqli_num_rows($result) > 0){
+                
+                if (mysqli_num_rows($result) > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $output .= '                        
+                        $salary = '$' . number_format($row['desire_salary']) . ' <i class="bi bi-cash"></i>';
+                        $position = $row['position'] . ' (' . $row['employment_type'] . ')';
+                        $output .= '
                         <div class="col-md-8 mb-2 mt-3">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Objective</h5>
-                                    <p class="card-text">'. $row['objective'] .'.</p>
+                                    <p class="card-text">' . $position . '<br><strong>Salary Expectation: </strong>' . $salary . '<br><strong>Goal: </strong>' . $row['goals'] . '.</p>
                                 </div>
                             </div>';
                     }
                 }
+                
 
                 $sql = "SELECT * FROM `education` WHERE user_id = $id";
                 $result = $conn->query($sql);
@@ -185,7 +190,7 @@ ob_start();
                                 <ul>';
                     while ($row = $result->fetch_assoc()) {
                         $output .= '
-                            <li>'. $row['firstname'].' '. $row['lastname'] .', ('. $row['relationship'] . ') <br>' . '<strong>E-mail: </strong>'. $row['email'] . '<i class="bi bi-envelope m-1"></i><br><strong>Phone: </strong>0'. $row['phone'] .'<i class="bi bi-telephone m-1"></i></li>      
+                            <li>'. $row['firstname'].' '. $row['lastname'] .', ('. $row['relationship'] . ') <br>' . '<strong>E-mail: </strong>'. $row['email'] . '<i class="bi bi-envelope m-1"></i><br><strong>Phone: </strong>'. $row['phone'] .'<i class="bi bi-telephone m-1"></i></li>      
                         ';
                     }
                     $output .= '

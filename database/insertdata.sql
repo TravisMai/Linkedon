@@ -1,51 +1,57 @@
 
 -- Insert 10 users into database
-INSERT INTO `users` (`firstname`, `lastname`, `username`, `password`, `email`, `phone`, `avatar`, `type`) 
+INSERT INTO `users` (`firstname`, `lastname`, `username`, `password`, `email`, `phone`, `address`, `avatar`, `type`) 
 VALUES 
 -- user 1
-('Kara-lynn', 'Bownas', 'kbownas0', 'd787HoJ', 'kbownas0@gmail.com', '0402849675', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Kara-lynn', 'Bownas', 'kbownas0', 'd787HoJ$', 'kbownas0@gmail.com', '0402849675', 'Sydney, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 2
-('Karoly', 'Bretelle', 'kbretelle1', 'u4QeRRmDZm', 'kbretelle1@gmail.com', '0477247106', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Karoly', 'Bretelle', 'kbretelle1', 'u4QeRRmDZm#', 'kbretelle1@gmail.com', '0477247106', 'Melbourne, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 3
-('Ingra', 'Brugger', 'ibrugger2', '6f3iWv', 'ibrugger2@gmail.com', '0559349117', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Ingra', 'Brugger', 'ibrugger2', '6f3iWv@k', 'ibrugger2@gmail.com', '0559349117', 'Brisbane, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 4
-('Michell', 'Medford', 'mmedford3', '923HIpspSW', 'mmedford3@gmail.com', '0325057104', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Michell', 'Medford', 'mmedford3', '923HIpspSW^', 'mmedford3@gmail.com', '0325057104', 'Adelaide, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 5
-('Cart', 'Stringman', 'cstringman4', 'bXrwL5u0Rx', 'cstringman4@gmail.com', '0631353477', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Cart', 'Stringman', 'cstringman4', 'bXrwL5u0Rx*', 'cstringman4@gmail.com', '0631353477', 'Perth, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 6
-('Sabine', 'Baguley', 'sbaguley5', 'MueVGBK3P1', 'sbaguley5@gmail.com', '0872532363', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Sabine', 'Baguley', 'sbaguley5', 'MueVGBK3P1%', 'sbaguley5@gmail.com', '0872532363', 'Hobart, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 7
-('Coralie', 'Carslaw', 'ccarslaw6', 'KhxDlTK', 'ccarslaw6@gmail.com', '0401625846', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1),
+('Coralie', 'Carslaw', 'ccarslaw6', 'KhxDlTK#1t', 'ccarslaw6@gmail.com', '0401625846', 'Darwin, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 8
-('Garvin', 'Galbreth', 'ggalbreth7', 'TQPVl9gHqwlC', 'ggalbreth7@gmail.com', '0867198979', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Garvin', 'Galbreth', 'ggalbreth7', 'TQPVl9gHqwlC+', 'ggalbreth7@gmail.com', '0867198979', 'Canberra, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 9
-('Cirilo', 'Nosworthy', 'cnosworthy8', 'YkQc06M', 'cnosworthy8@gmail.com', '0861791717', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 1),
+('Cirilo', 'Nosworthy', 'cnosworthy8', 'YkQc06M@p', 'cnosworthy8@gmail.com', '0861791717', 'Gold Coast, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 10
-('Gertrudis', 'Espinas', 'gespinas9', 'TYgZMwz', 'gespinas9@gmail.com', '0291168164', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 1);
+('Gertrudis', 'Espinas', 'gespinas9', 'TYgZMwz$1', 'gespinas9@gmail.com', '0291168164', 'Newcastle, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0);
+
 
 -- Insert resumes for each user
-INSERT INTO `resume` (`user_id`, `objective`)
+-- `position` varchar(255) NOT NULL,
+--    `employment_type` varchar(255) NOT NULL,
+ --   `desire_salary` int(10) NOT NULL,
+  --  `goals` text NOT NULL,
+INSERT INTO `resume` (`user_id`, `position`, `employment_type`, `desire_salary`, `goals`)
 VALUES
   -- User 1
-  (1, 'Web developer'),
+  (1, 'Web developer', 'Full-time', 100000, 'To become an expert in web development'),
   -- User 2
-  (2, 'Business Analyst'),
+  (2, 'Business Analyst', 'Full-time', 90000, 'To help companies make data-driven decisions'),
   -- User 3
-  (3, 'Accountant'),
+  (3, 'Accountant', 'Part-time', 50000, 'To gain more experience in accounting'),
   -- User 4
-  (4, 'Software Engineer'),
+  (4, 'Software Engineer', 'Full-time', 120000, 'To work on challenging projects and innovate'),
   -- User 5
-  (5, 'Associate Electrical Engineer'),
+  (5, 'Associate Electrical Engineer', 'Full-time', 80000, 'To design and implement electrical systems'),
   -- User 6
-  (6, 'Administrative Assistant'),
+  (6, 'Administrative Assistant', 'Contract', 60000, 'To provide efficient administrative support'),
   -- User 7
-  (7, 'Customer Service Representative'),
+  (7, 'Customer Service Representative', 'Full-time', 50000, 'To provide excellent service to customers'),
   -- User 8
-  (8, 'Marketing Coordinator'),
+  (8, 'Marketing Coordinator', 'Full-time', 70000, 'To develop and implement effective marketing plans'),
   -- User 9
-  (9, 'Mentor'),
+  (9, 'Mentor', 'Part-time', 30000, 'To help guide and inspire others'),
   -- User 10
-  (10, 'Content Creator');
+  (10, 'Content Creator', 'Full-time', 80000, 'To create engaging and informative content for audiences');
+
 
 -- Insert education for each user
 INSERT INTO `education` (`resume_id`, `user_id`, `school`, `degree`, `major`)
@@ -180,22 +186,22 @@ VALUES
 
 INSERT INTO `reference` (`resume_id`, `user_id`, `firstname`, `lastname`, `email`, `phone`, `relationship`)
 VALUES
-(1, 1, 'Sarah', 'Lee', 'sarahlee@email.com', '1234567890', 'Former Manager'),
+(1, 1, 'Sarah', 'Lee', 'sarahlee@email.com', '0421412421', 'Former Manager'),
 
-(1, 1, 'David', 'Kim', 'davidkim@email.com', '1234567890', 'Former Colleague'),
+(1, 1, 'David', 'Kim', 'davidkim@email.com', '0123456779', 'Former Colleague'),
 
-(2, 2, 'Mark', 'Chen', 'markchen@email.com', '1234567890', 'Former Manager'),
+(2, 2, 'Mark', 'Chen', 'markchen@email.com', '0123457789', 'Former Manager'),
 
-(2, 2, 'Emily', 'Wang', 'emilywang@email.com', '1234567890', 'Former Tutor'),
+(2, 2, 'Emily', 'Wang', 'emilywang@email.com', '0127456789', 'Former Tutor'),
 
-(3, 3, 'Amy', 'Zhang', 'amyzhang@email.com', '1234567890', 'Former Manager'),
+(3, 3, 'Amy', 'Zhang', 'amyzhang@email.com', '0123456689', 'Former Manager'),
 
-(3, 3, 'Michael', 'Li', 'michaelli@email.com', '1234567890', 'Former Colleague'),
+(3, 3, 'Michael', 'Li', 'michaelli@email.com', '0123456769', 'Former Colleague'),
 
-(4, 4, 'Jennifer', 'Kim', 'jenniferkim@email.com', '1234567890', 'Former Supervisor'),
+(4, 4, 'Jennifer', 'Kim', 'jenniferkim@email.com', '0823456789', 'Former Supervisor'),
 
-(5, 5, 'Daniel', 'Cho', 'danielcho@email.com', '1234567890', 'Former Colleague'),
+(5, 5, 'Daniel', 'Cho', 'danielcho@email.com', '0825456789', 'Former Colleague'),
 
-(6, 6, 'Andrew', 'Kwon', 'andrewkwon@email.com', '1234567890', 'Former Manager'),
+(6, 6, 'Andrew', 'Kwon', 'andrewkwon@email.com', '0923456789', 'Former Manager'),
 
-(8, 8, 'Jessica', 'Park', 'jessicapark@email.com', '1234567890', 'Former Colleague');
+(8, 8, 'Jessica', 'Park', 'jessicapark@email.com', '023456789', 'Former Colleague');

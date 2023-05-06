@@ -24,6 +24,7 @@ else {
         }
         select {
             max-width: 200px;
+            min-width: 200px;
         }
         .card {
             box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
@@ -176,6 +177,7 @@ else {
 
             document.getElementById('filterObjective').disabled = true;
             document.getElementById('filterMajor').disabled = true;
+            document.getElementById('filterSkill').disabled = true;
             // clear input field
             var inputField = document.getElementById('searchInput');
             inputField.value = '';
@@ -226,11 +228,13 @@ else {
         function filterCandidates() {
             var objective = document.getElementById("filterObjective").value;
             var major = document.getElementById("filterMajor").value;
+            var skill = document.getElementById("filterSkill").value;
+
             var candidate_search = document.getElementById("candidate-search-result");
             var candidate_all = document.getElementById("candidate-all");
             var showBtn = document.getElementById("showBtn");
 
-            if(objective == '0' && major == '0') {
+            if(objective == '0' && major == '0' && skill == '0') {
                 showBtn.disabled = true;
                 candidate_all.style.display = 'block';
                 candidate_search.style.display = 'none';
@@ -248,7 +252,8 @@ else {
                         candidate_search.innerHTML=this.responseText;
                     }
                 };
-                xmlhttp.open("GET", "action/filter_candidate.php?objective=" + objective + "&major=" + major, true);
+                skill = encodeURIComponent(skill);
+                xmlhttp.open("GET", "action/filter_candidate.php?objective=" + objective + "&major=" + major + "&skill=" + skill, true);
                 xmlhttp.send();
             }
         }
@@ -258,9 +263,12 @@ else {
             var candidate_search = document.getElementById("candidate-search-result");
             var candidate_all = document.getElementById("candidate-all");
             var showBtn = document.getElementById("showBtn");
+
             var filterBtn = document.getElementById("filterBtn");
+
             var objectiveSlct = document.getElementById("filterObjective");
             var majorSlct = document.getElementById("filterMajor");
+            var skillSlct = document.getElementById("filterSkill");
 
             if(candidate_search.style.display === 'none') {         
                 candidate_search.style.display = 'block';
@@ -269,11 +277,13 @@ else {
             else {
                 document.getElementById('filterObjective').disabled = false;
                 document.getElementById('filterMajor').disabled = false;
+                document.getElementById('filterSkill').disabled = false;
                 filterBtn.disabled = false;
                 showBtn.disabled = true;
 
                 objectiveSlct.selectedIndex = 0;
                 majorSlct.selectedIndex = 0;
+                skillSlct.selectedIndex = 0;
 
                 candidate_search.style.display = 'none';
                 candidate_all.style.display = 'block';
@@ -310,13 +320,13 @@ else {
                             <?php
                                 include "database/dbconnect.php";
 
-                                $sql = "SELECT DISTINCT `objective` FROM `resume`";
+                                $sql = "SELECT DISTINCT `position` FROM `resume`";
 
                                 $result = $conn->query($sql);
 
                                 if(mysqli_num_rows($result) > 0){
                                     while($row = $result->fetch_assoc()) {
-                                        echo '<option value="'. $row['objective'] .'">'. $row['objective'] .'</option>';
+                                        echo '<option value="'. $row['position'] .'">'. $row['position'] .'</option>';
                                     }
                                 }
                             ?>
@@ -335,6 +345,24 @@ else {
                                 if(mysqli_num_rows($result) > 0){
                                     while($row = $result->fetch_assoc()) {
                                         echo '<option value="'. $row['major'] .'">'. $row['major'] .'</option>';
+                                    }
+                                }
+                            ?>
+                        </select>             
+                    </div>        
+                    <div class = "d-flex pt-1">
+                        <select class="form-select w-100" aria-label="Sort by Skill" id = "filterSkill" data-live-search="true">
+                            <option class="select-label" value="0" selected>Skill</option>
+                            <?php
+                                include "database/dbconnect.php";
+
+                                $sql = "SELECT DISTINCT `skill` FROM `skill`";
+
+                                $result = $conn->query($sql);
+
+                                if(mysqli_num_rows($result) > 0){
+                                    while($row = $result->fetch_assoc()) {
+                                        echo '<option value="'. $row['skill'] .'">'. $row['skill'] .'</option>';
                                     }
                                 }
                             ?>
@@ -380,7 +408,7 @@ else {
                                                 users.firstname, 
                                                 users.lastname, 
                                                 users.avatar, 
-                                                resume.objective, 
+                                                resume.position, 
                                                 education.major 
                                                 FROM users
                                                 INNER JOIN resume ON users.id = resume.user_id
@@ -412,7 +440,7 @@ else {
                                                             </div>
                                                         </td>
                                                         <td class="candidate-list-objective mb-0">
-                                                            <span>'. $row['objective'] .'</span>
+                                                            <span>'. $row['position'] .'</span>
                                                         </td>
                                                         <td id = "viewCVBtn">
                                                             <a href="index.php?page=candidates&id='. $row['id'] . '"><button class = "btn btn-outline-secondary btn-sm">View CV</button></a>
