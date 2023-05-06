@@ -178,6 +178,7 @@ CREATE TABLE IF NOT EXISTS `working_history` (
     `user_id` int(50) NOT NULL,
     `position` varchar(255) NOT NULL,
     `company_name` varchar(255) NOT NULL,
+    `work_type` varchar(255) NOT NULL,
     `duration` VARCHAR(255) NOT NULL,
     `tasks` text NOT NULL,  
     PRIMARY KEY (id),
