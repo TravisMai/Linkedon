@@ -1,9 +1,9 @@
 <footer class="pt-4 pb-4 text-center bg-light">
     <div class="container">
         <div class="my-3">
-            <div class="h4">Mai Huu Nghia</div>
-            <p>Undergraduate Student</p>
-            <div class="social-nav">
+            <div class="h4">LinkedOn</div>
+            <p>Web Programming Assignment</p>
+            <!-- <div class="social-nav">
                 <nav role="navigation">
                     <ul class="nav justify-content-center">
                         <li class="nav-item"><a class="nav-link" href="https://www.facebook.com/HuuNghiaTheGreat/"
@@ -19,7 +19,7 @@
                                     class="fab fa-github"></i><span class="menu-title sr-only">Github</span></a></li>
                     </ul>
                 </nav>
-            </div>
+            </div> -->
         </div>
     </div>
 </footer>

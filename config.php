@@ -29,8 +29,8 @@ $conn->select_db("co3049");
 
 // Create products table
 // cái type ở đây là dùng để phân ra user là jobseeker hay là nhà tuyển dụng ấy
-// nên set 1 là jobseeker
-// set 2 là nhà tuyển dụng
+// nên set 0 là jobseeker
+// set 1 là nhà tuyển dụng
 // với ai làm khúc register thì xem cách upload hình như thế nào nhá :v rồi trữ cái dường dẫn đó vào database
 // file hình thì đc trữ trong folder uploads r trích ra khi xài
 
@@ -144,14 +144,11 @@ if ($conn->query($sql) === TRUE) {
 // skill PHP kinh nghiệm 100 năm 2 tháng
 
 $sql = "
-CREATE TABLE IF NOT EXISTS experience (
+CREATE TABLE IF NOT EXISTS skill (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
     `resume_id` int(50) NOT NULL,
     `user_id` int(50) NOT NULL,
-    `experience` VARCHAR(255) NOT NULL,
-    `duration_years` INT(11) NOT NULL,
-    `duration_months` INT(11) NOT NULL,
-    `description` TEXT,
+    `skill` VARCHAR(255) NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (`resume_id`) REFERENCES `resume`(`id`) ON DELETE CASCADE,
     FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
@@ -175,8 +172,7 @@ CREATE TABLE IF NOT EXISTS `working_history` (
     `user_id` int(50) NOT NULL,
     `position` varchar(255) NOT NULL,
     `company_name` varchar(255) NOT NULL,
-    `start_date` date NOT NULL,
-    `end_date` date DEFAULT NULL,
+    `duration` VARCHAR(255) NOT NULL,
     `tasks` text NOT NULL,  
     PRIMARY KEY (id),
     FOREIGN KEY (`resume_id`) REFERENCES `resume`(`id`) ON DELETE CASCADE,

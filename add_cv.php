@@ -26,11 +26,7 @@
             <header>
                 <div class="cover bg-light">
                     <div class="row bg-success">
-                        <div class="container container-fluid text-center py-5">
-                            <h1 data-v-c0c0f1ee="" class="title">
-                                Step 1: Upload CV
-                            </h1>
-                        </div>
+                            <img src="images/neon_cat.webp" style="max-height: 200px; width: 100%;">
                     </div>
             </header>
             <div class="container bg-light px-3">
@@ -86,16 +82,32 @@
                                 <p class="card-text h4">Start: Personal Information</p>
                                 <p class="text" style="color: blue">First, we need to confirm your personal information
                                 </p>
+                                <?php 
+                                    require_once('./config.php');
+                                    $servername = DB_SERVER;
+                                    $username = DB_USERNAME;
+                                    $password = DB_PASSWORD;
+                                    $dbname = DB_NAME;
+                                    $conn = new mysqli($servername, $username, $password, $dbname);
+                                    
+                                    // Get the user's type by querying the database with the user_id stored in the session
+                                    $user_id = $_SESSION["user_id"];
+                                    $stmt = $conn->prepare("SELECT * FROM users WHERE `id` = ?");
+                                    $stmt->bind_param("i", $user_id);
+                                    $stmt->execute();
+                                    $result = $stmt->get_result();
+                                    $row = $result->fetch_assoc();      
+                                ?>
                                 <label for="first-name" class="mt-2">First Name</label>
-                                <input type="text" class="form-control" name="first-name" id="first-name" disabled value="lấy bên login">
+                                <input type="text" class="form-control" name="first-name" id="first-name" disabled value="<?php echo $row['firstname']; ?>">
                                 <label for="last-name" class="mt-2">Last Name</label>
-                                <input type="text" class="form-control" name="last-name" placeholder="Tell us the field you want to apply" id="last-name" disabled value="lấy bên login">
+                                <input type="text" class="form-control" name="last-name" placeholder="Tell us the field you want to apply" id="last-name" disabled value="<?php echo $row['lastname']; ?>">
                                 <label for="email" class="mt-2">Email</label>
-                                <input type="text" id="email" name="email" class="form-control" disabled value="lấy bên Phú@gmail.com">
+                                <input type="text" id="email" name="email" class="form-control" disabled value="<?php echo $row['email']; ?>">
                                 <label for="phone-number" class="mt-2">Phone Number:</label>
-                                <input type="text" id="phone-number" name="phone-number" class="form-control" disabled value="093423233232">
+                                <input type="text" id="phone-number" name="phone-number" class="form-control" disabled value="<?php echo $row['phone']; ?>">
                                 <label for="address" class="mt-2">Address</label>
-                                <input type="text" id="address" name="address" class="form-control" disabled value="xx/yy abc, P.z, Q.t">
+                                <input type="text" id="address" name="address" class="form-control" disabled value="<?php echo $row['address']; ?>">
                                 <label for="additional-info" class="mt-2">Additional Information:</label>
                                 <div class="form-group mt-2">
                                     <label for="habit">Habit</label>

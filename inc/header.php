@@ -12,6 +12,6 @@
   <link href="./css/bootstrap-icons/bootstrap-icons.css?ver=1.2.0" rel="stylesheet">
   <link href="./css/bootstrap.min.css?ver=1.2.0" rel="stylesheet">
   <link href="./css/main.css?ver=1.2.0" rel="stylesheet">
-  <title>EmChes | 2052612</title>
+  <title>LinkedOn</title>
 </head>
 <?php require_once('initialize.php') ?>
