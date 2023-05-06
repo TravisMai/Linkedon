@@ -23,8 +23,8 @@
     <?php require_once('inc/topBarNav.php');
     if (!isset($_SESSION["user_id"])) {
         header('Location: index.php?page=home');
-    } 
-    if ($_SESSION['first-name'] == "" || $_SESSION['last-name'] == ""){
+    }
+    if ($_SESSION['first-name'] == "" || $_SESSION['last-name'] == "") {
         $_SESSION['label'] = "Error";
         $_SESSION['message'] = "Please Fulfill your information";
         header('Location: index.php?page=profile');
@@ -32,7 +32,7 @@
 
     ?>
     <div class="page-content bg-light">
-        <div id="content ">
+        <div id="content">
             <header>
                 <div class="cover bg-light">
                     <div class="row bg-success">
@@ -148,8 +148,7 @@
                                 <div class="form-group mt-2">
                                     <label for="habit">Habit</label>
                                     <input type="text" class="form-control" placeholder="Something about your habit"
-                                        id="habit" name="habit"
-                                        value="<?php if (isset($row_additional['habits'])) {
+                                        id="habit" name="habit" value="<?php if (isset($row_additional['habits'])) {
                                             echo $row_additional['habits'];
                                         } else {
                                             echo "";
@@ -158,8 +157,7 @@
                                 <div class="form-group mt-2">
                                     <label for="hobbies">Hobbies</label>
                                     <input type="text" class="form-control" placeholder="Something about your hobbies"
-                                        id="hobbies" name="hobbies"
-                                        value="<?php if (isset($row_additional['hobbies'])) {
+                                        id="hobbies" name="hobbies" value="<?php if (isset($row_additional['hobbies'])) {
                                             echo $row_additional['hobbies'];
                                         } else {
                                             echo "";
@@ -168,8 +166,7 @@
                                 <div class="form-group mt-2">
                                     <label for="personal-information">Personal Information</label>
                                     <textarea class="form-control" id="personal-information" name="personal-information"
-                                        rows="3"
-                                        placeholder="Share us something about yourself: 
+                                        rows="3" placeholder="Share us something about yourself: 
 Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_additional['personal_info'])) {
     echo $row_additional['personal_info'];
 } else {
@@ -182,33 +179,27 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         onclick="changeTab('objective')">Confirm</button>
                                 </div>
                             </div>
-
                             <!-- Job Objective Section -->
                             <div class="tab-pane" id="objective-section">
                                 <input type="hidden" id="activeTabIndex" value="1">
                                 <h4>Step 1/6: Job Objective</h4>
-                                <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="job-title">Job Title</label>
                                     <input placeholder="Job Title" type="text" class="form-control" id="job-title"
-                                        name="job-title"
-                                        value="<?php if (isset($row_obj['title'])) {
+                                        name="job-title" value="<?php if (isset($row_obj['title'])) {
                                             echo $row_obj['title'];
                                         } else {
                                             echo "";
-                                        } ?>"
-                                        required>
+                                        } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="position">Postion</label>
                                     <input placeholder="Tell us the position you want to apply: fresher, junior, etc.."
-                                        type="text" class="form-control"
-                                        value="<?php if (isset($row_obj['position'])) {
+                                        type="text" class="form-control" value="<?php if (isset($row_obj['position'])) {
                                             echo $row_obj['position'];
                                         } else {
                                             echo "";
-                                        } ?>"
-                                        id="position" name="position" required>
+                                        } ?>" id="position" name="position" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="employment-type">Type of Employment</label>
@@ -236,8 +227,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <div class="input-group">
                                         <label class="input-group-text" for="salary-range">Apprx</label>
                                         <input placeholder="Ex: 20." type="number" min="1" step="1" class="form-control"
-                                            required id="salary-range" name="salary-range"
-                                            value="<?php if (isset($row_obj['desire_salary'])) {
+                                            required id="salary-range" name="salary-range" value="<?php if (isset($row_obj['desire_salary'])) {
                                                 echo $row_obj['desire_salary'];
                                             } else {
                                                 echo "";
@@ -261,7 +251,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <button type="button" class="btn btn-primary ml-auto" id="next-to-education"
                                         onclick="changeTab('education')">Next</button>
                                 </div>
-                                <!-- </form> -->
                             </div>
 
 
@@ -280,24 +269,20 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 <div class="form-group mt-1">
                                     <label for="school-name">School/University name</label>
                                     <input type="text" placeholder="Your University/ School" class="form-control"
-                                        id="school-name" name="school-name"
-                                        value="<?php if (isset($row_edu['school'])) {
+                                        id="school-name" name="school-name" value="<?php if (isset($row_edu['school'])) {
                                             echo $row_edu['school'];
                                         } else {
                                             echo "";
-                                        } ?>"
-                                        required>
+                                        } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="degree-name">Major/Course name</label>
                                     <input type="text" placeholder="Your majority/ course name" class="form-control"
-                                        id="degree-name" name="degree-name"
-                                        value="<?php if (isset($row_edu['major'])) {
+                                        id="degree-name" name="degree-name" value="<?php if (isset($row_edu['major'])) {
                                             echo $row_edu['major'];
                                         } else {
                                             echo "";
-                                        } ?>"
-                                        required>
+                                        } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="education-level">Education level</label>
@@ -320,18 +305,16 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         </option>
                                         <option value="Post Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Post Graduate') {
                                             echo 'selected';
-                                        } ?>>
-                                            Post-Graduate Degree</option>
+                                        } ?>>Post-Graduate Degree</option>
                                         <option value="Ph.D" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Ph.D') {
                                             echo 'selected';
-                                        } ?>>Doctor of
-                                            Philosophy</option>
+                                        } ?>>Doctor of Philosophy</option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="graduation-year">Graduation Year</label>
                                     <select class="form-control" id="graduation-year" name="graduation-year">
-                                        <option value="">-- Select Year --</option>
+                                    <option value="">-- Select --</option>
                                         <option value="1234">High School</option>
                                         <!-- Generate options for years from 1990 to 2023 -->
                                         <?php
@@ -350,11 +333,12 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <div class="input-group">
                                         <label class="input-group-text" for="gpa-scale"> </label>
                                         <input type="number" step="0.01" max="10" required class="form-control" id="gpa"
-                                            placeholder="7.0" name="gpa">
-
+                                            placeholder="7.0" name="gpa"
+                                            value = "<?php echo isset($row_edu['gpa'])?$parts = explode('/', $row_edu['gpa'])[0]:'';?>"
+                                        >
                                         <select class="form-control" id="gpa-scale" name="gpa-scale">
-                                            <option value="10">/10</option>
-                                            <option value="4">/4</option>
+                                            <option value="10" <?php if ((isset($row_edu['gpa'])) && explode('/', $row_edu['gpa'])[1] == 10){echo 'selected';} ?>>/10</option>
+                                            <option value="4" <?php if ((isset($row_edu['gpa'])) && explode('/', $row_edu['gpa'])[1] == 4){echo 'selected';} ?> >/4</option>
                                         </select>
                                         <div>
                                         </div>
@@ -376,14 +360,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 <input type="hidden" id="activeTabIndex" value="3">
                                 <h4>Step 3/6: Professional Experience</h4>
                                 <h5>First Skill</h5>
-                                <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="job-skills">Skills Utilized</label>
                                     <input type="text" class="form-control" id="job-skills"
-                                        placeholder="What you obtain after working at this position" name="job-skills[]"
-                                        required>
+                                        placeholder="What skill that you obtained" name="job-skills[]" required>
                                 </div>
-
                                 <button type="button" class="btn btn-success my-3" id="add-experience">Add
                                     New skill</button>
                                 <!-- Add a Next button to go to the next section -->
@@ -393,7 +374,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <button type="button" class="btn btn-primary ml-auto" id="next-to-history"
                                         onclick="changeTab('history')">Next</button>
                                 </div>
-                                <!-- </form> -->
                             </div>
 
                             <?php
@@ -412,24 +392,20 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <div class="form-group mt-1">
                                         <label for="job-name">Job Position</label>
                                         <input type="text" class="form-control" id="job-name" name="job-name"
-                                            placeholder="Job Name"
-                                            value="<?php if (isset($row_work['position'])) {
+                                            placeholder="Job Name" value="<?php if (isset($row_work['position'])) {
                                                 echo $row_work['position'];
                                             } else {
                                                 echo "";
-                                            } ?>"
-                                            required>
+                                            } ?>" required>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="company-name">Company Name</label>
                                         <input type="text" class="form-control" placeholder="Name of the Company"
-                                            id="company-name" name="company-name"
-                                            value="<?php if (isset($row_work['company_name'])) {
+                                            id="company-name" name="company-name" value="<?php if (isset($row_work['company_name'])) {
                                                 echo $row_work['company_name'];
                                             } else {
                                                 echo "";
-                                            } ?>"
-                                            required>
+                                            } ?>" required>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="employment-degree">Type of Employment</label>
@@ -487,8 +463,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
 
                                         <textarea class="form-control" id="working-description"
                                             placeholder="Tell us something about that working experience such as which tasks you have done, ..."
-                                            name="working-description" rows="2"
-                                            required><?php if (isset($row_work['tasks'])) {
+                                            name="working-description" rows="2" required><?php if (isset($row_work['tasks'])) {
                                                 echo $row_work['tasks'];
                                             } else {
                                                 echo "";
@@ -510,9 +485,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                             <div class="tab-pane" id="certification-section" style="display: none;">
                                 <input type="hidden" id="activeTabIndex" value="5">
                                 <h4>Step 5/6: Certifications</h4>
-
                                 <h5>First Certification</h5>
-                                <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="certification-name">Certification Name</label>
                                     <input type="text" class="form-control" id="certification-name"
@@ -521,7 +494,8 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 <div class="form-group mt-1">
                                     <label for="certification-organization">Organization</label>
                                     <textarea class="form-control" id="certification-organization"
-                                        name="certification-organization[]" placeholder = "Organization provider"rows="1" required></textarea>
+                                        name="certification-organization[]" placeholder="Organization provider" rows="1"
+                                        required></textarea>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="certification-date">Obtained date</label>
@@ -532,13 +506,8 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <label for="expire-date">Expired date</label>
                                     <input type="date" class="form-control" id="expire-date" name="expire-date[]">
                                 </div>
-
-                                <!-- </form> -->
-
-
                                 <button type="button" class="btn btn-primary mt-3" id="add-certification">Add
                                     More</button>
-
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-history"
                                         onclick="changeTab('history')">Back</button>
@@ -546,8 +515,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         onclick="changeTab('reference')">Next</button>
                                 </div>
                             </div>
-
-
 
                             <!-- Refernce -->
                             <div class="tab-pane" id="reference-section" style="display: none;">
@@ -562,17 +529,18 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 <div class="form-group mt-1">
                                     <label for="reference-email">Email</label>
                                     <input type="email" class="form-control" id="reference-email"
-                                        name="reference-email[]"  placeholder="Email"required>
+                                        name="reference-email[]" placeholder="Email" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="reference-phone">Phone</label>
                                     <input type="text" class="form-control" id="reference-phone"
-                                        name="reference-phone[]"  placeholder="Phone" required>
+                                        name="reference-phone[]" placeholder="Phone" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="reference-relationship">Relationship</label>
                                     <input type="text" class="form-control" id="reference-relationship"
-                                    placeholder="Ex: Lecturer, Mentor, etc" name="reference-relationship[]" required>
+                                        placeholder="Ex: Lecturer, Mentor, etc" name="reference-relationship[]"
+                                        required>
                                 </div>
                                 <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
 
@@ -603,122 +571,290 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
     <script src="./scripts/aos.min.js?ver=1.2.0"></script>
     <script src="./scripts/main.js?ver=1.2.0"></script>
 
+    <div>
+        <!-- required word handle -->
+        <script>
+            // Get all input elements with the 'required' attribute
+            const requiredInputs = document.querySelectorAll('[required]');
 
-    <!-- required word handle -->
-    <script>
-        // Get all input elements with the 'required' attribute
-        const requiredInputs = document.querySelectorAll('[required]');
+            // Loop through each required input element and add an event listener
+            requiredInputs.forEach(input => {
+                const requiredLabel = document.createElement('span');
+                requiredLabel.textContent = ' *';
+                requiredLabel.style.color = 'red';
+                requiredLabel.style.verticalAlign = 'middle';
 
-        // Loop through each required input element and add an event listener
-        requiredInputs.forEach(input => {
-            const requiredLabel = document.createElement('span');
-            requiredLabel.textContent = ' *';
-            requiredLabel.style.color = 'red';
-            requiredLabel.style.verticalAlign = 'middle';
-
-            // Check if the input already has a value when the page loads
-            if (input.value) {
-                requiredLabel.textContent = '';
-            }
-
-            // Update the text of the corresponding span element when the input value changes
-            input.addEventListener('input', () => {
+                // Check if the input already has a value when the page loads
                 if (input.value) {
                     requiredLabel.textContent = '';
+                }
+
+                // Update the text of the corresponding span element when the input value changes
+                input.addEventListener('input', () => {
+                    if (input.value) {
+                        requiredLabel.textContent = '';
+                    } else {
+                        requiredLabel.textContent = ' *(required)';
+                    }
+                });
+
+                // Insert the span element after the label element
+                const label = input.parentNode.querySelector('label');
+                label.insertBefore(requiredLabel, label.lastChild.nextSibling);
+            });
+        </script>
+
+
+        <!-- Year/Salary handle -->
+        <script>
+            const educationLevel = document.getElementById('education-level');
+            const graduationYearSelect = document.getElementById('graduation-year');
+
+            // Disable the Graduation Year select when the Education Level is High School
+            educationLevel.addEventListener('change', function () {
+                if (educationLevel.value === 'high-school') {
+                    graduationYearSelect.value = '1234';
+                    graduationYearSelect.disabled = true;
                 } else {
-                    requiredLabel.textContent = ' *(required)';
+                    graduationYearSelect.disabled = false;
+                }
+            });
+            const salaryRangeInput = document.getElementById('salary-range');
+
+            salaryRangeInput.addEventListener('input', function () {
+                const cleanedValue = salaryRangeInput.value.replace(/[^0-9]/g, '');
+                salaryRangeInput.value = cleanedValue;
+            });
+        </script>
+
+        <!-- GPA handle -->
+        <script>
+            const gpaInput = document.getElementById('gpa');
+
+            let gpaScaleSelect = document.querySelector('#gpa-scale');
+
+            gpaScaleSelect.addEventListener('change', function () {
+                let gpaScale = this.value;
+
+                gpaInput.setAttribute('max', gpaScale);
+            });
+
+
+            // Set initial max value based on the selected scale
+            const maxGpa = gpaScaleSelect.value;
+            gpaInput.setAttribute('max', maxGpa);
+
+            // Update max value when the selected scale changes
+            gpaScaleSelect.addEventListener('change', function () {
+                const newMaxGpa = gpaScaleSelect.value;
+                gpaInput.setAttribute('max', newMaxGpa);
+            });
+
+            // Listen for input events on the GPA input element
+            gpaInput.addEventListener('input', function () {
+                const enteredGpa = parseFloat(gpaInput.value);
+                const maxGpa = parseFloat(gpaInput.getAttribute('max'));
+
+                // If the entered GPA is greater than the max value, set the input value to the max value
+                if (enteredGpa > maxGpa) {
+                    gpaInput.value = maxGpa;
+                }
+            });
+            gpaInput.addEventListener('input', function () {
+                // Remove all non-numeric and non-decimal characters
+                let cleanedValue = gpaInput.value;
+
+                // Limit the input length to 4 characters
+                if (cleanedValue.length > 4) {
+                    cleanedValue = cleanedValue.slice(0, 4);
+                    // Update the input value
+                    gpaInput.value = cleanedValue;
+                }
+
+
+            });
+        </script>
+
+        <!-- validation handle -->
+        <script>
+            // Enable the next button only when all required fields have been filled
+
+            function validationTab(tab) {
+
+
+                let activeTabIndex = tabIndex[tab];
+                // Get the index of the active tab
+
+                let nextButton = document.getElementById(`next-to-${Object.entries(tabIndex)[activeTabIndex[0] + 1][0]}`);
+                // Get all required inputs in the active tab
+                let requiredInputs = document.querySelectorAll(`#${Object.entries(tabIndex)[activeTabIndex[0]][0]}-section [required]`);
+
+                let buttons = document.querySelectorAll("#add-reference, #add-experience, #add-certification");
+                // Add event listener to each button
+                buttons.forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        // Update required inputs
+                        requiredInputs.forEach(function (input) {
+                            input.removeEventListener("keyup", onInputEvent);
+                        });
+                        requiredInputs = document.querySelectorAll(`#${Object.entries(tabIndex)[activeTabIndex[0]][0]}-section [required]`);
+                        attachEventListeners("keyup");
+                        inputValidation(nextButton, tab, tabIndex);
+                    });
+                });
+                // Disable the next button initially
+                if (!tabIndex[tab][1]) {
+                    nextButton.disabled = true;
+                } else {
+                    nextButton.disabled = false;
+                }
+                function inputValidation(nextButton, tab, tabIndex) {
+                    if (checkRequiredInputs()) {
+                        nextButton.disabled = false;
+                        document.getElementById(tab + "-tab").disabled = false;
+                        tabIndex[tab][1] = 1;
+                    } else {
+                        nextButton.disabled = true;
+                    }
+                }
+
+                function onInputEvent() {
+                    inputValidation(nextButton, tab, tabIndex);
+                }
+
+                function attachEventListeners(eventType) {
+                    requiredInputs.forEach(function (input) {
+                        input.addEventListener(eventType, onInputEvent);
+                    });
+                }
+
+
+                attachEventListeners("mousemove");
+                attachEventListeners("keyup");
+
+                // Check if all required inputs in the active tab are filled
+                function checkRequiredInputs() {
+                    let allFilled = true;
+                    requiredInputs = document.querySelectorAll(`#${Object.entries(tabIndex)[activeTabIndex[0]][0]}-section [required]`);
+                    requiredInputs.forEach(function (input) {
+                        if (input.value === "") {
+                            allFilled = false;
+                        }
+                    });
+                    return allFilled;
+                }
+                // Get all tab content elements 
+            }
+        </script>
+
+        <!-- submit handle -->
+        <script>
+            const form = document.getElementById('cv-form');
+
+            form.addEventListener('keydown', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    changeTab('next-tab');
+                }
+            });
+        </script>
+
+        <script>
+            // Get the activeTabIndex value
+            const activeTabIndexInput = document.getElementById("activeTabIndex");
+            let activeTabIndex = parseInt(activeTabIndexInput.value);
+
+            // Function to change the active tab
+            function changeTab(tab) {
+                // document.getElementById(tab + "-tab").disabled = false;
+                validationTab(tab);
+                var tabs = document.getElementsByClassName("tab-pane");
+                let tabButton = document.getElementById(`${tab}-tab`);
+                // Loop through each tab content element and hide them
+                for (var i = 0; i < tabs.length; i++) {
+                    tabs[i].style.display = "none";
+                }
+                activeTabIndex = tabIndex[tab][0];
+                activeTabIndexInput.value = activeTabIndex;
+
+                // Show the selected tab content element
+                document.getElementById(tab + "-section").style.display = "block";
+
+                // Remove the 'active' class from all tab links
+                var links = document.getElementsByClassName("nav-link");
+                for (var i = 0; i < links.length; i++) {
+                    links[i].classList.remove("active");
+                    document.querySelector('.active').style.backgroundColor = "transparent"
+                }
+
+                // Add the 'active' class to the selected tab link
+
+                document.getElementById(tab + "-tab").classList.add('active');
+
+                document.querySelector('.active').style.backgroundColor = "lightblue"
+                const scrolling = document.getElementById('card-cv');
+
+                scrolling.scrollIntoView();
+
+            }
+
+
+            // Function to navigate to the next tab
+            function nextTab() {
+                const currentTab = Object.keys(tabIndex).find(key => tabIndex[key][0] === activeTabIndex);
+                const nextTab = Object.keys(tabIndex).find(key => (tabIndex[key][0]) === tabIndex[currentTab][0] + 1);
+
+                if (nextTab) {
+                    changeTab(nextTab);
+                } else {
+                    // Submit the form if on the last tab
+                    if (checkRequiredInputs()) {
+                        document.getElementById("cv-form").submit();
+                    }
+                }
+            }
+
+
+            // Handle keydown event for Enter key
+            document.addEventListener("keydown", function (event) {
+                const activeTabIndexInput = document.getElementById("activeTabIndex");
+                let activeTabIndex = parseInt(activeTabIndexInput.value);
+                if (event.key === "Enter") {
+                    event.preventDefault(); // Prevent form submission
+                    // Check if currently on the last tab
+                    if (activeTabIndex === tabIndex["end"][0]) {
+                        // Submit the form
+                        if (checkRequiredInputs()) {
+                            document.getElementById("cv-form").submit();
+                        }
+                    } else {
+                        // Navigate to the next tab
+                        let next_but = document.getElementById(`next-to-${Object.entries(tabIndex)[activeTabIndex + 1][0]}`);
+                        if (next_but.disabled === false) {
+                            nextTab();
+                        }
+                    }
                 }
             });
 
-            // Insert the span element after the label element
-            const label = input.parentNode.querySelector('label');
-            label.insertBefore(requiredLabel, label.lastChild.nextSibling);
-        });
-    </script>
+            // Initialize tab navigation
+            window.addEventListener("DOMContentLoaded", function () {
+                // Call the changeTab() function to set the initial tab
+                const initialTab = Object.keys(tabIndex)[0];
+                changeTab(initialTab);
+            });
+        </script>
 
+        <!-- add many experience -->
 
-    <!-- Year/Salary handle -->
-    <script>
-        const educationLevel = document.getElementById('education-level');
-        const graduationYearSelect = document.getElementById('graduation-year');
-
-        // Disable the Graduation Year select when the Education Level is High School
-        educationLevel.addEventListener('change', function () {
-            if (educationLevel.value === 'high-school') {
-                graduationYearSelect.value = '1234';
-                graduationYearSelect.disabled = true;
-            } else {
-                graduationYearSelect.disabled = false;
-            }
-        });
-        const salaryRangeInput = document.getElementById('salary-range');
-
-        salaryRangeInput.addEventListener('input', function () {
-            const cleanedValue = salaryRangeInput.value.replace(/[^0-9]/g, '');
-            salaryRangeInput.value = cleanedValue;
-        });
-    </script>
-
-    <!-- GPA handle -->
-    <script>
-        const gpaInput = document.getElementById('gpa');
-
-        let gpaScaleSelect = document.querySelector('#gpa-scale');
-
-        gpaScaleSelect.addEventListener('change', function () {
-            let gpaScale = this.value;
-
-            gpaInput.setAttribute('max', gpaScale);
-        });
-
-
-
-
-        // Set initial max value based on the selected scale
-        const maxGpa = gpaScaleSelect.value;
-        gpaInput.setAttribute('max', maxGpa);
-
-        // Update max value when the selected scale changes
-        gpaScaleSelect.addEventListener('change', function () {
-            const newMaxGpa = gpaScaleSelect.value;
-            gpaInput.setAttribute('max', newMaxGpa);
-        });
-
-        // Listen for input events on the GPA input element
-        gpaInput.addEventListener('input', function () {
-            const enteredGpa = parseFloat(gpaInput.value);
-            const maxGpa = parseFloat(gpaInput.getAttribute('max'));
-
-            // If the entered GPA is greater than the max value, set the input value to the max value
-            if (enteredGpa > maxGpa) {
-                gpaInput.value = maxGpa;
-            }
-        });
-        gpaInput.addEventListener('input', function () {
-            // Remove all non-numeric and non-decimal characters
-            let cleanedValue = gpaInput.value;
-
-            // Limit the input length to 4 characters
-            if (cleanedValue.length > 4) {
-                cleanedValue = cleanedValue.slice(0, 4);
-                // Update the input value
-                gpaInput.value = cleanedValue;
-            }
-
-
-        });
-    </script>
-
-    <!-- add many experience -->
-
-    <script>
-        function addExperienceForm() {
-            let experienceCount = 1;
-            document.querySelector('#add-experience').addEventListener('click', function () {
-                // Create new form elements
-                let newForm = document.createElement('div');
-                newForm.classList.add('experience-forms');
-                newForm.innerHTML = `
+        <script>
+            function addExperienceForm() {
+                let experienceCount = 1;
+                document.querySelector('#add-experience').addEventListener('click', function () {
+                    // Create new form elements
+                    let newForm = document.createElement('div');
+                    newForm.classList.add('experience-forms');
+                    newForm.innerHTML = `
             <h5 class="mt-3">Another Skill </h5>
                 <div class="form-group">
                     <label for="job-skills">Skills Utilized</label>
@@ -728,37 +864,37 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                 </div>
             <button type="button" class="btn btn-danger mt-3 remove-experience-form">Remove Skill</button>
         `;
-                // Append the new form elements to the page
-                this.parentNode.insertBefore(newForm, this);
-                // Increment the experience count
-                experienceCount++;
-                // Add event listener to the new "Remove Experience" button
-                newForm.querySelector('.remove-experience-form').addEventListener('click', function () {
-                    if (confirm('Are you sure you want to delete this skill?')) {
-                        // Remove the corresponding experience form
-                        this.parentNode.remove();
-                        // Decrement the experience count
-                        experienceCount--;
-                        // Update the text of the p element
-                    }
+                    // Append the new form elements to the page
+                    this.parentNode.insertBefore(newForm, this);
+                    // Increment the experience count
+                    experienceCount++;
+                    // Add event listener to the new "Remove Experience" button
+                    newForm.querySelector('.remove-experience-form').addEventListener('click', function () {
+                        if (confirm('Are you sure you want to delete this skill?')) {
+                            // Remove the corresponding experience form
+                            this.parentNode.remove();
+                            // Decrement the experience count
+                            experienceCount--;
+                            // Update the text of the p element
+                        }
+                    });
                 });
-            });
-        }
+            }
 
-        addExperienceForm();
-    </script>
+            addExperienceForm();
+        </script>
 
 
-    <!-- Add many certification -->
+        <!-- Add many certification -->
 
-    <script>
-        function addCertificationForm() {
-            let certificationCount = 1;
-            document.querySelector('#add-certification').addEventListener('click', function () {
-                // Create new form elements
-                let newForm = document.createElement('div');
-                newForm.classList.add('certification-forms');
-                newForm.innerHTML = `
+        <script>
+            function addCertificationForm() {
+                let certificationCount = 1;
+                document.querySelector('#add-certification').addEventListener('click', function () {
+                    // Create new form elements
+                    let newForm = document.createElement('div');
+                    newForm.classList.add('certification-forms');
+                    newForm.innerHTML = `
             <h5 class="mt-3">Next Certification</h5>
             <div class="form-group mt-1">
                 <label for="certification-name">Certification Name</label>
@@ -782,32 +918,32 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             <button type="button" class="btn btn-danger mt-3 remove-certification-form">Remove Certification</button>
         `;
 
-                this.parentNode.insertBefore(newForm, this);
+                    this.parentNode.insertBefore(newForm, this);
 
-                certificationCount++;
+                    certificationCount++;
 
-                newForm.querySelector('.remove-certification-form').addEventListener('click', function () {
-                    if (confirm('Are you sure you want to delete this certification?')) {
-                        // Remove the corresponding experience form
-                        this.parentNode.remove();
-                        // Decrement the experience count
-                        experienceCount--;
-                    }
+                    newForm.querySelector('.remove-certification-form').addEventListener('click', function () {
+                        if (confirm('Are you sure you want to delete this certification?')) {
+                            // Remove the corresponding experience form
+                            this.parentNode.remove();
+                            // Decrement the experience count
+                            experienceCount--;
+                        }
+                    });
                 });
-            });
-        }
-        addCertificationForm();
-    </script>
+            }
+            addCertificationForm();
+        </script>
 
-    <!-- Add many reference -->
-    <script>
-        function addReferenceForm() {
-            let referenceCount = 1;
-            document.querySelector('#add-reference').addEventListener('click', function () {
-                // Create new form elements
-                let newForm = document.createElement('div');
-                newForm.classList.add('reference-forms');
-                newForm.innerHTML = `
+        <!-- Add many reference -->
+        <script>
+            function addReferenceForm() {
+                let referenceCount = 1;
+                document.querySelector('#add-reference').addEventListener('click', function () {
+                    // Create new form elements
+                    let newForm = document.createElement('div');
+                    newForm.classList.add('reference-forms');
+                    newForm.innerHTML = `
             <h5 class="mt-3">Next Reference</h5>
             <div class="form-group">
                 <label for="reference-name">Name</label>
@@ -829,179 +965,35 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                 <input type="text" class="form-control" id="reference-relationship"
                 placeholder="Ex: Lecturer, Mentor, etc" name="reference-relationship[]" required>
             </div>
-            <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
             <button type="button" class="btn btn-danger mt-3 remove-reference-form">Remove Reference</button>
         `;
 
-                this.parentNode.insertBefore(newForm, this);
+                    this.parentNode.insertBefore(newForm, this);
 
-                referenceCount++;
+                    referenceCount++;
 
-                newForm.querySelector('.remove-reference-form').addEventListener('click', function () {
-                    if (confirm('Are you sure you want to delete this reference?')) {
-                        // Remove the corresponding reference form
-                        this.parentNode.remove();
-                        // Decrement the reference count
-                        referenceCount--;
-                    }
+                    newForm.querySelector('.remove-reference-form').addEventListener('click', function () {
+                        if (confirm('Are you sure you want to delete this reference?')) {
+                            // Remove the corresponding reference form
+                            this.parentNode.remove();
+                            // Decrement the reference count
+                            referenceCount--;
+                        }
+                    });
                 });
-            });
-        }
-
-        addReferenceForm();
-    </script>
-
-
-    <!-- validation handle -->
-    <script>
-        // Enable the next button only when all required fields have been filled
-        function validationTab(tab) {
-            let activeTabIndex = tabIndex[tab];
-            // Get the index of the active tab
-
-            let nextButton = document.getElementById(`next-to-${Object.entries(tabIndex)[activeTabIndex[0] + 1][0]}`);
-
-            // Get all required inputs in the active tab
-            let requiredInputs = document.querySelectorAll(`#${Object.entries(tabIndex)[activeTabIndex[0]][0]}-section [required]`);
-
-            // Disable the next button initially
-            if (!tabIndex[tab][1]) {
-                nextButton.disabled = true;
-            } else {
-                nextButton.disabled = false;
-
             }
-            requiredInputs.forEach(function (input) {
-                input.addEventListener("mousemove", function () {
-                    if (checkRequiredInputs()) {
-                        nextButton.disabled = false;
-                        document.getElementById(tab + "-tab").disabled = false;
-                        tabIndex[tab][1] = 1;
-                    } else {
-                        nextButton.disabled = true;
-                    }
-                });
-            });
-
-            // Check if all required inputs in the active tab are filled
-            function checkRequiredInputs() {
-                let allFilled = true;
-                requiredInputs.forEach(function (input) {
-                    if (input.value === "") {
-                        allFilled = false;
-                    }
-                });
-                return allFilled;
-            }
-            // Get all tab content elements 
-        }
-    </script>
-
-    <!-- submit handle -->
-    <script>
-        const form = document.getElementById('cv-form');
-
-        form.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                changeTab('next-tab');
-            }
-        });
-    </script>
-
-    <script>
-        // Get the activeTabIndex value
-        const activeTabIndexInput = document.getElementById("activeTabIndex");
-        let activeTabIndex = parseInt(activeTabIndexInput.value);
-
-        // Function to change the active tab
-        function changeTab(tab) {
-            // document.getElementById(tab + "-tab").disabled = false;
-            validationTab(tab);
-            var tabs = document.getElementsByClassName("tab-pane");
-            let tabButton = document.getElementById(`${tab}-tab`);
-            // Loop through each tab content element and hide them
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].style.display = "none";
-            }
-            activeTabIndex = tabIndex[tab][0];
-            activeTabIndexInput.value = activeTabIndex;
-
-            // Show the selected tab content element
-            document.getElementById(tab + "-section").style.display = "block";
-
-            // Remove the 'active' class from all tab links
-            var links = document.getElementsByClassName("nav-link");
-            for (var i = 0; i < links.length; i++) {
-                links[i].classList.remove("active");
-                document.querySelector('.active').style.backgroundColor = "transparent"
-            }
-
-            // Add the 'active' class to the selected tab link
+            addReferenceForm();
+        </script>
 
 
-            document.getElementById(tab + "-tab").classList.add('active');
 
-            document.querySelector('.active').style.backgroundColor = "lightblue"
-            const scrolling = document.getElementById('card-cv');
-
-            scrolling.scrollIntoView();
-
-        }
-
-
-        // Function to navigate to the next tab
-        function nextTab() {
-            const currentTab = Object.keys(tabIndex).find(key => tabIndex[key][0] === activeTabIndex);
-            const nextTab = Object.keys(tabIndex).find(key => (tabIndex[key][0]) === tabIndex[currentTab][0] + 1);
-
-            if (nextTab) {
-                changeTab(nextTab);
-            } else {
-                // Submit the form if on the last tab
-                if (checkRequiredInputs()) {
-                    document.getElementById("cv-form").submit();
-                }
-            }
-        }
-
-
-        // Handle keydown event for Enter key
-        document.addEventListener("keydown", function (event) {
-            const activeTabIndexInput = document.getElementById("activeTabIndex");
-            let activeTabIndex = parseInt(activeTabIndexInput.value);
-            if (event.key === "Enter") {
-                event.preventDefault(); // Prevent form submission
-                // Check if currently on the last tab
-                if (activeTabIndex === tabIndex["end"][0]) {
-                    // Submit the form
-                    if (checkRequiredInputs()) {
-                        document.getElementById("cv-form").submit();
-                    }
-                } else {
-                    // Navigate to the next tab
-                    let next_but = document.getElementById(`next-to-${Object.entries(tabIndex)[activeTabIndex + 1][0]}`);
-                    if (next_but.disabled === false) {
-                        nextTab();
-                    }
-                }
-            }
-        });
-
-        // Initialize tab navigation
-        window.addEventListener("DOMContentLoaded", function () {
-            // Call the changeTab() function to set the initial tab
-            const initialTab = Object.keys(tabIndex)[0];
-            changeTab(initialTab);
-        });
-    </script>
-
-    <!-- <script>
+        <!-- <script>
         for (var idx = 0; idx < Object.keys(tabIndex).length; idx++) {
             document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled = !Object.entries(tabIndex)[idx][1][1];
             document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").style.backgroundColor = "lightpink";
         }
     </script> -->
+    </div>
 </body>
 
 </html>
