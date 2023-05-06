@@ -70,6 +70,7 @@ CREATE TABLE IF NOT EXISTS `resume` (
     `position` varchar(255) NOT NULL,
     `employment_type` varchar(255) NOT NULL,
     `desire_salary` int(10) NOT NULL,
+    `goals` text NOT NULL,
     `date_added` datetime NOT NULL DEFAULT current_timestamp(),
     `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
     FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE

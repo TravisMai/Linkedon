@@ -15,7 +15,7 @@ $position = $_POST['position'];
 $employment_type = $_POST['employment-type'];
 $salary_range = $_POST['salary-range'];
 $qualifications = $_POST['qualifications'];
-$sql = "INSERT INTO resume (user_id, objective, date_added, date_updated) VALUES ($user_id,'$job_title','$position','$employment_type')";
+$sql = "INSERT INTO resume (user_id, title, position, employment_type, desire_salary, date_added, date_updated) VALUES ($user_id,'$job_title','$position','$employment_type')";
 $sql = rtrim($sql, ",");
 mysqli_query($conn, $sql);
 $insert_id = mysqli_insert_id($conn);
