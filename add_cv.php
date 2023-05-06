@@ -92,7 +92,7 @@
 
                                 // Get the user's type by querying the database with the user_id stored in the session
                                 $user_id = $_SESSION["user_id"];
-                                $user_info = $conn->prepare("SELECT * FROM users WHERE `id` = ?");
+                                $user_info = $conn->prepare("SELECT * FROM users INNER JOIN `resume` ON users.id = resume.user_id WHERE users.id = ? ");
                                 $user_info->bind_param("i", $user_id);
                                 $user_info->execute();
                                 $result = $user_info->get_result();

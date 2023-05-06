@@ -66,7 +66,10 @@ $sql = "
 CREATE TABLE IF NOT EXISTS `resume` (
     `id` int(50) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     `user_id` int(50) NOT NULL,
-    `objective` varchar(250) NOT NULL,
+    `title` varchar(255) NOT NULL,
+    `position` varchar(255) NOT NULL,
+    `employment_type` varchar(255) NOT NULL,
+    `desire_salary` int(10) NOT NULL,
     `date_added` datetime NOT NULL DEFAULT current_timestamp(),
     `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
     FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE
