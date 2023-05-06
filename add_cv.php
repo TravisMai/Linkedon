@@ -20,7 +20,17 @@
 </script>
 
 <body id="top">
-    <?php require_once('inc/topBarNav.php') ?>
+    <?php require_once('inc/topBarNav.php');
+    if (!isset($_SESSION["user_id"])) {
+        header('Location: index.php?page=home');
+    } 
+    if ($_SESSION['first-name'] == "" || $_SESSION['last-name'] == ""){
+        $_SESSION['label'] = "Error";
+        $_SESSION['message'] = "Please Fulfill your information";
+        header('Location: index.php?page=profile');
+    }
+
+    ?>
     <div class="page-content bg-light">
         <div id="content ">
             <header>
@@ -105,12 +115,12 @@
                                 $obj_info->execute();
                                 $result_obj = $obj_info->get_result();
                                 $row_obj = $result_obj->fetch_assoc();
-                                if (isset($row_obj['id'])){
+                                if (isset($row_obj['id'])) {
                                     $resume_id = $row_obj['id'];
                                 } else {
                                     $resume_id = -999;
                                 }
-                                
+
 
 
                                 $additional_info = $conn->prepare("SELECT additional_information.hobbies, additional_information.habits, additional_information.personal_info FROM additional_information WHERE additional_information.user_id = $user_id AND additional_information.resume_id = $resume_id");
@@ -138,18 +148,33 @@
                                 <div class="form-group mt-2">
                                     <label for="habit">Habit</label>
                                     <input type="text" class="form-control" placeholder="Something about your habit"
-                                        id="habit" name="habit" value="<?php if (isset($row_additional['habits'])) {echo $row_additional['habits'];} else {echo "";} ?>">
+                                        id="habit" name="habit"
+                                        value="<?php if (isset($row_additional['habits'])) {
+                                            echo $row_additional['habits'];
+                                        } else {
+                                            echo "";
+                                        } ?>">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label for="hobbies">Hobbies</label>
                                     <input type="text" class="form-control" placeholder="Something about your hobbies"
-                                        id="hobbies" name="hobbies" value="<?php if (isset($row_additional['hobbies'])) {echo $row_additional['hobbies'];} else {echo "";} ?>">
+                                        id="hobbies" name="hobbies"
+                                        value="<?php if (isset($row_additional['hobbies'])) {
+                                            echo $row_additional['hobbies'];
+                                        } else {
+                                            echo "";
+                                        } ?>">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label for="personal-information">Personal Information</label>
                                     <textarea class="form-control" id="personal-information" name="personal-information"
-                                        rows="3" placeholder="Share us something about yourself: 
-Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_additional['personal_info'])) {echo $row_additional['personal_info'];} else {echo "";} ?></textarea>
+                                        rows="3"
+                                        placeholder="Share us something about yourself: 
+Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_additional['personal_info'])) {
+    echo $row_additional['personal_info'];
+} else {
+    echo "";
+} ?></textarea>
                                 </div>
                                 <div class="d-flex justify-content-between mt-4">
                                     <div class="mr-auto"> </div>
@@ -165,38 +190,70 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="job-title">Job Title</label>
-                                    <input placeholder="Job Title" type="text" class="form-control" id="job-title" name="job-title"value="<?php if (isset($row_obj['title'])) {echo $row_obj['title'];} else {echo "";} ?>"required>
+                                    <input placeholder="Job Title" type="text" class="form-control" id="job-title"
+                                        name="job-title"
+                                        value="<?php if (isset($row_obj['title'])) {
+                                            echo $row_obj['title'];
+                                        } else {
+                                            echo "";
+                                        } ?>"
+                                        required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="position">Postion</label>
                                     <input placeholder="Tell us the position you want to apply: fresher, junior, etc.."
                                         type="text" class="form-control"
-                                        value="<?php if (isset($row_obj['position'])) {echo $row_obj['position'];} else {echo "";} ?>"
+                                        value="<?php if (isset($row_obj['position'])) {
+                                            echo $row_obj['position'];
+                                        } else {
+                                            echo "";
+                                        } ?>"
                                         id="position" name="position" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="employment-type">Type of Employment</label>
                                     <select class="form-control" required id="employment-type" name="employment-type">
                                         <option value="">-- Select --</option>
-                                        <option value="full-time" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'full-time') echo 'selected'; ?>>Full-time</option>
-                                        <option value="part-time" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'part-time') echo 'selected'; ?>>Part-time</option>
-                                        <option value="contract" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'contract') echo 'selected'; ?>>Contract</option>
-                                        <option value="freelance" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'freelance') echo 'selected'; ?>>Freelance</option>
-                                        <option value="internship" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'internship') echo 'selected'; ?>>Internship</option>
+                                        <option value="full-time" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'full-time')
+                                            echo 'selected'; ?>>Full-time
+                                        </option>
+                                        <option value="part-time" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'part-time')
+                                            echo 'selected'; ?>>Part-time
+                                        </option>
+                                        <option value="contract" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'contract')
+                                            echo 'selected'; ?>>Contract
+                                        </option>
+                                        <option value="freelance" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'freelance')
+                                            echo 'selected'; ?>>Freelance
+                                        </option>
+                                        <option value="internship" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'internship')
+                                            echo 'selected'; ?>>Internship
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="">Desired Salary Range</label>
                                     <div class="input-group">
                                         <label class="input-group-text" for="salary-range">Apprx</label>
-                                        <input placeholder="Ex: 20." type="number" min="1" step="1" class="form-control" required id="salary-range" name="salary-range" value="<?php if (isset($row_obj['desire_salary'])) {echo $row_obj['desire_salary'];} else {echo "";} ?>">
+                                        <input placeholder="Ex: 20." type="number" min="1" step="1" class="form-control"
+                                            required id="salary-range" name="salary-range"
+                                            value="<?php if (isset($row_obj['desire_salary'])) {
+                                                echo $row_obj['desire_salary'];
+                                            } else {
+                                                echo "";
+                                            } ?>">
                                         <span class="input-group-text">.000.000 VND</span>
                                     </div>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="qualifications">Qualifications and Career Goals</label>
                                     <textarea placeholder="Tell us about your aim and goal, and expectation about job"
-                                        required class="form-control" id="qualifications" name="qualifications" rows="2"><?php if (isset($row_obj['goals'])) {echo $row_obj['goals'];} else {echo "";} ?></textarea>
+                                        required class="form-control" id="qualifications" name="qualifications"
+                                        rows="2"><?php if (isset($row_obj['goals'])) {
+                                            echo $row_obj['goals'];
+                                        } else {
+                                            echo "";
+                                        } ?></textarea>
                                 </div>
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-personal"
@@ -222,22 +279,53 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="school-name">School/University name</label>
-                                    <input type="text" placeholder="Your University/ School" class="form-control" id="school-name" name="school-name" value="<?php if (isset($row_edu['school'])) {echo $row_edu['school'];} else {echo "";} ?>" required>
+                                    <input type="text" placeholder="Your University/ School" class="form-control"
+                                        id="school-name" name="school-name"
+                                        value="<?php if (isset($row_edu['school'])) {
+                                            echo $row_edu['school'];
+                                        } else {
+                                            echo "";
+                                        } ?>"
+                                        required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="degree-name">Major/Course name</label>
-                                    <input type="text" placeholder="Your majority/ course name" class="form-control" id="degree-name" name="degree-name" value="<?php if (isset($row_edu['major'])) {echo $row_edu['major'];} else {echo "";} ?>" required>
+                                    <input type="text" placeholder="Your majority/ course name" class="form-control"
+                                        id="degree-name" name="degree-name"
+                                        value="<?php if (isset($row_edu['major'])) {
+                                            echo $row_edu['major'];
+                                        } else {
+                                            echo "";
+                                        } ?>"
+                                        required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="education-level">Education level</label>
                                     <select class="form-control" id="education-level" name="education-level" required>
                                         <option value="">-- Select --</option>
-                                        <option value="High School" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'High School') {echo 'selected';} ?>>High School</option>
-                                        <option value="Bachelor" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Bachelor's Degree") {echo 'selected';} ?>>Bachelor's Degree</option>
-                                        <option value="MBA" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'MBA') {echo 'selected';} ?>>MBA</option>
-                                        <option value="Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Graduate Degree') {echo 'selected';} ?>>Graduate Degree</option>
-                                        <option value="Post Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Post-Graduate Degree') {echo 'selected';} ?>>Post-Graduate Degree</option>
-                                        <option value="Ph.D" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Doctor of Philosophy') {echo 'selected';} ?>>Doctor of Philosophy</option>
+                                        <option value="High School" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'High School') {
+                                            echo 'selected';
+                                        } ?>>High School
+                                        </option>
+                                        <option value="Bachelor" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Bachelor") {
+                                            echo 'selected';
+                                        } ?>>Bachelor's
+                                            Degree</option>
+                                        <option value="MBA" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'MBA') {
+                                            echo 'selected';
+                                        } ?>>MBA</option>
+                                        <option value="Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Graduate') {
+                                            echo 'selected';
+                                        } ?>>Graduate Degree
+                                        </option>
+                                        <option value="Post Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Post Graduate') {
+                                            echo 'selected';
+                                        } ?>>
+                                            Post-Graduate Degree</option>
+                                        <option value="Ph.D" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Ph.D') {
+                                            echo 'selected';
+                                        } ?>>Doctor of
+                                            Philosophy</option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-1">
@@ -248,7 +336,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <!-- Generate options for years from 1990 to 2023 -->
                                         <?php
                                         for ($i = 2030; $i >= 1990; $i--) {
-                                            if (isset($row_edu['year']) && $row_edu['year'] == $i){
+                                            if (isset($row_edu['year']) && $row_edu['year'] == $i) {
                                                 echo "<option value='$i' selected>$i</option>";
                                             } else {
                                                 echo "<option value='$i'>$i</option>";
@@ -322,25 +410,47 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     impressive experience </p>
                                 <form>
                                     <div class="form-group mt-1">
-                                        <label for="job-name">Job Poition</label>
+                                        <label for="job-name">Job Position</label>
                                         <input type="text" class="form-control" id="job-name" name="job-name"
-                                            placeholder="Job Name" value="<?php if (isset($row_work['position'])) {echo $row_work['position'];} else {echo "";} ?>" required>
+                                            placeholder="Job Name"
+                                            value="<?php if (isset($row_work['position'])) {
+                                                echo $row_work['position'];
+                                            } else {
+                                                echo "";
+                                            } ?>"
+                                            required>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="company-name">Company Name</label>
                                         <input type="text" class="form-control" placeholder="Name of the Company"
-                                            id="company-name" name="company-name" value="<?php if (isset($row_work['company_name'])) {echo $row_work['company_name'];} else {echo "";} ?>" required>
+                                            id="company-name" name="company-name"
+                                            value="<?php if (isset($row_work['company_name'])) {
+                                                echo $row_work['company_name'];
+                                            } else {
+                                                echo "";
+                                            } ?>"
+                                            required>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="employment-degree">Type of Employment</label>
                                         <select class="form-control" id="employment-degree" required
                                             name="employment-degree">
                                             <option value="">-- Select --</option>
-                                        <option value="full-time" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'full-time') echo 'selected'; ?>>Full-time</option>
-                                        <option value="part-time" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'part-time') echo 'selected'; ?>>Part-time</option>
-                                        <option value="contract" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'contract') echo 'selected'; ?>>Contract</option>
-                                        <option value="freelance" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'freelance') echo 'selected'; ?>>Freelance</option>
-                                        <option value="internship" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'internship') echo 'selected'; ?>>Internship</option>
+                                            <option value="full-time" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'full-time')
+                                                echo 'selected'; ?>>Full-time
+                                            </option>
+                                            <option value="part-time" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'part-time')
+                                                echo 'selected'; ?>>Part-time
+                                            </option>
+                                            <option value="contract" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'contract')
+                                                echo 'selected'; ?>>Contract
+                                            </option>
+                                            <option value="freelance" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'freelance')
+                                                echo 'selected'; ?>>Freelance
+                                            </option>
+                                            <option value="internship" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'internship')
+                                                echo 'selected'; ?>>Internship
+                                            </option>
                                         </select>
                                     </div>
 
@@ -348,14 +458,28 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <label for="job-duration">Duration</label>
                                         <select class="form-control" id="job-duration" name="job-duration[]" required>
                                             <option value="">-- Select --</option>
-                                            <option value="0" <?php if (isset($row_work['duration']) && $row_work['duration'] == '0') echo 'selected'; ?>>Less Than 6 Months</option>
-                                            <option value="1" <?php if (isset($row_work['duration']) && $row_work['duration'] == '1') echo 'selected'; ?>>6 Months to < 1 Years</option>
-                                            <option value="2" <?php if (isset($row_work['duration']) && $row_work['duration'] == '2') echo 'selected'; ?>>1 Years to < 2 Years</option>
-                                            <option value="3" <?php if (isset($row_work['duration']) && $row_work['duration'] == '3') echo 'selected'; ?>>2 Years to < 3 Years</option>
-                                            <option value="4" <?php if (isset($row_work['duration']) && $row_work['duration'] == '4') echo 'selected'; ?>>3 Years to < 4 Years</option>
-                                            <option value="5" <?php if (isset($row_work['duration']) && $row_work['duration'] == '5') echo 'selected'; ?>>4 Years to < 5 Years</option>
-                                            <option value="6" <?php if (isset($row_work['duration']) && $row_work['duration'] == '6') echo 'selected'; ?>>Over 5 Years</option>
-                                            <option value="-1" <?php if (isset($row_work['duration']) && $row_work['duration'] == '-1') echo 'selected'; ?>>Still in Job</option>
+                                            <option value="0" <?php if (isset($row_work['duration']) && $row_work['duration'] == '0')
+                                                echo 'selected'; ?>>Less Than 6 Months
+                                            </option>
+                                            <option value="1" <?php if (isset($row_work['duration']) && $row_work['duration'] == '1')
+                                                echo 'selected'; ?>>6 Months to < 1
+                                                    Years</option>
+                                            <option value="2" <?php if (isset($row_work['duration']) && $row_work['duration'] == '2')
+                                                echo 'selected'; ?>>1 Years to < 2
+                                                    Years</option>
+                                            <option value="3" <?php if (isset($row_work['duration']) && $row_work['duration'] == '3')
+                                                echo 'selected'; ?>>2 Years to < 3
+                                                    Years</option>
+                                            <option value="4" <?php if (isset($row_work['duration']) && $row_work['duration'] == '4')
+                                                echo 'selected'; ?>>3 Years to < 4
+                                                    Years</option>
+                                            <option value="5" <?php if (isset($row_work['duration']) && $row_work['duration'] == '5')
+                                                echo 'selected'; ?>>4 Years to < 5
+                                                    Years</option>
+                                            <option value="6" <?php if (isset($row_work['duration']) && $row_work['duration'] == '6')
+                                                echo 'selected'; ?>>Over 5 Years</option>
+                                            <option value="-1" <?php if (isset($row_work['duration']) && $row_work['duration'] == '-1')
+                                                echo 'selected'; ?>>Still in Job</option>
                                         </select>
                                     </div>
                                     <div class="form-group mt-1 ">
@@ -363,7 +487,12 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
 
                                         <textarea class="form-control" id="working-description"
                                             placeholder="Tell us something about that working experience such as which tasks you have done, ..."
-                                            name="working-description" rows="2" required><?php if (isset($row_work['tasks'])) {echo $row_work['tasks'];} else {echo "";} ?></textarea>
+                                            name="working-description" rows="2"
+                                            required><?php if (isset($row_work['tasks'])) {
+                                                echo $row_work['tasks'];
+                                            } else {
+                                                echo "";
+                                            } ?></textarea>
 
                                     </div>
                                 </form>
@@ -392,7 +521,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 <div class="form-group mt-1">
                                     <label for="certification-organization">Organization</label>
                                     <textarea class="form-control" id="certification-organization"
-                                        name="certification-organization[]" rows="1" required></textarea>
+                                        name="certification-organization[]" placeholder = "Organization provider"rows="1" required></textarea>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="certification-date">Obtained date</label>
@@ -401,8 +530,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="expire-date">Expired date</label>
-                                    <input type="date" class="form-control" id="expire-date"
-                                        name="expire-date[]">
+                                    <input type="date" class="form-control" id="expire-date" name="expire-date[]">
                                 </div>
 
                                 <!-- </form> -->
@@ -426,31 +554,26 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 <input type="hidden" id="activeTabIndex" value="6">
                                 <h4>Step 6/6: References</h4>
                                 <h5>First Reference</h5>
-                                <!-- <form> -->
                                 <div class="form-group">
-                                    <label for="reference-name">Reference Name</label>
+                                    <label for="reference-name">Name</label>
                                     <input type="text" class="form-control" id="reference-name" name="reference-name[]"
-                                        required>
+                                        placeholder="Relationship's name" required>
                                 </div>
-                                <div class="form-group">
-                                    <label for="reference-phone">Major</label>
-                                    <input type="text" class="form-control" id="reference-phone"
-                                        name="reference-phone[]" required>
-                                </div>
-                                <div class="form-group">
+                                <div class="form-group mt-1">
                                     <label for="reference-email">Email</label>
                                     <input type="email" class="form-control" id="reference-email"
-                                        name="reference-email[]" required>
+                                        name="reference-email[]"  placeholder="Email"required>
                                 </div>
-
-                                <div class="form-group">
+                                <div class="form-group mt-1">
+                                    <label for="reference-phone">Phone</label>
+                                    <input type="text" class="form-control" id="reference-phone"
+                                        name="reference-phone[]"  placeholder="Phone" required>
+                                </div>
+                                <div class="form-group mt-1">
                                     <label for="reference-relationship">Relationship</label>
                                     <input type="text" class="form-control" id="reference-relationship"
-                                        name="reference-relationship[]" required>
+                                    placeholder="Ex: Lecturer, Mentor, etc" name="reference-relationship[]" required>
                                 </div>
-                                <!-- </form> -->
-
-
                                 <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
 
                                 <div class="d-flex justify-content-between mt-4">
@@ -637,21 +760,26 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                 newForm.classList.add('certification-forms');
                 newForm.innerHTML = `
             <h5 class="mt-3">Next Certification</h5>
-            <div class="form-group">
-
+            <div class="form-group mt-1">
                 <label for="certification-name">Certification Name</label>
-                <input type="text" class="form-control" id="certification-name" name="certification-name[]" required>
+                <input type="text" class="form-control" id="certification-name"
+                    placeholder="Certification title" name="certification-name[]" required>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-1">
                 <label for="certification-organization">Organization</label>
-                <textarea class="form-control" id="certification-organization"  name="certification-organization[]"  rows="1" required></textarea>
+                <textarea class="form-control" id="certification-organization"
+                    name="certification-organization[]" placeholder = "Organization provider"rows="1" required></textarea>
             </div>
-            <div class="form-group">
-                <label for="certification-date">Date</label>
-                <input type="month" class="form-control" id="certification-date" name="certification-date[]" required>
+            <div class="form-group mt-1">
+                <label for="certification-date">Obtained date</label>
+                <input type="date" class="form-control" id="certification-date"
+                    name="certification-date[]" required>
             </div>
-            
-            <button type="button" class="btn btn-danger my-3 remove-certification-form">Remove Certification</button>
+            <div class="form-group mt-1">
+                <label for="expire-date">Expired date</label>
+                <input type="date" class="form-control" id="expire-date" name="expire-date[]">
+            </div>
+            <button type="button" class="btn btn-danger mt-3 remove-certification-form">Remove Certification</button>
         `;
 
                 this.parentNode.insertBefore(newForm, this);
@@ -682,22 +810,27 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                 newForm.innerHTML = `
             <h5 class="mt-3">Next Reference</h5>
             <div class="form-group">
-                <label for="reference-name">Reference Name</label>
-                <input type="text" class="form-control" name="reference-name[]" required>
+                <label for="reference-name">Name</label>
+                <input type="text" class="form-control" id="reference-name" name="reference-name[]"
+                    placeholder="Relationship's name" required>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-1">
                 <label for="reference-email">Email</label>
-                <input type="email" class="form-control" name="reference-email[]" required>
+                <input type="email" class="form-control" id="reference-email"
+                    name="reference-email[]"  placeholder="Email"required>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-1">
                 <label for="reference-phone">Phone</label>
-                <input type="tel" class="form-control" name="reference-phone[]" required>
+                <input type="text" class="form-control" id="reference-phone"
+                    name="reference-phone[]"  placeholder="Phone" required>
             </div>
-            <div class="form-group">
+            <div class="form-group mt-1">
                 <label for="reference-relationship">Relationship</label>
-                <input type="text" class="form-control" name="reference-relationship[]" required>
+                <input type="text" class="form-control" id="reference-relationship"
+                placeholder="Ex: Lecturer, Mentor, etc" name="reference-relationship[]" required>
             </div>
-            <button type="button" class="btn btn-danger my-3 remove-reference-form">Remove Reference</button>
+            <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
+            <button type="button" class="btn btn-danger mt-3 remove-reference-form">Remove Reference</button>
         `;
 
                 this.parentNode.insertBefore(newForm, this);
@@ -739,7 +872,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
 
             }
             requiredInputs.forEach(function (input) {
-                input.addEventListener("input", function () {
+                input.addEventListener("mousemove", function () {
                     if (checkRequiredInputs()) {
                         nextButton.disabled = false;
                         document.getElementById(tab + "-tab").disabled = false;
