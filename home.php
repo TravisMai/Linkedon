@@ -26,7 +26,7 @@
                                             <ul class="nav justify-content-left">
                                                 <li class="nav-item"><a class="nav-link"
                                                         href="https://www.facebook.com/HuuNghiaTheGreat/"
-                                                        title="Facebook"><i class="fab fa-facebook"></i><span
+                                                        title="Facebook"><i class="fab fa-facebook fa-spin"></i><span
                                                             class="menu-title sr-only">Facebook</span></a></li>
                                                 <li class="nav-item"><a class="nav-link"
                                                         href="mailto:emches1976@gmail.com" title="Gmail"><i
@@ -34,7 +34,7 @@
                                                             class="menu-title sr-only">Gmail</span></a></li>
                                                 <li class="nav-item"><a class="nav-link"
                                                         href="https://github.com/TravisMai/CO3049_WebProgramming_HK222" title="Github"><i
-                                                            class="fab fa-github"></i><span
+                                                            class="fab fa-github fa-spin"></i><span
                                                             class="menu-title sr-only">Github</span></a></li>
                                             </ul>
                                         </nav>
