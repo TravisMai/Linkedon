@@ -86,21 +86,21 @@
                                 <p class="card-text h4">Start: Personal Information</p>
                                 <p class="text" style="color: blue">First, we need to confirm your personal information
                                 </p>
-                                <?php 
-                                    require_once('./config.php');
-                                    $servername = DB_SERVER;
-                                    $username = DB_USERNAME;
-                                    $password = DB_PASSWORD;
-                                    $dbname = DB_NAME;
-                                    $conn = new mysqli($servername, $username, $password, $dbname);
-                                    
-                                    // Get the user's type by querying the database with the user_id stored in the session
-                                    $user_id = $_SESSION["user_id"];
-                                    $stmt = $conn->prepare("SELECT * FROM users WHERE `id` = ?");
-                                    $stmt->bind_param("i", $user_id);
-                                    $stmt->execute();
-                                    $result = $stmt->get_result();
-                                    $row = $result->fetch_assoc();      
+                                <?php
+                                require_once('./config.php');
+                                $servername = DB_SERVER;
+                                $username = DB_USERNAME;
+                                $password = DB_PASSWORD;
+                                $dbname = DB_NAME;
+                                $conn = new mysqli($servername, $username, $password, $dbname);
+
+                                // Get the user's type by querying the database with the user_id stored in the session
+                                $user_id = $_SESSION["user_id"];
+                                $stmt = $conn->prepare("SELECT * FROM users WHERE `id` = ?");
+                                $stmt->bind_param("i", $user_id);
+                                $stmt->execute();
+                                $result = $stmt->get_result();
+                                $row = $result->fetch_assoc();
                                 ?>
                                 <label for="first-name" class="mt-2">First Name</label>
                                 <input type="text" class="form-control" name="first-name" id="first-name" disabled value="<?php echo $row['firstname']; ?>">
@@ -242,35 +242,15 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
 
                                 <input type="hidden" id="activeTabIndex" value="3">
                                 <h4>Step 3/6: Professional Experience</h4>
-                                <h5>First Experience</h5>
+                                <h5>First Skill</h5>
                                 <!-- <form> -->
-
-                                <div class="form-group mt-1">
-                                    <label for="job-description">Job Description</label>
-                                    <textarea class="form-control" id="job-description" name="job-description[]" placeholder="Tell us something about that job" rows="2" required></textarea>
-                                </div>
-                                <div class="form-group mt-1">
-                                    <label for="job-duration">Duration</label>
-                                    <select class="form-control" id="job-duration" name="job-duration[]" required>
-                                        <option value="">-- Select --</option>
-                                        <option value="0">Less Than 6 Months</option>
-                                        <option value="1">6 Months to < 1 Years</option>
-                                        <option value="2">1 Years to < 2 Years</option>
-                                        <option value="3">2 Years to < 3 Years</option>
-                                        <option value="4">3 Years to < 4 Years</option>
-                                        <option value="5">4 Years to < 5 Years</option>
-                                        <option value="6">Over 5 Years</option>
-                                        <option value="-1">Still in Job</option>
-                                    </select>
-                                </div>
                                 <div class="form-group mt-1">
                                     <label for="job-skills">Skills Utilized</label>
                                     <input type="text" class="form-control" id="job-skills" placeholder="What you obtain after working at this position" name="job-skills[]" required>
                                 </div>
 
                                 <button type="button" class="btn btn-success my-3" id="add-experience">Add
-                                    Another
-                                    Experience</button>
+                                    New skill</button>
                                 <!-- Add a Next button to go to the next section -->
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-education" onclick="changeTab('education')">Back</button>
@@ -284,14 +264,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                             <div class="tab-pane" id="history-section">
                                 <input type="hidden" id="activeTabIndex" value="4">
                                 <h4>Step 4/6: Work History</h4>
-                                <p class="text" style="color: blue">Plese show us your latest job, or your most
-                                    impressive experience </p>
+                                <p class="text" style="color: blue">Please show us your latest job, or your most impressive experience </p>
                                 <form>
                                     <div class="form-group mt-1">
-
                                         <label for="job-name">Job Title</label>
-                                        <input type="text" class="form-control" id="job-name" name="job-name" required>
-
+                                        <input type="text" class="form-control" id="job-name" name="job-name" placeholder="jJo" required>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="company-name">Company Name</label>
@@ -309,18 +286,25 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                             <option value="internship">Internship</option>
                                         </select>
                                     </div>
+
                                     <div class="form-group mt-1">
-                                        <label for="start-date">Start Date</label>
-                                        <input type="date" class="form-control" id="start-date" name="start-date" required>
-                                    </div>
-                                    <div class="form-group mt-1">
-                                        <label for="end-date">End Date</label>
-                                        <input type="date" class="form-control" id="end-date" name="end-date">
+                                        <label for="job-duration">Duration</label>
+                                        <select class="form-control" id="job-duration" name="job-duration[]" required>
+                                            <option value="">-- Select --</option>
+                                            <option value="0">Less Than 6 Months</option>
+                                            <option value="1">6 Months to < 1 Years</option>
+                                            <option value="2">1 Years to < 2 Years</option>
+                                            <option value="3">2 Years to < 3 Years</option>
+                                            <option value="4">3 Years to < 4 Years</option>
+                                            <option value="5">4 Years to < 5 Years</option>
+                                            <option value="6">Over 5 Years</option>
+                                            <option value="-1">Still in Job</option>
+                                        </select>
                                     </div>
                                     <div class="form-group mt-1 ">
                                         <label for="working-description">Job Description</label>
 
-                                        <textarea class="form-control" id="working-description" placeholder="Tell us something about that working experience" name="working-description" rows="5" required></textarea>
+                                        <textarea class="form-control" id="working-description" placeholder="Tell us something about that working experience" name="working-description" rows="2" required></textarea>
 
                                     </div>
                                 </form>
@@ -533,35 +517,14 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                 let newForm = document.createElement('div');
                 newForm.classList.add('experience-forms');
                 newForm.innerHTML = `
-            <h5 class="mt-3">Next Experience </h5>
-            <div class="form-group">
-
-                    <label for="job-description">Job Description</label>
-                    <textarea class="form-control" id="job-description" name="job-description[]" 
-                    placeholder="Tell us something about that job" rows="2"
-                        required></textarea>
-                </div>
-                <div class="form-group">
-                <label for="job-duration">Duration</label>
-                                    <select  class="form-control" id="job-duration" name="job-duration[]" required>
-                                    <option value="">-- Select --</option>
-                                        <option value="0">Less Than 6 Months</option>
-                                        <option value="1">6 Months to < 1 Years</option>
-                                        <option value="2">1 Years to < 2 Years</option>
-                                        <option value="3">2 Years to < 3 Years</option>
-                                        <option value="4">3 Years to < 4 Years</option>
-                                        <option value="5">4 Years to < 5 Years</option>
-                                        <option value="6">Over 5 Years</option>
-                                        <option value="-1">Still in Job</option>
-                                    </select>
-                </div>
+            <h5 class="mt-3">Another Skill </h5>
                 <div class="form-group">
                     <label for="job-skills">Skills Utilized</label>
                     <input type="text" id="job-skill" class="form-control" placeholder="What you obtain after working at this position" 
                     name="job-skills[]" required>
 
                 </div>
-            <button type="button" class="btn btn-danger my-3 remove-experience-form">Remove Experience</button>
+            <button type="button" class="btn btn-danger mt-3 remove-experience-form">Remove Skill</button>
         `;
                 // Append the new form elements to the page
                 this.parentNode.insertBefore(newForm, this);
@@ -569,7 +532,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                 experienceCount++;
                 // Add event listener to the new "Remove Experience" button
                 newForm.querySelector('.remove-experience-form').addEventListener('click', function() {
-                    if (confirm('Are you sure you want to delete this experience?')) {
+                    if (confirm('Are you sure you want to delete this skill?')) {
                         // Remove the corresponding experience form
                         this.parentNode.remove();
                         // Decrement the experience count
@@ -722,13 +685,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
         }
     </script>
 
-    <script>
-        for (var idx = 0; idx < Object.keys(tabIndex).length; idx++) {
-            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled = !Object.entries(tabIndex)[idx][1][1];
-            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").style.backgroundColor = "lightpink";
-        }
-    </script>
-
     <!-- submit handle -->
     <script>
         const form = document.getElementById('cv-form');
@@ -827,6 +783,13 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
             changeTab(initialTab);
         });
     </script>
+
+    <!-- <script>
+        for (var idx = 0; idx < Object.keys(tabIndex).length; idx++) {
+            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled = !Object.entries(tabIndex)[idx][1][1];
+            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").style.backgroundColor = "lightpink";
+        }
+    </script> -->
 </body>
 
 </html>

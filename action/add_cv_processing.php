@@ -47,24 +47,20 @@ require_once('database/dbconnect.php');
     mysqli_query($conn, $sql);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Professional
-    $job_descriptions = $_POST['job-description'];
-    $job_durations = $_POST['job-duration'];
     $job_skills = $_POST['job-skills'];
 
     // Store the values in an array
     $professional_experiences = array();
     for ($i = 0; $i < count($job_descriptions); $i++) {
         $professional_experiences[] = array(
-            'job_description' => $job_descriptions[$i],
-            'job_duration' => $job_durations[$i],
             'job_skills' => $job_skills[$i]
         );
     }
 
     // Insert the professional experiences into the database
-    $sql = "INSERT INTO experience (resume_id, user_id, experience, duration_years, description) VALUES ";
+    $sql = "INSERT INTO skill (resume_id, user_id, skill) VALUES ";
     foreach ($professional_experiences as $professional_experience) {
-        $sql .= "('$insert_id','$user_id','$professional_experience[job_description]', '$professional_experience[job_duration]', '$professional_experience[job_skills]'),";
+        $sql .= "('$insert_id','$user_id','$professional_experience[job_skills]'),";
     }
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
