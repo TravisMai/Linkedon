@@ -96,10 +96,10 @@
 
                                 // Get the user's type by querying the database with the user_id stored in the session
                                 $user_id = $_SESSION["user_id"];
-                                $stmt = $conn->prepare("SELECT * FROM users WHERE `id` = ?");
-                                $stmt->bind_param("i", $user_id);
-                                $stmt->execute();
-                                $result = $stmt->get_result();
+                                $user_info = $conn->prepare("SELECT * FROM users WHERE `id` = ?");
+                                $user_info->bind_param("i", $user_id);
+                                $user_info->execute();
+                                $result = $user_info->get_result();
                                 $row = $result->fetch_assoc();
                                 ?>
                                 <label for="first-name" class="mt-2">First Name</label>
@@ -132,7 +132,9 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 </div>
                             </div>
 
+                            <?php
 
+                            ?>
                             <!-- Job Objective Section -->
                             <div class="tab-pane" id="objective-section">
                                 <input type="hidden" id="activeTabIndex" value="1">
@@ -140,15 +142,19 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="job-title">Job Title</label>
-                                    <input placeholder="Job Title" type="text" class="form-control" id="job-title" name="job-title" required>
+                                    <input placeholder="Job Title" type="text" class="form-control" id="job-title" 
+                                    name="job-title" value="<?php echo "" ;?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="position">Postion</label>
-                                    <input placeholder="Tell us the position you want to apply: fresher, junior, etc.." type="text" class="form-control" id="position" name="position" required>
+                                    <input placeholder="Tell us the position you want to apply: fresher, junior, etc.." 
+                                    type="text" class="form-control" value="<?php echo "" ;?>"
+                                    id="position" name="position" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="employment-type">Type of Employment</label>
-                                    <select class="form-control" required id="employment-type" name="employment-type">
+                                    <select class="form-control" required id="employment-type" 
+                                    name="employment-type" value="<?php echo "" ;?>">
                                         <option value="">-- Select --</option>
                                         <option value="full-time">Full-time</option>
                                         <option value="part-time">Part-time</option>
@@ -161,13 +167,17 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                     <label for="">Desired Salary Range</label>
                                     <div class="input-group">
                                         <label class="input-group-text" for="salary-range">Apprx</label>
-                                        <input placeholder="Ex: 20." type="number" min="1" step="1" class="form-control" required id="salary-range" name="salary-range">
+                                        <input placeholder="Ex: 20." type="number" min="1" step="1" 
+                                        class="form-control" required id="salary-range"
+                                        name="salary-range" value="<?php echo "" ;?>">
                                         <span class="input-group-text">.000.000 VND</span>
                                     </div>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="qualifications">Qualifications and Career Goals</label>
-                                    <textarea placeholder="Tell us about your aim and goal, and expectation about job" required class="form-control" id="qualifications" name="qualifications" rows="2"></textarea>
+                                    <textarea placeholder="Tell us about your aim and goal, and expectation about job" 
+                                    required class="form-control" id="qualifications" name="qualifications" 
+                                    value="<?php echo "" ;?>" rows="2"></textarea>
                                 </div>
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-personal" onclick="changeTab('personal')">Back</button>
@@ -218,7 +228,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 <div class="form-group mt-1">
                                     <label for="">GPA</label>
                                     <div class="input-group">
-                                        <label class="input-group-text" for="gpa"> </label>
+                                        <label class="input-group-text" for="gpa-scale"> </label>
                                         <input type="number" step="0.01" max="10" required class="form-control" id="gpa" placeholder="7.0" name="gpa">
 
                                         <select class="form-control" id="gpa-scale" name="gpa-scale">
@@ -268,7 +278,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 <form>
                                     <div class="form-group mt-1">
                                         <label for="job-name">Job Title</label>
-                                        <input type="text" class="form-control" id="job-name" name="job-name" placeholder="jJo" required>
+                                        <input type="text" class="form-control" id="job-name" name="job-name" placeholder="Job Name" required>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="company-name">Company Name</label>
@@ -328,13 +338,15 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                     <input type="text" class="form-control" id="certification-name" placeholder="Certification title" name="certification-name[]" required>
                                 </div>
                                 <div class="form-group mt-1">
+                                    <label for="certification-organization">Organization</label>
+                                    <textarea class="form-control" id="certification-organization" 
+                                    name="certification-organization[]"  rows="1" required></textarea>
+                                </div>
+                                <div class="form-group mt-1">
                                     <label for="certification-date">Date</label>
                                     <input type="month" class="form-control" id="certification-date" name="certification-date[]" required>
                                 </div>
-                                <div class="form-group mt-1">
-                                    <label for="certification-organization">Description</label>
-                                    <textarea class="form-control" id="certification-organization" name="certification-organization[]" rows="5" required></textarea>
-                                </div>
+
                                 <!-- </form> -->
 
 
@@ -564,14 +576,14 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                 <input type="text" class="form-control" id="certification-name" name="certification-name[]" required>
             </div>
             <div class="form-group">
+                <label for="certification-organization">Organization</label>
+                <textarea class="form-control" id="certification-organization"  name="certification-organization[]"  rows="1" required></textarea>
+            </div>
+            <div class="form-group">
                 <label for="certification-date">Date</label>
                 <input type="month" class="form-control" id="certification-date" name="certification-date[]" required>
             </div>
-            <div class="form-group">
-                <label for="certification-organization">Description</label>
-                <textarea class="form-control" id="certification-organization"  name="certification-organization[]"  rows="2" required></textarea>
-
-            </div>
+            
             <button type="button" class="btn btn-danger my-3 remove-certification-form">Remove Certification</button>
         `;
 
