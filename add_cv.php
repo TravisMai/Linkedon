@@ -290,19 +290,16 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <option value="">-- Select --</option>
                                         <option value="High School" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'High School') {
                                             echo 'selected';
-                                        } ?>>High School
-                                        </option>
+                                        } ?>>High School </option>
                                         <option value="Bachelor" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Bachelor") {
                                             echo 'selected';
-                                        } ?>>Bachelor's
-                                            Degree</option>
+                                        } ?>>Bachelor's Degree</option>
                                         <option value="MBA" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'MBA') {
                                             echo 'selected';
                                         } ?>>MBA</option>
                                         <option value="Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Graduate') {
                                             echo 'selected';
-                                        } ?>>Graduate Degree
-                                        </option>
+                                        } ?>>Graduate Degree</option>
                                         <option value="Post Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Post Graduate') {
                                             echo 'selected';
                                         } ?>>Post-Graduate Degree</option>
