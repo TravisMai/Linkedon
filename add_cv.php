@@ -26,7 +26,7 @@
             <header>
                 <div class="cover bg-light">
                     <div class="row bg-success">
-                            <img src="images/neon_cat.webp" style="max-height: 200px; width: 100%;">
+                        <img src="images/neon_cat.webp" style="max-height: 350px; width: 100%;">
                     </div>
             </header>
             <div class="container bg-light px-3">
@@ -45,7 +45,8 @@
             <div class="col-7 col-sm-10 col-md-6">
                 <ul class="nav nav-tabs flex-column flex-md-row" id="cv-Tab">
                     <li class="nav-item">
-                        <a class="nav-link" id="personal-tab" disabled onclick="changeTab('personal')" style="display: none">
+                        <a class="nav-link" id="personal-tab" disabled onclick="changeTab('personal')"
+                            style="display: none">
                         </a>
                     </li>
                     <li class="nav-item">
@@ -62,7 +63,8 @@
                         <button class="nav-link" id="history-tab" onclick="changeTab('history')">Work History</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link" id="certification-tab" onclick="changeTab('certification')">Certification</button>
+                        <button class="nav-link" id="certification-tab"
+                            onclick="changeTab('certification')">Certification</button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" id="reference-tab" onclick="changeTab('reference')">References</button>
@@ -92,45 +94,65 @@
 
                                 // Get the user's type by querying the database with the user_id stored in the session
                                 $user_id = $_SESSION["user_id"];
-                                $user_info = $conn->prepare("SELECT * FROM users INNER JOIN `resume` ON users.id = resume.user_id WHERE users.id = ? ");
+                                $user_info = $conn->prepare("SELECT * FROM users WHERE users.id = ? ");
                                 $user_info->bind_param("i", $user_id);
                                 $user_info->execute();
                                 $result = $user_info->get_result();
                                 $row = $result->fetch_assoc();
+
+
+                                $obj_info = $conn->prepare("SELECT users.firstname, users.lastname, users.email, users.phone, users.address, resume.id, resume.title, resume.position, resume.employment_type, resume.desire_salary, resume.goals FROM users INNER JOIN `resume` ON users.id = resume.user_id WHERE users.id = $user_id ");
+                                $obj_info->execute();
+                                $result_obj = $obj_info->get_result();
+                                $row_obj = $result_obj->fetch_assoc();
+                                $resume_id = $row_obj['id'];
+
+
+                                $additional_info = $conn->prepare("SELECT additional_information.hobbies, additional_information.habits, additional_information.personal_info FROM additional_information WHERE additional_information.user_id = $user_id AND additional_information.resume_id = $resume_id");
+                                $additional_info->execute();
+                                $result_additional = $additional_info->get_result();
+                                $row_additional = $result_additional->fetch_assoc();
                                 ?>
                                 <label for="first-name" class="mt-2">First Name</label>
-                                <input type="text" class="form-control" name="first-name" id="first-name" disabled value="<?php echo $row['firstname']; ?>">
+                                <input type="text" class="form-control" name="first-name" id="first-name" disabled
+                                    value="<?php echo $row['firstname']; ?>">
                                 <label for="last-name" class="mt-2">Last Name</label>
-                                <input type="text" class="form-control" name="last-name" placeholder="Tell us the field you want to apply" id="last-name" disabled value="<?php echo $row['lastname']; ?>">
+                                <input type="text" class="form-control" name="last-name"
+                                    placeholder="Hãy nói với chúng tôi và chúng tôi đổi khai sinh của bạn"
+                                    id="last-name" disabled value="<?php echo $row['lastname']; ?>">
                                 <label for="email" class="mt-2">Email</label>
-                                <input type="text" id="email" name="email" class="form-control" disabled value="<?php echo $row['email']; ?>">
+                                <input type="text" id="email" name="email" class="form-control" disabled
+                                    value="<?php echo $row['email']; ?>">
                                 <label for="phone-number" class="mt-2">Phone Number:</label>
-                                <input type="text" id="phone-number" name="phone-number" class="form-control" disabled value="<?php echo $row['phone']; ?>">
+                                <input type="text" id="phone-number" name="phone-number" class="form-control" disabled
+                                    value="<?php echo $row['phone']; ?>">
                                 <label for="address" class="mt-2">Address</label>
-                                <input type="text" id="address" name="address" class="form-control" disabled value="<?php echo $row['address']; ?>">
+                                <input type="text" id="address" name="address" class="form-control" disabled
+                                    value="<?php echo $row['address']; ?>">
                                 <label for="additional-info" class="mt-2">Additional Information:</label>
                                 <div class="form-group mt-2">
                                     <label for="habit">Habit</label>
-                                    <input type="text" class="form-control" placeholder="Something about your habit" id="habit" name="habit">
+                                    <input type="text" class="form-control" placeholder="Something about your habit"
+                                        id="habit" name="habit" value="<?php if (isset($row_additional['habits'])) {echo $row_additional['habits'];} else {echo "";} ?>">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label for="hobbies">Hobbies</label>
-                                    <input type="text" class="form-control" placeholder="Something about your hobbies" id="hobbies" name="hobbies">
+                                    <input type="text" class="form-control" placeholder="Something about your hobbies"
+                                        id="hobbies" name="hobbies" value="<?php if (isset($row_additional['hobbies'])) {echo $row_additional['hobbies'];} else {echo "";} ?>">
                                 </div>
                                 <div class="form-group mt-2">
                                     <label for="personal-information">Personal Information</label>
-                                    <textarea class="form-control" id="personal-information" name="personal-information" rows="3" placeholder="Share us something about yourself: 
-Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
+                                    <textarea class="form-control" id="personal-information" name="personal-information"
+                                        rows="3" placeholder="Share us something about yourself: 
+Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_additional['personal_info'])) {echo $row_additional['personal_info'];} else {echo "";} ?></textarea>
                                 </div>
                                 <div class="d-flex justify-content-between mt-4">
                                     <div class="mr-auto"> </div>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-objective" onclick="changeTab('objective')">Confirm</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-objective"
+                                        onclick="changeTab('objective')">Confirm</button>
                                 </div>
                             </div>
 
-                            <?php
-
-                            ?>
                             <!-- Job Objective Section -->
                             <div class="tab-pane" id="objective-section">
                                 <input type="hidden" id="activeTabIndex" value="1">
@@ -138,19 +160,19 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="job-title">Job Title</label>
-                                    <input placeholder="Job Title" type="text" class="form-control" id="job-title" 
-                                    name="job-title" value="<?php echo "" ;?>" required>
+                                    <input placeholder="Job Title" type="text" class="form-control" id="job-title" name="job-title"value="<?php if (isset($row_obj['title'])) {echo $row_obj['title'];} else {echo "";} ?>"required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="position">Postion</label>
-                                    <input placeholder="Tell us the position you want to apply: fresher, junior, etc.." 
-                                    type="text" class="form-control" value="<?php echo "" ;?>"
-                                    id="position" name="position" required>
+                                    <input placeholder="Tell us the position you want to apply: fresher, junior, etc.."
+                                        type="text" class="form-control"
+                                        value="<?php if (isset($row_obj['position'])) {echo $row_obj['position'];} else {echo "";} ?>"
+                                        id="position" name="position" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="employment-type">Type of Employment</label>
-                                    <select class="form-control" required id="employment-type" 
-                                    name="employment-type" value="<?php echo "" ;?>">
+                                    <select class="form-control" required id="employment-type" name="employment-type"
+                                        value="<?php echo "full-time"; ?>">
                                         <option value="">-- Select --</option>
                                         <option value="full-time">Full-time</option>
                                         <option value="part-time">Part-time</option>
@@ -163,25 +185,31 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                     <label for="">Desired Salary Range</label>
                                     <div class="input-group">
                                         <label class="input-group-text" for="salary-range">Apprx</label>
-                                        <input placeholder="Ex: 20." type="number" min="1" step="1" 
-                                        class="form-control" required id="salary-range"
-                                        name="salary-range" value="<?php echo "" ;?>">
+                                        <input placeholder="Ex: 20." type="number" min="1" step="1" class="form-control" required id="salary-range" name="salary-range" value="<?php if (isset($row_obj['desire_salary'])) {echo $row_obj['desire_salary'];} else {echo "";} ?>">
                                         <span class="input-group-text">.000.000 VND</span>
                                     </div>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="qualifications">Qualifications and Career Goals</label>
-                                    <textarea placeholder="Tell us about your aim and goal, and expectation about job" 
-                                    required class="form-control" id="qualifications" name="qualifications" 
-                                    value="<?php echo "" ;?>" rows="2"></textarea>
+                                    <textarea placeholder="Tell us about your aim and goal, and expectation about job"
+                                        required class="form-control" id="qualifications" name="qualifications" rows="2"><?php if (isset($row_obj['goals'])) {echo $row_obj['goals'];} else {echo "";} ?></textarea>
                                 </div>
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-personal" onclick="changeTab('personal')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-education" onclick="changeTab('education')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-personal"
+                                        onclick="changeTab('personal')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-education"
+                                        onclick="changeTab('education')">Next</button>
                                 </div>
                                 <!-- </form> -->
                             </div>
 
+
+                            <?php
+                            $edu_info = $conn->prepare("SELECT education.school, education.major, education.degree FROM education WHERE education.user_id = $user_id AND education.resume_id = $resume_id");
+                            $edu_info->execute();
+                            $result_edu = $edu_info->get_result();
+                            $row_edu = $result_edu->fetch_assoc();
+                            ?>
                             <!-- Education Section -->
                             <div class="tab-pane" id="education-section">
                                 <input type="hidden" id="activeTabIndex" value="2">
@@ -190,11 +218,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="school-name">School/University name</label>
-                                    <input type="text" placeholder="Your University/ School" class="form-control" id="school-name" name="school-name" required>
+                                    <input type="text" placeholder="Your University/ School" class="form-control" id="school-name" name="school-name" value="<?php if (isset($row_edu['school'])) {echo $row_edu['school'];} else {echo "";} ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
-                                    <label for="degree-name">Degree/Course name</label>
-                                    <input type="text" placeholder="Your majority/ course name" class="form-control" id="degree-name" name="degree-name" required>
+                                    <label for="degree-name">Major/Course name</label>
+                                    <input type="text" placeholder="Your majority/ course name" class="form-control" id="degree-name" name="degree-name" value="<?php if (isset($row_edu['major'])) {echo $row_edu['major'];} else {echo "";} ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="education-level">Education level</label>
@@ -225,7 +253,8 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                     <label for="">GPA</label>
                                     <div class="input-group">
                                         <label class="input-group-text" for="gpa-scale"> </label>
-                                        <input type="number" step="0.01" max="10" required class="form-control" id="gpa" placeholder="7.0" name="gpa">
+                                        <input type="number" step="0.01" max="10" required class="form-control" id="gpa"
+                                            placeholder="7.0" name="gpa">
 
                                         <select class="form-control" id="gpa-scale" name="gpa-scale">
                                             <option value="10">/10</option>
@@ -237,8 +266,10 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 </div>
                                 <!-- </form> -->
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-objective" onclick="changeTab('objective')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-experience" onclick="changeTab('experience')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-objective"
+                                        onclick="changeTab('objective')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-experience"
+                                        onclick="changeTab('experience')">Next</button>
                                 </div>
                             </div>
 
@@ -252,38 +283,51 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="job-skills">Skills Utilized</label>
-                                    <input type="text" class="form-control" id="job-skills" placeholder="What you obtain after working at this position" name="job-skills[]" required>
+                                    <input type="text" class="form-control" id="job-skills"
+                                        placeholder="What you obtain after working at this position" name="job-skills[]"
+                                        required>
                                 </div>
 
                                 <button type="button" class="btn btn-success my-3" id="add-experience">Add
                                     New skill</button>
                                 <!-- Add a Next button to go to the next section -->
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-education" onclick="changeTab('education')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-history" onclick="changeTab('history')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-education"
+                                        onclick="changeTab('education')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-history"
+                                        onclick="changeTab('history')">Next</button>
                                 </div>
                                 <!-- </form> -->
                             </div>
 
-
+                            <?php
+                            $work_info = $conn->prepare("SELECT working_history.position, working_history.company_name, working_history.duration, working_history.tasks FROM working_history WHERE working_history.resume_id = $resume_id AND working_history.user_id = $user_id");
+                            $work_info->execute();
+                            $result_work = $work_info->get_result();
+                            $row_work = $result_work->fetch_assoc();
+                            ?>
                             <!-- Work history Section -->
                             <div class="tab-pane" id="history-section">
                                 <input type="hidden" id="activeTabIndex" value="4">
                                 <h4>Step 4/6: Work History</h4>
-                                <p class="text" style="color: blue">Please show us your latest job, or your most impressive experience </p>
+                                <p class="text" style="color: blue">Please show us your latest job, or your most
+                                    impressive experience </p>
                                 <form>
                                     <div class="form-group mt-1">
-                                        <label for="job-name">Job Title</label>
-                                        <input type="text" class="form-control" id="job-name" name="job-name" placeholder="Job Name" required>
+                                        <label for="job-name">Job Poition</label>
+                                        <input type="text" class="form-control" id="job-name" name="job-name"
+                                            placeholder="Job Name" value="<?php if (isset($row_work['position'])) {echo $row_work['position'];} else {echo "";} ?>" required>
                                     </div>
                                     <div class="form-group mt-1">
                                         <label for="company-name">Company Name</label>
-                                        <input type="text" class="form-control" placeholder="Name of the Company" id="company-name" name="company-name" required>
+                                        <input type="text" class="form-control" placeholder="Name of the Company"
+                                            id="company-name" name="company-name" value="<?php if (isset($row_work['company_name'])) {echo $row_work['company_name'];} else {echo "";} ?>" required>
                                     </div>
                                     <div class="form-group mt-1">
 
                                         <label for="employment-degree">Type of Employment</label>
-                                        <select class="form-control" id="employment-degree" required name="employment-degree">
+                                        <select class="form-control" id="employment-degree" required
+                                            name="employment-degree">
                                             <option value="">-- Select --</option>
                                             <option value="full-time">Full-time</option>
                                             <option value="part-time">Part-time</option>
@@ -310,13 +354,17 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                     <div class="form-group mt-1 ">
                                         <label for="working-description">Job Description</label>
 
-                                        <textarea class="form-control" id="working-description" placeholder="Tell us something about that working experience" name="working-description" rows="2" required></textarea>
+                                        <textarea class="form-control" id="working-description"
+                                            placeholder="Tell us something about that working experience such as which tasks you have done, ..."
+                                            name="working-description" rows="2" required><?php if (isset($row_work['tasks'])) {echo $row_work['tasks'];} else {echo "";} ?></textarea>
 
                                     </div>
                                 </form>
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-experience" onclick="changeTab('experience')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-certification" onclick="changeTab('certification')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-experience"
+                                        onclick="changeTab('experience')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-certification"
+                                        onclick="changeTab('certification')">Next</button>
                                 </div>
                             </div>
 
@@ -331,16 +379,18 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="certification-name">Certification Name</label>
-                                    <input type="text" class="form-control" id="certification-name" placeholder="Certification title" name="certification-name[]" required>
+                                    <input type="text" class="form-control" id="certification-name"
+                                        placeholder="Certification title" name="certification-name[]" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="certification-organization">Organization</label>
-                                    <textarea class="form-control" id="certification-organization" 
-                                    name="certification-organization[]"  rows="1" required></textarea>
+                                    <textarea class="form-control" id="certification-organization"
+                                        name="certification-organization[]" rows="1" required></textarea>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="certification-date">Date</label>
-                                    <input type="month" class="form-control" id="certification-date" name="certification-date[]" required>
+                                    <input type="month" class="form-control" id="certification-date"
+                                        name="certification-date[]" required>
                                 </div>
 
                                 <!-- </form> -->
@@ -350,8 +400,10 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                     More</button>
 
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-history" onclick="changeTab('history')">Back</button>
-                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-reference" onclick="changeTab('reference')">Next</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-history"
+                                        onclick="changeTab('history')">Back</button>
+                                    <button type="button" class="btn btn-primary ml-auto" id="next-to-reference"
+                                        onclick="changeTab('reference')">Next</button>
                                 </div>
                             </div>
 
@@ -365,20 +417,24 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 <!-- <form> -->
                                 <div class="form-group">
                                     <label for="reference-name">Reference Name</label>
-                                    <input type="text" class="form-control" id="reference-name" name="reference-name[]" required>
+                                    <input type="text" class="form-control" id="reference-name" name="reference-name[]"
+                                        required>
                                 </div>
                                 <div class="form-group">
                                     <label for="reference-phone">Major</label>
-                                    <input type="text" class="form-control" id="reference-phone" name="reference-phone[]" required>
+                                    <input type="text" class="form-control" id="reference-phone"
+                                        name="reference-phone[]" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="reference-email">Email</label>
-                                    <input type="email" class="form-control" id="reference-email" name="reference-email[]" required>
+                                    <input type="email" class="form-control" id="reference-email"
+                                        name="reference-email[]" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="reference-relationship">Relationship</label>
-                                    <input type="text" class="form-control" id="reference-relationship" name="reference-relationship[]" required>
+                                    <input type="text" class="form-control" id="reference-relationship"
+                                        name="reference-relationship[]" required>
                                 </div>
                                 <!-- </form> -->
 
@@ -386,8 +442,10 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                                 <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
 
                                 <div class="d-flex justify-content-between mt-4">
-                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-certification" onclick="changeTab('certification')">Back</button>
-                                    <button type="submit" id="next-to-end" class="btn btn-primary ml-auto">Submit</button>
+                                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-certification"
+                                        onclick="changeTab('certification')">Back</button>
+                                    <button type="submit" id="next-to-end"
+                                        class="btn btn-primary ml-auto">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -400,7 +458,8 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
     </div>
     </div>
     <?php require_once('inc/footer.php') ?>
-    <div id="scrolltop"><a class="btn btn-secondary" href="#top"><span class="icon"><i class="fas fa-angle-up fa-x"></i></span></a></div>
+    <div id="scrolltop"><a class="btn btn-secondary" href="#top"><span class="icon"><i
+                    class="fas fa-angle-up fa-x"></i></span></a></div>
     <script src="./scripts/imagesloaded.pkgd.min.js?ver=1.2.0"></script>
     <script src="./scripts/masonry.pkgd.min.js?ver=1.2.0"></script>
     <script src="./scripts/BigPicture.min.js?ver=1.2.0"></script>
@@ -449,7 +508,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
         const graduationYearSelect = document.getElementById('graduation-year');
 
         // Disable the Graduation Year select when the Education Level is High School
-        educationLevel.addEventListener('change', function() {
+        educationLevel.addEventListener('change', function () {
             if (educationLevel.value === 'high-school') {
                 graduationYearSelect.value = '1234';
                 graduationYearSelect.disabled = true;
@@ -459,7 +518,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
         });
         const salaryRangeInput = document.getElementById('salary-range');
 
-        salaryRangeInput.addEventListener('input', function() {
+        salaryRangeInput.addEventListener('input', function () {
             const cleanedValue = salaryRangeInput.value.replace(/[^0-9]/g, '');
             salaryRangeInput.value = cleanedValue;
         });
@@ -471,7 +530,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
 
         let gpaScaleSelect = document.querySelector('#gpa-scale');
 
-        gpaScaleSelect.addEventListener('change', function() {
+        gpaScaleSelect.addEventListener('change', function () {
             let gpaScale = this.value;
 
             gpaInput.setAttribute('max', gpaScale);
@@ -485,13 +544,13 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
         gpaInput.setAttribute('max', maxGpa);
 
         // Update max value when the selected scale changes
-        gpaScaleSelect.addEventListener('change', function() {
+        gpaScaleSelect.addEventListener('change', function () {
             const newMaxGpa = gpaScaleSelect.value;
             gpaInput.setAttribute('max', newMaxGpa);
         });
 
         // Listen for input events on the GPA input element
-        gpaInput.addEventListener('input', function() {
+        gpaInput.addEventListener('input', function () {
             const enteredGpa = parseFloat(gpaInput.value);
             const maxGpa = parseFloat(gpaInput.getAttribute('max'));
 
@@ -500,7 +559,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                 gpaInput.value = maxGpa;
             }
         });
-        gpaInput.addEventListener('input', function() {
+        gpaInput.addEventListener('input', function () {
             // Remove all non-numeric and non-decimal characters
             let cleanedValue = gpaInput.value;
 
@@ -520,7 +579,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
     <script>
         function addExperienceForm() {
             let experienceCount = 1;
-            document.querySelector('#add-experience').addEventListener('click', function() {
+            document.querySelector('#add-experience').addEventListener('click', function () {
                 // Create new form elements
                 let newForm = document.createElement('div');
                 newForm.classList.add('experience-forms');
@@ -539,7 +598,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                 // Increment the experience count
                 experienceCount++;
                 // Add event listener to the new "Remove Experience" button
-                newForm.querySelector('.remove-experience-form').addEventListener('click', function() {
+                newForm.querySelector('.remove-experience-form').addEventListener('click', function () {
                     if (confirm('Are you sure you want to delete this skill?')) {
                         // Remove the corresponding experience form
                         this.parentNode.remove();
@@ -560,7 +619,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
     <script>
         function addCertificationForm() {
             let certificationCount = 1;
-            document.querySelector('#add-certification').addEventListener('click', function() {
+            document.querySelector('#add-certification').addEventListener('click', function () {
                 // Create new form elements
                 let newForm = document.createElement('div');
                 newForm.classList.add('certification-forms');
@@ -587,7 +646,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
 
                 certificationCount++;
 
-                newForm.querySelector('.remove-certification-form').addEventListener('click', function() {
+                newForm.querySelector('.remove-certification-form').addEventListener('click', function () {
                     if (confirm('Are you sure you want to delete this certification?')) {
                         // Remove the corresponding experience form
                         this.parentNode.remove();
@@ -604,7 +663,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
     <script>
         function addReferenceForm() {
             let referenceCount = 1;
-            document.querySelector('#add-reference').addEventListener('click', function() {
+            document.querySelector('#add-reference').addEventListener('click', function () {
                 // Create new form elements
                 let newForm = document.createElement('div');
                 newForm.classList.add('reference-forms');
@@ -633,7 +692,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
 
                 referenceCount++;
 
-                newForm.querySelector('.remove-reference-form').addEventListener('click', function() {
+                newForm.querySelector('.remove-reference-form').addEventListener('click', function () {
                     if (confirm('Are you sure you want to delete this reference?')) {
                         // Remove the corresponding reference form
                         this.parentNode.remove();
@@ -667,8 +726,8 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
                 nextButton.disabled = false;
 
             }
-            requiredInputs.forEach(function(input) {
-                input.addEventListener("input", function() {
+            requiredInputs.forEach(function (input) {
+                input.addEventListener("input", function () {
                     if (checkRequiredInputs()) {
                         nextButton.disabled = false;
                         document.getElementById(tab + "-tab").disabled = false;
@@ -682,7 +741,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
             // Check if all required inputs in the active tab are filled
             function checkRequiredInputs() {
                 let allFilled = true;
-                requiredInputs.forEach(function(input) {
+                requiredInputs.forEach(function (input) {
                     if (input.value === "") {
                         allFilled = false;
                     }
@@ -697,7 +756,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
     <script>
         const form = document.getElementById('cv-form');
 
-        form.addEventListener('keydown', function(event) {
+        form.addEventListener('keydown', function (event) {
             if (event.key === 'Enter') {
                 event.preventDefault();
                 changeTab('next-tab');
@@ -763,7 +822,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
 
 
         // Handle keydown event for Enter key
-        document.addEventListener("keydown", function(event) {
+        document.addEventListener("keydown", function (event) {
             const activeTabIndexInput = document.getElementById("activeTabIndex");
             let activeTabIndex = parseInt(activeTabIndexInput.value);
             if (event.key === "Enter") {
@@ -785,7 +844,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."></textarea>
         });
 
         // Initialize tab navigation
-        window.addEventListener("DOMContentLoaded", function() {
+        window.addEventListener("DOMContentLoaded", function () {
             // Call the changeTab() function to set the initial tab
             const initialTab = Object.keys(tabIndex)[0];
             changeTab(initialTab);

@@ -97,6 +97,8 @@ CREATE TABLE IF NOT EXISTS `education` (
     `school` varchar(250) NOT NULL,
     `degree` varchar(250) NOT NULL,
     `major` varchar(250) NOT NULL,
+    `year` varchar(250) NOT NULL,
+    `gpa` varchar(250) NOT NULL,
     `date_added` datetime NOT NULL DEFAULT current_timestamp(),
     `date_updated` datetime DEFAULT NULL ON UPDATE current_timestamp(),
     FOREIGN KEY (`resume_id`) REFERENCES `resume`(`id`) ON DELETE CASCADE,
