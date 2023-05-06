@@ -29,8 +29,8 @@ $conn->select_db("co3049");
 
 // Create products table
 // cái type ở đây là dùng để phân ra user là jobseeker hay là nhà tuyển dụng ấy
-// nên set 1 là jobseeker
-// set 2 là nhà tuyển dụng
+// nên set 0 là jobseeker
+// set 1 là nhà tuyển dụng
 // với ai làm khúc register thì xem cách upload hình như thế nào nhá :v rồi trữ cái dường dẫn đó vào database
 // file hình thì đc trữ trong folder uploads r trích ra khi xài
 
