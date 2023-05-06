@@ -105,7 +105,12 @@
                                 $obj_info->execute();
                                 $result_obj = $obj_info->get_result();
                                 $row_obj = $result_obj->fetch_assoc();
-                                $resume_id = $row_obj['id'];
+                                if (isset($row_obj['id'])){
+                                    $resume_id = $row_obj['id'];
+                                } else {
+                                    $resume_id = -999;
+                                }
+                                
 
 
                                 $additional_info = $conn->prepare("SELECT additional_information.hobbies, additional_information.habits, additional_information.personal_info FROM additional_information WHERE additional_information.user_id = $user_id AND additional_information.resume_id = $resume_id");
@@ -173,11 +178,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <label for="employment-type">Type of Employment</label>
                                     <select class="form-control" required id="employment-type" name="employment-type">
                                         <option value="">-- Select --</option>
-                                        <option value="full-time" <?php if ($row_obj['employment_type'] == 'full-time') echo 'selected'; ?>>Full-time</option>
-                                        <option value="part-time" <?php if ($row_obj['employment_type'] == 'part-time') echo 'selected'; ?>>Part-time</option>
-                                        <option value="contract" <?php if ($row_obj['employment_type'] == 'contract') echo 'selected'; ?>>Contract</option>
-                                        <option value="freelance" <?php if ($row_obj['employment_type'] == 'freelance') echo 'selected'; ?>>Freelance</option>
-                                        <option value="internship" <?php if ($row_obj['employment_type'] == 'internship') echo 'selected'; ?>>Internship</option>
+                                        <option value="full-time" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'full-time') echo 'selected'; ?>>Full-time</option>
+                                        <option value="part-time" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'part-time') echo 'selected'; ?>>Part-time</option>
+                                        <option value="contract" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'contract') echo 'selected'; ?>>Contract</option>
+                                        <option value="freelance" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'freelance') echo 'selected'; ?>>Freelance</option>
+                                        <option value="internship" <?php if (isset($row_obj['employment_type']) && $row_obj['employment_type'] == 'internship') echo 'selected'; ?>>Internship</option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-1">
@@ -331,11 +336,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <select class="form-control" id="employment-degree" required
                                             name="employment-degree">
                                             <option value="">-- Select --</option>
-                                            <option value="full-time" <?php if ($row_work['work_type'] == 'full-time') echo 'selected'; ?>>Full-time</option>
-                                            <option value="part-time" <?php if ($row_work['work_type'] == 'part-time') echo 'selected'; ?>>Part-time</option>
-                                            <option value="contract" <?php if ($row_work['work_type'] == 'contract') echo 'selected'; ?>>Contract</option>
-                                            <option value="freelance" <?php if ($row_work['work_type'] == 'freelance') echo 'selected'; ?>>Freelance</option>
-                                            <option value="internship" <?php if ($row_work['work_type'] == 'internship') echo 'selected'; ?>>Internship</option>
+                                        <option value="full-time" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'full-time') echo 'selected'; ?>>Full-time</option>
+                                        <option value="part-time" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'part-time') echo 'selected'; ?>>Part-time</option>
+                                        <option value="contract" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'contract') echo 'selected'; ?>>Contract</option>
+                                        <option value="freelance" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'freelance') echo 'selected'; ?>>Freelance</option>
+                                        <option value="internship" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'internship') echo 'selected'; ?>>Internship</option>
                                         </select>
                                     </div>
 
@@ -343,14 +348,14 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <label for="job-duration">Duration</label>
                                         <select class="form-control" id="job-duration" name="job-duration[]" required>
                                             <option value="">-- Select --</option>
-                                            <option value="0" <?php if ($row_work['duration'] == '0') echo 'selected'; ?>>Less Than 6 Months</option>
-                                            <option value="1" <?php if ($row_work['duration'] == '1') echo 'selected'; ?>>6 Months to < 1 Years</option>
-                                            <option value="2" <?php if ($row_work['duration'] == '2') echo 'selected'; ?>>1 Years to < 2 Years</option>
-                                            <option value="3" <?php if ($row_work['duration'] == '3') echo 'selected'; ?>>2 Years to < 3 Years</option>
-                                            <option value="4" <?php if ($row_work['duration'] == '4') echo 'selected'; ?>>3 Years to < 4 Years</option>
-                                            <option value="5" <?php if ($row_work['duration'] == '5') echo 'selected'; ?>>4 Years to < 5 Years</option>
-                                            <option value="6" <?php if ($row_work['duration'] == '6') echo 'selected'; ?>>Over 5 Years</option>
-                                            <option value="-1" <?php if ($row_work['duration'] == '-1') echo 'selected'; ?>>Still in Job</option>
+                                            <option value="0" <?php if (isset($row_work['duration']) && $row_work['duration'] == '0') echo 'selected'; ?>>Less Than 6 Months</option>
+                                            <option value="1" <?php if (isset($row_work['duration']) && $row_work['duration'] == '1') echo 'selected'; ?>>6 Months to < 1 Years</option>
+                                            <option value="2" <?php if (isset($row_work['duration']) && $row_work['duration'] == '2') echo 'selected'; ?>>1 Years to < 2 Years</option>
+                                            <option value="3" <?php if (isset($row_work['duration']) && $row_work['duration'] == '3') echo 'selected'; ?>>2 Years to < 3 Years</option>
+                                            <option value="4" <?php if (isset($row_work['duration']) && $row_work['duration'] == '4') echo 'selected'; ?>>3 Years to < 4 Years</option>
+                                            <option value="5" <?php if (isset($row_work['duration']) && $row_work['duration'] == '5') echo 'selected'; ?>>4 Years to < 5 Years</option>
+                                            <option value="6" <?php if (isset($row_work['duration']) && $row_work['duration'] == '6') echo 'selected'; ?>>Over 5 Years</option>
+                                            <option value="-1" <?php if (isset($row_work['duration']) && $row_work['duration'] == '-1') echo 'selected'; ?>>Still in Job</option>
                                         </select>
                                     </div>
                                     <div class="form-group mt-1 ">
@@ -390,9 +395,14 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         name="certification-organization[]" rows="1" required></textarea>
                                 </div>
                                 <div class="form-group mt-1">
-                                    <label for="certification-date">Date</label>
-                                    <input type="month" class="form-control" id="certification-date"
+                                    <label for="certification-date">Obtained date</label>
+                                    <input type="date" class="form-control" id="certification-date"
                                         name="certification-date[]" required>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="expire-date">Expired date</label>
+                                    <input type="date" class="form-control" id="expire-date"
+                                        name="expire-date[]">
                                 </div>
 
                                 <!-- </form> -->

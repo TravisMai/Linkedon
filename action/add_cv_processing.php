@@ -100,15 +100,16 @@ $certifications = array();
 for ($i = 0; $i < count($certification_names); $i++) {
     $certifications[$i] = array(
         'name' => $certification_names[$i],
-        'date' => $certification_dates[$i],
+        'obtain_date' => date('Y-m-d', strtotime($certification_dates[$i])),
+        'expire_date' => date('Y-m-d', strtotime($expire_dates[$i])),
         'organization' => $certification_organizations[$i]
     );
 }
 
 // Insert the certifications into the database
-$sql = "INSERT INTO certificate (resume_id, user_id, title, obtained_date, organization) VALUES ";
+$sql = "INSERT INTO certificate (resume_id, user_id, title, obtained_date, expiration_date, organization) VALUES ";
 foreach ($certifications as $certification) {
-    $sql .= "('$insert_id','$user_id','$certification[name]', '$certification[date]', '$certification[organization]'),";
+    $sql .= "('$insert_id','$user_id','$certification[name]', '$certification[obtain_date]', '$certification[expire_date]', '$certification[organization]'),";
 }
 $sql = rtrim($sql, ",");
 mysqli_query($conn, $sql);
@@ -131,7 +132,7 @@ for ($i = 0; $i < count($reference_names); $i++) {
 }
 
 // Insert the references into the database
-$sql = "INSERT INTO references (reference_name, reference_phone, reference_email, reference_relationship) VALUES ";
+$sql = "INSERT INTO reference (reference_name, reference_phone, reference_email, reference_relationship) VALUES ";
 foreach ($references as $reference) {
     $sql .= "('$reference[reference_name]', '$reference[reference_phone]', '$reference[reference_email]', '$reference[reference_relationship]'),";
 }
