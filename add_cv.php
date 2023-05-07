@@ -14,11 +14,14 @@
         "reference": [6, 0],
         "end": [7, 0]
     };
-    var experienceCount = 0;
-    var certificationCount = 0;
-    var referenceCount = 0;
-    var jobCount = 0;
+
 </script>
+<?php
+$experienceCount = 0;
+$certificationCount = 0;
+$referenceCount = 0;
+$jobCount = 0;
+?>
 
 <body id="top">
     <?php require_once('inc/topBarNav.php');
@@ -249,8 +252,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         onclick="changeTab('education')">Next</button>
                                 </div>
                             </div>
-
-
                             <?php
                             $edu_info = $conn->prepare("SELECT education.school, education.major, education.degree, education.year, education.gpa FROM education WHERE education.user_id = $user_id AND education.resume_id = $resume_id");
                             $edu_info->execute();
@@ -261,8 +262,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                             <div class="tab-pane" id="education-section">
                                 <input type="hidden" id="activeTabIndex" value="2">
                                 <h4>Step 2/6: Education</h4>
-
-                                <!-- <form> -->
                                 <div class="form-group mt-1">
                                     <label for="school-name">School/University name</label>
                                     <input type="text" placeholder="Your University/ School" class="form-control"
@@ -287,31 +286,35 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <option value="">-- Select --</option>
                                         <option value="High School" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'High School') {
                                             echo 'selected';
-                                        } ?>>High School</option>
+                                        } ?>>High School
+                                        </option>
                                         <option value="Ungraduated" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Ungraduated") {
                                             echo 'selected';
                                         } ?>>Ungraduated</option>
                                         <option value="Bachelor" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Bachelor") {
                                             echo 'selected';
-                                        } ?>>Bachelor's Degree</option>
+                                        } ?>>Bachelor's Degree
+                                        </option>
                                         <option value="MBA" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'MBA') {
                                             echo 'selected';
                                         } ?>>MBA</option>
                                         <option value="Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Graduate') {
                                             echo 'selected';
-                                        } ?>>Graduate Degree</option>
+                                        } ?>>Graduate Degree
+                                        </option>
                                         <option value="Post Graduate" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Post Graduate') {
                                             echo 'selected';
-                                        } ?>>Post-Graduate Degree</option>
+                                        } ?>>Post-Graduate   Degree</option>
                                         <option value="Ph.D" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == 'Ph.D') {
                                             echo 'selected';
-                                        } ?>>Doctor of Philosophy</option>
+                                        } ?>>Doctor of Philosophy
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="graduation-year">Graduation Year</label>
                                     <select class="form-control" id="graduation-year" name="graduation-year">
-                                    <option value="">-- Select --</option>
+                                        <option value="">-- Select --</option>
                                         <option value="1234">High School</option>
                                         <!-- Generate options for years from 1990 to 2023 -->
                                         <?php
@@ -331,17 +334,19 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <label class="input-group-text" for="gpa-scale"> </label>
                                         <input type="number" step="0.01" max="10" required class="form-control" id="gpa"
                                             placeholder="7.0" name="gpa"
-                                            value = "<?php echo isset($row_edu['gpa'])?$parts = explode('/', $row_edu['gpa'])[0]:'';?>"
-                                        >
+                                            value="<?php echo isset($row_edu['gpa']) ? $parts = explode('/', $row_edu['gpa'])[0] : ''; ?>">
                                         <select class="form-control" id="gpa-scale" name="gpa-scale">
-                                            <option value="10" <?php if ((isset($row_edu['gpa'])) && $parts = explode('/', $row_edu['gpa'])[1] == 10){echo 'selected';} ?>>/10</option>
-                                            <option value="4" <?php if ((isset($row_edu['gpa'])) && $parts = explode('/', $row_edu['gpa'])[1] == 4){echo 'selected';} ?> >/4</option>
+                                            <option value="10" <?php if ((isset($row_edu['gpa'])) && $parts = explode('/', $row_edu['gpa'])[1] == 10) {
+                                                echo 'selected';
+                                            } ?>>/10</option>
+                                            <option value="4" <?php if ((isset($row_edu['gpa'])) && $parts = explode('/', $row_edu['gpa'])[1] == 4) {
+                                                echo 'selected';
+                                            } ?>>/4</option>
                                         </select>
                                         <div>
                                         </div>
                                     </div>
                                 </div>
-                                <!-- </form> -->
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-objective"
                                         onclick="changeTab('objective')">Back</button>
@@ -349,17 +354,26 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         onclick="changeTab('experience')">Next</button>
                                 </div>
                             </div>
-
-
+                            <?php
+                            $skill_info = $conn->prepare("SELECT skill.skill FROM skill WHERE skill.resume_id = $resume_id AND skill.user_id = $user_id");
+                            $skill_info->execute();
+                            $result_skill = $skill_info->get_result();
+                            $row_skill = $result_skill->fetch_assoc();
+                            ?>
                             <!-- Professional Skills -->
                             <div class="tab-pane" id="experience-section" style="display: none;">
                                 <input type="hidden" id="activeTabIndex" value="3">
+                                <?php $experienceCount++; ?>
                                 <h4>Step 3/6: Professional Experience</h4>
                                 <h5>First Skill</h5>
                                 <div class="form-group mt-1">
                                     <label for="job-skills">Skills Utilized</label>
                                     <input type="text" class="form-control" id="job-skills"
-                                        placeholder="What skill that you obtained" name="job-skills[]" required>
+                                        placeholder="What skill that you obtained" name="job-skills[]" value="<?php if (isset($row_skill['skill'])) {
+                                            echo $row_skill['skill'];
+                                        } else {
+                                            echo "";
+                                        } ?>" required>
                                 </div>
                                 <button type="button" class="btn btn-success my-3" id="add-experience">Add
                                     New skill</button>
@@ -378,13 +392,14 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                             $result_work = $work_info->get_result();
                             $row_work = $result_work->fetch_assoc();
                             ?>
-                            <!-- Work history Section --> 
+                            <!-- Work history Section -->
                             <div class="tab-pane" id="history-section">
                                 <input type="hidden" id="activeTabIndex" value="4">
+                                <?php $jobCount++; ?>
                                 <h4>Step 4/6: Work History</h4>
                                 <h5>Lastest Job</h5>
                                 <p class="text" style="color: blue">Please show us your latest job, or your most
-                                impressive experience </p>
+                                    impressive experience </p>
                                 <div class="form-group mt-1">
                                     <label for="job-name">Job Position</label>
                                     <input type="text" class="form-control" id="job-name" name="job-name[]"
@@ -463,7 +478,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         } else {
                                             echo "";
                                         } ?></textarea>
-                                </div> 
+                                </div>
                                 <button type="button" class="btn btn-primary mt-3" id="add-job">Add More</button>
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-experience"
@@ -473,30 +488,53 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 </div>
                             </div>
 
+                            <?php
+                            $certi_info = $conn->prepare("SELECT certificate.title, certificate.organization, certificate.obtained_date, certificate.expiration_date FROM certificate WHERE certificate.resume_id = $resume_id AND certificate.user_id = $user_id");
+                            $certi_info->execute();
+                            $result_certi = $certi_info->get_result();
+                            $row_certi = $result_certi->fetch_assoc();
+                            ?>
                             <!-- Certiftication -->
                             <div class="tab-pane" id="certification-section" style="display: none;">
                                 <input type="hidden" id="activeTabIndex" value="5">
+                                <?php $certificationCount++; ?>
                                 <h4>Step 5/6: Certifications</h4>
                                 <h5>First Certification</h5>
                                 <div class="form-group mt-1">
                                     <label for="certification-name">Certification Name</label>
                                     <input type="text" class="form-control" id="certification-name"
-                                        placeholder="Certification title" name="certification-name[]" required>
+                                        placeholder="Certification title" name="certification-name[]" value="<?php if (isset($row_certi['title'])) {
+                                            echo $row_certi['title'];
+                                        } else {
+                                            echo "";
+                                        } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="certification-organization">Organization</label>
                                     <textarea class="form-control" id="certification-organization"
                                         name="certification-organization[]" placeholder="Organization provider" rows="1"
-                                        required></textarea>
+                                        required><?php if (isset($row_certi['organization'])) {
+                                            echo $row_certi['organization'];
+                                        } else {
+                                            echo "";
+                                        } ?></textarea>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="certification-date">Obtained date</label>
                                     <input type="date" class="form-control" id="certification-date"
-                                        name="certification-date[]" required>
+                                        name="certification-date[]" value="<?php if (isset($row_certi['obtained_date'])) {
+                                            echo $row_certi['obtained_date'];
+                                        } else {
+                                            echo "";
+                                        } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="expire-date">Expired date</label>
-                                    <input type="date" class="form-control" id="expire-date" name="expire-date[]">
+                                    <input type="date" class="form-control" id="expire-date" name="expire-date[]" value="<?php if (isset($row_certi['expiration_date'])) {
+                                        echo $row_certi['expiration_date'];
+                                    } else {
+                                        echo "";
+                                    } ?>">
                                 </div>
                                 <button type="button" class="btn btn-primary mt-3" id="add-certification">Add
                                     More</button>
@@ -507,32 +545,55 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         onclick="changeTab('reference')">Next</button>
                                 </div>
                             </div>
-
+                            
+                            <?php
+                            $refer_info = $conn->prepare("SELECT reference.name, reference.email, reference.phone, reference.relationship FROM reference WHERE reference.resume_id = $resume_id AND reference.user_id = $user_id");
+                            $refer_info->execute();
+                            $result_refer = $refer_info->get_result();
+                            $row_refer = $result_refer->fetch_assoc();
+                            ?>
                             <!-- Refernce -->
                             <div class="tab-pane" id="reference-section" style="display: none;">
                                 <input type="hidden" id="activeTabIndex" value="6">
+                                <?php $referenceCount++; ?>
                                 <h4>Step 6/6: References</h4>
                                 <h5>First Reference</h5>
+
                                 <div class="form-group">
                                     <label for="reference-name">Name</label>
                                     <input type="text" class="form-control" id="reference-name" name="reference-name[]"
-                                        placeholder="Relationship's name" required>
+                                        placeholder="Relationship's name" value="<?php if (isset($row_refer['name'])) {
+                                            echo $row_refer['name'];
+                                        } else {
+                                            echo "";
+                                        } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="reference-email">Email</label>
                                     <input type="email" class="form-control" id="reference-email"
-                                        name="reference-email[]" placeholder="Email" required>
+                                        name="reference-email[]" placeholder="Email" value="<?php if (isset($row_refer['email'])) {
+                                            echo $row_refer['email'];
+                                        } else {
+                                            echo "";
+                                        } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="reference-phone">Phone</label>
                                     <input type="text" class="form-control" id="reference-phone"
-                                        name="reference-phone[]" placeholder="Phone" required>
+                                        name="reference-phone[]" placeholder="Phone" value="<?php if (isset($row_refer['phone'])) {
+                                            echo $row_refer['phone'];
+                                        } else {
+                                            echo "";
+                                        } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
                                     <label for="reference-relationship">Relationship</label>
                                     <input type="text" class="form-control" id="reference-relationship"
-                                        placeholder="Ex: Lecturer, Mentor, etc" name="reference-relationship[]"
-                                        required>
+                                        placeholder="Ex: Lecturer, Mentor, etc" name="reference-relationship[]" value="<?php if (isset($row_refer['relationship'])) {
+                                            echo $row_refer['relationship'];
+                                        } else {
+                                            echo "";
+                                        } ?>" required>
                                 </div>
                                 <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
 
@@ -595,7 +656,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                 label.insertBefore(requiredLabel, label.lastChild.nextSibling);
             });
         </script>
-
 
         <!-- Year/Salary handle -->
         <script>
@@ -672,8 +732,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             // Enable the next button only when all required fields have been filled
 
             function validationTab(tab) {
-
-
                 let activeTabIndex = tabIndex[tab];
                 // Get the index of the active tab
 
@@ -751,6 +809,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             });
         </script>
 
+        <!-- Nav bar Handle -->
         <script>
             // Get the activeTabIndex value
             const activeTabIndexInput = document.getElementById("activeTabIndex");
@@ -778,7 +837,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                     links[i].classList.remove("active");
                     document.querySelector('.active').style.backgroundColor = "transparent"
                 }
-
                 // Add the 'active' class to the selected tab link
 
                 document.getElementById(tab + "-tab").classList.add('active');
@@ -787,7 +845,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                 const scrolling = document.getElementById('card-cv');
 
                 scrolling.scrollIntoView();
-
             }
 
 
@@ -838,35 +895,36 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
         </script>
 
         <!-- add many experience -->
-
         <script>
             function addExperienceForm() {
-                let experienceCount = 1;
                 document.querySelector('#add-experience').addEventListener('click', function () {
                     // Create new form elements
                     let newForm = document.createElement('div');
                     newForm.classList.add('experience-forms');
                     newForm.innerHTML = `
+                    <?php $experienceCount++; ?>
             <h5 class="mt-3">Another Skill </h5>
-                <div class="form-group">
-                    <label for="job-skills">Skills Utilized</label>
-                    <input type="text" id="job-skill" class="form-control" placeholder="What you obtain after working at this position" 
-                    name="job-skills[]" required>
-
-                </div>
+            <div class="form-group mt-1">
+            <?php $row_skill = $result_skill->fetch_assoc(); ?>
+                <label for="job-skills">Skills Utilized</label>
+                <input type="text" class="form-control" id="job-skills"
+                    placeholder="What skill that you obtained" name="job-skills[]" value="<?php if (isset($row_skill['skill'])) {
+                        echo $row_skill['skill'];
+                    } else {
+                        echo "";
+                    } ?>" required>
+            </div>
             <button type="button" class="btn btn-danger mt-3 remove-experience-form">Remove Skill</button>
         `;
                     // Append the new form elements to the page
                     this.parentNode.insertBefore(newForm, this);
                     // Increment the experience count
-                    experienceCount++;
                     // Add event listener to the new "Remove Experience" button
                     newForm.querySelector('.remove-experience-form').addEventListener('click', function () {
                         if (confirm('Are you sure you want to delete this skill?')) {
                             // Remove the corresponding experience form
                             this.parentNode.remove();
                             // Decrement the experience count
-                            experienceCount--;
                             // Update the text of the p element
                         }
                     });
@@ -878,13 +936,13 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
         <!-- Add many job  -->
         <script>
             function addJobForm() {
-                let experienceCount = 1;
                 document.querySelector('#add-job').addEventListener('click', function () {
                     // Create new form elements
                     let newForm = document.createElement('div');
                     newForm.classList.add('job-forms');
                     newForm.innerHTML = `
             <h5 class="mt-3">Another Job </h5>
+            <?php $row_work = $result_work->fetch_assoc(); ?>
             <div class="form-group mt-1">
                 <label for="job-name">Job Position</label>
                 <input type="text" class="form-control" id="job-name" name="job-name[]"
@@ -969,65 +1027,84 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                     // Append the new form elements to the page
                     this.parentNode.insertBefore(newForm, this);
                     // Increment the experience count
-                    experienceCount++;
                     // Add event listener to the new "Remove Experience" button
                     newForm.querySelector('.remove-job-form').addEventListener('click', function () {
                         if (confirm('Are you sure you want to delete this job history?')) {
                             // Remove the corresponding experience form
                             this.parentNode.remove();
                             // Decrement the experience count
-                            jobCount--;
                             // Update the text of the p element
                         }
                     });
                 });
             }
-            addExperienceForm();
+            addJobForm();
         </script>
 
         <!-- Add many certification -->
 
         <script>
             function addCertificationForm() {
-                let certificationCount = 1;
                 document.querySelector('#add-certification').addEventListener('click', function () {
                     // Create new form elements
                     let newForm = document.createElement('div');
                     newForm.classList.add('certification-forms');
                     newForm.innerHTML = `
             <h5 class="mt-3">Next Certification</h5>
+            <?php $row_certi = $result_certi->fetch_assoc(); ?>
             <div class="form-group mt-1">
-                <label for="certification-name">Certification Name</label>
-                <input type="text" class="form-control" id="certification-name"
-                    placeholder="Certification title" name="certification-name[]" required>
-            </div>
-            <div class="form-group mt-1">
-                <label for="certification-organization">Organization</label>
-                <textarea class="form-control" id="certification-organization"
-                    name="certification-organization[]" placeholder = "Organization provider"rows="1" required></textarea>
-            </div>
-            <div class="form-group mt-1">
-                <label for="certification-date">Obtained date</label>
-                <input type="date" class="form-control" id="certification-date"
-                    name="certification-date[]" required>
-            </div>
-            <div class="form-group mt-1">
-                <label for="expire-date">Expired date</label>
-                <input type="date" class="form-control" id="expire-date" name="expire-date[]">
-            </div>
+                    <label for="certification-name">Certification Name</label>
+                    <input type="text" class="form-control" id="certification-name"
+                        placeholder="Certification title" name="certification-name[]" value="<?php if (isset($row_certi['title'])) {
+                            echo $row_certi['title'];
+                        } else {
+                            echo "";
+                        } ?>" required>
+                </div>
+                <div class="form-group mt-1">
+                    <label for="certification-organization">Organization</label>
+                    <textarea class="form-control" id="certification-organization"
+                        name="certification-organization[]" placeholder="Organization provider" rows="1"
+                        required><?php if (isset($row_certi['organization'])) {
+                            echo $row_certi['organization'];
+                        } else {
+                            echo "";
+                        } ?></textarea>
+                </div>
+                <div class="form-group mt-1">
+                    <label for="certification-date">Obtained date</label>
+                    <input type="date" class="form-control" id="certification-date"
+                        name="certification-date[]" value="<?php if (isset($row_certi['obtained_date'])) {
+                            echo $row_certi['obtained_date'];
+                        } else {
+                            echo "";
+                        } ?>" required>
+                </div>
+                <div class="form-group mt-1">
+                    <label for="expire-date">Expired date</label>
+                    <input type="date" class="form-control" id="expire-date" name="expire-date[]" value="<?php if (isset($row_certi['expiration_date'])) {
+                        echo $row_certi['expiration_date'];
+                    } else {
+                        echo "";
+                    } ?>">
+                </div>
+                <button type="button" class="btn btn-primary mt-3" id="add-certification">Add
+                    More</button>
+                <div class="d-flex justify-content-between mt-4">
+                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-history"
+                        onclick="changeTab('history')">Back</button>
+                    <button type="button" class="btn btn-primary ml-auto" id="next-to-reference"
+                        onclick="changeTab('reference')">Next</button>
+                </div>
             <button type="button" class="btn btn-danger mt-3 remove-certification-form">Remove Certification</button>
         `;
 
                     this.parentNode.insertBefore(newForm, this);
-
-                    certificationCount++;
-
                     newForm.querySelector('.remove-certification-form').addEventListener('click', function () {
                         if (confirm('Are you sure you want to delete this certification?')) {
                             // Remove the corresponding experience form
                             this.parentNode.remove();
                             // Decrement the experience count
-                            experienceCount--;
                         }
                     });
                 });
@@ -1038,46 +1115,58 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
         <!-- Add many reference -->
         <script>
             function addReferenceForm() {
-                let referenceCount = 1;
                 document.querySelector('#add-reference').addEventListener('click', function () {
                     // Create new form elements
                     let newForm = document.createElement('div');
                     newForm.classList.add('reference-forms');
                     newForm.innerHTML = `
             <h5 class="mt-3">Next Reference</h5>
-            <div class="form-group">
-                <label for="reference-name">Name</label>
-                <input type="text" class="form-control" id="reference-name" name="reference-name[]"
-                    placeholder="Relationship's name" required>
-            </div>
-            <div class="form-group mt-1">
-                <label for="reference-email">Email</label>
-                <input type="email" class="form-control" id="reference-email"
-                    name="reference-email[]"  placeholder="Email"required>
-            </div>
-            <div class="form-group mt-1">
-                <label for="reference-phone">Phone</label>
-                <input type="text" class="form-control" id="reference-phone"
-                    name="reference-phone[]"  placeholder="Phone" required>
-            </div>
-            <div class="form-group mt-1">
-                <label for="reference-relationship">Relationship</label>
-                <input type="text" class="form-control" id="reference-relationship"
-                placeholder="Ex: Lecturer, Mentor, etc" name="reference-relationship[]" required>
-            </div>
+            <?php $row_refer = $result_refer->fetch_assoc(); ?>
+                <div class="form-group">
+                    <label for="reference-name">Name</label>
+                    <input type="text" class="form-control" id="reference-name" name="reference-name[]"
+                        placeholder="Relationship's name" value="<?php if (isset($row_refer['name'])) {
+                            echo $row_refer['name'];
+                        } else {
+                            echo "";
+                        } ?>" required>
+                </div>
+                <div class="form-group mt-1">
+                    <label for="reference-email">Email</label>
+                    <input type="email" class="form-control" id="reference-email"
+                        name="reference-email[]" placeholder="Email" value="<?php if (isset($row_refer['email'])) {
+                            echo $row_refer['email'];
+                        } else {
+                            echo "";
+                        } ?>" required>
+                </div>
+                <div class="form-group mt-1">
+                    <label for="reference-phone">Phone</label>
+                    <input type="text" class="form-control" id="reference-phone"
+                        name="reference-phone[]" placeholder="Phone" value="<?php if (isset($row_refer['phone'])) {
+                            echo $row_refer['phone'];
+                        } else {
+                            echo "";
+                        } ?>" required>
+                </div>
+                <div class="form-group mt-1">
+                    <label for="reference-relationship">Relationship</label>
+                    <input type="text" class="form-control" id="reference-relationship"
+                        placeholder="Ex: Lecturer, Mentor, etc" name="reference-relationship[]" value="<?php if (isset($row_refer['relationship'])) {
+                            echo $row_refer['relationship'];
+                        } else {
+                            echo "";
+                        } ?>" required>
+                </div>
             <button type="button" class="btn btn-danger mt-3 remove-reference-form">Remove Reference</button>
         `;
 
                     this.parentNode.insertBefore(newForm, this);
-
-                    referenceCount++;
-
                     newForm.querySelector('.remove-reference-form').addEventListener('click', function () {
                         if (confirm('Are you sure you want to delete this reference?')) {
                             // Remove the corresponding reference form
                             this.parentNode.remove();
                             // Decrement the reference count
-                            referenceCount--;
                         }
                     });
                 });
@@ -1085,10 +1174,10 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             addReferenceForm();
         </script>
 
-        <script>
+        <!-- <script>
             let submitButton = document.getElementById("next-to-end");
 
-            submitButton.addEventListener("click", function(event) {
+            submitButton.addEventListener("click", function (event) {
                 event.preventDefault();
                 let user_id = <?php echo $_SESSION['user_id']; ?>;
                 let hasMatchingResume = <?php echo $hasMatchingResume; ?>;
@@ -1103,7 +1192,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                     document.getElementById("my-cv").submit();
                 }
             });
-        </script>
+        </script> -->
         <!-- <script>
         for (var idx = 0; idx < Object.keys(tabIndex).length; idx++) {
             document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled = !Object.entries(tabIndex)[idx][1][1];
