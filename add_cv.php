@@ -355,7 +355,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                 </div>
                             </div>
                             <?php
-                            $skill_info = $conn->prepare("SELECT skill.skill FROM skill WHERE skill.resume_id = $resume_id AND skill.user_id = $user_id");
+                            $skill_info = $conn->prepare("SELECT skill.skill FROM skill WHERE skill.resume_id = $resume_id AND skill.user_id = $user_id AND skill.skill <> ''");
                             $skill_info->execute();
                             $result_skill = $skill_info->get_result();
                             $row_skill = $result_skill->fetch_assoc();
@@ -374,6 +374,12 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         } else {
                                             echo "";
                                         } ?>" required>
+                                    <?php while($row_skill = $result_skill->fetch_assoc()): ?>
+                                        <input type="search" class="form-control" id="job-skills"
+                                        placeholder="Leave blank if you want to delete it" name="job-skills[]" value="<?php if (isset($row_skill['skill'])) {
+                                            echo $row_skill['skill'];
+                                        }?>">
+                                    <?php endwhile; ?>
                                 </div>
                                 <button type="button" class="btn btn-success my-3" id="add-experience">Add
                                     New skill</button>
@@ -387,7 +393,13 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                             </div>
 
                             <?php
-                            $work_info = $conn->prepare("SELECT working_history.position, working_history.company_name, working_history.duration, working_history.work_type, working_history.tasks FROM working_history WHERE working_history.resume_id = $resume_id AND working_history.user_id = $user_id");
+                            $work_info = $conn->prepare("SELECT working_history.position, working_history.company_name, working_history.duration, working_history.work_type, working_history.tasks FROM working_history WHERE working_history.resume_id = $resume_id AND working_history.user_id = $user_id
+                                                        AND working_history.position <> '' 
+                                                        AND working_history.company_name <> '' 
+                                                        AND working_history.duration <> '' 
+                                                        AND working_history.work_type <> '' 
+                                                        AND working_history.tasks <> ''
+                                                        ");
                             $work_info->execute();
                             $result_work = $work_info->get_result();
                             $row_work = $result_work->fetch_assoc();
@@ -479,6 +491,87 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                             echo "";
                                         } ?></textarea>
                                 </div>
+                                <?php while($row_work = $result_work->fetch_assoc()): ?>
+                                    <br/>
+                                    <h5>Another Job</h5>
+                                <p class="text" style="color: blue">If you want to delete an old work-history, just simply leave Job Position or Company Name field blank</p>
+                                <div class="form-group mt-1">
+                                    <label for="job-name">Job Position</label>
+                                    <input type="search" class="form-control" id="job-name" name="job-name[]"
+                                        placeholder="Leave blank if you want to delete it" value="<?php if (isset($row_work['position'])) {
+                                            echo $row_work['position'];
+                                        }?>">
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="company-name">Company Name</label>
+                                    <input type="search" class="form-control" placeholder="Leave blank if you want to delete it"
+                                        id="company-name" name="company-name[]" value="<?php if (isset($row_work['company_name'])) {
+                                            echo $row_work['company_name'];
+                                        }?>" >
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="employment-degree">Type of Employment</label>
+                                    <select class="form-control" id="employment-degree" required
+                                        name="employment-degree[]">
+                                        <option value="">-- Select --</option>
+                                        <option value="full-time" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'full-time')
+                                            echo 'selected'; ?>>Full-time
+                                        </option>
+                                        <option value="part-time" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'part-time')
+                                            echo 'selected'; ?>>Part-time
+                                        </option>
+                                        <option value="contract" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'contract')
+                                            echo 'selected'; ?>>Contract
+                                        </option>
+                                        <option value="freelance" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'freelance')
+                                            echo 'selected'; ?>>Freelance
+                                        </option>
+                                        <option value="internship" <?php if (isset($row_work['work_type']) && $row_work['work_type'] == 'internship')
+                                            echo 'selected'; ?>>Internship
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mt-1">
+                                    <label for="job-duration">Duration</label>
+                                    <select class="form-control" id="job-duration" name="job-duration[]" required>
+                                        <option value="">-- Select --</option>
+                                        <option value="0" <?php if (isset($row_work['duration']) && $row_work['duration'] == '0')
+                                            echo 'selected'; ?>>Less Than 6 Months
+                                        </option>
+                                        <option value="1" <?php if (isset($row_work['duration']) && $row_work['duration'] == '1')
+                                            echo 'selected'; ?>>6 Months to < 1
+                                                Years</option>
+                                        <option value="2" <?php if (isset($row_work['duration']) && $row_work['duration'] == '2')
+                                            echo 'selected'; ?>>1 Years to < 2
+                                                Years</option>
+                                        <option value="3" <?php if (isset($row_work['duration']) && $row_work['duration'] == '3')
+                                            echo 'selected'; ?>>2 Years to < 3
+                                                Years</option>
+                                        <option value="4" <?php if (isset($row_work['duration']) && $row_work['duration'] == '4')
+                                            echo 'selected'; ?>>3 Years to < 4
+                                                Years</option>
+                                        <option value="5" <?php if (isset($row_work['duration']) && $row_work['duration'] == '5')
+                                            echo 'selected'; ?>>4 Years to < 5
+                                                Years</option>
+                                        <option value="6" <?php if (isset($row_work['duration']) && $row_work['duration'] == '6')
+                                            echo 'selected'; ?>>Over 5 Years</option>
+                                        <option value="-1" <?php if (isset($row_work['duration']) && $row_work['duration'] == '-1')
+                                            echo 'selected'; ?>>Still in Job</option>
+                                    </select>
+                                </div>
+                                <div class="form-group mt-1 ">
+                                    <label for="working-description">Job Description</label>
+                                    <textarea class="form-control" id="working-description"
+                                        placeholder="Leave blank if you want to delete it"
+                                        name="working-description[]" rows="2" ><?php if (isset($row_work['tasks'])) {
+                                            echo $row_work['tasks'];
+                                        }?></textarea>
+                                </div>
+                                <?php endwhile; ?>
+
+
+
                                 <button type="button" class="btn btn-primary mt-3" id="add-job">Add More</button>
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-experience"
@@ -489,7 +582,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                             </div>
 
                             <?php
-                            $certi_info = $conn->prepare("SELECT certificate.title, certificate.organization, certificate.obtained_date, certificate.expiration_date FROM certificate WHERE certificate.resume_id = $resume_id AND certificate.user_id = $user_id");
+                            $certi_info = $conn->prepare("SELECT certificate.title, certificate.organization, certificate.obtained_date, certificate.expiration_date FROM certificate WHERE certificate.resume_id = $resume_id AND certificate.user_id = $user_id
+                                                        AND certificate.title <> ''
+                                                        AND certificate.organization <> ''
+                                                        AND certificate.obtained_date <> ''
+                                                        AND certificate.expiration_date <> ''");
                             $certi_info->execute();
                             $result_certi = $certi_info->get_result();
                             $row_certi = $result_certi->fetch_assoc();
@@ -536,6 +633,41 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         echo "";
                                     } ?>">
                                 </div>
+                                <?php while($row_certi = $result_certi->fetch_assoc()): ?>
+                                    <br/>
+                                    <h5>Another Certification</h5>
+                                    <p class="text" style="color: blue">If you want to delete a certificate, just simply leave Certification Name field blank</p>
+                                <div class="form-group mt-1">
+                                    <label for="certification-name">Certification Name</label>
+                                    <input type="search" class="form-control" id="certification-name"
+                                        placeholder="Leave blank if you want to delete it" name="certification-name[]" value="<?php if (isset($row_certi['title'])) {
+                                            echo $row_certi['title'];
+                                        }?>">
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="certification-organization">Organization</label>
+                                    <textarea class="form-control" id="certification-organization"
+                                        name="certification-organization[]" placeholder="Organization provider" rows="1"
+                                        required><?php if (isset($row_certi['organization'])) {
+                                            echo $row_certi['organization'];
+                                        }?></textarea>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="certification-date">Obtained date</label>
+                                    <input type="date" class="form-control" id="certification-date"
+                                        name="certification-date[]" value="<?php if (isset($row_certi['obtained_date'])) {
+                                            echo $row_certi['obtained_date'];
+                                        }?>" required>
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="expire-date">Expired date</label>
+                                    <input type="date" class="form-control" id="expire-date" name="expire-date[]" value="<?php if (isset($row_certi['expiration_date'])) {
+                                        echo $row_certi['expiration_date'];
+                                    }?>">
+                                </div>
+                                <?php endwhile; ?>
+
+
                                 <button type="button" class="btn btn-primary mt-3" id="add-certification">Add
                                     More</button>
                                 <div class="d-flex justify-content-between mt-4">
@@ -547,7 +679,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                             </div>
                             
                             <?php
-                            $refer_info = $conn->prepare("SELECT reference.name, reference.email, reference.phone, reference.relationship FROM reference WHERE reference.resume_id = $resume_id AND reference.user_id = $user_id");
+                            $refer_info = $conn->prepare("SELECT reference.name, reference.email, reference.phone, reference.relationship FROM reference WHERE reference.resume_id = $resume_id AND reference.user_id = $user_id
+                                                        AND reference.name <> ''
+                                                        AND reference.email <> ''
+                                                        AND reference.phone <> ''
+                                                        AND reference.relationship <> ''");
                             $refer_info->execute();
                             $result_refer = $refer_info->get_result();
                             $row_refer = $result_refer->fetch_assoc();
@@ -595,13 +731,49 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                             echo "";
                                         } ?>" required>
                                 </div>
+                                <?php while($row_refer = $result_refer->fetch_assoc()): ?>
+                                    <br/>
+                                    <h5>Another Reference</h5>
+                                    <p class="text" style="color: blue">If you want to delete a reference, just simply leave any field blank</p>
+                                <div class="form-group">
+                                    <label for="reference-name">Name</label>
+                                    <input type="search" class="form-control" id="reference-name" name="reference-name[]"
+                                        placeholder="Leave blank if you want to delete it" value="<?php if (isset($row_refer['name'])) {
+                                            echo $row_refer['name'];
+                                        }?>" >
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="reference-email">Email</label>
+                                    <input type="email" class="form-control" id="reference-email"
+                                        name="reference-email[]" placeholder="Email" value="<?php if (isset($row_refer['email'])) {
+                                            echo $row_refer['email'];
+                                        }?>" >
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="reference-phone">Phone</label>
+                                    <input type="search" class="form-control" id="reference-phone"
+                                        name="reference-phone[]" placeholder="Leave blank if you want to delete it" value="<?php if (isset($row_refer['phone'])) {
+                                            echo $row_refer['phone'];
+                                        }?>" >
+                                </div>
+                                <div class="form-group mt-1">
+                                    <label for="reference-relationship">Relationship</label>
+                                    <input type="search" class="form-control" id="reference-relationship"
+                                        placeholder="Leave blank if you want to delete it" name="reference-relationship[]" value="<?php if (isset($row_refer['relationship'])) {
+                                            echo $row_refer['relationship'];
+                                        }?>" >
+                                </div>
+                                <?php endwhile; ?>
+
+
+
                                 <button type="button" class="btn btn-primary mt-3" id="add-reference">Add More</button>
 
                                 <div class="d-flex justify-content-between mt-4">
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-certification"
                                         onclick="changeTab('certification')">Back</button>
                                     <button type="submit" id="next-to-end"
-                                        class="btn btn-primary ml-auto" onclick="confirm('If you already have a CV, old CV will be deleted. Are you sure?')">Submit</button>
+                                        class="btn btn-primary ml-auto" onclick="confirm('Are you sure and want to continue?')">Submit</button>
                                 </div>
                             </div>
                         </div>
