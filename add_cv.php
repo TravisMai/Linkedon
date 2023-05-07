@@ -288,9 +288,9 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                             echo 'selected';
                                         } ?>>High School
                                         </option>
-                                        <option value="Ungraduated" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Ungraduated") {
+                                        <option value="Under Graduated" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Under Graduated") {
                                             echo 'selected';
-                                        } ?>>Ungraduated</option>
+                                        } ?>>Under Graduated</option>
                                         <option value="Bachelor" <?php if (isset($row_edu['degree']) && $row_edu['degree'] == "Bachelor") {
                                             echo 'selected';
                                         } ?>>Bachelor's Degree
@@ -335,7 +335,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         <input type="number" step="0.01" max="10" required class="form-control" id="gpa"
                                             placeholder="7.0" name="gpa"
                                             value="<?php echo isset($row_edu['gpa']) ? $parts = explode('/', $row_edu['gpa'])[0] : ''; ?>">
-                                        <select class="form-control" id="gpa-scale" name="gpa-scale">
+                                        <select class="form-control" id="gpa-scale" name="gpa-scale" required>
                                             <option value="10" <?php if ((isset($row_edu['gpa'])) && $parts = explode('/', $row_edu['gpa'])[1] == 10) {
                                                 echo 'selected';
                                             } ?>>/10</option>
@@ -601,7 +601,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <button type="button" class="btn btn-secondary mr-auto" id="back-to-certification"
                                         onclick="changeTab('certification')">Back</button>
                                     <button type="submit" id="next-to-end"
-                                        class="btn btn-primary ml-auto">Submit</button>
+                                        class="btn btn-primary ml-auto" onclick="confirm('If you already have a CV, old CV will be deleted. Are you sure?')">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -797,17 +797,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             }
         </script>
 
-        <!-- submit handle -->
-        <script>
-            const form = document.getElementById('cv-form');
-
-            form.addEventListener('keydown', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    changeTab('next-tab');
-                }
-            });
-        </script>
 
         <!-- Nav bar Handle -->
         <script>
@@ -873,9 +862,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                     // Check if currently on the last tab
                     if (activeTabIndex === tabIndex["end"][0]) {
                         // Submit the form
-                        if (checkRequiredInputs()) {
-                            document.getElementById("cv-form").submit();
-                        }
+                        ;
                     } else {
                         // Navigate to the next tab
                         let next_but = document.getElementById(`next-to-${Object.entries(tabIndex)[activeTabIndex + 1][0]}`);
@@ -1042,7 +1029,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
         </script>
 
         <!-- Add many certification -->
-
         <script>
             function addCertificationForm() {
                 document.querySelector('#add-certification').addEventListener('click', function () {
@@ -1174,31 +1160,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             addReferenceForm();
         </script>
 
-        <!-- <script>
-            let submitButton = document.getElementById("next-to-end");
 
-            submitButton.addEventListener("click", function (event) {
-                event.preventDefault();
-                let user_id = <?php echo $_SESSION['user_id']; ?>;
-                let hasMatchingResume = <?php echo $hasMatchingResume; ?>;
-                if (hasMatchingResume) {
-                    let confirmMessage = "Your old CV will be deleted";
-                    if (confirm(confirmMessage)) {
-                        // Proceed with form submission
-                        document.getElementById("my-cv").submit();
-                    }
-                } else {
-                    // No matching resume found, proceed with form submission
-                    document.getElementById("my-cv").submit();
-                }
-            });
-        </script> -->
-        <!-- <script>
-        for (var idx = 0; idx < Object.keys(tabIndex).length; idx++) {
-            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled = !Object.entries(tabIndex)[idx][1][1];
-            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").style.backgroundColor = "lightpink";
-        }
-    </script> -->
     </div>
 </body>
 

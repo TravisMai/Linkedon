@@ -5,7 +5,18 @@ require_once('database/dbconnect.php');
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
     $user_id = $_SESSION["user_id"];
+    // Prepare the SQL query
+    $old_resume_info = $conn->prepare("SELECT `id` FROM `resume` WHERE user_id = $user_id");
+    $old_resume_info->execute();
+    $result_old = $old_resume_info->get_result();
+    $row_old = $result_old->fetch_assoc();
+    $old_id = $row_old['id'];
+    if(count($row_old) > 0){
+        $delete_resume = $conn->prepare("DELETE FROM `resume` WHERE id = $old_id");
+        $delete_resume->execute();
+    }
     // Job-Objective
     $job_title = $_POST['job-title'];
     $position = $_POST['position'];
@@ -151,7 +162,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $_SESSION['label'] = "Successful";
     $_SESSION['message'] = "Your CV created successfully";
     header('Location: ./index.php?page=candidates&id=' . $_SESSION["user_id"] . '');
-}
-else{
-    echo "dm";
+} else {
+    $_SESSION['label'] = "Error";
+    $_SESSION['message'] = "Your CV not submit";
+    header('Location: ./index.php?page=candidates&id=' . $_SESSION["user_id"] . '');
 }
