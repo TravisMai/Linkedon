@@ -40,7 +40,7 @@ $jobCount = 0;
             <header>
                 <div class="cover bg-light">
                     <div class="row bg-success">
-                        <img src="images/neon_cat.webp" style="max-height: 350px; width: 100%;">
+                        <img src="images/ezgif.com-crop.gif" style="max-height: 350px; width: 100%;">
                     </div>
             </header>
             <div class="container bg-light px-3">
