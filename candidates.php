@@ -358,7 +358,7 @@ else {
                             <?php
                                 include "database/dbconnect.php";
 
-                                $sql = "SELECT DISTINCT `skill` FROM `skill` AND `skill` <> ''";
+                                $sql = "SELECT DISTINCT `skill` FROM `skill` WHERE `skill` <> ''";
 
                                 $result = $conn->query($sql);
 

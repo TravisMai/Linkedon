@@ -3,25 +3,25 @@
 INSERT INTO `users` (`firstname`, `lastname`, `username`, `password`, `email`, `phone`, `address`, `avatar`, `type`) 
 VALUES 
 -- user 1
-('Kara-lynn', 'Bownas', 'kbownas0', 'd787HoJ$', 'kbownas0@gmail.com', '0402849675', 'Sydney, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
+('Kara-lynn', 'Bownas', 'kbownas0', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'kbownas0@gmail.com', '0402849675', 'Sydney, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 2
-('Karoly', 'Bretelle', 'kbretelle1', 'u4QeRRmDZm#', 'kbretelle1@gmail.com', '0477247106', 'Melbourne, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
+('Karoly', 'Bretelle', 'kbretelle1', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'kbretelle1@gmail.com', '0477247106', 'Melbourne, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 3
-('Ingra', 'Brugger', 'ibrugger2', '6f3iWv@k', 'ibrugger2@gmail.com', '0559349117', 'Brisbane, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
+('Ingra', 'Brugger', 'ibrugger2', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'ibrugger2@gmail.com', '0559349117', 'Brisbane, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 4
-('Michell', 'Medford', 'mmedford3', '923HIpspSW^', 'mmedford3@gmail.com', '0325057104', 'Adelaide, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
+('Michell', 'Medford', 'mmedford3', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'mmedford3@gmail.com', '0325057104', 'Adelaide, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 5
-('Cart', 'Stringman', 'cstringman4', 'bXrwL5u0Rx*', 'cstringman4@gmail.com', '0631353477', 'Perth, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
+('Cart', 'Stringman', 'cstringman4', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'cstringman4@gmail.com', '0631353477', 'Perth, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 6
-('Sabine', 'Baguley', 'sbaguley5', 'MueVGBK3P1%', 'sbaguley5@gmail.com', '0872532363', 'Hobart, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
+('Sabine', 'Baguley', 'sbaguley5', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'sbaguley5@gmail.com', '0872532363', 'Hobart, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 7
-('Coralie', 'Carslaw', 'ccarslaw6', 'KhxDlTK#1t', 'ccarslaw6@gmail.com', '0401625846', 'Darwin, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
+('Coralie', 'Carslaw', 'ccarslaw6', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'ccarslaw6@gmail.com', '0401625846', 'Darwin, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0),
 -- user 8
-('Garvin', 'Galbreth', 'ggalbreth7', 'TQPVl9gHqwlC+', 'ggalbreth7@gmail.com', '0867198979', 'Canberra, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
+('Garvin', 'Galbreth', 'ggalbreth7', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'ggalbreth7@gmail.com', '0867198979', 'Canberra, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 9
-('Cirilo', 'Nosworthy', 'cnosworthy8', 'YkQc06M@p', 'cnosworthy8@gmail.com', '0861791717', 'Gold Coast, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
+('Cirilo', 'Nosworthy', 'cnosworthy8', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'cnosworthy8@gmail.com', '0861791717', 'Gold Coast, Australia', 'https://i.ibb.co/x3wfK5z/female-avatar.jpg', 0),
 -- user 10
-('Gertrudis', 'Espinas', 'gespinas9', 'TYgZMwz$1', 'gespinas9@gmail.com', '0291168164', 'Newcastle, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0);
+('Gertrudis', 'Espinas', 'gespinas9', '$2y$10$cJAewUStwaJsscmFmQ.09eL08hWQs38.hdfUkNww9c8JCcCTLLuyK', 'gespinas9@gmail.com', '0291168164', 'Newcastle, Australia', 'https://i.ibb.co/VBFY9Dr/male-avatar.jpg', 0);
 
 
 -- Insert resumes for each user
