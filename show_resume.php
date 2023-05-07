@@ -190,7 +190,7 @@ ob_start();
                                 <ul>';
                     while ($row = $result->fetch_assoc()) {
                         $output .= '
-                            <li>'. $row['firstname'].' '. $row['lastname'] .', ('. $row['relationship'] . ') <br>' . '<strong>E-mail: </strong>'. $row['email'] . '<i class="bi bi-envelope m-1"></i><br><strong>Phone: </strong>'. $row['phone'] .'<i class="bi bi-telephone m-1"></i></li>      
+                            <li>'. $row['name'].' , ('. $row['relationship'] . ') <br>' . '<strong>E-mail: </strong>'. $row['email'] . '<i class="bi bi-envelope m-1"></i><br><strong>Phone: </strong>'. $row['phone'] .'<i class="bi bi-telephone m-1"></i></li>      
                         ';
                     }
                     $output .= '
