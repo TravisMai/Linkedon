@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $old_resume_info->execute();
     $result_old = $old_resume_info->get_result();
     $row_old = $result_old->fetch_assoc();
-    $old_id = $row_old['id'];
-    if(count($row_old) > 0){
+    $old_id = isset($row_old['id'])?$row_old['id']:"";
+    if(isset($row_old)){
         $delete_resume = $conn->prepare("DELETE FROM `resume` WHERE id = $old_id");
         $delete_resume->execute();
     }
