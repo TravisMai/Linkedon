@@ -113,6 +113,7 @@ ob_start();
                             <h5 class="card-title">Working History</h5>
                                 <ul>';
                     while ($row = $result->fetch_assoc()) {
+                        $duration = 'N/A';
                         if ($row['duration'] == 0) $duration = 'Less Than 6 Months';
                         elseif ($row['duration'] == 1) $duration = '6 Months to < 1 Years';
                         elseif ($row['duration'] == 2) $duration = '1 Years to < 2 Years';

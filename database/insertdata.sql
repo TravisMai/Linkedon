@@ -32,25 +32,25 @@ VALUES
 INSERT INTO `resume` (`user_id`, `position`, `employment_type`, `desire_salary`, `goals`)
 VALUES
   -- User 1
-  (1, 'Web developer', 'Full-time', 100000, 'To become an expert in web development'),
+  (1, 'Web developer', 'Full-time', 10, 'To become an expert in web development'),
   -- User 2
-  (2, 'Business Analyst', 'Full-time', 90000, 'To help companies make data-driven decisions'),
+  (2, 'Business Analyst', 'Full-time', 90, 'To help companies make data-driven decisions'),
   -- User 3
-  (3, 'Accountant', 'Part-time', 50000, 'To gain more experience in accounting'),
+  (3, 'Accountant', 'Part-time', 50, 'To gain more experience in accounting'),
   -- User 4
-  (4, 'Software Engineer', 'Full-time', 120000, 'To work on challenging projects and innovate'),
+  (4, 'Software Engineer', 'Full-time', 120, 'To work on challenging projects and innovate'),
   -- User 5
-  (5, 'Associate Electrical Engineer', 'Full-time', 80000, 'To design and implement electrical systems'),
+  (5, 'Associate Electrical Engineer', 'Full-time', 80, 'To design and implement electrical systems'),
   -- User 6
-  (6, 'Administrative Assistant', 'Contract', 60000, 'To provide efficient administrative support'),
+  (6, 'Administrative Assistant', 'Contract', 60, 'To provide efficient administrative support'),
   -- User 7
-  (7, 'Customer Service Representative', 'Full-time', 50000, 'To provide excellent service to customers'),
+  (7, 'Customer Service Representative', 'Full-time', 50, 'To provide excellent service to customers'),
   -- User 8
-  (8, 'Marketing Coordinator', 'Full-time', 70000, 'To develop and implement effective marketing plans'),
+  (8, 'Marketing Coordinator', 'Full-time', 70, 'To develop and implement effective marketing plans'),
   -- User 9
-  (9, 'Mentor', 'Part-time', 30000, 'To help guide and inspire others'),
+  (9, 'Mentor', 'Part-time', 30, 'To help guide and inspire others'),
   -- User 10
-  (10, 'Content Creator', 'Full-time', 80000, 'To create engaging and informative content for audiences');
+  (10, 'Content Creator', 'Full-time', 80, 'To create engaging and informative content for audiences');
 
 
 -- Insert education for each user
@@ -140,26 +140,26 @@ VALUES
 INSERT INTO `working_history` (`resume_id`, `user_id`, `position`, `company_name`, `duration`, `tasks`)
 VALUES
   -- User 1
-  (1, 1, 'Web Developer', 'ABC Company', '1 year', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP. Collaborated with clients and designers to ensure project accuracy and completed projects on time.'),
-  (1, 1, 'Web Developer', 'ABllC Company', 'less than 6 months', 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP.'),
+  (1, 1, 'Web Developer', 'ABC Company', 0, 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP. Collaborated with clients and designers to ensure project accuracy and completed projects on time.'),
+  (1, 1, 'Web Developer', 'ABllC Company', 1, 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP.'),
   -- User 2
-  (2, 2, 'Business Analyst', 'XYZ Corporation', '5 years', 'Worked closely with key stakeholders to model business processes, gather and define business requirements. Conducted system analysis, developed use cases and prepared functional specifications.'),
+  (2, 2, 'Business Analyst', 'XYZ Corporation', 5, 'Worked closely with key stakeholders to model business processes, gather and define business requirements. Conducted system analysis, developed use cases and prepared functional specifications.'),
   -- User 3
-  (3, 3, 'Senior Accountant', 'Super Accounting Firm', '50 years', 'Conducted multiple audits of firms and provided internal control analysis while communicating documents and performing fieldwork.'),
+  (3, 3, 'Senior Accountant', 'Super Accounting Firm', 6, 'Conducted multiple audits of firms and provided internal control analysis while communicating documents and performing fieldwork.'),
   -- User 4
-  (4, 4, 'Software Developer', 'Global Software Solutions', '5 months', 'Coded, tested and deployed software applications, APIs and software libraries. Worked in a team environment with frequent code reviews.'),
+  (4, 4, 'Software Developer', 'Global Software Solutions', 4, 'Coded, tested and deployed software applications, APIs and software libraries. Worked in a team environment with frequent code reviews.'),
   -- User 5
-  (5, 5, 'Associate Electrical Engineer', 'Electricity Innovations', '9 months', 'Constructed, implemented and analyzed electrical testing to provide safety and optimization in electrical products. Collaborated in a team environment to ensure goal completion.'),
+  (5, 5, 'Associate Electrical Engineer', 'Electricity Innovations', 4, 'Constructed, implemented and analyzed electrical testing to provide safety and optimization in electrical products. Collaborated in a team environment to ensure goal completion.'),
   -- User 6
-  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.', '15 months', 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
+  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.', 4, 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
   -- User 7
-  (7, 7, 'Customer Service Representative', 'Helpful Corp.', '7 years', 'Provided top-notch customer service using voice and digital channels. Provided solutions to consumer problems by escalating larger issues to management staff when necessary.'),
+  (7, 7, 'Customer Service Representative', 'Helpful Corp.', 1, 'Provided top-notch customer service using voice and digital channels. Provided solutions to consumer problems by escalating larger issues to management staff when necessary.'),
   -- User 8
-  (8, 8, 'Marketing Coordinator', 'Marketing Firm', '3 years', 'Designed and implemented digital marketing campaigns using a variety of mediums on channels like LinkedIn, Instagram, and Twitter. Analyzed campaign success and made recommendations for updates to the company strategy.'),
+  (8, 8, 'Marketing Coordinator', 'Marketing Firm', -1, 'Designed and implemented digital marketing campaigns using a variety of mediums on channels like LinkedIn, Instagram, and Twitter. Analyzed campaign success and made recommendations for updates to the company strategy.'),
   -- User 9
-  (9, 9, 'Mechanical Engineer', 'Mechanical Industries, LLC', '8 months', 'Researched, designed and created mechanical systems in machines and structures. Collaborated with a team to ensure the completion of important projects.'),
+  (9, 9, 'Mechanical Engineer', 'Mechanical Industries, LLC', 5, 'Researched, designed and created mechanical systems in machines and structures. Collaborated with a team to ensure the completion of important projects.'),
   -- User 10
-  (10, 10, 'Content Writer', 'Content Creation, Inc.', '7 years', 'Wrote engaging content across a variety of web products, ranging from press releases to landing pages to full-fledged articles. Worked with clients to develop content strategies that were appropriate to their specific needs.');
+  (10, 10, 'Content Writer', 'Content Creation, Inc.', 5, 'Wrote engaging content across a variety of web products, ranging from press releases to landing pages to full-fledged articles. Worked with clients to develop content strategies that were appropriate to their specific needs.');
 
 -- Insert additional information for each user
 INSERT INTO `additional_information` (`resume_id`, `user_id`, `hobbies`, `habits`, `personal_info`)
