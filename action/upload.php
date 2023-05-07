@@ -36,7 +36,7 @@
                     echo "The file ".$fileName. " has been uploaded.";
                     
                     // Save the path of the uploaded file to MySQL
-                    $dbHost = 'localhost';
+                    $dbHost = 'localhost:3307';
                     $dbUsername = 'root';
                     $dbPassword = '';
                     $dbName = 'co3049';

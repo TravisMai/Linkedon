@@ -141,6 +141,16 @@ else {
             position: absolute;
             z-index: 10;
         }
+        @media screen and (max-width: 1100px) {
+            #numbertoshow p {
+                display: none;
+            }
+            #numbertoshow {
+                position: static;
+                justify-content: center;
+                margin-bottom: 5px;
+            }
+        }
         @media screen and (max-width: 800px) {
             #candidate-all {
                 margin: 0;
@@ -152,15 +162,7 @@ else {
                 width: 45px;
                 height: 45px;
             }
-
-            #numbertoshow {
-                position: static;
-                justify-content: center;
-                margin-bottom: 5px;
-            }
-            #numbertoshow p {
-                display: none;
-            }
+           
         }
         @media screen and (max-width: 768px) {
             .candidate-list-objective {
@@ -356,7 +358,7 @@ else {
                             <?php
                                 include "database/dbconnect.php";
 
-                                $sql = "SELECT DISTINCT `skill` FROM `skill`";
+                                $sql = "SELECT DISTINCT `skill` FROM `skill` AND `skill` <> ''";
 
                                 $result = $conn->query($sql);
 

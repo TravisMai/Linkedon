@@ -67,7 +67,7 @@ ob_start();
                 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $salary = 'VND ' . number_format($row['desire_salary']) . '.000.000 <i class="bi bi-cash"></i>';
+                        $salary = number_format($row['desire_salary']) . '.000.000 VND <i class="bi bi-cash"></i>';
                         $position = $row['position'] . ' (' . $row['employment_type'] . ')';
                         $output .= '
                         <div class="col-md-8 mb-2 mt-3">
@@ -122,9 +122,9 @@ ob_start();
                         elseif ($row['duration'] == 6) $duration = 'Over 5 Years';
                         elseif ($row['duration'] == -1) $duration = 'Still in Job';
                         $output .= '
-                            <li>'. $row['position'] .' at '. $row['company_name'] .'</li>
-                            <li>'. 'Duration: ' . $duration . '<br>' . '</li>
-                            <li>'. '<strong>Tasks: </strong>'. $row['tasks'] .'</li><br/>    
+                            <li>'. $row['position'] .' at '. $row['company_name'] .'
+                            <br>'. '<strong>Duration: </strong>' . $duration  . '
+                            <br>'. '<strong>Tasks: </strong>'. $row['tasks'] .'</li>
                         ';
                     }
                     $output .= '
@@ -153,7 +153,7 @@ ob_start();
                     </div>';
                 }
 
-                $sql = "SELECT `skill` FROM `skill` WHERE user_id = $id";
+                $sql = "SELECT `skill` FROM `skill` WHERE user_id = $id AND `skill` <> ''";
                 $result = $conn->query($sql);
 
                 if (mysqli_num_rows($result) > 0) {
@@ -202,7 +202,7 @@ ob_start();
                                 <ul>';
                     while ($row = $result->fetch_assoc()) {
                         $output .= '
-                            <li>'. $row['name'].' , ('. $row['relationship'] . ') <br>' . '<strong>E-mail: </strong>'. $row['email'] . '<i class="bi bi-envelope m-1"></i><br><strong>Phone: </strong>'. $row['phone'] .'<i class="bi bi-telephone m-1"></i></li><br/>      
+                            <li>'. $row['name'].' ('. $row['relationship'] . ') <br>' . '<strong>E-mail: </strong>'. $row['email'] . '<i class="bi bi-envelope m-1"></i><br><strong>Phone: </strong>'. $row['phone'] .'<i class="bi bi-telephone m-1"></i></li><br/>      
                         ';
                     }
                     $output .= '

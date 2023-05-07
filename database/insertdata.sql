@@ -54,54 +54,54 @@ VALUES
 
 
 -- Insert education for each user
-INSERT INTO `education` (`resume_id`, `user_id`, `school`, `degree`, `major`)
+INSERT INTO `education` (`resume_id`, `user_id`, `school`, `degree`, `major`, `year`, `gpa`)
 VALUES
   -- User 1
-  (1, 1, 'University of California', 'Bachelor of Science', 'Computer Science'),
+  (1, 1, 'University of California', 'Bachelor of Science', 'Computer Science', '2021', '8'),
   -- User 2
-  (2, 2, 'University of Michigan', 'Bachelor of Arts', 'Business Administration'),
+  (2, 2, 'University of Michigan', 'Bachelor of Arts', 'Business Administration', '2021', '7'),
   -- User 3
-  (3, 3, 'University of Illinois', 'Master of Accountancy', 'Accounting'),
+  (3, 3, 'University of Illinois', 'Master of Accountancy', 'Accounting', '2021', '7'),
   -- User 4
-  (4, 4, 'Massachusetts Institute of Technology', 'Bachelor of Science', 'Computer Science'),
+  (4, 4, 'Massachusetts Institute of Technology', 'Bachelor of Science', 'Computer Science', '2021', '7'),
   -- User 5
-  (5, 5, 'Stanford University', 'Bachelor of Science', 'Electrical Engineering'),
+  (5, 5, 'Stanford University', 'Bachelor of Science', 'Electrical Engineering', '2021', '9'),
   -- User 6
-  (6, 6, 'University of Texas at Austin', 'Bachelor of Science', 'Business Administration'),
+  (6, 6, 'University of Texas at Austin', 'Bachelor of Science', 'Business Administration', '2021', '8'),
   -- User 7
-  (7, 7, 'Arizona State University', 'Bachelor of Arts', 'Communication'),
+  (7, 7, 'Arizona State University', 'Bachelor of Arts', 'Communication', '2021', '8'),
   -- User 8
-  (8, 8, 'Columbia University', 'Master of Business Administration', 'Marketing'),
+  (8, 8, 'Columbia University', 'Master of Business Administration', 'Marketing', '2021', '10'),
   -- User 9
-  (9, 9, 'Virginia Polytechnic Institute and State University', 'Bachelor of Science', 'Mechanical Engineering'),
+  (9, 9, 'Virginia Polytechnic Institute and State University', 'Bachelor of Science', 'Mechanical Engineering', '2021', '10'),
   -- User 10
-  (10, 10, 'University of Washington', 'Bachelor of Arts', 'English');
+  (10, 10, 'University of Washington', 'Bachelor of Arts', 'English', '2021', '10');
 
 -- Insert certificates for each user
-INSERT INTO `certificate` (`resume_id`, `user_id`, `title`, `organization`, `value`, `obtained_date`, `expiration_date`)
+INSERT INTO `certificate` (`resume_id`, `user_id`, `title`, `organization`, `obtained_date`, `expiration_date`)
 VALUES
   -- User 1
-  (1, 1, 'Certified Web Developer', 'Web Development Institute', 'Passed', '2021-01-15', NULL),
-  (1, 1, 'Google Analytics Individual Qualification', 'Google', 'Passed', '2021-02-01', '2022-02-01'),
+  (1, 1, 'Certified Web Developer', 'Web Development Institute', '2021-01-15', NULL),
+  (1, 1, 'Google Analytics Individual Qualification', 'Google', '2021-02-01', '2022-02-01'),
   -- User 2
-  (2, 2, 'Certified Business Analyst', 'International Institute of Business Analysis', 'Passed', '2022-03-22', NULL),
+  (2, 2, 'Certified Business Analyst', 'International Institute of Business Analysis', '2022-03-22', NULL),
   -- User 3
-  (3, 3, 'Certified Public Accountant', 'American Institute of Certified Public Accountants', 'Passed', '2020-07-01', '2025-06-30'),
+  (3, 3, 'Certified Public Accountant', 'American Institute of Certified Public Accountants', '2020-07-01', '2025-06-30'),
   -- User 4
-  (4, 4, 'AWS Certified Developer - Associate', 'Amazon Web Services', 'Passed', '2020-05-12', NULL),
+  (4, 4, 'AWS Certified Developer - Associate', 'Amazon Web Services', '2020-05-12', NULL),
   -- User 5
-  (5, 5, 'Certified Electrical Engineer', 'Institute of Electrical and Electronics Engineers', 'Passed', '2019-12-30', NULL),
+  (5, 5, 'Certified Electrical Engineer', 'Institute of Electrical and Electronics Engineers', '2019-12-30', NULL),
   -- User 6
-  (6, 6, 'Certified Administrative Professional', 'International Association of Administrative Professionals', 'Passed', '2022-02-01', NULL),
+  (6, 6, 'Certified Administrative Professional', 'International Association of Administrative Professionals', '2022-02-01', NULL),
   -- User 7
-  (7, 7, 'Certified Customer Service Professional', 'National Customer Service Association', 'Passed', '2021-11-15', NULL),
-  (7, 7, 'Project Management Professional', 'Project Management Institute', 'Passed', '2018-10-01', '2023-10-01'),
+  (7, 7, 'Certified Customer Service Professional', 'National Customer Service Association', '2021-11-15', NULL),
+  (7, 7, 'Project Management Professional', 'Project Management Institute', '2018-10-01', '2023-10-01'),
   -- User 8
-  (8, 8, 'Google Ads Certification', 'Google', 'Passed', '2021-06-25', NULL),
+  (8, 8, 'Google Ads Certification', 'Google', '2021-06-25', NULL),
   -- User 9
-  (9, 9, 'Lean Six Sigma Green Belt', 'International Association for Six Sigma Certification', 'Passed', '2022-01-10', NULL),
+  (9, 9, 'Lean Six Sigma Green Belt', 'International Association for Six Sigma Certification', '2022-01-10', NULL),
   -- User 10
-  (10, 10, 'Certified Writer', 'National Writers Association', 'Passed', '2021-09-03', NULL);
+  (10, 10, 'Certified Writer', 'National Writers Association', '2021-09-03', NULL);
   
 
 -- Insert experience for each user
@@ -184,24 +184,24 @@ VALUES
 
 (10, 10, 'Playing volleyball, camping', 'Regular exercise, healthy eating habits', 'I am a big sports fan and enjoy watching and playing a variety of sports.');
 
-INSERT INTO `reference` (`resume_id`, `user_id`, `firstname`, `lastname`, `email`, `phone`, `relationship`)
+INSERT INTO `reference` (`resume_id`, `user_id`, `name`, `email`, `phone`, `relationship`)
 VALUES
-(1, 1, 'Sarah', 'Lee', 'sarahlee@email.com', '0421412421', 'Former Manager'),
+(1, 1, 'Sarah Lee', 'sarahlee@email.com', '0421412421', 'Former Manager'),
 
-(1, 1, 'David', 'Kim', 'davidkim@email.com', '0123456779', 'Former Colleague'),
+(1, 1, 'David Kim', 'davidkim@email.com', '0123456779', 'Former Colleague'),
 
-(2, 2, 'Mark', 'Chen', 'markchen@email.com', '0123457789', 'Former Manager'),
+(2, 2, 'Mark Chen', 'markchen@email.com', '0123457789', 'Former Manager'),
 
-(2, 2, 'Emily', 'Wang', 'emilywang@email.com', '0127456789', 'Former Tutor'),
+(2, 2, 'Emily Wang', 'emilywang@email.com', '0127456789', 'Former Tutor'),
 
-(3, 3, 'Amy', 'Zhang', 'amyzhang@email.com', '0123456689', 'Former Manager'),
+(3, 3, 'Amy Zhang', 'amyzhang@email.com', '0123456689', 'Former Manager'),
 
-(3, 3, 'Michael', 'Li', 'michaelli@email.com', '0123456769', 'Former Colleague'),
+(3, 3, 'Michael Li', 'michaelli@email.com', '0123456769', 'Former Colleague'),
 
-(4, 4, 'Jennifer', 'Kim', 'jenniferkim@email.com', '0823456789', 'Former Supervisor'),
+(4, 4, 'Jennifer Kim', 'jenniferkim@email.com', '0823456789', 'Former Supervisor'),
 
-(5, 5, 'Daniel', 'Cho', 'danielcho@email.com', '0825456789', 'Former Colleague'),
+(5, 5, 'Daniel Cho', 'danielcho@email.com', '0825456789', 'Former Colleague'),
 
-(6, 6, 'Andrew', 'Kwon', 'andrewkwon@email.com', '0923456789', 'Former Manager'),
+(6, 6, 'Andrew Kwon', 'andrewkwon@email.com', '0923456789', 'Former Manager'),
 
-(8, 8, 'Jessica', 'Park', 'jessicapark@email.com', '023456789', 'Former Colleague');
+(8, 8, 'Jessica Park', 'jessicapark@email.com', '023456789', 'Former Colleague');
