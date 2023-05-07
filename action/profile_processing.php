@@ -48,7 +48,7 @@ if (isset($_POST['first-name']) && isset($_POST['last-name']) && isset($_POST['p
       }
     
   // Connect to the database
-  $servername = "localhost:3307";
+  $servername = "localhost";
   $password_db = "";
   $dbname = "co3049";
   $conn = new mysqli($servername, "root", $password_db, $dbname);

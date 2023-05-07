@@ -2,7 +2,7 @@
 session_start();
 include '../config.php'; // contains the database connection settings
 
-$host = 'localhost:3307';
+$host = 'localhost';
 $dbname = 'co3049';
 $username = 'root';
 $password = '';
