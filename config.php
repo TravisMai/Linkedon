@@ -224,7 +224,7 @@ CREATE TABLE IF NOT EXISTS `reference` (
     `user_id` int(50) NOT NULL,
     `name` varchar(250) NOT NULL,
     `email` text NOT NULL,
-    `phone` int(10) NOT NULL,
+    `phone` VARCHAR(250) NOT NULL,
     `relationship` text NOT NULL,
     PRIMARY KEY (id),
     FOREIGN KEY (`resume_id`) REFERENCES `resume`(`id`) ON DELETE CASCADE,

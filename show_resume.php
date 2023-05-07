@@ -67,7 +67,7 @@ ob_start();
                 
                 if (mysqli_num_rows($result) > 0) {
                     while ($row = $result->fetch_assoc()) {
-                        $salary = '$' . number_format($row['desire_salary']) . ' <i class="bi bi-cash"></i>';
+                        $salary = 'VND ' . number_format($row['desire_salary']) . '.000.000 <i class="bi bi-cash"></i>';
                         $position = $row['position'] . ' (' . $row['employment_type'] . ')';
                         $output .= '
                         <div class="col-md-8 mb-2 mt-3">
@@ -92,7 +92,9 @@ ob_start();
                             <ul>';
                     while ($row = $result->fetch_assoc()) {
                         $output .= '
-                            <li>'.$row['degree'] .' in ' . $row['major'] .', '. $row['school'] .'</li>      
+                            <li>'.$row['degree'] .' in ' . $row['major'] .', '. $row['school'] .'</li>  
+                            <li>'.' Graduate year: ' . $row['year'] .'</li>
+                            <li>'.' GPA: ' . $row['gpa'] .'</li>      
                         ';
                     }
                     $output .= '
@@ -111,8 +113,18 @@ ob_start();
                             <h5 class="card-title">Working History</h5>
                                 <ul>';
                     while ($row = $result->fetch_assoc()) {
+                        if ($row['duration'] == 0) $duration = 'Less Than 6 Months';
+                        elseif ($row['duration'] == 1) $duration = '6 Months to < 1 Years';
+                        elseif ($row['duration'] == 2) $duration = '1 Years to < 2 Years';
+                        elseif ($row['duration'] == 3) $duration = '2 Years to < 3 Years';
+                        elseif ($row['duration'] == 4) $duration = '3 Years to < 4 Years';
+                        elseif ($row['duration'] == 5) $duration = '4 Years to < 5 Years';
+                        elseif ($row['duration'] == 6) $duration = 'Over 5 Years';
+                        elseif ($row['duration'] == -1) $duration = 'Still in Job';
                         $output .= '
-                            <li>'. $row['position'] .', '. $row['company_name'] . ', ' . $row['duration'] . '<br>' . '<strong>Tasks: </strong>'. $row['tasks'] .'</li>      
+                            <li>'. $row['position'] .' at '. $row['company_name'] .'</li>
+                            <li>'. 'Duration: ' . $duration . '<br>' . '</li>
+                            <li>'. '<strong>Tasks: </strong>'. $row['tasks'] .'</li>      
                         ';
                     }
                     $output .= '
@@ -121,7 +133,7 @@ ob_start();
                     </div>';
                 }
 
-                $sql = "SELECT `title`, `organization`, `value`, YEAR(obtained_date) as `year` FROM `certificate` WHERE user_id = $id";
+                $sql = "SELECT `title`, `organization`, DATE_FORMAT(`obtained_date`, '%m/%Y') as `year` FROM `certificate` WHERE user_id = $id";
                 $result = $conn->query($sql);
 
                 if(mysqli_num_rows($result) > 0){
@@ -132,7 +144,7 @@ ob_start();
                                 <ul>';
                     while ($row = $result->fetch_assoc()) {
                         $output .= '
-                            <li>'.$row['title'] .', '. $row['organization'] . ', ' . $row['year'] . '<br>' . '<strong>Status: </strong>' . $row['value'] .'</li>      
+                            <li>'.$row['title'] .' - '. $row['organization'] . ' - ' . $row['year'] . '</li>      
                         ';
                     }
                     $output .= '
@@ -190,7 +202,7 @@ ob_start();
                                 <ul>';
                     while ($row = $result->fetch_assoc()) {
                         $output .= '
-                            <li>'. $row['name'].' , ('. $row['relationship'] . ') <br>' . '<strong>E-mail: </strong>'. $row['email'] . '<i class="bi bi-envelope m-1"></i><br><strong>Phone: </strong>'. $row['phone'] .'<i class="bi bi-telephone m-1"></i></li>      
+                            <li>'. $row['name'].' , ('. $row['relationship'] . ') <br>' . '<strong>E-mail: </strong>'. $row['email'] . '<i class="bi bi-envelope m-1"></i><br><strong>Phone: </strong>'. $row['phone'] .'<i class="bi bi-telephone m-1"></i></li><br/>      
                         ';
                     }
                     $output .= '
