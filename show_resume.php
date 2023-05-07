@@ -124,7 +124,7 @@ ob_start();
                         $output .= '
                             <li>'. $row['position'] .' at '. $row['company_name'] .'</li>
                             <li>'. 'Duration: ' . $duration . '<br>' . '</li>
-                            <li>'. '<strong>Tasks: </strong>'. $row['tasks'] .'</li>      
+                            <li>'. '<strong>Tasks: </strong>'. $row['tasks'] .'</li><br/>    
                         ';
                     }
                     $output .= '

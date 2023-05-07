@@ -1074,14 +1074,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                         echo "";
                     } ?>">
                 </div>
-                <button type="button" class="btn btn-primary mt-3" id="add-certification">Add
-                    More</button>
-                <div class="d-flex justify-content-between mt-4">
-                    <button type="button" class="btn btn-secondary mr-auto" id="back-to-history"
-                        onclick="changeTab('history')">Back</button>
-                    <button type="button" class="btn btn-primary ml-auto" id="next-to-reference"
-                        onclick="changeTab('reference')">Next</button>
-                </div>
             <button type="button" class="btn btn-danger mt-3 remove-certification-form">Remove Certification</button>
         `;
 
