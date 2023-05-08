@@ -1,6 +1,6 @@
 <?php
 session_start(); // start session
-
+ob_start();
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 if (isset($_GET['id'])) {
@@ -23,10 +23,19 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
 
 // output header with dynamic login link
 ?>
-
+<script src="./scripts/imagesloaded.pkgd.min.js?ver=1.2.0"></script>
+<script src="./scripts/masonry.pkgd.min.js?ver=1.2.0"></script>
+<script src="./scripts/BigPicture.min.js?ver=1.2.0"></script>
+<script src="./scripts/purecounter.min.js?ver=1.2.0"></script>
+<script src="./scripts/bootstrap.bundle.min.js?ver=1.2.0"></script>
+<script src="./scripts/aos.min.js?ver=1.2.0"></script>
+<script src="./scripts/main.js?ver=1.2.0"></script>
 <header class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header-nav" role="navigation">
-        <div class="container"><a class="link-dark navbar-brand site-title mb-0" href="index.php?page=home">LinkedOn</a>
+        <div class="container"><a class="link-dark navbar-brand site-title mb-0"
+                style="color:  #ff7153; font-size: 30px" href="index.php?page=home">Linked<span
+                    style="background-color: #ff7153; color: white; border-radius: 5px; padding-left: 2px; padding-right: 2px; margin-left: 2px;">on</span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>

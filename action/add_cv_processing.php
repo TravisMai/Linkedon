@@ -12,8 +12,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $old_resume_info->execute();
     $result_old = $old_resume_info->get_result();
     $row_old = $result_old->fetch_assoc();
-    $old_id = isset($row_old['id'])?$row_old['id']:"";
-    if(isset($row_old)){
+    $old_id = isset($row_old['id']) ? $row_old['id'] : "";
+    if (isset($row_old)) {
         $delete_resume = $conn->prepare("DELETE FROM `resume` WHERE id = $old_id");
         $delete_resume->execute();
     }
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_query($conn, $sql);
     $insert_id = mysqli_insert_id($conn);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Additional Section
+    // Additional Section
     $habit = $_POST['habit'];
     $hobbies = $_POST['hobbies'];
     $personal_information = $_POST['personal-information'];
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_query($conn, $sql);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Education-Section
+    // Education-Section
     $school_name = $_POST['school-name'];
     $degree_name = $_POST['degree-name'];
     $education_level = $_POST['education-level'];
@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     );
 
     // Insert the educations into the database
-// $sql = "INSERT INTO education (school, degree, major, graduation_year, gpa) VALUES ";
+    // $sql = "INSERT INTO education (school, degree, major, graduation_year, gpa) VALUES ";
     $sql = "INSERT INTO education (resume_id, user_id , school,  degree, `year`, gpa, major) VALUES ";
     foreach ($educations as $education) {
         $sql .= "('$insert_id','$user_id','$education[school_name]', '$education[education_level]','$education[graduation_year]' , '$education[gpa]',  '$education[degree_name]'),";
@@ -63,15 +63,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Professional
+    // Professional
     $job_skills = $_POST['job-skills'];
 
     // Store the values in an array
     $professional_experiences = array();
     for ($i = 0; $i < count($job_skills); $i++) {
-        $professional_experiences[] = array(
-            'job_skills' => $job_skills[$i]
-        );
+        if ($job_skills[$i] !== "") {
+            $professional_experiences[] = array(
+                'job_skills' => $job_skills[$i]
+            );
+        }
     }
 
     // Insert the professional experiences into the database
@@ -82,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Working-Section
+    // Working-Section
     $job_name = $_POST['job-name'];
     $company_name = $_POST['company-name'];
     $work_type = $_POST['employment-degree'];
@@ -92,13 +94,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Store the values in an array
     $work_histories = array();
     for ($i = 0; $i < count($job_name); $i++) {
-        $work_histories[$i] = array(
-            'job_name' => $job_name[$i],
-            'company_name' => $company_name[$i],
-            'work_type' => $work_type[$i],
-            'job_duration' => $job_duration[$i],
-            'working_description' => $working_description[$i]
-        );
+        if ($job_name[$i] !== "" && $company_name[$i] !== "" && $work_type[$i] !== "" && $job_duration[$i] !== "" && $working_description[$i] !== "") {
+            $work_histories[$i] = array(
+                'job_name' => $job_name[$i],
+                'company_name' => $company_name[$i],
+                'work_type' => $work_type[$i],
+                'job_duration' => $job_duration[$i],
+                'working_description' => $working_description[$i]
+            );
+        }
     }
 
     // Insert the work histories into the database
@@ -109,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Certification Section
+    // Certification Section
     $certification_names = $_POST['certification-name'];
     $certification_dates = $_POST['certification-date'];
     $expire_dates = $_POST['expire-date'];
@@ -118,12 +122,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Store the values in an array
     $certifications = array();
     for ($i = 0; $i < count($certification_names); $i++) {
-        $certifications[$i] = array(
-            'name' => $certification_names[$i],
-            'obtain_date' => date('Y-m-d', strtotime($certification_dates[$i])),
-            'expire_date' => date('Y-m-d', strtotime($expire_dates[$i])),
-            'organization' => $certification_organizations[$i]
-        );
+        if ($certification_names[$i] !== "" && $certification_dates[$i] !== "" && $certification_organizations[$i] !== "") {
+            $certifications[$i] = array(
+                'name' => $certification_names[$i],
+                'obtain_date' => date('Y-m-d', strtotime($certification_dates[$i])),
+                'expire_date' => date('Y-m-d', strtotime($expire_dates[$i])),
+                'organization' => $certification_organizations[$i]
+            );
+        }
     }
 
     // Insert the certifications into the database
@@ -134,7 +140,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sql = rtrim($sql, ",");
     mysqli_query($conn, $sql);
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Reference Section
+    // Reference Section
     $reference_names = $_POST['reference-name'];
     $reference_phones = $_POST['reference-phone'];
     $reference_emails = $_POST['reference-email'];
@@ -143,12 +149,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Store the values in an array
     $references = array();
     for ($i = 0; $i < count($reference_names); $i++) {
-        $references[] = array(
-            'reference_name' => $reference_names[$i],
-            'reference_phone' => $reference_phones[$i],
-            'reference_email' => $reference_emails[$i],
-            'reference_relationship' => $reference_relationships[$i]
-        );
+        if ($reference_names[$i] !== "" && $reference_phones[$i] !== "" && $reference_emails[$i] !== "" && $reference_relationships[$i] !== "") {
+            $references[] = array(
+                'reference_name' => $reference_names[$i],
+                'reference_phone' => $reference_phones[$i],
+                'reference_email' => $reference_emails[$i],
+                'reference_relationship' => $reference_relationships[$i]
+            );
+        }
     }
 
     // Insert the references into the database

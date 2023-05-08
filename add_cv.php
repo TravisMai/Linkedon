@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require_once('inc/header.php') ?>
+<?php 
+require_once('inc/header.php');
+require_once('database/dbconnect.php');
+
+?>
 
 <script>
     var tabIndex = {
@@ -28,7 +32,15 @@ $jobCount = 0;
     if (!isset($_SESSION["user_id"])) {
         header('Location: index.php?page=home');
     }
-    if ($_SESSION['first-name'] == "" || $_SESSION['last-name'] == "") {
+    else {
+        $user_id = $_SESSION["user_id"];
+    }
+    $name_check = $conn->prepare("SELECT firstname, lastname FROM `users` WHERE `id` = $user_id");
+    $name_check->execute();
+    $name_info = $name_check->get_result();
+    $row_name = $name_info->fetch_assoc();
+
+    if (empty($row_name['firstname']) || empty($row_name['lastname'])) {
         $_SESSION['label'] = "Error";
         $_SESSION['message'] = "Please Fulfill your information";
         header('Location: index.php?page=profile');
@@ -40,7 +52,7 @@ $jobCount = 0;
             <header>
                 <div class="cover bg-light">
                     <div class="row bg-success">
-                        <img src="images/neon_cat.webp" style="max-height: 350px; width: 100%;">
+                        <img src="images/ezgif.com-crop.gif" style="max-height: 350px; width: 100%;">
                     </div>
             </header>
             <div class="container bg-light px-3">
@@ -57,8 +69,8 @@ $jobCount = 0;
         <div class="row">
             <div class="col bg-light"> </div>
             <div class="col-7 col-sm-10 col-md-6">
-                <ul class="nav nav-tabs flex-column flex-md-row" id="cv-Tab">
-                    <li class="nav-item">
+                <ul class="nav nav-tabs flex-md-row" style="justify-content: space-between" id="cv-Tab">
+                    <li class="nav-item"  style="display: none">
                         <a class="nav-link" id="personal-tab" disabled onclick="changeTab('personal')"
                             style="display: none">
                         </a>
@@ -196,7 +208,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
-                                    <label for="position">Postion</label>
+                                    <label for="position">Position</label>
                                     <input placeholder="Tell us the position you want to apply: fresher, junior, etc.."
                                         type="text" class="form-control" value="<?php if (isset($row_obj['position'])) {
                                             echo $row_obj['position'];
@@ -315,7 +327,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <label for="graduation-year">Graduation Year</label>
                                     <select class="form-control" id="graduation-year" name="graduation-year">
                                         <option value="">-- Select --</option>
-                                        <option value="1234">High School</option>
+                                        <option value="High School">High School</option>
                                         <!-- Generate options for years from 1990 to 2023 -->
                                         <?php
                                         for ($i = 2030; $i >= 1990; $i--) {
@@ -375,7 +387,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                             echo "";
                                         } ?>" required>
                                     <?php while($row_skill = $result_skill->fetch_assoc()): ?>
-                                        <input type="search" class="form-control" id="job-skills"
+                                        <input type="search" class="form-control mt-1" id="job-skills"
                                         placeholder="Leave blank if you want to delete it" name="job-skills[]" value="<?php if (isset($row_skill['skill'])) {
                                             echo $row_skill['skill'];
                                         }?>">
@@ -836,8 +848,8 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
 
             // Disable the Graduation Year select when the Education Level is High School
             educationLevel.addEventListener('change', function () {
-                if (educationLevel.value === 'high-school') {
-                    graduationYearSelect.value = '1234';
+                if (educationLevel.value === 'High School') {
+                    graduationYearSelect.value = 'High School';
                     graduationYearSelect.disabled = true;
                 } else {
                     graduationYearSelect.disabled = false;
@@ -894,8 +906,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                     // Update the input value
                     gpaInput.value = cleanedValue;
                 }
-
-
             });
         </script>
 
@@ -1323,7 +1333,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             }
             addReferenceForm();
         </script>
-
+        <script>
+        for (var idx = 0; idx < Object.keys(tabIndex).length; idx++) {
+            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled = !Object.entries(tabIndex)[idx][1][1];
+        }
+    </script>
 
     </div>
 </body>
