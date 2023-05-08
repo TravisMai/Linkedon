@@ -92,9 +92,9 @@ ob_start();
                             <ul>';
                     while ($row = $result->fetch_assoc()) {
                         $output .= '
-                            <li>'.$row['degree'] .' in ' . $row['major'] .', '. $row['school'] .'</li>  
-                            <li>'.' Graduate year: ' . $row['year'] .'</li>
-                            <li>'.' GPA: ' . $row['gpa'] .'</li>      
+                            <li>'.$row['degree'] .' in ' . $row['major'] .', '. $row['school'] .'<br>'
+                            .'<strong>Graduate year: </strong>' . $row['year'] .'<br>'
+                            .'<strong>GPA: </strong>' . $row['gpa'] .'</li>      
                         ';
                     }
                     $output .= '
@@ -123,7 +123,7 @@ ob_start();
                         elseif ($row['duration'] == 6) $duration = 'Over 5 Years';
                         elseif ($row['duration'] == -1) $duration = 'Still in Job';
                         $output .= '
-                            <li>'. $row['position'] .' at '. $row['company_name'] .'
+                            <li><em>'. $row['position'] .'</em> at <em>'. $row['company_name'] .'</em>
                             <br>'. '<strong>Duration: </strong>' . $duration  . '
                             <br>'. '<strong>Tasks: </strong>'. $row['tasks'] .'</li>
                         ';
