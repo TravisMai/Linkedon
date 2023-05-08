@@ -1333,12 +1333,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             }
             addReferenceForm();
         </script>
-        <!-- <script>
+        <script>
         for (var idx = 0; idx < Object.keys(tabIndex).length; idx++) {
             document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled = !Object.entries(tabIndex)[idx][1][1];
-            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").style.backgroundColor = "lightpink";
         }
-    </script> -->
+    </script>
 
     </div>
 </body>
