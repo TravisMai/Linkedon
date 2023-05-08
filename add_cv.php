@@ -208,7 +208,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                         } ?>" required>
                                 </div>
                                 <div class="form-group mt-1">
-                                    <label for="position">Postion</label>
+                                    <label for="position">Position</label>
                                     <input placeholder="Tell us the position you want to apply: fresher, junior, etc.."
                                         type="text" class="form-control" value="<?php if (isset($row_obj['position'])) {
                                             echo $row_obj['position'];
@@ -327,7 +327,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                     <label for="graduation-year">Graduation Year</label>
                                     <select class="form-control" id="graduation-year" name="graduation-year">
                                         <option value="">-- Select --</option>
-                                        <option value="1234">High School</option>
+                                        <option value="High School">High School</option>
                                         <!-- Generate options for years from 1990 to 2023 -->
                                         <?php
                                         for ($i = 2030; $i >= 1990; $i--) {
@@ -387,7 +387,7 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                                             echo "";
                                         } ?>" required>
                                     <?php while($row_skill = $result_skill->fetch_assoc()): ?>
-                                        <input type="search" class="form-control" id="job-skills"
+                                        <input type="search" class="form-control mt-1" id="job-skills"
                                         placeholder="Leave blank if you want to delete it" name="job-skills[]" value="<?php if (isset($row_skill['skill'])) {
                                             echo $row_skill['skill'];
                                         }?>">
@@ -848,8 +848,8 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
 
             // Disable the Graduation Year select when the Education Level is High School
             educationLevel.addEventListener('change', function () {
-                if (educationLevel.value === 'high-school') {
-                    graduationYearSelect.value = '1234';
+                if (educationLevel.value === 'High School') {
+                    graduationYearSelect.value = 'High School';
                     graduationYearSelect.disabled = true;
                 } else {
                     graduationYearSelect.disabled = false;
@@ -1333,12 +1333,11 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             }
             addReferenceForm();
         </script>
-        <!-- <script>
+        <script>
         for (var idx = 0; idx < Object.keys(tabIndex).length; idx++) {
             document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled = !Object.entries(tabIndex)[idx][1][1];
-            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").style.backgroundColor = "lightpink";
         }
-    </script> -->
+    </script>
 
     </div>
 </body>
