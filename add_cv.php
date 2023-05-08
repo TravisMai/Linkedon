@@ -69,8 +69,8 @@ $jobCount = 0;
         <div class="row">
             <div class="col bg-light"> </div>
             <div class="col-7 col-sm-10 col-md-6">
-                <ul class="nav nav-tabs flex-md-row" style="justify-content: space-between" id="cv-Tab">
-                    <li class="nav-item"  style="display: none">
+                <ul class="nav nav-tabs flex-column flex-md-row" id="cv-Tab">
+                    <li class="nav-item">
                         <a class="nav-link" id="personal-tab" disabled onclick="changeTab('personal')"
                             style="display: none">
                         </a>
