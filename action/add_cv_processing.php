@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Store the values in an array
     $work_histories = array();
     for ($i = 0; $i < count($job_name); $i++) {
-        if ($job_name[$i] !== "" && $company_name[$i] !== "" && $work_type[$i] !== ""  && $job_duration[$i] !== "" && $working_description[$i] !== "") {
+        if ($job_name[$i] !== "" && $company_name[$i] !== "" && $work_type[$i] !== "" && $job_duration[$i] !== "" && $working_description[$i] !== "") {
             $work_histories[$i] = array(
                 'job_name' => $job_name[$i],
                 'company_name' => $company_name[$i],
@@ -122,13 +122,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Store the values in an array
     $certifications = array();
     for ($i = 0; $i < count($certification_names); $i++) {
-        if ($certification_names[$i] !== "" && $certification_dates[$i] !== "" && $certification_organizations[$i] == "")
-        $certifications[$i] = array(
-            'name' => $certification_names[$i],
-            'obtain_date' => date('Y-m-d', strtotime($certification_dates[$i])),
-            'expire_date' => date('Y-m-d', strtotime($expire_dates[$i])),
-            'organization' => $certification_organizations[$i]
-        );
+        if ($certification_names[$i] !== "" && $certification_dates[$i] !== "" && $certification_organizations[$i] !== "") {
+            $certifications[$i] = array(
+                'name' => $certification_names[$i],
+                'obtain_date' => date('Y-m-d', strtotime($certification_dates[$i])),
+                'expire_date' => date('Y-m-d', strtotime($expire_dates[$i])),
+                'organization' => $certification_organizations[$i]
+            );
+        }
     }
 
     // Insert the certifications into the database
@@ -148,13 +149,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Store the values in an array
     $references = array();
     for ($i = 0; $i < count($reference_names); $i++) {
-        if ($reference_names[$i] !== "" && $reference_phones[$i] !== "" && $reference_emails[$i] !== "" &&$reference_relationships[$i] !== "")
-        $references[] = array(
-            'reference_name' => $reference_names[$i],
-            'reference_phone' => $reference_phones[$i],
-            'reference_email' => $reference_emails[$i],
-            'reference_relationship' => $reference_relationships[$i]
-        );
+        if ($reference_names[$i] !== "" && $reference_phones[$i] !== "" && $reference_emails[$i] !== "" && $reference_relationships[$i] !== "") {
+            $references[] = array(
+                'reference_name' => $reference_names[$i],
+                'reference_phone' => $reference_phones[$i],
+                'reference_email' => $reference_emails[$i],
+                'reference_relationship' => $reference_relationships[$i]
+            );
+        }
     }
 
     // Insert the references into the database
