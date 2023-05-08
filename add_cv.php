@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<?php require_once('inc/header.php') ?>
+<?php 
+require_once('inc/header.php');
+require_once('database/dbconnect.php');
+
+?>
 
 <script>
     var tabIndex = {
@@ -28,7 +32,15 @@ $jobCount = 0;
     if (!isset($_SESSION["user_id"])) {
         header('Location: index.php?page=home');
     }
-    if ($_SESSION['first-name'] == "" || $_SESSION['last-name'] == "") {
+    else {
+        $user_id = $_SESSION["user_id"];
+    }
+    $name_check = $conn->prepare("SELECT firstname, lastname FROM `users` WHERE `id` = $user_id");
+    $name_check->execute();
+    $name_info = $name_check->get_result();
+    $row_name = $name_info->fetch_assoc();
+
+    if (empty($row_name['firstname']) || empty($row_name['lastname'])) {
         $_SESSION['label'] = "Error";
         $_SESSION['message'] = "Please Fulfill your information";
         header('Location: index.php?page=profile');
@@ -894,8 +906,6 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
                     // Update the input value
                     gpaInput.value = cleanedValue;
                 }
-
-
             });
         </script>
 
@@ -1323,7 +1333,12 @@ Ex: a language, playing a guitar, i am a vegetarian...."><?php if (isset($row_ad
             }
             addReferenceForm();
         </script>
-
+        <!-- <script>
+        for (var idx = 0; idx < Object.keys(tabIndex).length; idx++) {
+            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").disabled = !Object.entries(tabIndex)[idx][1][1];
+            document.getElementById(Object.entries(tabIndex)[idx][0] + "-tab").style.backgroundColor = "lightpink";
+        }
+    </script> -->
 
     </div>
 </body>
