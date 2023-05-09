@@ -28,7 +28,9 @@ if(isset($_GET['query'])){
         while($row = $result->fetch_assoc()) {
             
             $hoverinfo = '
-            <div class="card info-tooltip">
+
+            <div class="card" id ="info-tooltip">
+
                 <div class="card-body">
                 <div class="row">
                     <div class="col-3">
@@ -97,7 +99,7 @@ if(isset($_GET['query'])){
                 </div>
                 <div class="candidate-list-details">
                     <div class="candidate-list-info">
-                        <div class="candidate-list-title">
+                        <div class="candidate-list-title candidate-name">
                             <h5 class="mb-0"><a href="index.php?page=candidates&id='. $row['id'] .'">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
                             '.
                             $hoverinfo

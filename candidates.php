@@ -141,7 +141,9 @@ else {
             position: absolute;
             z-index: 10;
         }
-        .info-tooltip {
+
+        #info-tooltip {
+
             position: absolute;
             padding: 5px;
             width: 400px;
@@ -150,10 +152,13 @@ else {
             opacity: 0;
             transition: 0.2s;
         }
-        .candidate-name:hover .info-tooltip {
+
+        .candidate-name:hover #info-tooltip {
+
             visibility: visible;
             opacity: 1;
         }
+
 
         @media screen and (max-width: 1100px) {
             #numbertoshow p {
@@ -189,7 +194,6 @@ else {
         }
     </style>
     <script>
-
         // Show candidate after click on search dropdown
         // disable the filter parts
         // enable Show All button to go back and show the whole list
@@ -326,7 +330,7 @@ else {
         <div id="content">
             <!-- This appear first when user click on "Candidates" -->
             <div class="container" id = "search-for-candidate">
-                <h1><u class="text-warning">Candidates</u></h1>
+                <h1><u class="text-dark">Candidates</u></h1>
                 <!-- Search bar -->
                 <div class="container mt-3 mb-2">
                     <input type="text" onkeyup="searchCandidate(this.value)" class="form-control rounded" id = "searchInput" placeholder="Search for candidate">
@@ -443,7 +447,9 @@ else {
                                                 if(mysqli_num_rows($result) > 0){
                                                     while($row = $result->fetch_assoc()) {
                                                         $hoverinfo = '
-                                                        <div class="card info-tooltip">
+
+                                                        <div class="card" id="info-tooltip">
+
                                                             <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-3">
