@@ -29,53 +29,53 @@ VALUES
 --    `employment_type` varchar(255) NOT NULL,
  --   `desire_salary` int(10) NOT NULL,
   --  `goals` text NOT NULL,
-INSERT INTO `resume` (`user_id`, `position`, `employment_type`, `desire_salary`, `goals`)
+INSERT INTO `resume` (`user_id`, `title`, `position`, `employment_type`, `desire_salary`, `goals`)
 VALUES
   -- User 1
-  (1, 'Web developer', 'Full-time', 10, 'To become an expert in web development'),
+  (1, 'Backend Developer', 'Web developer', 'full-time', 10, 'To become an expert in web development'),
   -- User 2
-  (2, 'Business Analyst', 'Full-time', 90, 'To help companies make data-driven decisions'),
+  (2, 'Data Crawling', 'Business Analyst', 'full-time', 90, 'To help companies make data-driven decisions'),
   -- User 3
-  (3, 'Accountant', 'Part-time', 50, 'To gain more experience in accounting'),
+  (3, 'Money Counting', 'Accountant', 'part-time', 50, 'To gain more experience in accounting'),
   -- User 4
-  (4, 'Software Engineer', 'Full-time', 120, 'To work on challenging projects and innovate'),
+  (4, 'Frontend Developer', 'Software Engineer', 'full-time', 120, 'To work on challenging projects and innovate'),
   -- User 5
-  (5, 'Associate Electrical Engineer', 'Full-time', 80, 'To design and implement electrical systems'),
+  (5, 'Building Electronic System', 'Associate Electrical Engineer', 'full-time', 80, 'To design and implement electrical systems'),
   -- User 6
-  (6, 'Administrative Assistant', 'Contract', 60, 'To provide efficient administrative support'),
+  (6, 'Do something', 'Administrative Assistant', 'contract', 60, 'To provide efficient administrative support'),
   -- User 7
-  (7, 'Customer Service Representative', 'Full-time', 50, 'To provide excellent service to customers'),
+  (7, 'Do nothing', 'Customer Service Representative', 'full-time', 50, 'To provide excellent service to customers'),
   -- User 8
-  (8, 'Marketing Coordinator', 'Full-time', 70, 'To develop and implement effective marketing plans'),
+  (8, 'Event Hosting', 'Marketing Coordinator', 'full-time', 70, 'To develop and implement effective marketing plans'),
   -- User 9
-  (9, 'Mentor', 'Part-time', 30, 'To help guide and inspire others'),
+  (9, 'Teaching Assistance', 'Mentor', 'part-time', 30, 'To help guide and inspire others'),
   -- User 10
-  (10, 'Content Creator', 'Full-time', 80, 'To create engaging and informative content for audiences');
+  (10, 'Facebook Content', 'Content Creator', 'full-time', 80, 'To create engaging and informative content for audiences');
 
 
 -- Insert education for each user
 INSERT INTO `education` (`resume_id`, `user_id`, `school`, `degree`, `major`, `year`, `gpa`)
 VALUES
   -- User 1
-  (1, 1, 'University of California', 'Bachelor of Science', 'Computer Science', '2021', '8'),
+  (1, 1, 'University of California', 'Bachelor', 'Computer Science', '2021', '8/10'),
   -- User 2
-  (2, 2, 'University of Michigan', 'Bachelor of Arts', 'Business Administration', '2021', '7'),
+  (2, 2, 'University of Michigan', 'Bachelor', 'Business Administration', '2021', '7/10'),
   -- User 3
-  (3, 3, 'University of Illinois', 'Master of Accountancy', 'Accounting', '2021', '7'),
+  (3, 3, 'University of Illinois', 'MBA', 'Accounting', '2021', '7/10'),
   -- User 4
-  (4, 4, 'Massachusetts Institute of Technology', 'Bachelor of Science', 'Computer Science', '2021', '7'),
+  (4, 4, 'Massachusetts Institute of Technology', 'Bachelor', 'Computer Science', '2021', '7/10'),
   -- User 5
-  (5, 5, 'Stanford University', 'Bachelor of Science', 'Electrical Engineering', '2021', '9'),
+  (5, 5, 'Stanford University', 'Bachelor', 'Electrical Engineering', '2021', '9/10'),
   -- User 6
-  (6, 6, 'University of Texas at Austin', 'Bachelor of Science', 'Business Administration', '2021', '8'),
+  (6, 6, 'University of Texas at Austin', 'Bachelor', 'Business Administration', '2021', '8/10'),
   -- User 7
-  (7, 7, 'Arizona State University', 'Bachelor of Arts', 'Communication', '2021', '8'),
+  (7, 7, 'Arizona State University', 'Bachelor', 'Communication', '2021', '8/10'),
   -- User 8
-  (8, 8, 'Columbia University', 'Master of Business Administration', 'Marketing', '2021', '10'),
+  (8, 8, 'Columbia University', 'MBA', 'Marketing', '2021', '10/10'),
   -- User 9
-  (9, 9, 'Virginia Polytechnic Institute and State University', 'Bachelor of Science', 'Mechanical Engineering', '2021', '10'),
+  (9, 9, 'Virginia Polytechnic Institute and State University', 'Bachelor', 'Mechanical Engineering', '2021', '10/10'),
   -- User 10
-  (10, 10, 'University of Washington', 'Bachelor of Arts', 'English', '2021', '10');
+  (10, 10, 'University of Washington', 'Bachelor', 'English', '2021', '10/10');
 
 -- Insert certificates for each user
 INSERT INTO `certificate` (`resume_id`, `user_id`, `title`, `organization`, `obtained_date`, `expiration_date`)
@@ -137,29 +137,29 @@ VALUES
   (10, 10, 'Research Skills');
 
 -- Insert working history for each user
-INSERT INTO `working_history` (`resume_id`, `user_id`, `position`, `company_name`, `duration`, `tasks`)
+INSERT INTO `working_history` (`resume_id`, `user_id`, `position`, `company_name`, `work_type`, `duration`, `tasks`)
 VALUES
   -- User 1
-  (1, 1, 'Web Developer', 'ABC Company', 0, 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP. Collaborated with clients and designers to ensure project accuracy and completed projects on time.'),
-  (1, 1, 'Web Developer', 'ABllC Company', 1, 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP.'),
+  (1, 1, 'Web Developer', 'ABC Company', 'full-time', 0, 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP. Collaborated with clients and designers to ensure project accuracy and completed projects on time.'),
+  (1, 1, 'Web Developer', 'ABllC Company', 'full-time',1, 'Developed and maintained custom websites and web applications using HTML, CSS, JavaScript, and PHP.'),
   -- User 2
-  (2, 2, 'Business Analyst', 'XYZ Corporation', 5, 'Worked closely with key stakeholders to model business processes, gather and define business requirements. Conducted system analysis, developed use cases and prepared functional specifications.'),
+  (2, 2, 'Business Analyst', 'XYZ Corporation', 'full-time',5, 'Worked closely with key stakeholders to model business processes, gather and define business requirements. Conducted system analysis, developed use cases and prepared functional specifications.'),
   -- User 3
-  (3, 3, 'Senior Accountant', 'Super Accounting Firm', 6, 'Conducted multiple audits of firms and provided internal control analysis while communicating documents and performing fieldwork.'),
+  (3, 3, 'Senior Accountant', 'Super Accounting Firm', 'full-time', 6, 'Conducted multiple audits of firms and provided internal control analysis while communicating documents and performing fieldwork.'),
   -- User 4
-  (4, 4, 'Software Developer', 'Global Software Solutions', 4, 'Coded, tested and deployed software applications, APIs and software libraries. Worked in a team environment with frequent code reviews.'),
+  (4, 4, 'Software Developer', 'Global Software Solutions', 'full-time', 4, 'Coded, tested and deployed software applications, APIs and software libraries. Worked in a team environment with frequent code reviews.'),
   -- User 5
-  (5, 5, 'Associate Electrical Engineer', 'Electricity Innovations', 4, 'Constructed, implemented and analyzed electrical testing to provide safety and optimization in electrical products. Collaborated in a team environment to ensure goal completion.'),
+  (5, 5, 'Associate Electrical Engineer', 'Electricity Innovations', 'full-time', 4, 'Constructed, implemented and analyzed electrical testing to provide safety and optimization in electrical products. Collaborated in a team environment to ensure goal completion.'),
   -- User 6
-  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.', 4, 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
+  (6, 6, 'Administrative Assistant', 'Super Industries, Inc.','full-time', 4, 'Answered calls and greeted visitors, assigned schedules and acted as the point of contact for all executive appointments.'),
   -- User 7
-  (7, 7, 'Customer Service Representative', 'Helpful Corp.', 1, 'Provided top-notch customer service using voice and digital channels. Provided solutions to consumer problems by escalating larger issues to management staff when necessary.'),
+  (7, 7, 'Customer Service Representative', 'Helpful Corp.', 'full-time', 1, 'Provided top-notch customer service using voice and digital channels. Provided solutions to consumer problems by escalating larger issues to management staff when necessary.'),
   -- User 8
-  (8, 8, 'Marketing Coordinator', 'Marketing Firm', -1, 'Designed and implemented digital marketing campaigns using a variety of mediums on channels like LinkedIn, Instagram, and Twitter. Analyzed campaign success and made recommendations for updates to the company strategy.'),
+  (8, 8, 'Marketing Coordinator', 'Marketing Firm', 'full-time', -1, 'Designed and implemented digital marketing campaigns using a variety of mediums on channels like LinkedIn, Instagram, and Twitter. Analyzed campaign success and made recommendations for updates to the company strategy.'),
   -- User 9
-  (9, 9, 'Mechanical Engineer', 'Mechanical Industries, LLC', 5, 'Researched, designed and created mechanical systems in machines and structures. Collaborated with a team to ensure the completion of important projects.'),
+  (9, 9, 'Mechanical Engineer', 'Mechanical Industries, LLC', 'full-time', 5, 'Researched, designed and created mechanical systems in machines and structures. Collaborated with a team to ensure the completion of important projects.'),
   -- User 10
-  (10, 10, 'Content Writer', 'Content Creation, Inc.', 5, 'Wrote engaging content across a variety of web products, ranging from press releases to landing pages to full-fledged articles. Worked with clients to develop content strategies that were appropriate to their specific needs.');
+  (10, 10, 'Content Writer', 'Content Creation, Inc.', 'full-time', 5, 'Wrote engaging content across a variety of web products, ranging from press releases to landing pages to full-fledged articles. Worked with clients to develop content strategies that were appropriate to their specific needs.');
 
 -- Insert additional information for each user
 INSERT INTO `additional_information` (`resume_id`, `user_id`, `hobbies`, `habits`, `personal_info`)
