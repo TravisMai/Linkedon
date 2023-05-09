@@ -4,6 +4,10 @@
     .avatar {
         object-fit: cover;
     }
+    .image{
+        display: flex;
+        justify-content: center;
+    }
 </style>
 
 <?php
@@ -68,7 +72,7 @@ require_once('./config.php');
                         <div class="col-2"></div>
 
                         <div class="col-md-5" data-aos="fade-left" data-aos-delay="100">
-                            <div class="form-floating mb-5 ">
+                            <div class="form-floating mb-5 image" >
                                 <img class="avatar mt-2" src="<?php echo isset($_SESSION['image']) ? $_SESSION['image'] : 'images/avatar.jpg'; ?>" width="200" height="200" alt="Walter Patterson" />
 
                             </div>
