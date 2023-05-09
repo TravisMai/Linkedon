@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Store the values in an array
     $work_histories = array();
     for ($i = 0; $i < count($job_name); $i++) {
-        if ($job_name[$i] !== "" && $company_name[$i] !== "" && $work_type[$i] !== ""  && $job_duration[$i] !== "" && $working_description[$i] !== "") {
+        if ($job_name[$i] !== "" && $company_name[$i] !== "" && $work_type[$i] !== "" && $job_duration[$i] !== "" && $working_description[$i] !== "") {
             $work_histories[$i] = array(
                 'job_name' => $job_name[$i],
                 'company_name' => $company_name[$i],

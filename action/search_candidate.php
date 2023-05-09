@@ -10,7 +10,10 @@ if(isset($_GET['query'])){
     users.id, 
     users.firstname, 
     users.lastname, 
-    users.avatar, 
+    users.avatar,
+    users.phone,
+    users.email,
+    users.address,  
     resume.position, 
     education.major 
     FROM users
@@ -22,18 +25,69 @@ if(isset($_GET['query'])){
 
     $output = '';
     if(mysqli_num_rows($result) > 0){
-        $output .= '
-        <table class="table manage-candidates-top mb-0">
-        <thead>
-            <tr>
-                <th>Candidate Name</th>
-                <th>Objective</th>
-                <th class="action text-right"></th>
-            </tr>
-        </thead>
-        <tbody>        
-        ';
         while($row = $result->fetch_assoc()) {
+            
+            $hoverinfo = '
+            <div class="card info-tooltip">
+                <div class="card-body">
+                <div class="row">
+                    <div class="col-3">
+                    <img src="'. $row['avatar'] .'" class="img-fluid rounded-circle" alt="Avatar">
+                    </div>
+                    <div class="col">
+                    <ul class="list-unstyled d-block">
+                        <li><h6>'. $row['firstname'] .' '. $row['lastname'] .'</h6></li>
+                        <li>
+                        <i class="bi bi-telephone-fill"></i> <strong>Phone:</strong> ' . $row['phone'] . '
+                        </li>
+                        <li>
+                        <i class="bi bi-envelope-fill"></i> <strong>Email:</strong> ' . $row['email'] . '
+                        </li>
+                        <li>
+                        <i class="bi bi-map-fill"></i> <strong>Address:</strong> ' . $row['address'] . '
+                        </li>
+                        <li>
+                        <i class="bi bi-graph-up"></i> <strong>Major:</strong> ' . $row['major'] . '
+                        </li>
+                        <li>
+                        <i class="bi bi-star-fill"></i> <strong>Objective:</strong> ' . $row['position'] . '
+                        </li>';
+
+            $sql_skills = "SELECT `skill` FROM `skill` WHERE user_id =" . intval($row['id']);
+            $result_skills = $conn->query($sql_skills);
+
+            $skills = '';
+            if (mysqli_num_rows($result_skills) > 0) {
+                while ($rowss = $result_skills->fetch_assoc()) {
+                    $delimiter = empty($skills) ? '' : ' <i class="bi bi-dot"></i> ';
+                    $skills .= $delimiter . $rowss['skill'];
+                }
+            } else {
+                $skills = 'N/A';
+            }
+
+            $hoverinfo .= '
+                        <li>
+                        <i class="bi bi-bookmark-fill"></i> <strong>Skills:</strong> ' . $skills . '
+                        </li>
+                    </ul>
+                    </div>
+                </div>
+                </div>
+            </div>
+            ';     
+
+            $output .= '
+            <table class="table manage-candidates-top mb-0">
+            <thead>
+                <tr>
+                    <th>Candidate Name</th>
+                    <th>Objective</th>
+                    <th class="action text-right"></th>
+                </tr>
+            </thead>
+            <tbody>        
+            ';
             $output .= '
             <tr class="candidates-list">
             <td class="title">
@@ -45,6 +99,9 @@ if(isset($_GET['query'])){
                     <div class="candidate-list-info">
                         <div class="candidate-list-title">
                             <h5 class="mb-0"><a href="index.php?page=candidates&id='. $row['id'] .'">'. $row['firstname'] . ' ' . $row['lastname'] .'</a></h5>
+                            '.
+                            $hoverinfo
+                            .'
                         </div>
                         <div class="candidate-list-option">
                             <ul class="list-unstyled">

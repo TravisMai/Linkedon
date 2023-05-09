@@ -1,6 +1,6 @@
 <?php
 session_start(); // start session
-
+ob_start();
 $page = isset($_GET['page']) ? $_GET['page'] : 'home';
 
 if (isset($_GET['id'])) {
@@ -34,7 +34,7 @@ if (isset($_SESSION['user_id']) && $_SESSION['user_id'] > 0) {
     <nav class="navbar navbar-expand-lg navbar-light bg-light" id="header-nav" role="navigation">
         <div class="container"><a class="link-dark navbar-brand site-title mb-0"
                 style="color:  #ff7153; font-size: 30px" href="index.php?page=home">Linked<span
-                    style="background-color: #ff7153; color: white; border-radius: 5px; padding-left: 2px; padding-right: 2px; margin-left: 2px;">On</span>
+                    style="background-color: #ff7153; color: white; border-radius: 5px; padding-left: 2px; padding-right: 2px; margin-left: 2px;">on</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
