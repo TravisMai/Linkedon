@@ -28,7 +28,9 @@ if(isset($_GET['query'])){
         while($row = $result->fetch_assoc()) {
             
             $hoverinfo = '
+
             <div class="card" id ="info-tooltip">
+
                 <div class="card-body">
                 <div class="row">
                     <div class="col-3">

@@ -141,7 +141,9 @@ else {
             position: absolute;
             z-index: 10;
         }
+
         #info-tooltip {
+
             position: absolute;
             padding: 5px;
             width: 400px;
@@ -150,7 +152,9 @@ else {
             opacity: 0;
             transition: 0.2s;
         }
+
         .candidate-name:hover #info-tooltip {
+
             visibility: visible;
             opacity: 1;
         }
@@ -443,7 +447,9 @@ else {
                                                 if(mysqli_num_rows($result) > 0){
                                                     while($row = $result->fetch_assoc()) {
                                                         $hoverinfo = '
+
                                                         <div class="card" id="info-tooltip">
+
                                                             <div class="card-body">
                                                             <div class="row">
                                                                 <div class="col-3">
